@@ -1,0 +1,19 @@
+.DS_Store
+
+# Buck
+buck-out/
+.buckd/
+
+# Downloaded buck
+tools/buck
+
+# Xcode
+**/xcuserdata/
+**/*.xcodeproj/
+**/*.xcworkspace/
+
+# Make
+*.d
+tools/scripts/private.sh
+User.makefile
+config/gen/*

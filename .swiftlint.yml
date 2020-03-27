@@ -1,0 +1,61 @@
+warning_threshold: 15
+
+line_length:
+  warning: 160
+
+identifier_name:
+  min_length: # not possible to disable this partial rule, so set it to zero
+    warning: 0
+    error: 0
+
+function_parameter_count:
+  warning: 10
+  error: 15
+
+file_length:
+  warning: 1000
+
+type_body_length:
+  warning: 700
+  error: 750
+
+function_body_length:
+  warning: 100
+
+opt_in_rules: # some rules are only opt-in
+  - closing_brace
+  - opening_brace
+  - return_arrow_whitespace
+  - trailing_semicolon
+  - statement_position
+  - empty_count
+  - discouraged_object_literal
+  - duplicate_imports
+  - empty_string
+  - fallthrough
+  - fatal_error_message
+  - implicit_getter
+  - implicit_return
+
+disabled_rules:
+  - trailing_whitespace
+  - force_cast
+  - nesting
+  - todo
+
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Carthage
+  - Pods
+  - tools
+  - vendor
+
+# configurable rules can be customized from this configuration file
+# binary rules can set their severity level
+trailing_semicolon: error
+empty_count: error
+closing_brace: error
+opening_brace: error
+return_arrow_whitespace: error
+comma: error
+
+reporter: "emoji"
