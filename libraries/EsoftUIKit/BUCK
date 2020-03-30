@@ -1,7 +1,7 @@
 load("//Config:buck_rule_macros.bzl", "framework")
 
 framework(
-    name = "ESUIKit",
+    name = "EsoftUIKit",
     srcs = glob([
         "Sources/**/*.swift",
     ]),
