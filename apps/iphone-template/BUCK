@@ -19,7 +19,7 @@ load("//config:buck_rule_macros.bzl",
 additional_frameworks = []
 
 framework_dependencies = [
-    "//libraries/ESUIKit:ESUIKit",
+    "//libraries/EsoftUIKit:EsoftUIKit",
 ]
 
 resource_dependencies = [
