@@ -1,3 +1,20 @@
-PODFILE CHECKSUM: 0a433c2ee9eb4f5f0824a6fef220dd5d04ad9e64
+PODS:
+  - Yoga (1.14.0)
+  - YogaKit (1.18.1):
+    - Yoga (~> 1.14)
+
+DEPENDENCIES:
+  - YogaKit
+
+SPEC REPOS:
+  trunk:
+    - Yoga
+    - YogaKit
+
+SPEC CHECKSUMS:
+  Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
+  YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
+
+PODFILE CHECKSUM: fdab1558574d8782405c2db56e47a17a36ce3628
 
 COCOAPODS: 1.8.4

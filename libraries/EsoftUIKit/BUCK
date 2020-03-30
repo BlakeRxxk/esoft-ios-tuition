@@ -1,0 +1,19 @@
+load("//Config:buck_rule_macros.bzl", "framework")
+
+framework(
+    name = "EsoftUIKit",
+    srcs = glob([
+        "Sources/**/*.swift",
+    ]),
+    deps = [
+    	"//libraries/BaseUI:BaseUI",
+        "//libraries/BaseFRP:BaseFRP",
+        "//libraries/AutoLayoutKit:AutoLayoutKit#shared",
+        "//Pods:Yoga",
+        "//Pods:YogaKit",
+    ],
+    frameworks = [
+        "$SDKROOT/System/Library/Frameworks/Foundation.framework",
+        "$SDKROOT/System/Library/Frameworks/UIKit.framework",
+    ],
+)
