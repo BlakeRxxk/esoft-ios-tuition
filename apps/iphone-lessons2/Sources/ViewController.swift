@@ -10,6 +10,7 @@ import YogaKit
 
 class ViewController: UIViewController {
   private var counter: Int = .zero
+  private(set) lazy var titleLabel: UILabel = UILabel()
   private(set) lazy var componentUI: SampleComponent = {
     $0.output = self
     return $0
@@ -18,8 +19,11 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .systemTeal
-    componentUI.sampleText = "some text"
-    
+    componentUI.sampleText = "tap me"
+    titleLabel.text = "some text: clicked \(counter) times"
+    titleLabel.textAlignment = .center
+
+    view.addSubview(titleLabel)
     view.addSubview(componentUI)
     // Do any additional setup after loading the view.
   }
@@ -38,6 +42,12 @@ class ViewController: UIViewController {
 
     }
     
+    titleLabel.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = 100%
+      layout.height = 24
+      layout.margin = 24
+    }
     componentUI.configureLayout { layout in
       layout.isEnabled = true
       layout.width = 100%
@@ -50,6 +60,6 @@ class ViewController: UIViewController {
 extension ViewController: SampleComponentOutput {
   func didTapActionButton(in sampleView: SampleComponentInput) {
     counter += 1
-    componentUI.sampleText = "some text: clicked \(counter) times"
+    titleLabel.text = "some text: clicked \(counter) times"
   }
 }
