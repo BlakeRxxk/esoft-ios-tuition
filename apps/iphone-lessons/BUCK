@@ -136,16 +136,6 @@ apple_test_lib(
         ":AppLibrary",
     ] + framework_binary_dependencies(framework_dependencies),
     frameworks = [] + additional_frameworks,
-    linker_flags = [
-        "-Xlinker",
-        "-rpath",
-        "-Xlinker",
-        "/usr/lib/swift",
-        "-Xlinker",
-        "-rpath",
-        "-Xlinker",
-        "@executable_path/../../Frameworks",
-    ],
     info_plist_substitutions = info_plist_substitutions("UnitTests")
 )
 
@@ -158,17 +148,7 @@ apple_test_lib(
     ]),
     deps = [
         ":AppLibrary",
-    ],
-    linker_flags = [
-        "-Xlinker",
-        "-rpath",
-        "-Xlinker",
-        "/usr/lib/swift",
-        "-Xlinker",
-        "-rpath",
-        "-Xlinker",
-        "@executable_path/../../Frameworks",
-    ],
+    ] + framework_bundle_dependencies(framework_dependencies),
     info_plist_substitutions = info_plist_substitutions("UnitTestsWithHostApp")
 )
 
@@ -177,15 +157,5 @@ apple_test_all(
     libraries = [],
     additional_tests = app_tests,
     prebuilt_frameworks = [] + framework_bundle_dependencies(framework_dependencies),
-    linker_flags = [
-        "-Xlinker",
-        "-rpath",
-        "-Xlinker",
-        "/usr/lib/swift",
-        "-Xlinker",
-        "-rpath",
-        "-Xlinker",
-        "@executable_path/../../Frameworks",
-    ],
     info_plist_substitutions = app_info_plist_substitutions("%sCITests"% appTargetName),
 )
