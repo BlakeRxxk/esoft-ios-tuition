@@ -2,7 +2,7 @@ load("//config:utils.bzl",
     "library_configs",
 )
 
-load("//Config:configs.bzl",
+load("//config:configs.bzl",
     "app_binary_configs",
     "info_plist_substitutions",
     "app_info_plist_substitutions",
@@ -18,13 +18,13 @@ load("//config:buck_rule_macros.bzl",
 
 additional_frameworks = []
 
-framework_dependencies = [
+framework_dependencies = []
+
+static_libraries = [
+    "//libraries/BaseUI:BaseUI",
+    "//libraries/BaseFRP:BaseFRP",
     "//libraries/EsoftUIKit:EsoftUIKit",
     "//libraries/AutoLayoutKit:AutoLayoutKit",
-]
-
-static_utils = [
-    "//libraries/BaseFRP:BaseFRP",
 ]
 
 prebuilt_frameworks = [
@@ -75,7 +75,7 @@ apple_library(
     configs = library_configs(),
     swift_version = native.read_config("swift", "version"),
     srcs = glob([ "Sources/**/*.swift" ]),
-    deps = [] + framework_binary_dependencies(framework_dependencies) + prebuilt_frameworks + static_utils,
+    deps = [] + framework_binary_dependencies(framework_dependencies) + prebuilt_frameworks + static_libraries,
     frameworks = additional_frameworks,
 )
 
@@ -112,6 +112,7 @@ apple_bundle(
     info_plist = "Info.plist",
     info_plist_substitutions = app_info_plist_substitutions(appTargetName),
     deps = []
+    + static_libraries
     + framework_bundle_dependencies(framework_dependencies)
     + prebuilt_frameworks,
 )
@@ -134,7 +135,9 @@ apple_test_lib(
     ]),
     deps = [
         ":AppLibrary",
-    ] + framework_binary_dependencies(framework_dependencies),
+    ]
+    + framework_bundle_dependencies(framework_dependencies)
+    + prebuilt_frameworks,
     frameworks = [] + additional_frameworks,
     info_plist_substitutions = info_plist_substitutions("UnitTests")
 )
@@ -148,7 +151,7 @@ apple_test_lib(
     ]),
     deps = [
         ":AppLibrary",
-    ] + framework_bundle_dependencies(framework_dependencies),
+    ],
     info_plist_substitutions = info_plist_substitutions("UnitTestsWithHostApp")
 )
 
@@ -156,6 +159,6 @@ apple_test_all(
     name = "%sCITests"% appTargetName,
     libraries = [],
     additional_tests = app_tests,
-    prebuilt_frameworks = [] + framework_bundle_dependencies(framework_dependencies),
+    prebuilt_frameworks = [] + framework_bundle_dependencies(framework_dependencies) + prebuilt_frameworks,
     info_plist_substitutions = app_info_plist_substitutions("%sCITests"% appTargetName),
 )

@@ -66,6 +66,11 @@ tests:
 	@rm -f $(buck_out)/tmp/*.profraw
 	@rm -f $(buck_out)/gen/*.profdata
 	$(BUCK) test //apps/$(APP_PATH):$(APP_NAME)CITests \
+		//libraries/BaseUI:BaseUITests \
+		//libraries/BaseFRP:BaseFRPTests \
+		//libraries/EsoftUIKit:EsoftUIKit \
+    	//libraries/AutoLayoutKit:AutoLayoutKit \
+		--config custom.mode=project \
 		--test-runner-env XCTOOL_TEST_ENV_LLVM_PROFILE_FILE="$(buck_out)/tmp/code-%p.profraw%15x" \
 		${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS} ${BUCK_THREADS_OPTIONS} \
 		${BUCK_CACHE_OPTIONS} ${BUCK_COVERAGE_OPTIONS} ${BUCK_TESTING_OPTIONS}

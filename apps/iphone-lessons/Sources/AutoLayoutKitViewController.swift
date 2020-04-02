@@ -120,7 +120,7 @@ final class AutoLayoutKitViewController: UIViewController {
       divider.height.constraint(equalToConstant: 1.0),
       divider.top.constraint(equalTo: nameContainer.bottom, constant: 16.0),
       divider.leading.constraint(equalTo: container.leading, constant: 16.0),
-      divider.trailing.constraint(equalTo: container.trailing, constant: -16.0),
+      divider.trailing.constraint(equalTo: container.trailing, constant: -16.0)
     ]
 
     NSLayoutConstraint.activate(constraints)

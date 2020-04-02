@@ -1,7 +1,14 @@
-import XCTest
-@testable import AppLibrary
+//
+//  Empty.swift
+//  AutoLayoutKitTests
+//
+//  Created by Blake Rxxk on 02.04.2020.
+//
 
-final class BuckSampleTests: XCTestCase {
+import XCTest
+@testable import AutoLayoutKit
+
+final class AutoLayoutKitTests: XCTestCase {
 
     func testExample() {
         // This is an example of a functional test case.

@@ -1,7 +1,13 @@
-import XCTest
-@testable import AppLibrary
+//
+//  Empty.swift
+//  BaseUI
+//
+//  Created by Blake Rxxk on 02.04.2020.
+//
 
-final class BuckSampleTests: XCTestCase {
+import XCTest
+
+final class BaseUITests: XCTestCase {
 
     func testExample() {
         // This is an example of a functional test case.
