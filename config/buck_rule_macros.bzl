@@ -356,10 +356,6 @@ def test_name(name):
 def ci_test_name(name):
     return name + "-For-CI"
 
-# Use this macro to declare test targets. For first-party libraries, use first_party_library to declare a test target instead.
-# This macro defines two targets.
-# 1. An apple_test target comprising `srcs`. This test target is picked up by Xcode, and is runnable from Buck.
-# 2. An apple_library target comprising the code in `srcs`. This library is used by the apple_test_all macro to create a single apple_test target in CI. This library will not be included in Xcode, unless an Xcode project is generated that relies on an apple_test_all target.
 def apple_test_lib(
         name,
         visibility = ["PUBLIC"],
@@ -423,8 +419,5 @@ def apple_test_all(
     apple_test_lib(
         deps = ci_test_libraries + additional_tests + prebuilt_frameworks,
         bundle_for_ci = False,
-        frameworks=libraries,
         **kwargs
     )
-
-    

@@ -46,16 +46,12 @@ build_debug: check_env
 	$(BUCK) build \
 	//apps/$(APP_PATH):AppPackage#iphoneos-arm64,iphoneos-armv7 \
 	//apps/$(APP_PATH):$(APP_NAME)#dwarf-and-dsym,iphoneos-arm64,iphoneos-armv7 \
-	//libraries/ESUIKit:ESUIKit#dwarf-and-dsym,shared,iphoneos-arm64,iphoneos-armv7 \
-	//libraries/ESUIKit:ESUIKit#shared,iphoneos-arm64,iphoneos-armv7 \
 	${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS} ${BUCK_THREADS_OPTIONS} ${BUCK_CACHE_OPTIONS}
 
 build_test: check_env
 	$(BUCK) build \
 	//apps/$(APP_PATH):AppPackage \
 	//apps/$(APP_PATH):$(APP_NAME)#dwarf-and-dsym,iphoneos-arm64,iphoneos-armv7 \
-	//libraries/ESUIKit:ESUIKit#dwarf-and-dsym,shared,iphoneos-arm64,iphoneos-armv7 \
-	//libraries/ESUIKit:ESUIKit#shared,iphoneos-arm64,iphoneos-armv7 \
 	--verbose 7 ${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS} ${BUCK_THREADS_OPTIONS}
 
 project: project_debug
@@ -66,10 +62,6 @@ tests:
 	@rm -f $(buck_out)/tmp/*.profraw
 	@rm -f $(buck_out)/gen/*.profdata
 	$(BUCK) test //apps/$(APP_PATH):$(APP_NAME)CITests \
-		//libraries/BaseUI:BaseUITests \
-		//libraries/BaseFRP:BaseFRPTests \
-		//libraries/EsoftUIKit:EsoftUIKit \
-    	//libraries/AutoLayoutKit:AutoLayoutKit \
 		--config custom.mode=project \
 		--test-runner-env XCTOOL_TEST_ENV_LLVM_PROFILE_FILE="$(buck_out)/tmp/code-%p.profraw%15x" \
 		${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS} ${BUCK_THREADS_OPTIONS} \
@@ -78,7 +70,7 @@ tests:
 	xcrun llvm-cov report "$(buck_out)/gen/apps/$(APP_PATH)/AppBinary#iphonesimulator-x86_64" -instr-profile "$(buck_out)/gen/Coverage.profdata" -ignore-filename-regex "Pods|Carthage|buck-out"
 
 
-xcode_tests:
+xcode_tests: build_test
 	$(xctool) -workspace apps/$(APP_PATH)/$(APP_NAME)_Buck.xcworkspace \
 		   -scheme $(APP_PATH) \
 		   -destination 'platform=iOS Simulator,name=iPhone 11 Pro Max,OS=latest' \

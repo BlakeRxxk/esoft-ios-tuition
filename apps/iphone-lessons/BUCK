@@ -157,8 +157,8 @@ apple_test_lib(
 
 apple_test_all(
     name = "%sCITests"% appTargetName,
-    libraries = [],
+    libraries = [] + static_libraries,
     additional_tests = app_tests,
-    prebuilt_frameworks = [] + framework_bundle_dependencies(framework_dependencies) + prebuilt_frameworks,
+    prebuilt_frameworks = prebuilt_frameworks,
     info_plist_substitutions = app_info_plist_substitutions("%sCITests"% appTargetName),
 )
