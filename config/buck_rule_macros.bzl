@@ -37,6 +37,7 @@ def apple_lib(
         warning_as_error = False,
         suppress_warnings = False,
         has_cpp = False,
+        tests = [],
         framework = False):
     swift_version = swift_version or native.read_config('swift', 'version')
     swift_compiler_flags = swift_compiler_flags or []
@@ -86,7 +87,6 @@ def apple_lib(
                 resolved_linker_flags = resolved_linker_flags + ["-Wl,-weak_framework,%s" % framework]
 
         resolved_linker_flags = resolved_linker_flags + section_rename_linker_flags
-
         native.apple_library(
             name = name + "",
             srcs = srcs,
@@ -107,8 +107,9 @@ def apple_lib(
             platform_compiler_flags = platform_compiler_flags,
             swift_compiler_flags = swift_compiler_flags,
             preferred_linkage = "shared",
-            #link_style = "static",
+            link_style = "static",
             linker_flags = resolved_linker_flags,
+            tests = tests
         )
     else:
         additional_linker_flags = additional_linker_flags or []
@@ -147,6 +148,7 @@ def apple_lib(
             swift_compiler_flags = swift_compiler_flags,
             preferred_linkage = "static",
             exported_preprocessor_flags = exported_preprocessor_flags,
+            tests = tests
         )
 
 def static_library(
@@ -170,8 +172,14 @@ def static_library(
         platform_compiler_flags = None,
         swift_compiler_flags = None,
         warning_as_error = False,
-        suppress_warnings = True
+        suppress_warnings = True,
+        test_host_app = None,
+        run_test_separately = False,
+        test_frameworks = [],
+        test_deps = [],
     ):
+    lib_test_name = test_name(name)
+
     apple_lib(
         name = name,
         srcs = srcs,
@@ -190,7 +198,26 @@ def static_library(
         frameworks = frameworks,
         weak_frameworks = weak_frameworks,
         warning_as_error = warning_as_error,
-        suppress_warnings = suppress_warnings
+        suppress_warnings = suppress_warnings,
+        tests = [":" + lib_test_name],
+    )
+
+    test_sources = native.glob(["Tests/**/*.swift"])
+    test_headers = None
+    if has_cpp:
+        test_sources.extend(native.glob(["Tests/**/*.m"]))
+        test_headers = native.glob(["Tests/**/*.h"])
+
+    apple_test_lib(
+        name = lib_test_name,
+        srcs = test_sources,
+        headers = test_headers,
+        info_plist = info_plist,
+        info_plist_substitutions = info_plist_substitutions,
+        test_host_app = test_host_app,
+        run_test_separately = run_test_separately,
+        frameworks = test_frameworks,
+        deps = [":" + name] + test_deps
     )
 
 def framework(
@@ -234,7 +261,6 @@ def framework(
         suppress_warnings = suppress_warnings,
         framework = True
     )
-    
 
 CXX_SRC_EXT = ["mm", "cpp", "S"]
 def apple_cxx_lib(
@@ -330,10 +356,6 @@ def test_name(name):
 def ci_test_name(name):
     return name + "-For-CI"
 
-# Use this macro to declare test targets. For first-party libraries, use first_party_library to declare a test target instead.
-# This macro defines two targets.
-# 1. An apple_test target comprising `srcs`. This test target is picked up by Xcode, and is runnable from Buck.
-# 2. An apple_library target comprising the code in `srcs`. This library is used by the apple_test_all macro to create a single apple_test target in CI. This library will not be included in Xcode, unless an Xcode project is generated that relies on an apple_test_all target.
 def apple_test_lib(
         name,
         visibility = ["PUBLIC"],
@@ -363,26 +385,10 @@ def apple_test_lib(
             **kwargs
         )
     if info_plist == None:
-        info_plist = "//Config:test_info_plist"
+        info_plist = "//config:test_info_plist"
 
     substitutions = {}
     substitutions.update(info_plist_substitutions)
-
-    # additional_linker_flags = []
-    # linker_flags = []
-    # weak_frameworks = []
-    # resolved_frameworks = []
-    # if native.read_config("custom", "mode") == "project":
-    #         resolved_linker_flags = linker_flags + additional_linker_flags + ["-Wl,-install_name,@rpath/lib%s.dylib" % ("ESUIKit")]
-    #         resolved_frameworks = resolved_frameworks + ["$SDKROOT/System/Library/Frameworks/%s.framework" % x for x in weak_frameworks]
-    # else:
-    #     resolved_linker_flags = linker_flags + additional_linker_flags + ["-Wl,-install_name,@rpath/%s.framework/%s" % ("ESUIKit", "ESUIKit")]
-    #     for framework in weak_frameworks:
-    #         tetFRM = "ESUIKit"
-    #         resolved_linker_flags = resolved_linker_flags + ["-Wl,-weak_framework,%s" % tetFRM]
-
-    # resolved_linker_flags = resolved_linker_flags + section_rename_linker_flags
-
     native.apple_test(
         name = name,
         visibility = visibility,
@@ -413,8 +419,5 @@ def apple_test_all(
     apple_test_lib(
         deps = ci_test_libraries + additional_tests + prebuilt_frameworks,
         bundle_for_ci = False,
-        frameworks=libraries,
         **kwargs
     )
-
-    

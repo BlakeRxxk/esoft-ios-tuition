@@ -1,4 +1,5 @@
-load("//Config:buck_rule_macros.bzl", "static_library")
+load("//config:buck_rule_macros.bzl", "static_library")
+load("//config:configs.bzl", "info_plist_substitutions")
 
 static_library(
     name = "AutoLayoutKit",
@@ -10,4 +11,5 @@ static_library(
         "$SDKROOT/System/Library/Frameworks/Foundation.framework",
         "$SDKROOT/System/Library/Frameworks/UIKit.framework",
     ],
+    info_plist_substitutions = info_plist_substitutions("AutoLayoutKitTests")
 )
