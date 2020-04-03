@@ -25,6 +25,8 @@ BUCK_OPTIONS=\
 clean: kill_xcode
 	rm -rf **/**/*.xcworkspace
 	rm -rf **/**/*.xcodeproj
+	rm -rf **/*.xcworkspace
+	rm -rf **/*.xcodeproj
 	rm -rf *.xcworkspace
 	rm -rf *.xcodeproj
 	rm -rf buck-out
