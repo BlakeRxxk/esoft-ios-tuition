@@ -10,16 +10,23 @@ static_library(
     	"//libraries/BaseUI:BaseUI",
         "//libraries/BaseFRP:BaseFRP",
         "//libraries/AutoLayoutKit:AutoLayoutKit",
-        "//Pods:Yoga",
-        "//Pods:YogaKit",
+        "//pods/Pods:Yoga",
+        "//pods/Pods:YogaKit",
     ],
     frameworks = [
         "$SDKROOT/System/Library/Frameworks/Foundation.framework",
         "$SDKROOT/System/Library/Frameworks/UIKit.framework",
     ],
-    test_deps = [
-        "//Pods:Yoga",
-        "//Pods:YogaKit",
+    additional_linker_flags = [
+        "-Xlinker",
+        "-rpath",
+        "-Xlinker",
+        "/usr/lib/swift",
+        "-Xlinker",
+        "-rpath",
+        "-Xlinker",
+        "@executable_path/../../Frameworks",
     ],
+    test_deps = [],
     info_plist_substitutions = info_plist_substitutions("EsoftUIKitTests")
 )
