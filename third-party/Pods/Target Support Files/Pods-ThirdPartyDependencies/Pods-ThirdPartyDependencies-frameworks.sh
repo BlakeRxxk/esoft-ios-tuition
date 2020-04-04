@@ -178,6 +178,8 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${PODS_ROOT}/DBDebugToolkit/DBDebugToolkit.framework"
   install_dsym "${PODS_ROOT}/DBDebugToolkit/DBDebugToolkit.framework.dSYM"
+  install_framework "${PODS_ROOT}/HeapInspector/HeapInspector.framework"
+  install_dsym "${PODS_ROOT}/HeapInspector/HeapInspector.framework.dSYM"
   install_framework "${PODS_ROOT}/Yoga/yoga.framework"
   install_dsym "${PODS_ROOT}/Yoga/yoga.framework.dSYM"
   install_framework "${PODS_ROOT}/YogaKit/YogaKit.framework"
@@ -186,6 +188,8 @@ fi
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${PODS_ROOT}/DBDebugToolkit/DBDebugToolkit.framework"
   install_dsym "${PODS_ROOT}/DBDebugToolkit/DBDebugToolkit.framework.dSYM"
+  install_framework "${PODS_ROOT}/HeapInspector/HeapInspector.framework"
+  install_dsym "${PODS_ROOT}/HeapInspector/HeapInspector.framework.dSYM"
   install_framework "${PODS_ROOT}/Yoga/yoga.framework"
   install_dsym "${PODS_ROOT}/Yoga/yoga.framework.dSYM"
   install_framework "${PODS_ROOT}/YogaKit/YogaKit.framework"

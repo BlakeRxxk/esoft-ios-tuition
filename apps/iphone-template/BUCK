@@ -153,6 +153,7 @@ apple_test_lib(
     ]),
     deps = [
         ":AppLibrary",
+        "//third-party/Pods:HeapInspector",
     ],
     info_plist_substitutions = info_plist_substitutions("UnitTestsWithHostApp")
 )

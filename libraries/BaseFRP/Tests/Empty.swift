@@ -8,7 +8,7 @@
 import XCTest
 @testable import BaseFRP
 
-final class BBaseFRPTests: XCTestCase {
+final class BaseFRPTests: XCTestCase {
 
     func testExample() {
         // This is an example of a functional test case.
