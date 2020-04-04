@@ -28,9 +28,9 @@ static_libraries = [
 ]
 
 prebuilt_frameworks = [
-    "//Pods:Yoga",
-    "//Pods:YogaKit",
-    "//Pods:PodsProjectGeneratorHack",
+    "//third-party/Pods:Yoga",
+    "//third-party/Pods:YogaKit",
+    "//third-party/Pods:PodsProjectGeneratorHack",
 ]
 
 resource_dependencies = [
@@ -46,6 +46,7 @@ app_tests = [
 ]
 
 appTargetName = "LessonsApp"
+appPath = "iphone-lessons"
 
 apple_asset_catalog(
   name = "Icons",
@@ -67,8 +68,8 @@ apple_resource(
 apple_library(
     name = "AppLibrary",
     visibility = [
-        "//apps/iphone-template:",
-        "//apps/iphone-template/...",
+        "//apps/%s:"%appPath,
+        "//apps/%s/..."%appPath,
         "//apps/...",
     ],
     tests = app_tests,
@@ -82,8 +83,8 @@ apple_library(
 apple_binary(
     name = "AppBinary",
     visibility = [
-        "//apps/iphone-template:",
-        "//apps/iphone-template/...",
+        "//apps/%s:"%appPath,
+        "//apps/%s/..."%appPath,
         "//apps/...",
     ],
     preprocessor_flags=[
@@ -104,7 +105,7 @@ apple_binary(
 apple_bundle(
     name = appTargetName,
     visibility = [
-        "//apps/iphone-template:",
+        "//apps/%s:"%appPath,
     ],
     extension = "app",
     binary = ":AppBinary",

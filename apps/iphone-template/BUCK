@@ -28,9 +28,9 @@ static_libraries = [
 ]
 
 prebuilt_frameworks = [
-    "//pods/Pods:Yoga",
-    "//pods/Pods:YogaKit",
-    "//pods/Pods:PodsProjectGeneratorHack",
+    "//third-party/Pods:Yoga",
+    "//third-party/Pods:YogaKit",
+    "//third-party/Pods:PodsProjectGeneratorHack",
 ]
 
 resource_dependencies = [

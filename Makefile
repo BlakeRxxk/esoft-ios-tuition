@@ -3,7 +3,7 @@
 # Use local version of Buck
 BUCK=tools/buck
 xctool=tools/xctool/bin/xctool
-swiftlint=Pods/SwiftLint/swiftlint
+swiftlint=third-party/Pods/SwiftLint/swiftlint
 
 include User.makefile
 include Utils.makefile
@@ -31,10 +31,17 @@ clean: kill_xcode
 	rm -rf *.xcodeproj
 	rm -rf buck-out
 
-debug:
-	$(BUCK) install //apps/$(APP_PATH):$(APP_NAME)#dwarf-and-dsym,shared \
-	${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS} ${BUCK_THREADS_OPTIONS} ${BUCK_CACHE_OPTIONS} \
-	--run --simulator-name 'iPhone 8'
+lint:
+	${swiftlint} lint
+
+autocorrect:
+	${swiftlint} autocorrect
+
+targets:
+	$(BUCK) targets //... ${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS}
+
+project: project_debug
+	open apps/$(APP_PATH)/$(APP_NAME)_Buck.xcworkspace
 
 project_debug: check_env kill_xcode
 	$(BUCK) project //apps/$(APP_PATH):workspace \
@@ -44,20 +51,16 @@ project_ci: check_env kill_xcode
 	$(BUCK) project //apps/$(APP_PATH):workspace \
 		--config custom.mode=project ${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS}
 
+debug:
+	$(BUCK) install //apps/$(APP_PATH):$(APP_NAME)#dwarf-and-dsym,shared \
+	${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS} ${BUCK_THREADS_OPTIONS} ${BUCK_CACHE_OPTIONS} \
+	--run --simulator-name 'iPhone 8'
+
 build_debug: check_env
 	$(BUCK) build \
 	//apps/$(APP_PATH):AppPackage#iphoneos-arm64,iphoneos-armv7 \
 	//apps/$(APP_PATH):$(APP_NAME)#dwarf-and-dsym,iphoneos-arm64,iphoneos-armv7 \
 	${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS} ${BUCK_THREADS_OPTIONS} ${BUCK_CACHE_OPTIONS}
-
-build_test: check_env
-	$(BUCK) build \
-	//apps/$(APP_PATH):AppPackage \
-	//apps/$(APP_PATH):$(APP_NAME)#dwarf-and-dsym,iphoneos-arm64,iphoneos-armv7 \
-	--verbose 7 ${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS} ${BUCK_THREADS_OPTIONS}
-
-project: project_debug
-	open apps/$(APP_PATH)/$(APP_NAME)_Buck.xcworkspace
 
 buck_out = $(shell $(BUCK) root)/buck-out
 tests:
@@ -70,25 +73,3 @@ tests:
 		${BUCK_CACHE_OPTIONS} ${BUCK_COVERAGE_OPTIONS} ${BUCK_TESTING_OPTIONS}
 	xcrun llvm-profdata merge -sparse "$(buck_out)/tmp/code-"*.profraw -o "$(buck_out)/gen/Coverage.profdata"
 	xcrun llvm-cov report "$(buck_out)/gen/apps/$(APP_PATH)/AppBinary#iphonesimulator-x86_64" -instr-profile "$(buck_out)/gen/Coverage.profdata" -ignore-filename-regex "Pods|Carthage|buck-out"
-
-
-xcode_tests: build_test
-	$(xctool) -workspace apps/$(APP_PATH)/$(APP_NAME)_Buck.xcworkspace \
-		   -scheme $(APP_PATH) \
-		   -destination 'platform=iOS Simulator,name=iPhone 11 Pro Max,OS=latest' \
-		   -sdk iphonesimulator \
-		   run-tests -parallelize \
-		   -reporter pretty \
-		   TEST_FRAMEWORK_SEARCH_PATHS=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/
-
-targets:
-	$(BUCK) targets //... ${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS}
-
-audit:
-	$(BUCK) audit rules apps/$(APP_PATH)/BUCK > config/gen/$(APP_PATH)-BUCK.py ${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS} ${BUCK_THREADS_OPTIONS} ${BUCK_CACHE_OPTIONS}
-
-lint:
-	${swiftlint} lint
-
-autocorrect:
-	${swiftlint} autocorrect

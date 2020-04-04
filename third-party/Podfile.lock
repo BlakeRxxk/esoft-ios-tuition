@@ -1,0 +1,24 @@
+PODS:
+  - SwiftLint (0.39.2)
+  - Yoga (1.14.0)
+  - YogaKit (1.18.1):
+    - Yoga (~> 1.14)
+
+DEPENDENCIES:
+  - SwiftLint
+  - YogaKit
+
+SPEC REPOS:
+  trunk:
+    - SwiftLint
+    - Yoga
+    - YogaKit
+
+SPEC CHECKSUMS:
+  SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
+  Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
+  YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
+
+PODFILE CHECKSUM: c0c0f349e74bcea2d8966f9fae72bae99f8d7281
+
+COCOAPODS: 1.8.4

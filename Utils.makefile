@@ -41,6 +41,9 @@ install_buck:
 	curl https://jitpack.io/com/github/airbnb/buck/4bd1a08625454c5034eb6ef6193e94f9e6e62a62/buck-4bd1a08625454c5034eb6ef6193e94f9e6e62a62.pex --output tools/buck
 	chmod u+x tools/buck
 
+install_pods:
+	cd third-party && pod install && cd ..
+
 check_env:
 ifndef BUCK
 	$(error BUCK is not set)
@@ -49,3 +52,7 @@ endif
 
 kill_xcode:
 	killall Xcode || true
+
+audit:
+	$(BUCK) audit rules apps/$(APP_PATH)/BUCK > config/gen/$(APP_PATH)-BUCK.py ${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS} ${BUCK_THREADS_OPTIONS} ${BUCK_CACHE_OPTIONS}
+
