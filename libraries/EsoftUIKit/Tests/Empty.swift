@@ -8,7 +8,7 @@
 import XCTest
 @testable import EsoftUIKit
 
-final class BuckSampleTests: XCTestCase {
+final class EsoftUIKitTests: XCTestCase {
   
   func testViewController() {
     // This test accesses internal classes and properties in the ExampleApp library.

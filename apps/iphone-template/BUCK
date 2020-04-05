@@ -25,12 +25,14 @@ static_libraries = [
     "//libraries/BaseFRP:BaseFRP",
     "//libraries/EsoftUIKit:EsoftUIKit",
     "//libraries/AutoLayoutKit:AutoLayoutKit",
+    # "//libraries/LeakInspector:LeakInspector",
 ]
 
 prebuilt_frameworks = [
-    "//pods/Pods:Yoga",
-    "//pods/Pods:YogaKit",
-    "//pods/Pods:PodsProjectGeneratorHack",
+    "//third-party/Pods:Yoga",
+    "//third-party/Pods:YogaKit",
+    "//third-party/Pods:DBDebugToolkit",
+    "//third-party/Pods:PodsProjectGeneratorHack",
 ]
 
 resource_dependencies = [
