@@ -25,6 +25,7 @@ static_libraries = [
     "//libraries/BaseFRP:BaseFRP",
     "//libraries/EsoftUIKit:EsoftUIKit",
     "//libraries/AutoLayoutKit:AutoLayoutKit",
+    # "//libraries/LeakInspector:LeakInspector",
 ]
 
 prebuilt_frameworks = [
@@ -153,7 +154,6 @@ apple_test_lib(
     ]),
     deps = [
         ":AppLibrary",
-        "//third-party/Pods:HeapInspector",
     ],
     info_plist_substitutions = info_plist_substitutions("UnitTestsWithHostApp")
 )
