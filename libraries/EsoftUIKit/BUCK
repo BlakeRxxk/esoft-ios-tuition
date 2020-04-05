@@ -1,6 +1,7 @@
-load("//Config:buck_rule_macros.bzl", "framework")
+load("//config:buck_rule_macros.bzl", "static_library")
+load("//config:configs.bzl", "info_plist_substitutions")
 
-framework(
+static_library(
     name = "EsoftUIKit",
     srcs = glob([
         "Sources/**/*.swift",
@@ -9,9 +10,23 @@ framework(
     	"//libraries/BaseUI:BaseUI",
         "//libraries/BaseFRP:BaseFRP",
         "//libraries/AutoLayoutKit:AutoLayoutKit",
+        "//third-party/Pods:Yoga",
+        "//third-party/Pods:YogaKit",
     ],
     frameworks = [
         "$SDKROOT/System/Library/Frameworks/Foundation.framework",
         "$SDKROOT/System/Library/Frameworks/UIKit.framework",
     ],
+    additional_linker_flags = [
+        "-Xlinker",
+        "-rpath",
+        "-Xlinker",
+        "/usr/lib/swift",
+        "-Xlinker",
+        "-rpath",
+        "-Xlinker",
+        "@executable_path/../../Frameworks",
+    ],
+    test_deps = [],
+    info_plist_substitutions = info_plist_substitutions("EsoftUIKitTests")
 )

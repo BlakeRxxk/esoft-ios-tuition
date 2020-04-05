@@ -1,0 +1,30 @@
+PODS:
+  - DBDebugToolkit (0.5.0)
+  - HeapInspector (1.0.1):
+    - HeapInspector/no-arc (= 1.0.1)
+  - HeapInspector/no-arc (1.0.1)
+  - Yoga (1.14.0)
+  - YogaKit (1.18.1):
+    - Yoga (~> 1.14)
+
+DEPENDENCIES:
+  - DBDebugToolkit
+  - HeapInspector
+  - YogaKit
+
+SPEC REPOS:
+  trunk:
+    - DBDebugToolkit
+    - HeapInspector
+    - Yoga
+    - YogaKit
+
+SPEC CHECKSUMS:
+  DBDebugToolkit: c04bb6f618051d3de447a4b4323f37826116cfed
+  HeapInspector: 121979cf97b186616ddfcd5ec0f61db631556c7b
+  Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
+  YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
+
+PODFILE CHECKSUM: e3e8aa5f0b8d74817075492f98026a564d5f7424
+
+COCOAPODS: 1.8.4
