@@ -25,11 +25,13 @@ static_libraries = [
     "//libraries/BaseFRP:BaseFRP",
     "//libraries/EsoftUIKit:EsoftUIKit",
     "//libraries/AutoLayoutKit:AutoLayoutKit",
+    # "//libraries/LeakInspector:LeakInspector",
 ]
 
 prebuilt_frameworks = [
     "//third-party/Pods:Yoga",
     "//third-party/Pods:YogaKit",
+    "//third-party/Pods:DBDebugToolkit",
     "//third-party/Pods:PodsProjectGeneratorHack",
 ]
 

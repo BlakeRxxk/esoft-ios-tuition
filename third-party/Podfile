@@ -13,4 +13,6 @@ target 'ThirdPartyDependencies' do
   pod 'YogaKit', :binary => true
  
   pod 'SwiftLint'
+  pod 'DBDebugToolkit', :binary => true
+  pod "HeapInspector", :binary => true
 end
