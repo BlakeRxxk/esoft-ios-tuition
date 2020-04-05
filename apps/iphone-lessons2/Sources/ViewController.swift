@@ -25,12 +25,18 @@ class ViewController: UIViewController {
 
     view.addSubview(titleLabel)
     view.addSubview(componentUI)
-    // Do any additional setup after loading the view.
   }
-  
+
+  override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    view.subviews.forEach {
+      $0.yoga.markDirty()
+    }
+    view.yoga.applyLayout(preservingOrigin: true)
+    super.traitCollectionDidChange(previousTraitCollection)
+  }
+
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    
     let containerSize = view.bounds.size
     view.configureLayout { layout in
       layout.isEnabled = true
@@ -39,7 +45,6 @@ class ViewController: UIViewController {
       layout.flexDirection = .column
       layout.alignItems = .center
       layout.justifyContent = .center
-
     }
     
     titleLabel.configureLayout { layout in
@@ -51,6 +56,7 @@ class ViewController: UIViewController {
     componentUI.configureLayout { layout in
       layout.isEnabled = true
       layout.width = 100%
+      layout.height = 48
     }
     
     view.yoga.applyLayout(preservingOrigin: true)

@@ -24,3 +24,10 @@ prebuilt_apple_framework(
     preferred_linkage = "shared",
     visibility = ["PUBLIC"],
 )
+
+prebuilt_apple_framework(
+    name = "DBDebugToolkit",
+    framework = "_Prebuild/GeneratedFrameworks/DBDebugToolkit/DBDebugToolkit.framework",
+    preferred_linkage = "shared",
+    visibility = ["PUBLIC"],
+)
