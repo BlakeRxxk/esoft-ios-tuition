@@ -6,14 +6,11 @@
 //
 
 import UIKit
-import EsoftUIKit
 
 class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .systemTeal
-
-     var test: NewType?
   }
 }
