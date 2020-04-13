@@ -1,8 +1,17 @@
 PODS:
   - DBDebugToolkit (0.5.0)
+  - FLAnimatedImage (1.0.12)
   - HeapInspector (1.0.1):
     - HeapInspector/no-arc (= 1.0.1)
   - HeapInspector/no-arc (1.0.1)
+  - PINCache (2.3)
+  - PINRemoteImage (2.1.4):
+    - PINRemoteImage/FLAnimatedImage (= 2.1.4)
+  - PINRemoteImage/Core (2.1.4):
+    - PINCache (>= 2.1)
+  - PINRemoteImage/FLAnimatedImage (2.1.4):
+    - FLAnimatedImage (>= 1.0)
+    - PINRemoteImage/Core
   - SwiftLint (0.39.2)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -11,24 +20,32 @@ PODS:
 DEPENDENCIES:
   - DBDebugToolkit
   - HeapInspector
+  - PINCache
+  - PINRemoteImage
   - SwiftLint
   - YogaKit
 
 SPEC REPOS:
   trunk:
     - DBDebugToolkit
+    - FLAnimatedImage
     - HeapInspector
+    - PINCache
+    - PINRemoteImage
     - SwiftLint
     - Yoga
     - YogaKit
 
 SPEC CHECKSUMS:
   DBDebugToolkit: c04bb6f618051d3de447a4b4323f37826116cfed
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   HeapInspector: 121979cf97b186616ddfcd5ec0f61db631556c7b
+  PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
+  PINRemoteImage: 4ac4011c5caefd6befd99758e09becede05d3226
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: e3e8aa5f0b8d74817075492f98026a564d5f7424
+PODFILE CHECKSUM: 0193c5930d88a717bc54a87ed0ef20ecf890874b
 
 COCOAPODS: 1.8.4

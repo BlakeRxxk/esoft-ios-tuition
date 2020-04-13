@@ -26,6 +26,27 @@ prebuilt_apple_framework(
 )
 
 prebuilt_apple_framework(
+    name = "PINCache",
+    framework = "_Prebuild/GeneratedFrameworks/PINCache/PINCache.framework",
+    preferred_linkage = "shared",
+    visibility = ["PUBLIC"],
+)
+
+prebuilt_apple_framework(
+    name = "PINRemoteImage",
+    framework = "_Prebuild/GeneratedFrameworks/PINRemoteImage/PINRemoteImage.framework",
+    preferred_linkage = "shared",
+    visibility = ["PUBLIC"],
+)
+
+prebuilt_apple_framework(
+    name = "FLAnimatedImage",
+    framework = "_Prebuild/GeneratedFrameworks/FLAnimatedImage/FLAnimatedImage.framework",
+    preferred_linkage = "shared",
+    visibility = ["PUBLIC"],
+)
+
+prebuilt_apple_framework(
     name = "DBDebugToolkit",
     framework = "_Prebuild/GeneratedFrameworks/DBDebugToolkit/DBDebugToolkit.framework",
     preferred_linkage = "shared",

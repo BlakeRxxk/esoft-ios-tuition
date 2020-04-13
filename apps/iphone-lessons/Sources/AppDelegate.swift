@@ -12,7 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   public var window: UIWindow?
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    let rootView = AutoLayoutKitViewController()
+    let rootView = AutoLayoutViewController()
     let rootViewController = UINavigationController(rootViewController: rootView)
     
     window = UIWindow()

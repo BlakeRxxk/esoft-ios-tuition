@@ -30,7 +30,6 @@ static_libraries = [
 prebuilt_frameworks = [
     "//third-party/Pods:Yoga",
     "//third-party/Pods:YogaKit",
-    "//third-party/Pods:PodsProjectGeneratorHack",
 ]
 
 resource_dependencies = [
@@ -112,7 +111,9 @@ apple_bundle(
     product_name = appTargetName,
     info_plist = "Info.plist",
     info_plist_substitutions = app_info_plist_substitutions(appTargetName),
-    deps = []
+    deps = [
+        "//third-party/Pods:PodsProjectGeneratorHack",
+    ]
     + static_libraries
     + framework_bundle_dependencies(framework_dependencies)
     + prebuilt_frameworks,
