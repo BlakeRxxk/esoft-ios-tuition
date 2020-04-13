@@ -12,7 +12,7 @@ final class AutoLayoutViewController: UIViewController {
   
   private(set) lazy var avatarContainer: UIView = UIView()
   
-  private(set) lazy var nameContainer: UIView = UIView()
+  private(set) lazy var nameContainer: UIStackView = UIStackView()
   private(set) lazy var fullName: UILabel = UILabel()
   private(set) lazy var position: UILabel = UILabel()
   
@@ -36,8 +36,8 @@ final class AutoLayoutViewController: UIViewController {
   private func createUI() {
     view.addSubview(container)
     
-    nameContainer.addSubview(fullName)
-    nameContainer.addSubview(position)
+    nameContainer.addArrangedSubview(fullName)
+    nameContainer.addArrangedSubview(position)
     
     phoneContainer.addSubview(phone)
     
@@ -50,7 +50,11 @@ final class AutoLayoutViewController: UIViewController {
   
   private func configureUI() {
     view.backgroundColor = .white
-
+    
+    nameContainer.axis = .vertical
+    nameContainer.isLayoutMarginsRelativeArrangement = true
+    nameContainer.layoutMargins = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 16)
+    
     avatarContainer.backgroundColor = .gray
     avatarContainer.layer.cornerRadius = 24.0
     avatarContainer.clipsToBounds = true
@@ -101,14 +105,10 @@ final class AutoLayoutViewController: UIViewController {
       avatarContainer.widthAnchor.constraint(equalToConstant: 48.0),
       avatarContainer.topAnchor.constraint(equalTo: container.topAnchor, constant: 16.0),
       avatarContainer.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16.0),
+      
       nameContainer.topAnchor.constraint(equalTo: container.topAnchor, constant: 8.0),
-      nameContainer.heightAnchor.constraint(equalToConstant: 80.0),
       nameContainer.leadingAnchor.constraint(equalTo: avatarContainer.trailingAnchor, constant: 8.0),
-      nameContainer.trailingAnchor.constraint(equalTo: container.layoutMarginsGuide.trailingAnchor),
-      fullName.trailingAnchor.constraint(equalTo: nameContainer.trailingAnchor, constant: -16.0),
-      fullName.leadingAnchor.constraint(equalTo: nameContainer.leadingAnchor),
-      fullName.topAnchor.constraint(lessThanOrEqualTo: container.topAnchor, constant: 8.0),
-      position.topAnchor.constraint(equalTo: fullName.bottomAnchor),
+      nameContainer.trailingAnchor.constraint(equalTo: container.trailingAnchor),
       
       divider.heightAnchor.constraint(equalToConstant: 1.0),
       divider.topAnchor.constraint(equalTo: nameContainer.bottomAnchor, constant: 16.0),
