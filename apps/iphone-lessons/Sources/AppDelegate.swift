@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ThemeManager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let rootView = AutoLayoutViewController()
     let rootViewController = UINavigationController(rootViewController: rootView)
     
+    ThemeManager.apply(theme: .client)
+
     window = UIWindow()
     window?.rootViewController = rootViewController
     window?.makeKeyAndVisible()

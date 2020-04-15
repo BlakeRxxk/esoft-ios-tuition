@@ -7,9 +7,12 @@ static_library(
         "Sources/**/*.swift",
     ]),
     deps = [
+        ":EsoftUIKitMedia",
+        "//libraries/Atlas:Atlas",
+        "//libraries/ThemeManager:ThemeManager",
+        "//libraries/AutoLayoutKit:AutoLayoutKit",
     	"//libraries/BaseUI:BaseUI",
         "//libraries/BaseFRP:BaseFRP",
-        "//libraries/AutoLayoutKit:AutoLayoutKit",
         "//third-party/Pods:Yoga",
         "//third-party/Pods:YogaKit",
     ],
@@ -29,4 +32,10 @@ static_library(
     ],
     test_deps = [],
     info_plist_substitutions = info_plist_substitutions("EsoftUIKitTests")
+)
+
+apple_asset_catalog(
+    name = "EsoftUIKitMedia",
+    visibility = ["PUBLIC"],
+    dirs = ["Resources/Media.xcassets"],
 )

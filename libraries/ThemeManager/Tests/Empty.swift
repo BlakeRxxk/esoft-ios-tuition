@@ -1,13 +1,13 @@
 //
 //  Empty.swift
-//  BaseUI
+//  ThemeManager
 //
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
 //
 
 import XCTest
 
-final class BaseUITests: XCTestCase {
+final class ThemeManagerTests: XCTestCase {
 
     func testExample() {
         // This is an example of a functional test case.
