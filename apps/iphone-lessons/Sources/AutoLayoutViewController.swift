@@ -135,17 +135,12 @@ final class AutoLayoutViewController: UIViewController {
       phoneIcon,
       phone
       ].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
-    
-    var containerConstraints: NSLayoutConstraint = container.topAnchor.constraint(equalTo: view.topAnchor)
-    if #available(iOS 11.0, *) {
-      containerConstraints = container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-    }
-    
+
     let constraints = [
-      containerConstraints,
+      container.topAnchor.constraint(equalTo: view.topAnchor),
       container.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       container.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      
+
       avatarContainer.heightAnchor.constraint(equalToConstant: 48.0),
       avatarContainer.widthAnchor.constraint(equalToConstant: 48.0),
       avatarContainer.topAnchor.constraint(equalTo: container.topAnchor, constant: 16.0),
@@ -172,7 +167,7 @@ final class AutoLayoutViewController: UIViewController {
       phoneIcon.widthAnchor.constraint(equalToConstant: 24.0)
 
     ]
-
+    
     NSLayoutConstraint.activate(constraints)
   }
 }

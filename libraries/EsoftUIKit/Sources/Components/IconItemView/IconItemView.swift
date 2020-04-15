@@ -80,14 +80,12 @@ public final class IconItemView: View {
     paragraphStyle.lineHeightMultiple = 1.08
     
     titleLabel.attributedText = NSMutableAttributedString(string: "title",
-                                                     attributes: [
-                                                      NSAttributedString.Key.kern: -0.41,
-                                                      NSAttributedString.Key.paragraphStyle: paragraphStyle])
+                                                          attributes: [
+                                                            NSAttributedString.Key.kern: -0.41,
+                                                            NSAttributedString.Key.paragraphStyle: paragraphStyle])
   }
   
   private func layout() {
-    NSLayoutConstraint.deactivate(activeConstraints)
-    
     activeConstraints = [
       containerStack.topAnchor.constraint(equalTo: topAnchor),
       containerStack.leadingAnchor.constraint(equalTo: leadingAnchor),
