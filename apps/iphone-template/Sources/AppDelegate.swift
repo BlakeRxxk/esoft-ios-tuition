@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     DBDebugToolkit.setup()
     #endif
     window = UIWindow()
-    window?.rootViewController = ViewController()
+    let nav = UINavigationController(rootViewController: ViewController())
+    window?.rootViewController = nav
     window?.makeKeyAndVisible()
     
     return true
