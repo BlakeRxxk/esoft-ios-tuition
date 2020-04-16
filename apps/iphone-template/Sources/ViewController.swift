@@ -194,9 +194,31 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     
     setupScreen()
+    addSubviewInView()
+    configureUI()
+   
+  }
+  
+  // MARK: - Functions
+  
+  private func setupScreen() {
     
-    let margins = view.layoutMarginsGuide
+    // view
+    view.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1)
     
+    // navigation
+    navigationItem.title = "Title"
+    let nav = self.navigationController?.navigationBar
+    nav?.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+    nav?.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
+    
+    // imageView
+    image.layer.cornerRadius = 8
+    image.clipsToBounds = true
+    
+  }
+  
+  private func addSubviewInView() {
     view.addSubview(container)
     
     container.addSubview(topView)
@@ -215,7 +237,7 @@ class ViewController: UIViewController {
     bottomView.addSubview(titleStack)
     titleStack.addArrangedSubview(mainTitle)
     titleStack.addArrangedSubview(phoneButton)
-
+    
     bottomView.addSubview(infoStack)
     
     infoStack.addArrangedSubview(viewsView)
@@ -227,6 +249,9 @@ class ViewController: UIViewController {
     favoriteView.addArrangedSubview(favoriteCount)
     
     infoStack.addArrangedSubview(codeObject)
+  }
+  
+  private func configureUI() {
     
     // setup
     priceStack.alignment = .center
@@ -242,6 +267,8 @@ class ViewController: UIViewController {
     
     infoStack.alignment = .center
     infoStack.distribution = .equalCentering
+    
+    let margins = view.layoutMarginsGuide
     
     // topView
     
@@ -308,29 +335,6 @@ class ViewController: UIViewController {
     
     favoriteImage.heightAnchor.constraint(equalToConstant: 10).isActive = true
     favoriteImage.heightAnchor.constraint(equalToConstant: 9.41).isActive = true
-   
   }
-  
-  // MARK: - Functions
-  
-  private func setupScreen() {
-    
-    // view
-    view.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1)
-    
-    // navigation
-    navigationItem.title = "Title"
-    let nav = self.navigationController?.navigationBar
-    nav?.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-    nav?.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
-    
-    // imageView
-    image.layer.cornerRadius = 8
-    image.clipsToBounds = true
-    
-    
-  }
-  
-  
   
 }
