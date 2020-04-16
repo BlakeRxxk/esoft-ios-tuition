@@ -2,7 +2,7 @@
 //  Empty.swift
 //  BaseUI
 //
-//  Created by Blake Rxxk on 02.04.2020.
+//  Copyright © 2020 E-SOFT, OOO. All rights reserved.
 //
 
 import XCTest

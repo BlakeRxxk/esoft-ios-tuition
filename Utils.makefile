@@ -42,7 +42,7 @@ install_buck:
 	chmod u+x tools/buck
 
 install_pods:
-	cd third-party && pod install && cd ..
+	cd third-party && bundle exec pod install && cd ..
 
 check_env:
 ifndef BUCK
