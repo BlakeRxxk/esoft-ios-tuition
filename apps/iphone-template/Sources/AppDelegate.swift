@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     #if DEBUG
     DBDebugToolkit.setup()
     #endif
+
+    AppTheme.apply(theme: .client)
+
     window = UIWindow()
     window?.rootViewController = ViewController()
     window?.makeKeyAndVisible()

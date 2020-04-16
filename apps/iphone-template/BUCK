@@ -25,7 +25,7 @@ static_libraries = [
     "//libraries/BaseFRP:BaseFRP",
     "//libraries/EsoftUIKit:EsoftUIKit",
     "//libraries/AutoLayoutKit:AutoLayoutKit",
-    # "//libraries/LeakInspector:LeakInspector",
+    "//libraries/ThemeManager:ThemeManager",
 ]
 
 prebuilt_frameworks = [

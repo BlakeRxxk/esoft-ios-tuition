@@ -15,4 +15,7 @@ target 'ThirdPartyDependencies' do
   pod 'SwiftLint'
   pod 'DBDebugToolkit', :binary => true
   pod "HeapInspector", :binary => true
+
+  pod 'PINRemoteImage', :binary => true
+  pod 'PINCache', :binary => true
 end
