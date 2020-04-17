@@ -10,7 +10,6 @@ import UIKit
 public protocol IconItemViewInput {
   var title: String { get set }
   var leftIcon: UIImage? { get set }
-  var viewUUID: String { get set }
 }
 
 public protocol IconItemViewOutput: class {

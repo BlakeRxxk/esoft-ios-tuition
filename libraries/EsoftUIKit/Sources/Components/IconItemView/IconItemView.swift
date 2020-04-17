@@ -8,16 +8,16 @@
 import UIKit
 import BaseUI
 import BaseFRP
+import ThemeManager
+import YogaKit
 
 public final class IconItemView: View {
-  public var viewUUID: String = UUID().uuidString
-
   public var title: String {
     get {
-      titleLabel.text ?? ""
+      titleLabel.styledText ?? ""
     }
     set {
-      titleLabel.text = newValue
+      titleLabel.styledText = newValue
     }
   }
   
@@ -30,7 +30,6 @@ public final class IconItemView: View {
     }
   }
 
-  private(set) lazy var containerStack: UIStackView = UIStackView()
   private(set) lazy var iconView: UIImageView = UIImageView()
   private(set) lazy var titleLabel: UILabel = UILabel()
   
@@ -41,62 +40,47 @@ public final class IconItemView: View {
     
     createUI()
     configureUI()
-    layout()
   }
   
   private func createUI() {
-    let subviews: [UIView] = [
-      containerStack,
-      iconView,
-      titleLabel
-    ]
-    
-    subviews.forEach {
-      $0.translatesAutoresizingMaskIntoConstraints = false
-    }
-
-    containerStack.addArrangedSubview(iconView)
-    containerStack.addArrangedSubview(titleLabel)
-    
-    addSubview <^> [
-      containerStack
-    ]
+    addSubview(iconView)
+    addSubview(titleLabel)
   }
 
   private func configureUI() {
-    iconView.image = UIImage.Call.right
-    
-    iconView.tintColor = UIColor(red: 0.204, green: 0.78, blue: 0.349, alpha: 1)
-    containerStack.alignment = .center
-    containerStack.axis = .horizontal
-    containerStack.spacing = 32.0
-    containerStack.isLayoutMarginsRelativeArrangement = true
-    containerStack.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-    
-    titleLabel.textColor = UIColor(red: 0.204, green: 0.78, blue: 0.349, alpha: 1)
-    titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+    iconView.tintColor = ThemeManager.current().colors.primary500
 
-    let paragraphStyle = NSMutableParagraphStyle()
-    paragraphStyle.lineHeightMultiple = 1.08
-    
-    titleLabel.attributedText = NSMutableAttributedString(string: "title",
-                                                          attributes: [
-                                                            NSAttributedString.Key.kern: -0.41,
-                                                            NSAttributedString.Key.paragraphStyle: paragraphStyle])
+    titleLabel.setStyles(
+      UILabel.Styles.headline,
+      UILabel.ColorStyle.primary500
+    )
   }
   
-  private func layout() {
-    activeConstraints = [
-      containerStack.topAnchor.constraint(equalTo: topAnchor),
-      containerStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-      containerStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-      containerStack.bottomAnchor.constraint(equalTo: bottomAnchor),
-      
-      iconView.heightAnchor.constraint(equalToConstant: Space.base),
-      iconView.widthAnchor.constraint(equalToConstant: Space.base)
-    ]
+  override public func layoutSubviews() {
+    super.layoutSubviews()
+    configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = 100%
+      layout.height = 48
+      layout.padding = 16
+      layout.flexDirection = .row
+      layout.alignItems = .flexStart
+    }
     
-    NSLayoutConstraint.activate(activeConstraints)
+    iconView.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = 24
+      layout.height = 24
+    }
+    
+    titleLabel.configureLayout { layout in
+      layout.isEnabled = true
+      layout.marginLeft = 32
+      layout.flexGrow = 1
+      layout.flexShrink = 1
+    }
+
+    yoga.applyLayout(preservingOrigin: true)
   }
   
   @objc func handleAction() {}

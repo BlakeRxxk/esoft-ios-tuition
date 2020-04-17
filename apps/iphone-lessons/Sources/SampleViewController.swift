@@ -2,12 +2,13 @@
 //  SampleViewController.swift
 //  AppLibrary
 //
-//  Created by Blake Rxxk on 15.04.2020.
+//  Copyright © 2020 E-SOFT, OOO. All rights reserved.
 //
 
 import UIKit
 import EsoftUIKit
 import ThemeManager
+import AutoLayoutKit
 
 final class SampleViewController: UIViewController {
   private(set) lazy var container: UIView = UIView()
@@ -15,18 +16,18 @@ final class SampleViewController: UIViewController {
   private(set) lazy var avatarContainer: UIView = UIView()
   private(set) lazy var avatarLabel: UILabel = UILabel()
   
-  private(set) lazy var fioStack: UIStackView = UIStackView()
-  
-  private(set) lazy var nameLabel: UILabel = UILabel()
-
-  private(set) lazy var positionLabel: UILabel = UILabel()
+  private(set) lazy var nameContainer: UIStackView = UIStackView()
+  private(set) lazy var fullName: UILabel = UILabel()
+  private(set) lazy var position: UILabel = UILabel()
   
   private(set) lazy var divider: UIView = UIView()
   
-  private(set) lazy var phoneStack: UIStackView = UIStackView()
-  private(set) lazy var phoneIcon: UIImageView = UIImageView()
-  private(set) lazy var phoneLabel: UILabel = UILabel()
+  private(set) lazy var phoneView: IconItemView = IconItemView()
+  private(set) lazy var chatView: IconItemView = IconItemView()
   
+  override func loadView() {
+    view = UIView()
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -37,79 +38,105 @@ final class SampleViewController: UIViewController {
   }
   
   private func createUI() {
-    fioStack.addArrangedSubview(nameLabel)
-    fioStack.addArrangedSubview(positionLabel)
+    view.addSubview(container)
     
-    phoneStack.addArrangedSubview(phoneIcon)
-    phoneStack.addArrangedSubview(phoneLabel)
+    nameContainer.addArrangedSubview(fullName)
+    nameContainer.addArrangedSubview(position)
     
     avatarContainer.addSubview(avatarLabel)
-
     container.addSubview(avatarContainer)
-    container.addSubview(fioStack)
-    container.addSubview(divider)
-    container.addSubview(phoneStack)
     
-    view.addSubview(container)
+    container.addSubview(nameContainer)
+    container.addSubview(divider)
+    container.addSubview(phoneView)
+    container.addSubview(chatView)
   }
   
   private func configureUI() {
-    view.backgroundColor = .white
+    view.backgroundColor = ThemeManager.current().colors.container
     
-    phoneLabel.text = Localization.phone
-    phoneLabel.textColor = ThemeManager.current().colors.primary500
-  
-    nameLabel.text = Localization.name
-    nameLabel.textColor = ThemeManager.current().textColors.primary
-  
-    positionLabel.text = Localization.position
-    positionLabel.textColor = ThemeManager.current().textColors.secondary
-    
-    avatarLabel.text = Localization.avatarStub
-    avatarLabel.textColor = ThemeManager.current().textColors.white
-    
-    fioStack.axis = .vertical
-    fioStack.isLayoutMarginsRelativeArrangement = true
-    fioStack.layoutMargins = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 16)
-    
-    phoneIcon.image = UIImage.Call.left
-    phoneIcon.tintColor = ThemeManager.current().colors.primary500
-    
-    phoneStack.axis = .horizontal
-    phoneStack.spacing = 32.0
-    phoneStack.isLayoutMarginsRelativeArrangement = true
-    phoneStack.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-  }
+    nameContainer.axis = .vertical
+    nameContainer.isLayoutMarginsRelativeArrangement = true
+    nameContainer.layoutMargins = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 16)
 
+    avatarContainer.backgroundColor = ThemeManager.current().colors.stub
+    avatarContainer.layer.cornerRadius = 24.0
+    avatarContainer.clipsToBounds = true
+
+    avatarLabel.setStyles(
+      UILabel.Styles.title3,
+      UILabel.ColorStyle.inverse
+    )
+    avatarLabel.styledText = Localized.avatarLabel
+    
+    fullName.styledText = Localized.name
+    fullName.numberOfLines = 0
+
+    position.font = UIFont.systemFont(ofSize: 15)
+    position.setStyles(
+      UILabel.Styles.small,
+      UILabel.ColorStyle.secondary
+    )
+    position.styledText = Localized.position
+    
+    divider.backgroundColor = ThemeManager.current().colors.divider
+    
+    phoneView.leftIcon = UIImage.Call.right
+    phoneView.setStyles(IconItemView.Styles.greeny)
+    phoneView.title = Localized.phone
+    
+    chatView.leftIcon = UIImage.Consultant.left
+    chatView.setStyles(IconItemView.Styles.normal)
+
+    chatView.title = Localized.chat
+  }
+  
   private func layout() {
     [
       container,
       avatarContainer,
       avatarLabel,
-      fioStack,
-      nameLabel,
-      positionLabel,
+      nameContainer,
+      fullName,
+      position,
       divider,
-      phoneStack,
-      phoneIcon,
-      phoneLabel
+      phoneView,
+      chatView,
       ].forEach {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    
     let constraints = [
+      container.topAnchor.constraint(equalTo: view.topAnchor),
       container.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       container.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      container.topAnchor.constraint(equalTo: view.topAnchor),
+
+      avatarContainer.heightAnchor.constraint(equalToConstant: 48.0),
+      avatarContainer.widthAnchor.constraint(equalToConstant: 48.0),
+      avatarContainer.topAnchor.constraint(equalTo: container.topAnchor, constant: 16.0),
+      avatarContainer.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16.0),
       
-      fioStack.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-      fioStack.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-      fioStack.topAnchor.constraint(equalTo: container.topAnchor),
+      avatarLabel.centerYAnchor.constraint(equalTo: avatarContainer.centerYAnchor),
+      avatarLabel.centerXAnchor.constraint(equalTo: avatarContainer.centerXAnchor),
       
-      phoneStack.topAnchor.constraint(equalTo: fioStack.bottomAnchor, constant: 16),
-      phoneStack.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-      phoneStack.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+      nameContainer.topAnchor.constraint(equalTo: container.topAnchor, constant: 8.0),
+      nameContainer.leadingAnchor.constraint(equalTo: avatarContainer.trailingAnchor, constant: 8.0),
+      nameContainer.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+      
+      divider.heightAnchor.constraint(equalToConstant: 1.0),
+      divider.topAnchor.constraint(equalTo: nameContainer.bottomAnchor),
+      divider.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16.0),
+      divider.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16.0),
+      
+      phoneView.topAnchor.constraint(equalTo: divider.bottomAnchor),
+      phoneView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+      phoneView.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+      phoneView.heightAnchor.constraint(equalToConstant: 48.0),
+
+      chatView.top.constraint(equalTo: phoneView.bottom),
+      chatView.leading.constraint(equalTo: container.leading),
+      chatView.trailing.constraint(equalTo: container.trailing),
+      chatView.height.constraint(equalToConstant: Space.large)
     ]
     
     NSLayoutConstraint.activate(constraints)
@@ -117,10 +144,11 @@ final class SampleViewController: UIViewController {
 }
 
 private extension SampleViewController {
-  enum Localization {
-    static let name: String = "Норкин Константин Владимирович"
-    static let position: String = "Персональный менеджер"
-    static let phone: String = "+7 999 999 99 99"
-    static let avatarStub: String = "НК"
+  enum Localized {
+    static let position = "Персональный менеджер"
+    static let name = "Константинов Константин Константинович"
+    static let avatarLabel = "КК"
+    static let phone = "+7 999 999 99 99"
+    static let chat = "Чат со специалистом"
   }
 }

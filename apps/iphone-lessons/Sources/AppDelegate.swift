@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   public var window: UIWindow?
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    let rootView = AutoLayoutViewController()
+    let rootView = SampleViewController()
     let rootViewController = UINavigationController(rootViewController: rootView)
     
     ThemeManager.apply(theme: .client)
