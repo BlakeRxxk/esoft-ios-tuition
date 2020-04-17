@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import EsoftUIKit
 
 class ViewController: UIViewController {
-  let label = UILabel()
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .systemTeal
+    view.backgroundColor = AppTheme.current().colors.container
     // Do any additional setup after loading the view.
   }
 
