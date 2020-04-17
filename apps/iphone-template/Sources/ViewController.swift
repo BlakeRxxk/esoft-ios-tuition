@@ -333,7 +333,7 @@ class ViewController: UIViewController {
     viewsImage.widthAnchor.constraint(equalToConstant: 11).isActive = true
     viewsImage.heightAnchor.constraint(equalToConstant: 7.5).isActive = true
     
-    favoriteImage.heightAnchor.constraint(equalToConstant: 10).isActive = true
+    favoriteImage.widthAnchor.constraint(equalToConstant: 10).isActive = true
     favoriteImage.heightAnchor.constraint(equalToConstant: 9.41).isActive = true
   }
   
