@@ -11,14 +11,14 @@ public struct Style {
   /**
    The name of the style
    */
-  let name: String
+  public let name: String
   
   /**
    Creates an instance of the style without registering in style storage.
    
    - parameter name: the name of the style
    */
-  init(name: String) {
+  public init(name: String) {
     self.name = name
   }
   
@@ -28,7 +28,7 @@ public struct Style {
    - parameter name: the name of the style
    - parameter process: a method of processing style
    */
-  init<T: Stylable>(name: String, process: @escaping (T) -> Void) {
+  public init<T: Stylable>(name: String, process: @escaping (T) -> Void) {
     assert(name.contains(" ") == false, "The style name must not contain space characters")
     self.init(name: name.replacingOccurrences(of: " ", with: "_"))
     StyleStorage.shared.register(name: name, process: process)
@@ -41,6 +41,6 @@ public struct Style {
  - parameter lhs: first style
  - parameter rhs: second style
  */
-func + (lhs: Style, rhs: Style) -> Style {
+public func + (lhs: Style, rhs: Style) -> Style {
   Style(name: lhs.name + " " + rhs.name)
 }
