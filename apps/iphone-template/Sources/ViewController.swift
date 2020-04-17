@@ -320,6 +320,8 @@ class ViewController: UIViewController {
     titleStack.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 16).isActive = true
     titleStack.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -16).isActive = true
     
+    mainTitle.bottomAnchor.constraint(lessThanOrEqualTo: titleStack.bottomAnchor, constant: -4).isActive = true
+    
     phoneButton.widthAnchor.constraint(equalToConstant: 18).isActive = true
     phoneButton.heightAnchor.constraint(equalToConstant: 18).isActive = true
     
