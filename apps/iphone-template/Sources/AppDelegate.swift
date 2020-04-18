@@ -22,7 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     AppTheme.apply(theme: .client)
 
     window = UIWindow()
-    window?.rootViewController = ViewController()
+    let rootVC = UINavigationController(rootViewController: ViewController())
+    rootVC.navigationBar.barTintColor = AppTheme.current().colors.defaultTopBar
+    rootVC.navigationBar.titleTextAttributes = [
+      .foregroundColor: AppTheme.current().textColors.white
+    ]
+    window?.rootViewController = rootVC
     window?.makeKeyAndVisible()
     
     return true
