@@ -22,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     AppTheme.apply(theme: .client)
 
     window = UIWindow()
-    window?.rootViewController = ViewController()
+    let navController = UINavigationController(rootViewController: ViewController())
+    window?.rootViewController = navController
     window?.makeKeyAndVisible()
     
     return true
