@@ -4,30 +4,35 @@
 //
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
 //
-
 import UIKit
-#if DEBUG
-import DBDebugToolkit
-#endif
+import ThemeManager
+import EsoftUIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   public var window: UIWindow?
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    #if DEBUG
-    DBDebugToolkit.setup()
-    #endif
-
-    AppTheme.apply(theme: .client)
-
-    window = UIWindow()
-    let rootVC = UINavigationController(rootViewController: ViewController())
-    rootVC.navigationBar.barTintColor = AppTheme.current().colors.defaultTopBar
-    rootVC.navigationBar.titleTextAttributes = [
-      .foregroundColor: AppTheme.current().textColors.white
+    let rootView = ViewController()
+    let rootViewController = UINavigationController(rootViewController: rootView)
+    
+    ThemeManager.apply(theme: .client)
+    
+    rootViewController.navigationBar.isTranslucent = false
+    rootViewController.navigationBar.barTintColor = ThemeManager.current().colors.defaultTopBar
+    rootViewController.navigationBar.tintColor = ThemeManager.current().textColors.white
+    rootViewController.navigationBar.titleTextAttributes = [
+      .foregroundColor: ThemeManager.current().textColors.white
     ]
-    window?.rootViewController = rootVC
+    rootViewController.navigationBar.shadowImage = nil
+    rootViewController.navigationBar.layoutMargins = UIEdgeInsets(top: 0,
+                                                                  left: Space.small,
+                                                                  bottom: 0,
+                                                                  right: Space.small)
+    rootViewController.navigationBar.preservesSuperviewLayoutMargins = true
+    
+    window = UIWindow()
+    window?.rootViewController = rootViewController
     window?.makeKeyAndVisible()
     
     return true
