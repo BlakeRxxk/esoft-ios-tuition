@@ -7,188 +7,171 @@
 
 import UIKit
 import EsoftUIKit
+import ThemeManager
 
 class ViewController: UIViewController {
   
   // MARK: - UI
-   
-   private(set) lazy var container: UIView = {
-     let view = UIView()
-     view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-     view.translatesAutoresizingMaskIntoConstraints = false
-     return view
-   }()
-   
-   // topView
-   
-   private(set) lazy var topView: UIView = {
-     let view = UIView()
-     view.translatesAutoresizingMaskIntoConstraints = false
-     return view
-   }()
-   
-   private(set) lazy var topViewStack: UIStackView = {
-     let view = UIStackView()
-     view.translatesAutoresizingMaskIntoConstraints = false
-     return view
-   }()
-   
-   
-   private(set) lazy var currentPrice: UILabel = {
-     let label = UILabel()
-     label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-     label.text = "2 200 000 руб."
-     label.translatesAutoresizingMaskIntoConstraints = false
-     return label
-   }()
-   
-   private(set) lazy var priceStack: UIStackView = {
-     let stack = UIStackView()
-     stack.translatesAutoresizingMaskIntoConstraints = false
-     return stack
-   }()
-   
-   private(set) lazy var priceImage: UIImageView = {
-     let imageView = UIImageView()
-     imageView.image = UIImage(named: "Arrow")
-     imageView.translatesAutoresizingMaskIntoConstraints = false
-     return imageView
-   }()
-   
-   private(set) lazy var price: UILabel = {
-     let label = UILabel()
-     label.textColor = #colorLiteral(red: 0.6195520759, green: 0.619643569, blue: 0.6195320487, alpha: 1)
-     label.font = label.font.withSize(13)
-     
-     let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: "2 300 000 руб.")
-     attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 1, range: NSMakeRange(0, attributeString.length))
-     
-     label.attributedText = attributeString
-     label.translatesAutoresizingMaskIntoConstraints = false
-     return label
-   }()
-   
-   private(set) lazy var address: UILabel = {
-     let label = UILabel()
-     label.text = "Тюмень, Центр: КПД, Республики"
-     label.font = label.font.withSize(13)
-     label.textColor = #colorLiteral(red: 0.458781004, green: 0.4588506818, blue: 0.4587657452, alpha: 1)
-     label.translatesAutoresizingMaskIntoConstraints = false
-     return label
-   }()
-   
-   // mainView
-   
-   private(set) lazy var mainView: UIView = {
-     let view = UIView()
-     view.translatesAutoresizingMaskIntoConstraints = false
-     return view
-   }()
-   
-   private(set) lazy var image: UIImageView = {
-     let imageView = UIImageView()
-     imageView.image = UIImage(named: "photo")
-     imageView.translatesAutoresizingMaskIntoConstraints = false
-     return imageView
-   }()
-   
-   private(set) lazy var favoriteButton: UIButton = {
-     let btn = UIButton()
-     btn.setImage(UIImage(named: "Star"), for: .normal)
-     btn.translatesAutoresizingMaskIntoConstraints = false
-     return btn
-   }()
-   
-   // bottomView
-   
-   private(set) lazy var bottomView: UIView = {
-     let view = UIView()
-     view.translatesAutoresizingMaskIntoConstraints = false
-     return view
-   }()
-   
-   private(set) lazy var titleStack: UIStackView = {
-     let view = UIStackView()
-     view.translatesAutoresizingMaskIntoConstraints = false
-     return view
-   }()
-   
-   private(set) lazy var mainTitle: UILabel = {
-     let label = UILabel()
-     label.font = label.font.withSize(13)
-     label.textColor = #colorLiteral(red: 0.1293964982, green: 0.1294215322, blue: 0.1293910444, alpha: 1)
-     label.numberOfLines = 0
-     label.text = "Пансионат, 1-комн., 18 м², этаж 3/8, 69 444 руб./м²"
-     label.translatesAutoresizingMaskIntoConstraints = false
-     return label
-   }()
-   
-   private(set) lazy var phoneButton: UIButton = {
-     let btn = UIButton()
-     btn.setImage(UIImage(named: "Phone"), for: .normal)
-     btn.translatesAutoresizingMaskIntoConstraints = false
-     return btn
-   }()
-   
-   private(set) lazy var infoStack: UIStackView = {
-     let stack = UIStackView()
-     stack.translatesAutoresizingMaskIntoConstraints = false
-     return stack
-   }()
-   
-   private(set) lazy var viewsView: UIStackView = {
-     let view = UIStackView()
-     view.translatesAutoresizingMaskIntoConstraints = false
-     return view
-   }()
-   
-   private(set) lazy var viewsImage: UIImageView = {
-     let imageView = UIImageView()
-     imageView.image = UIImage(named: "Shape")
-     imageView.translatesAutoresizingMaskIntoConstraints = false
-     return imageView
-   }()
-   
-   private(set) lazy var viewsCount: UILabel = {
-     let label = UILabel()
-     label.text = "314"
-     label.font = label.font.withSize(10)
-     label.textColor = #colorLiteral(red: 0.6195520759, green: 0.619643569, blue: 0.6195320487, alpha: 1)
-     label.translatesAutoresizingMaskIntoConstraints = false
-     return label
-   }()
-   
-   private(set) lazy var favoriteView: UIStackView = {
-     let view = UIStackView()
-     view.translatesAutoresizingMaskIntoConstraints = false
-     return view
-   }()
-   
-   private(set) lazy var favoriteImage: UIImageView = {
-     let imageView = UIImageView()
-     imageView.image = UIImage(named: "Star-small")
-     imageView.translatesAutoresizingMaskIntoConstraints = false
-     return imageView
-   }()
-   
-   private(set) lazy var favoriteCount: UILabel = {
-     let label = UILabel()
-     label.text = "7,4"
-     label.font = label.font.withSize(10)
-     label.textColor = #colorLiteral(red: 0.6195520759, green: 0.619643569, blue: 0.6195320487, alpha: 1)
-     label.translatesAutoresizingMaskIntoConstraints = false
-     return label
-   }()
-   
-   private(set) lazy var codeObject: UILabel = {
-     let label = UILabel()
-     label.text = "Код объекта: 773355"
-     label.font = label.font.withSize(10)
-     label.textColor = #colorLiteral(red: 0.6195520759, green: 0.619643569, blue: 0.6195320487, alpha: 1)
-     label.translatesAutoresizingMaskIntoConstraints = false
-     return label
-   }()
-
+  
+  private(set) lazy var container: UIView = {
+    let view = UIView()
+    view.backgroundColor = AppTheme.current().colors.container
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  // topView
+  
+  private(set) lazy var topView: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private(set) lazy var topViewStack: UIStackView = {
+    let view = UIStackView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private(set) lazy var currentPrice: UILabel = {
+    let label = UILabel()
+    label.text = "2 200 000 руб."
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
+  private(set) lazy var priceStack: UIStackView = {
+    let stack = UIStackView()
+    stack.translatesAutoresizingMaskIntoConstraints = false
+    return stack
+  }()
+  
+  private(set) lazy var priceImage: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = UIImage(named: "Arrow")
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    return imageView
+  }()
+  
+  private(set) lazy var price: UILabel = {
+    let label = UILabel()
+    label.text = "2 300 000 руб."
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
+  private(set) lazy var address: UILabel = {
+    let label = UILabel()
+    label.text = "Тюмень, Центр: КПД, Республики"
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
+  // mainView
+  
+  private(set) lazy var mainView: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private(set) lazy var image: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = UIImage(named: "photo")
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    return imageView
+  }()
+  
+  private(set) lazy var favoriteButton: UIButton = {
+    let btn = UIButton()
+    btn.setImage(UIImage(named: "Star"), for: .normal)
+    btn.translatesAutoresizingMaskIntoConstraints = false
+    return btn
+  }()
+  
+  // bottomView
+  
+  private(set) lazy var bottomView: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private(set) lazy var titleStack: UIStackView = {
+    let view = UIStackView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private(set) lazy var mainTitle: UILabel = {
+    let label = UILabel()
+    label.numberOfLines = 0
+    label.text = "Пансионат, 1-комн., 18 м², этаж 3/8, 69 444 руб./м²"
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
+  private(set) lazy var phoneButton: UIButton = {
+    let btn = UIButton()
+    btn.setImage(UIImage(named: "Phone"), for: .normal)
+    btn.translatesAutoresizingMaskIntoConstraints = false
+    return btn
+  }()
+  
+  private(set) lazy var infoStack: UIStackView = {
+    let stack = UIStackView()
+    stack.translatesAutoresizingMaskIntoConstraints = false
+    return stack
+  }()
+  
+  private(set) lazy var viewsView: UIStackView = {
+    let view = UIStackView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private(set) lazy var viewsImage: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = UIImage(named: "Shape")
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    return imageView
+  }()
+  
+  private(set) lazy var viewsCount: UILabel = {
+    let label = UILabel()
+    label.text = "314"
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
+  private(set) lazy var favoriteView: UIStackView = {
+    let view = UIStackView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  private(set) lazy var favoriteImage: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = UIImage(named: "Star-small")
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    return imageView
+  }()
+  
+  private(set) lazy var favoriteCount: UILabel = {
+    let label = UILabel()
+    label.text = "7,4"
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
+  private(set) lazy var codeObject: UILabel = {
+    let label = UILabel()
+    label.text = "Код объекта: 773355"
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = AppTheme.current().colors.container
@@ -203,17 +186,51 @@ class ViewController: UIViewController {
   private func setupScreen() {
     
     // view
-    view.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1)
+    view.backgroundColor = AppTheme.current().colors.screen
     
     // navigation
     navigationItem.title = "Title"
-    let nav = self.navigationController?.navigationBar
-    nav?.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-    nav?.barTintColor = #colorLiteral(red: 0.2039215686, green: 0.7803921569, blue: 0.3490196078, alpha: 1)
     
     // imageView
     image.layer.cornerRadius = 8
     image.clipsToBounds = true
+    
+    // setupUI
+    currentPrice.setStyles(
+      UILabel.Styles.title3,
+      UILabel.ColorStyle.primary
+    )
+    
+    price.setStyles(
+      UILabel.Styles.tiny,
+      UILabel.Styles.strikeThrough,
+      UILabel.ColorStyle.placeholders
+    )
+    
+    address.setStyles(
+      UILabel.Styles.tiny,
+      UILabel.Styles.secondary
+    )
+    
+    mainTitle.setStyles(
+      UILabel.Styles.tiny,
+      UILabel.ColorStyle.primary
+    )
+    
+    viewsCount.setStyles(
+      UILabel.Styles.micro,
+      UILabel.ColorStyle.placeholders
+    )
+    
+    favoriteCount.setStyles(
+      UILabel.Styles.micro,
+      UILabel.ColorStyle.placeholders
+    )
+    
+    codeObject.setStyles(
+      UILabel.Styles.micro,
+      UILabel.ColorStyle.placeholders
+    )
     
   }
   
@@ -337,5 +354,5 @@ class ViewController: UIViewController {
     favoriteImage.widthAnchor.constraint(equalToConstant: 10).isActive = true
     favoriteImage.heightAnchor.constraint(equalToConstant: 9.41).isActive = true
   }
-
+  
 }
