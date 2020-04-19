@@ -18,19 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     ThemeManager.apply(theme: .client)
     
+    rootViewController.navigationBar.shadowImage = UIImage()
     rootViewController.navigationBar.isTranslucent = false
-    rootViewController.navigationBar.barTintColor = ThemeManager.current().colors.defaultTopBar
-    rootViewController.navigationBar.tintColor = ThemeManager.current().textColors.white
-    rootViewController.navigationBar.titleTextAttributes = [
-      .foregroundColor: ThemeManager.current().textColors.white
-    ]
-    rootViewController.navigationBar.shadowImage = nil
-    rootViewController.navigationBar.layoutMargins = UIEdgeInsets(top: 0,
-                                                                  left: Space.small,
-                                                                  bottom: 0,
-                                                                  right: Space.small)
-    rootViewController.navigationBar.preservesSuperviewLayoutMargins = true
-    
+    rootViewController.navigationBar.barTintColor = ThemeManager.current().colors.container
+
     window = UIWindow()
     window?.rootViewController = rootViewController
     window?.makeKeyAndVisible()

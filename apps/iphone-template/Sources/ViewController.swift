@@ -12,6 +12,10 @@ import ThemeManager
 import AutoLayoutKit
 
 final class ViewController: UIViewController {
+  private(set) lazy var titleView: UIView = UIView()
+  private(set) lazy var logoImageView: UIImageView = UIImageView()
+  private(set) lazy var closeImageView: UIImageView = UIImageView()
+  
   private(set) lazy var container: UIView = UIView()
   
   private(set) lazy var enterLabel: UILabel = UILabel()
@@ -42,6 +46,11 @@ final class ViewController: UIViewController {
   }
   
   private func createUI() {
+    navigationItem.titleView = titleView
+    navigationItem.leftBarButtonItem = UIBarButtonItem(customView: closeImageView)
+    
+    titleView.addSubview(logoImageView)
+    
     view.addSubview(container)
     
     container.addSubview(enterLabel)
@@ -60,6 +69,9 @@ final class ViewController: UIViewController {
   }
   
   private func configureUI() {
+    logoImageView.image = #imageLiteral(resourceName: "logo")
+    closeImageView.image = #imageLiteral(resourceName: "closeIcon")
+    
     view.backgroundColor = ThemeManager.current().colors.container
     
     enterLabel.setStyles(UILabel.ColorStyle.primary)
@@ -81,10 +93,10 @@ final class ViewController: UIViewController {
     socialStackView.spacing = 48.0
     socialStackView.distribution = .equalSpacing
     socialStackView.axis = .horizontal
-    facebookImageView.image = UIImage(named: "facebookIcon")
-    vkImageView.image = UIImage(named: "vkIcon")
-    okImageView.image = UIImage(named: "okIcon")
-    googleImageView.image = UIImage(named: "googleIcon")
+    facebookImageView.image = #imageLiteral(resourceName: "facebookIcon")
+    vkImageView.image = #imageLiteral(resourceName: "vkIcon")
+    okImageView.image = #imageLiteral(resourceName: "okIcon")
+    googleImageView.image = #imageLiteral(resourceName: "googleIcon")
     
     termLabel.setStyles(UILabel.Styles.doubleLine,
                         UILabel.Styles.tiny,
@@ -101,6 +113,8 @@ final class ViewController: UIViewController {
   
   private func layout() {
     [
+      titleView,
+      logoImageView,
       container,
       enterLabel,
       phoneTextField,
@@ -112,11 +126,12 @@ final class ViewController: UIViewController {
       okImageView,
       googleImageView,
       termLabel
-      ].forEach {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+      ].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
     
     let constraints = [
+      logoImageView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
+      logoImageView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor, constant: -4),
+      
       container.topAnchor.constraint(equalTo: view.topAnchor),
       container.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       container.trailingAnchor.constraint(equalTo: view.trailingAnchor),
