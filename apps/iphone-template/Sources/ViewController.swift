@@ -128,8 +128,8 @@ final class ViewController: UIViewController {
         
         photoSubheader.text = "Фотографии"
         
-        photoContainer.backgroundColor = .systemPink
-        collectionView.backgroundColor = .blue
+        photoContainer.backgroundColor = .white
+        collectionView.backgroundColor = .clear
         
         arrowImage.image = UIImage(named: "go")
         
@@ -187,7 +187,6 @@ final class ViewController: UIViewController {
             costLabel.widthAnchor.constraint(equalToConstant: 206),
             
             noticeLabel.leadingAnchor.constraint(equalTo: costLabel.trailingAnchor, constant: 16),
-            noticeLabel.trailingAnchor.constraint(equalTo: costStackView.trailingAnchor),
             noticeLabel.centerYAnchor.constraint(equalTo: costStackView.centerYAnchor),
             noticeLabel.widthAnchor.constraint(equalToConstant: 121),
             
