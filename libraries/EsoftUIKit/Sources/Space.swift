@@ -14,6 +14,4 @@ public enum Space {
   public static let large: CGFloat = 48
   public static let xLarge: CGFloat = 64
   public static let xxLarge: CGFloat = 128
-
-  public static let navBarHeight: CGFloat = 56
 }

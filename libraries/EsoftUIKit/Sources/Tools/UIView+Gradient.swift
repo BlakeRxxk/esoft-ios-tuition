@@ -1,6 +1,6 @@
 //
 //  UIView+Gradient.swift
-//  EsoftUIKit#iphonesimulator-x86_64
+//  EsoftUIKit
 //
 //  Copyright © 2019 E-SOFT. All rights reserved.
 //

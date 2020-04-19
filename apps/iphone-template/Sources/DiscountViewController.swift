@@ -13,6 +13,8 @@ import Atlas
 
 import Foundation
 final class DiscountViewController: UIViewController {
+  private lazy var navBarHeight: CGFloat = 56
+
   private(set) lazy var imageContainer: UIView = UIView()
   private(set) lazy var bodyContainer: UIStackView = UIStackView()
 
@@ -102,7 +104,7 @@ final class DiscountViewController: UIViewController {
     companyName.text = Localized.companyName
     companyName.setStyles(UILabel.Styles.title3)
 
-    categoryLabel.text = Localized.category
+    categoryLabel.attributedText = NSAttributedString(string: Localized.category, attributes: [.kern: -0.08])
     categoryLabel.setStyles(UILabel.Styles.tiny)
     categoryLabel.textColor = UIColor.TextColor.placeholder
 
@@ -113,14 +115,14 @@ final class DiscountViewController: UIViewController {
     discountDescription.setStyles(UILabel.Styles.regular)
     discountDescription.numberOfLines = 3
 
-    whyYouCanUseDescription.text = Localized.whyYouCanUseDescription
+    whyYouCanUseDescription.attributedText = NSAttributedString(string: Localized.whyYouCanUseDescription, attributes: [.kern: -0.08])
     whyYouCanUseDescription.setStyles(UILabel.Styles.tiny)
     whyYouCanUseDescription.textColor = UIColor.TextColor.placeholder
     whyYouCanUseDescription.numberOfLines = 0
 
     divider.backgroundColor = ThemeManager.current().colors.divider
 
-    button.setTitle(Localized.useDiscount, for: UIControl.State.normal)
+    button.setTitle(Localized.useDiscount, for: .normal)
     button.backgroundColor = ThemeManager.current().colors.primary500
     button.titleLabel?.setStyles(UILabel.Styles.headline)
     button.layer.cornerRadius = 22
@@ -154,27 +156,27 @@ final class DiscountViewController: UIViewController {
       gradientView.topAnchor.constraint(equalTo: imageContainer.topAnchor),
 
       logoImageView.topAnchor.constraint(equalTo: imageContainer.topAnchor, constant: Space.small),
-      logoImageView.heightAnchor.constraint(equalToConstant: 285.0),
-      logoImageView.widthAnchor.constraint(equalToConstant: imageContainer.bounds.width),
+      logoImageView.heightAnchor.constraint(equalTo: logoImageView.widthAnchor, multiplier: 1.0/1.5),
       logoImageView.leadingAnchor.constraint(equalTo: imageContainer.leadingAnchor),
       logoImageView.trailingAnchor.constraint(equalTo: imageContainer.trailingAnchor),
+      logoImageView.bottomAnchor.constraint(equalTo: imageContainer.bottomAnchor),
 
-      arrowBackImageView.topAnchor.constraint(equalTo: imageContainer.topAnchor, constant: Space.navBarHeight),
+      arrowBackImageView.topAnchor.constraint(equalTo: imageContainer.topAnchor, constant: navBarHeight),
       arrowBackImageView.leadingAnchor.constraint(equalTo: imageContainer.leadingAnchor, constant: 14.0),
 
-      favouritesImageView.topAnchor.constraint(equalTo: imageContainer.topAnchor, constant: Space.navBarHeight),
+      favouritesImageView.topAnchor.constraint(equalTo: imageContainer.topAnchor, constant: navBarHeight),
       favouritesImageView.trailingAnchor.constraint(equalTo: shareImageView.leadingAnchor, constant: -10.5),
 
-      shareImageView.topAnchor.constraint(equalTo: imageContainer.topAnchor, constant: Space.navBarHeight + 3.0),
+      shareImageView.topAnchor.constraint(equalTo: imageContainer.topAnchor, constant: navBarHeight + 3.0),
       shareImageView.trailingAnchor.constraint(equalTo: imageContainer.trailingAnchor, constant: -18.0),
 
-      bodyContainer.topAnchor.constraint(equalTo: imageContainer.bottomAnchor),
+      bodyContainer.topAnchor.constraint(equalTo: imageContainer.bottomAnchor, constant: 12.0),
       bodyContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       bodyContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 
-      companyName.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 12),
+      companyName.topAnchor.constraint(equalTo: bodyContainer.topAnchor),
 
-      categoryLabel.topAnchor.constraint(equalTo: companyName.bottomAnchor, constant: 2),
+      categoryLabel.topAnchor.constraint(equalTo: companyName.bottomAnchor, constant: 2.0),
 
       discountType.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: Space.base),
 
@@ -184,7 +186,7 @@ final class DiscountViewController: UIViewController {
 
       whyYouCanUseDescription.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: Space.tiny),
 
-      button.heightAnchor.constraint(equalToConstant: 44.0)
+      button.heightAnchor.constraint(equalToConstant: Space.large)
     ]
 
     NSLayoutConstraint.activate(constraints)
