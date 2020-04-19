@@ -179,6 +179,7 @@ class ViewController: UIViewController {
     setupScreen()
     addSubviewInView()
     configureUI()
+    // test
   }
   
   // MARK: - Functions
@@ -197,9 +198,9 @@ class ViewController: UIViewController {
     
     // setupUI
     currentPrice.setStyles(
-      UILabel.Styles.title3,
-      UILabel.ColorStyle.primary
+      UILabel.Styles.title3
     )
+    currentPrice.textColor = AppTheme.current().colors.error
     
     price.setStyles(
       UILabel.Styles.tiny,
