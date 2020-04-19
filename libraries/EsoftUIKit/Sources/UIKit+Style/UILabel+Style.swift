@@ -51,7 +51,7 @@ extension UILabel {
     
     public static let tiny = lineSpacingTiny + makeStyle(name: "tiny", attributes: [
       .font: UIFont.tiny,
-      .foregroundColor: ThemeManager.current().textColors.primary,
+      .foregroundColor: ThemeManager.current().textColors.primary
     ])
     
     public static let micro = lineSpacingMicro + makeStyle(name: "micro", attributes: [
