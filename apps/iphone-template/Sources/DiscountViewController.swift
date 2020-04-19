@@ -119,7 +119,7 @@ final class DiscountViewController: UIViewController {
       discountDescription,
       divider,
       whyYouCanUseDescription,
-      button,
+      button
     ].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -153,7 +153,7 @@ final class DiscountViewController: UIViewController {
 
       whyYouCanUseDescription.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: Space.tiny),
 
-      button.heightAnchor.constraint(equalToConstant: 44.0),
+      button.heightAnchor.constraint(equalToConstant: 44.0)
     ]
 
     NSLayoutConstraint.activate(constraints)
@@ -165,60 +165,9 @@ private extension DiscountViewController {
     static let companyName = "Hoff"
     static let category = "Мебель, товары для дома"
     static let discountType = "Основная скидка"
-    static let discountDescription = "15 000 руб. Скидка предоставляется в рамках программы \"Новое жилье с мебелью Hoff\". Акция не распротстраняется, и еще тут много очень текста, который скроется"
+    static let discountDescription = "15 000 руб. Скидка предоставляется в рамках программы \"Новое жилье с мебелью Hoff\"."
+    + " Акция не распротстраняется, и еще тут много очень текста, который скроется"
     static let whyYouCanUseDescription = "Вы совершили сделку с нашей компанией, теперь вам доступна скидка более высокого уровня, чем приветственная."
     static let useDiscount = "Воспользоваться скидкой"
   }
 }
-//
-//extension UIView {
-//   // For insert layer in Foreground
-//   func addBlackGradientLayerInForeground(colors:[UIColor]){
-//    let gradient = CAGradientLayer()
-//    gradient.frame = self.frame
-//    gradient.colors = colors.map{$0.cgColor}
-//    gradient.startPoint = DirectionGradient.horizontally.startPoint
-//    gradient.endPoint = DirectionGradient.horizontally.endPoint
-//    gradient.locations = [0, 1]
-//    self.layer.addSublayer(gradient)
-//   }
-//   // For insert layer in background
-//   func addBlackGradientLayerInBackground(colors:[UIColor]){
-//    let gradient = CAGradientLayer()
-//    gradient.frame = self.frame
-//    gradient.colors = colors.map{$0.cgColor}
-//    gradient.startPoint = DirectionGradient.horizontally.startPoint
-//    gradient.endPoint = DirectionGradient.horizontally.endPoint
-//    gradient.locations = [0, 1]
-//    self.layer.insertSublayer(gradient, at: 1)
-//   }
-//
-//  enum DirectionGradient {
-//    case horizontally
-//    case vertically
-//    case under45degreesLeftToRight
-//    case under45degreesRightToLeft
-//
-//    var startPoint: CGPoint {
-//      switch self {
-//      case .horizontally, .vertically, .under45degreesLeftToRight:
-//        return CGPoint(x: 0.0, y: 0.0)
-//      case .under45degreesRightToLeft:
-//        return CGPoint(x: 1.0, y: 0.0)
-//      }
-//    }
-//
-//    var endPoint: CGPoint {
-//      switch self {
-//      case .horizontally:
-//        return CGPoint(x: 1.0, y: 0.0)
-//      case .vertically:
-//        return CGPoint(x: 0.0, y: 1.0)
-//      case .under45degreesLeftToRight:
-//        return CGPoint(x: 1.0, y: 1.0)
-//      case .under45degreesRightToLeft:
-//        return CGPoint(x: 0.0, y: 1.0)
-//      }
-//    }
-//  }
-//}
