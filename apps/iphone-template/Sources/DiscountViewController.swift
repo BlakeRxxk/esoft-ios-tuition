@@ -15,15 +15,19 @@ import Foundation
 final class DiscountViewController: UIViewController {
   private(set) lazy var imageContainer: UIView = UIView()
   private(set) lazy var bodyContainer: UIStackView = UIStackView()
+
   private(set) lazy var gradientView: UIView = UIView()
   private(set) lazy var logoImageView: UIImageView = UIImageView()
+  private(set) lazy var arrowBackImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+  private(set) lazy var favouritesImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+  private(set) lazy var shareImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+
   private(set) lazy var companyName: UILabel = UILabel()
   private(set) lazy var categoryLabel: UILabel = UILabel()
   private(set) lazy var discountType: UILabel = UILabel()
   private(set) lazy var discountDescription: UILabel = UILabel()
   private(set) lazy var divider: UIView = UIView()
   private(set) lazy var whyYouCanUseDescription: UILabel = UILabel()
-
   private(set) lazy var button: UIButton = UIButton()
 
   override func loadView() {
@@ -47,6 +51,9 @@ final class DiscountViewController: UIViewController {
     view.addSubview(bodyContainer)
     imageContainer.addSubview(logoImageView)
     imageContainer.addSubview(gradientView)
+    imageContainer.addSubview(arrowBackImageView)
+    imageContainer.addSubview(favouritesImageView)
+    imageContainer.addSubview(shareImageView)
     bodyContainer.addArrangedSubview(companyName)
     bodyContainer.addArrangedSubview(categoryLabel)
     bodyContainer.addArrangedSubview(discountType)
@@ -69,6 +76,18 @@ final class DiscountViewController: UIViewController {
     logoImageView.image = UIImage(named: "companyLogotype")
     logoImageView.layer.masksToBounds = true
     logoImageView.contentMode = .scaleAspectFill
+
+    arrowBackImageView.backgroundColor = UIColor.clear
+    arrowBackImageView.contentMode = .center
+    arrowBackImageView.image = UIImage(named: "arrow.left.small")
+
+    favouritesImageView.backgroundColor = UIColor.clear
+    favouritesImageView.contentMode = .center
+    favouritesImageView.image = UIImage(named: "star.small")
+
+    shareImageView.backgroundColor = UIColor.clear
+    shareImageView.contentMode = .center
+    shareImageView.image = UIImage(named: "share.small")
 
     gradientView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 285.0)
     gradientView.setGradient(
@@ -113,6 +132,9 @@ final class DiscountViewController: UIViewController {
       bodyContainer,
       gradientView,
       logoImageView,
+      arrowBackImageView,
+      favouritesImageView,
+      shareImageView,
       companyName,
       categoryLabel,
       discountType,
@@ -136,6 +158,15 @@ final class DiscountViewController: UIViewController {
       logoImageView.widthAnchor.constraint(equalToConstant: imageContainer.bounds.width),
       logoImageView.leadingAnchor.constraint(equalTo: imageContainer.leadingAnchor),
       logoImageView.trailingAnchor.constraint(equalTo: imageContainer.trailingAnchor),
+
+      arrowBackImageView.topAnchor.constraint(equalTo: imageContainer.topAnchor, constant: Space.navBarHeight),
+      arrowBackImageView.leadingAnchor.constraint(equalTo: imageContainer.leadingAnchor, constant: 14.0),
+
+      favouritesImageView.topAnchor.constraint(equalTo: imageContainer.topAnchor, constant: Space.navBarHeight),
+      favouritesImageView.trailingAnchor.constraint(equalTo: shareImageView.leadingAnchor, constant: -10.5),
+
+      shareImageView.topAnchor.constraint(equalTo: imageContainer.topAnchor, constant: Space.navBarHeight + 3.0),
+      shareImageView.trailingAnchor.constraint(equalTo: imageContainer.trailingAnchor, constant: -18.0),
 
       bodyContainer.topAnchor.constraint(equalTo: imageContainer.bottomAnchor),
       bodyContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
