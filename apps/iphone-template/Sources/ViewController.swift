@@ -36,7 +36,7 @@ class ViewController: UIViewController {
   
   private(set) lazy var currentPrice: UILabel = {
     let label = UILabel()
-    label.text = "2 200 000 руб."
+    label.text = Localized.currentPrice
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -57,14 +57,14 @@ class ViewController: UIViewController {
   
   private(set) lazy var price: UILabel = {
     let label = UILabel()
-    label.text = "2 300 000 руб."
+    label.text = Localized.price
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
   private(set) lazy var address: UILabel = {
     let label = UILabel()
-    label.text = "Тюмень, Центр: КПД, Республики"
+    label.text = Localized.address
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -109,7 +109,7 @@ class ViewController: UIViewController {
   private(set) lazy var mainTitle: UILabel = {
     let label = UILabel()
     label.numberOfLines = 0
-    label.text = "Пансионат, 1-комн., 18 м², этаж 3/8, 69 444 руб./м²"
+    label.text = Localized.mainTitle
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -144,7 +144,7 @@ class ViewController: UIViewController {
   
   private(set) lazy var viewsCount: UILabel = {
     let label = UILabel()
-    label.text = "314"
+    label.text = Localized.views
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -165,14 +165,14 @@ class ViewController: UIViewController {
   
   private(set) lazy var favoriteCount: UILabel = {
     let label = UILabel()
-    label.text = "7,4"
+    label.text = Localized.favorits
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
   private(set) lazy var codeObject: UILabel = {
     let label = UILabel()
-    label.text = "Код объекта: 773355"
+    label.text = Localized.codeObject
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -359,4 +359,16 @@ class ViewController: UIViewController {
     favoriteImage.heightAnchor.constraint(equalToConstant: 9.41).isActive = true
   }
   
+}
+
+private extension ViewController {
+  enum Localized {
+    static let price = "2 300 000 руб."
+    static let currentPrice = "2 200 000 руб."
+    static let address = "Тюмень, Центр: КПД, Республики"
+    static let mainTitle = "Пансионат, 1-комн., 18 м², этаж 3/8, 69 444 руб./м²"
+    static let views = "314"
+    static let favorits = "7,4"
+    static let codeObject = "Код объекта: 773355"
+  }
 }
