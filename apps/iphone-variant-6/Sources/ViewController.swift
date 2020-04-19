@@ -69,8 +69,8 @@ final class ViewController: UIViewController {
   }
   
   private func configureUI() {
-    logoImageView.image = #imageLiteral(resourceName: "logo")
-    closeImageView.image = #imageLiteral(resourceName: "closeIcon")
+    logoImageView.image = UIImage(named: "logo")
+    closeImageView.image = UIImage(named: "closeIcon")
     
     view.backgroundColor = ThemeManager.current().colors.container
     
@@ -84,7 +84,7 @@ final class ViewController: UIViewController {
     
     divider.backgroundColor = ThemeManager.current().colors.divider
     
-    let redColor = #colorLiteral(red: 0.9215686275, green: 0.3529411765, blue: 0.2745098039, alpha: 1)
+    let redColor = UIColor(red: 235.0 / 255.0, green: 90.0 / 255.0, blue: 70.0 / 255.0, alpha: 1.0)
     continueButton.backgroundColor = redColor
     continueButton.layer.cornerRadius = 22.0
     continueButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
@@ -93,10 +93,10 @@ final class ViewController: UIViewController {
     socialStackView.spacing = 48.0
     socialStackView.distribution = .equalSpacing
     socialStackView.axis = .horizontal
-    facebookImageView.image = #imageLiteral(resourceName: "facebookIcon")
-    vkImageView.image = #imageLiteral(resourceName: "vkIcon")
-    okImageView.image = #imageLiteral(resourceName: "okIcon")
-    googleImageView.image = #imageLiteral(resourceName: "googleIcon")
+    facebookImageView.image = UIImage(named: "facebookIcon")
+    vkImageView.image = UIImage(named: "vkIcon")
+    okImageView.image = UIImage(named: "okIcon")
+    googleImageView.image = UIImage(named: "googleIcon")
     
     termLabel.setStyles(UILabel.Styles.doubleLine,
                         UILabel.Styles.tiny,
