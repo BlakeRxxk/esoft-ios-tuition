@@ -23,6 +23,16 @@ extension UIImage {
       named("consultant.base").withRenderingMode(.alwaysTemplate)
     }
   }
+    
+  public enum Screen5 {
+    public static var edit: UIImage {
+      named("edit").withRenderingMode(.alwaysTemplate)
+    }
+    
+    public static var go: UIImage {
+      named("go").withRenderingMode(.alwaysTemplate)
+    }
+  }
   
   public enum Arrow {
     public enum Right {

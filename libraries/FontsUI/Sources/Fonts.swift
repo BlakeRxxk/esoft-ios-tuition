@@ -43,6 +43,10 @@ extension UIFont {
   public static var micro: UIFont {
     UIFont.makeFont(size: 10, face: "Medium")
   }
+
+  public static var microNormal: UIFont {
+    UIFont.makeFont(size: 10, face: "Regular")
+  }
   
   private static func makeFont(size: CGFloat, face: String) -> UIFont {
     var descriptor = UIFontDescriptor()
