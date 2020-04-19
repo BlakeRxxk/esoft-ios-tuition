@@ -49,7 +49,8 @@ class ViewController: UIViewController {
   
   private(set) lazy var priceImage: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: "Arrow")
+    imageView.image = UIImage.arrowDown
+    imageView.tintColor = AppTheme.current().colors.primary500
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
@@ -85,7 +86,8 @@ class ViewController: UIViewController {
   
   private(set) lazy var favoriteButton: UIButton = {
     let btn = UIButton()
-    btn.setImage(UIImage(named: "Star"), for: .normal)
+    btn.setBackgroundImage(UIImage.favorit, for: .normal)
+    btn.tintColor = .white
     btn.translatesAutoresizingMaskIntoConstraints = false
     return btn
   }()
@@ -114,7 +116,8 @@ class ViewController: UIViewController {
   
   private(set) lazy var phoneButton: UIButton = {
     let btn = UIButton()
-    btn.setImage(UIImage(named: "Phone"), for: .normal)
+    btn.setBackgroundImage(UIImage.Call.right, for: .normal)
+    btn.tintColor = AppTheme.current().colors.primary500
     btn.translatesAutoresizingMaskIntoConstraints = false
     return btn
   }()
@@ -133,7 +136,8 @@ class ViewController: UIViewController {
   
   private(set) lazy var viewsImage: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: "Shape")
+    imageView.image = UIImage.eye
+    imageView.tintColor = AppTheme.current().textColors.secondary
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
@@ -153,7 +157,8 @@ class ViewController: UIViewController {
   
   private(set) lazy var favoriteImage: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: "Star-small")
+    imageView.image = UIImage.starSmall
+    imageView.tintColor = AppTheme.current().textColors.secondary
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
@@ -179,7 +184,6 @@ class ViewController: UIViewController {
     setupScreen()
     addSubviewInView()
     configureUI()
-    // test
   }
   
   // MARK: - Functions
@@ -200,7 +204,6 @@ class ViewController: UIViewController {
     currentPrice.setStyles(
       UILabel.Styles.title3
     )
-    currentPrice.textColor = AppTheme.current().colors.error
     
     price.setStyles(
       UILabel.Styles.tiny,
@@ -339,8 +342,8 @@ class ViewController: UIViewController {
     
     mainTitle.bottomAnchor.constraint(lessThanOrEqualTo: titleStack.bottomAnchor, constant: -4).isActive = true
     
-    phoneButton.widthAnchor.constraint(equalToConstant: 18).isActive = true
-    phoneButton.heightAnchor.constraint(equalToConstant: 18).isActive = true
+    phoneButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
+    phoneButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
     
     infoStack.topAnchor.constraint(equalTo: titleStack.bottomAnchor, constant: 4).isActive = true
     infoStack.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 16).isActive = true

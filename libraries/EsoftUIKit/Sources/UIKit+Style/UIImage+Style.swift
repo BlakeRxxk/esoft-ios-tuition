@@ -24,6 +24,22 @@ extension UIImage {
     }
   }
   
+  public static var arrowDown: UIImage {
+    named("arrow.down").withRenderingMode(.alwaysTemplate)
+  }
+  
+  public static var eye: UIImage {
+    named("eye").withRenderingMode(.alwaysTemplate)
+  }
+  
+  public static var starSmall: UIImage {
+    named("star.small").withRenderingMode(.alwaysTemplate)
+  }
+  
+  public static var favorit: UIImage {
+    named("favorit").withRenderingMode(.alwaysTemplate)
+  }
+  
   public enum Arrow {
     public enum Right {
       public static var base: UIImage {
