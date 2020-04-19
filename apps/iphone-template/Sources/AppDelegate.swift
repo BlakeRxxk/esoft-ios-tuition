@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     AppTheme.apply(theme: .client)
 
     window = UIWindow()
-    window?.rootViewController = ViewController()
+    window?.rootViewController = DiscountViewController()
     window?.makeKeyAndVisible()
     
     return true
