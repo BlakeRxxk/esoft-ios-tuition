@@ -84,7 +84,7 @@ final class ViewController: UIViewController {
     
     divider.backgroundColor = ThemeManager.current().colors.divider
     
-    let redColor = UIColor(red: 235.0 / 255.0, green: 90.0 / 255.0, blue: 70.0 / 255.0, alpha: 1.0)
+    let redColor = #colorLiteral(red: 0.9215686275, green: 0.3529411765, blue: 0.2745098039, alpha: 1)
     continueButton.backgroundColor = redColor
     continueButton.layer.cornerRadius = 22.0
     continueButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
@@ -159,6 +159,11 @@ final class ViewController: UIViewController {
       // Я бы сделал space around, но это не флексы
       socialStackView.leadingAnchor.constraint(equalTo: phoneTextField.leadingAnchor, constant: 18.0),
       socialStackView.trailingAnchor.constraint(equalTo: phoneTextField.trailingAnchor, constant: -18.0),
+      
+//      facebookImageView.widthAnchor.constraint(equalToConstant: 32.0),
+//      vkImageView.widthAnchor.constraint(equalToConstant: 32.0),
+//      okImageView.widthAnchor.constraint(equalToConstant: 32.0),
+//      googleImageView.widthAnchor.constraint(equalToConstant: 32.0),
       
       termLabel.topAnchor.constraint(equalTo: socialStackView.bottomAnchor, constant: 16.0),
       termLabel.leadingAnchor.constraint(equalTo: socialStackView.leadingAnchor),

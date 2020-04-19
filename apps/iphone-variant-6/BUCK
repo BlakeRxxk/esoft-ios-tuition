@@ -46,8 +46,8 @@ app_tests = [
     ":UnitTestsWithHostApp",
 ]
 
-appTargetName = "TemplateApp"
-appPath = "iphone-template"
+appTargetName = "Variant6App"
+appPath = "iphone-varinat-6"
 
 apple_asset_catalog(
   name = "Icons",
