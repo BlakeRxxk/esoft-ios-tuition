@@ -59,7 +59,7 @@ public final class InfoItemView: View {
   // INFO STACK
   private(set) lazy var infoStack: UIStackView = UIStackView()
   private(set) lazy var viewsView: UIStackView = UIStackView()
-  private(set) lazy var viewsImage: UIImageView = UIImageView ()
+  private(set) lazy var viewsImage: UIImageView = UIImageView()
   private(set) lazy var viewsCount: UILabel = UILabel()
   private(set) lazy var favoriteView: UIStackView = UIStackView()
   private(set) lazy var favoriteImage: UIImageView = UIImageView()
