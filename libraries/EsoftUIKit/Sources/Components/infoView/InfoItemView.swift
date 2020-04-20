@@ -57,14 +57,14 @@ public final class InfoItemView: View {
   }
   
   // INFO STACK
-  private(set) lazy var infoStack:      UIStackView = UIStackView()
-  private(set) lazy var viewsView:      UIStackView = UIStackView()
-  private(set) lazy var viewsImage:     UIImageView = UIImageView ()
-  private(set) lazy var viewsCount:     UILabel     = UILabel()
-  private(set) lazy var favoriteView:   UIStackView = UIStackView()
-  private(set) lazy var favoriteImage:  UIImageView = UIImageView()
-  private(set) lazy var favoriteCount:  UILabel     = UILabel()
-  private(set) lazy var codeObject:     UILabel     = UILabel()
+  private(set) lazy var infoStack: UIStackView = UIStackView()
+  private(set) lazy var viewsView: UIStackView = UIStackView()
+  private(set) lazy var viewsImage: UIImageView = UIImageView ()
+  private(set) lazy var viewsCount: UILabel = UILabel()
+  private(set) lazy var favoriteView: UIStackView = UIStackView()
+  private(set) lazy var favoriteImage: UIImageView = UIImageView()
+  private(set) lazy var favoriteCount: UILabel = UILabel()
+  private(set) lazy var codeObject: UILabel = UILabel()
   
   private var activeConstraints: [NSLayoutConstraint] = []
   
@@ -122,11 +122,6 @@ public final class InfoItemView: View {
     
     favoriteView.alignment = .center
     favoriteView.spacing = 5
-    
-//    viewsCount.font = UIFont.systemFont(ofSize: 10)
-//    favoriteCount.font = UIFont.systemFont(ofSize: 10)
-//    codeObject.font = UIFont.systemFont(ofSize: 10)
-    
     
     viewsCount.setStyles(
       UILabel.Styles.micro,
