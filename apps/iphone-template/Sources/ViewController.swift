@@ -122,59 +122,14 @@ class ViewController: UIViewController {
     return btn
   }()
   
-  private(set) lazy var infoStack: UIStackView = {
-    let stack = UIStackView()
-    stack.translatesAutoresizingMaskIntoConstraints = false
-    return stack
-  }()
-  
-  private(set) lazy var viewsView: UIStackView = {
-    let view = UIStackView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }()
-  
-  private(set) lazy var viewsImage: UIImageView = {
-    let imageView = UIImageView()
-    imageView.image = UIImage.eye
-    imageView.tintColor = AppTheme.current().textColors.secondary
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    return imageView
-  }()
-  
-  private(set) lazy var viewsCount: UILabel = {
-    let label = UILabel()
-    label.text = Localized.views
-    label.translatesAutoresizingMaskIntoConstraints = false
-    return label
-  }()
-  
-  private(set) lazy var favoriteView: UIStackView = {
-    let view = UIStackView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }()
-  
-  private(set) lazy var favoriteImage: UIImageView = {
-    let imageView = UIImageView()
-    imageView.image = UIImage.starSmall
-    imageView.tintColor = AppTheme.current().textColors.secondary
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    return imageView
-  }()
-  
-  private(set) lazy var favoriteCount: UILabel = {
-    let label = UILabel()
-    label.text = Localized.favorits
-    label.translatesAutoresizingMaskIntoConstraints = false
-    return label
-  }()
-  
-  private(set) lazy var codeObject: UILabel = {
-    let label = UILabel()
-    label.text = Localized.codeObject
-    label.translatesAutoresizingMaskIntoConstraints = false
-    return label
+  // INFO STACK
+  private(set) lazy var infoStack: InfoItemView = {
+    let info = InfoItemView()
+    info.firstTitle = Localized.views
+    info.secondTitle = Localized.favorits
+    info.thirdTitle = Localized.codeObject
+    info.translatesAutoresizingMaskIntoConstraints = false
+    return info
   }()
   
   override func viewDidLoad() {
@@ -221,21 +176,6 @@ class ViewController: UIViewController {
       UILabel.ColorStyle.primary
     )
     
-    viewsCount.setStyles(
-      UILabel.Styles.micro,
-      UILabel.ColorStyle.placeholders
-    )
-    
-    favoriteCount.setStyles(
-      UILabel.Styles.micro,
-      UILabel.ColorStyle.placeholders
-    )
-    
-    codeObject.setStyles(
-      UILabel.Styles.micro,
-      UILabel.ColorStyle.placeholders
-    )
-    
   }
   
   private func addSubviewInView() {
@@ -259,16 +199,6 @@ class ViewController: UIViewController {
     titleStack.addArrangedSubview(phoneButton)
     
     bottomView.addSubview(infoStack)
-    
-    infoStack.addArrangedSubview(viewsView)
-    viewsView.addArrangedSubview(viewsImage)
-    viewsView.addArrangedSubview(viewsCount)
-    
-    infoStack.addArrangedSubview(favoriteView)
-    favoriteView.addArrangedSubview(favoriteImage)
-    favoriteView.addArrangedSubview(favoriteCount)
-    
-    infoStack.addArrangedSubview(codeObject)
   }
   
   private func configureUI() {
@@ -279,14 +209,6 @@ class ViewController: UIViewController {
     
     titleStack.spacing = 60
     titleStack.alignment = .center
-    
-    viewsView.alignment = .center
-    viewsView.spacing = 5
-    favoriteView.alignment = .center
-    favoriteView.spacing = 5
-    
-    infoStack.alignment = .center
-    infoStack.distribution = .equalCentering
     
     let margins = view.layoutMarginsGuide
     
@@ -349,14 +271,6 @@ class ViewController: UIViewController {
     infoStack.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 16).isActive = true
     infoStack.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -16).isActive = true
     infoStack.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: -8).isActive = true
-    
-    favoriteView.leadingAnchor.constraint(equalTo: viewsView.trailingAnchor, constant: 22).isActive = true
-    
-    viewsImage.widthAnchor.constraint(equalToConstant: 11).isActive = true
-    viewsImage.heightAnchor.constraint(equalToConstant: 7.5).isActive = true
-    
-    favoriteImage.widthAnchor.constraint(equalToConstant: 10).isActive = true
-    favoriteImage.heightAnchor.constraint(equalToConstant: 9.41).isActive = true
   }
   
 }
