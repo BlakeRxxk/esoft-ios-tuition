@@ -34,4 +34,13 @@ extension UIImage {
       }
     }
   }
+  
+  public enum Logo {
+    public static var base: UIImage {
+      return named("logo.base").withRenderingMode(.alwaysTemplate)
+    }
+    public static var small: UIImage {
+      return named("logo.small").withRenderingMode(.alwaysTemplate)
+    }
+  }
 }
