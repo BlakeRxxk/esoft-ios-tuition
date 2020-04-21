@@ -21,7 +21,7 @@ final class ViewController: UIViewController {
   
   private(set) lazy var continueButton: UIButton = UIButton()
   
-  private(set) lazy var socialStackView: UIStackView = UIStackView()
+  private(set) lazy var socialView: UIView = UIView()
   
   private(set) lazy var facebookImageView: UIImageView = UIImageView()
   private(set) lazy var vkImageView: UIImageView = UIImageView()
@@ -58,7 +58,7 @@ final class ViewController: UIViewController {
       phoneTextField,
       divider,
       continueButton,
-      socialStackView,
+      socialView,
       termLabel,
       ].forEach { container.addSubview($0) }
     
@@ -67,13 +67,14 @@ final class ViewController: UIViewController {
       vkImageView,
       okImageView,
       googleImageView,
-      ].forEach { socialStackView.addArrangedSubview($0) }
+      ].forEach { socialView.addSubview($0) }
   }
   
   private func configureUI() {
     view.backgroundColor = ThemeManager.current().colors.container
     
-    enterLabel.setStyles(UILabel.ColorStyle.primary)
+    enterLabel.setStyles(UILabel.Styles.alignCenter,
+                         UILabel.ColorStyle.primary)
     enterLabel.styledText = Localized.enterLabel
     
     phoneTextField.attributedPlaceholder = NSAttributedString(string: Localized.phonePlaceholder,
@@ -86,10 +87,6 @@ final class ViewController: UIViewController {
     continueButton.layer.cornerRadius = 22.0
     continueButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
     continueButton.setTitle(Localized.continueButton, for: .normal)
-    
-    socialStackView.spacing = 48.0
-    socialStackView.distribution = .equalSpacing
-    socialStackView.axis = .horizontal
     
     facebookImageView.image = UIImage.Socials.facebook
     vkImageView.image = UIImage.Socials.vk
@@ -119,7 +116,7 @@ final class ViewController: UIViewController {
     phoneTextField.configureLayout(block: layout.phoneTextField)
     divider.configureLayout(block: layout.divider)
     continueButton.configureLayout(block: layout.continueButton)
-    socialStackView.configureLayout(block: layout.socialStackView)
+    socialView.configureLayout(block: layout.socialView)
     termLabel.configureLayout(block: layout.termLabel)
     
     facebookImageView.configureLayout(block: layout.socialIcon)
