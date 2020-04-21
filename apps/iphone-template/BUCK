@@ -32,6 +32,9 @@ prebuilt_frameworks = [
     "//third-party/Pods:Yoga",
     "//third-party/Pods:YogaKit",
     "//third-party/Pods:DBDebugToolkit",
+    "//third-party/Pods:PINCache",
+    "//third-party/Pods:PINRemoteImage",
+    "//third-party/Pods:FLAnimatedImage"
 ]
 
 resource_dependencies = [
