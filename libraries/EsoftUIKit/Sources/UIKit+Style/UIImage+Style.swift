@@ -34,4 +34,34 @@ extension UIImage {
       }
     }
   }
+  
+  public enum Logo {
+    public static var base: UIImage {
+      named("logo.base").withRenderingMode(.alwaysTemplate)
+    }
+    public static var small: UIImage {
+      named("logo.small").withRenderingMode(.alwaysTemplate)
+    }
+  }
+  
+  public enum Close {
+    public static var base: UIImage {
+      named("close.base").withRenderingMode(.alwaysTemplate)
+    }
+  }
+  
+  public enum Socials {
+    public static var facebook: UIImage {
+      named("facebook")
+    }
+    public static var vk: UIImage {
+      named("vk")
+    }
+    public static var ok: UIImage {
+      named("ok")
+    }
+    public static var google: UIImage {
+      named("google")
+    }
+  }
 }

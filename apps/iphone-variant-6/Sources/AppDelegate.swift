@@ -4,28 +4,23 @@
 //
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
 //
+
 import UIKit
-import ThemeManager
-import EsoftUIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   public var window: UIWindow?
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    let rootView = ViewController()
-    let rootViewController = UINavigationController(rootViewController: rootView)
-    
-    ThemeManager.apply(theme: .client)
-    
-    rootViewController.navigationBar.shadowImage = UIImage()
-    rootViewController.navigationBar.isTranslucent = false
-    rootViewController.navigationBar.barTintColor = ThemeManager.current().colors.container
+    AppTheme.apply(theme: .client)
 
     window = UIWindow()
-    window?.rootViewController = rootViewController
-    window?.makeKeyAndVisible()
+    let rootVC = UINavigationController(rootViewController: ViewController())
+    rootVC.navigationBar.setStyles(UINavigationBar.Styles.default)
     
+    window?.rootViewController = rootVC
+    window?.makeKeyAndVisible()
+
     return true
   }
   
