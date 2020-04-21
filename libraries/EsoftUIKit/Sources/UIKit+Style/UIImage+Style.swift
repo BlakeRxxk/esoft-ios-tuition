@@ -4,7 +4,6 @@
 //
 //  Copyright © 2020 E-SOFT. All rights reserved.
 //
-
 import UIKit
 
 extension UIImage {
@@ -43,7 +42,7 @@ extension UIImage {
       named("logo.small").withRenderingMode(.alwaysTemplate)
     }
   }
-  
+
   public enum Close {
     public static var base: UIImage {
       named("close.base").withRenderingMode(.alwaysTemplate)
