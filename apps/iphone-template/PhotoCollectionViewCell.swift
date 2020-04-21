@@ -16,7 +16,6 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     iv.translatesAutoresizingMaskIntoConstraints = false
     iv.contentMode = .scaleAspectFill
     iv.clipsToBounds = true
-    iv.image = #imageLiteral(resourceName: "photo2")
     iv.layer.cornerRadius = 8
     return iv
   }()

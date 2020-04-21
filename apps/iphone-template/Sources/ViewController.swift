@@ -13,26 +13,9 @@ import AutoLayoutKit
 final class ViewController: UIViewController {
   
   // MARK: - Outlets
-  private(set) lazy var costContainer: UIView = UIView()
-  
-  private(set) lazy var costSubheader: UILabel = UILabel()
-  
-  private(set) lazy var costStackView: UIStackView = UIStackView()
-  
-  private(set) lazy var costLabel: UILabel = UILabel()
-  private(set) lazy var noticeLabel: UILabel = UILabel()
-  
-  private(set) lazy var divider: UIView = UIView()
-  
-  private(set) lazy var editStackView: UIStackView = UIStackView()
-  
-  private(set) lazy var editIcon: UIImageView = UIImageView()
-  private(set) lazy var editLabel: UILabel = UILabel()
-  
+  private(set) lazy var costItemView: CostItemView = CostItemView()
   private(set) lazy var photoSubheader: UILabel = UILabel()
-  
   private(set) lazy var photoContainer: UIView = UIView()
-  
   private(set) lazy var showAllLabel: UILabel = UILabel()
   private(set) lazy var showAllStackView: UIStackView = UIStackView()
   private(set) lazy var showAllQuantityStackView: UIStackView = UIStackView()
@@ -77,19 +60,7 @@ final class ViewController: UIViewController {
   
   // MARK: - Methods
   private func createUI() {
-    view.addSubview(costSubheader)
-    view.addSubview(costContainer)
-    
-    costContainer.addSubview(costStackView)
-    
-    costStackView.addArrangedSubview(costLabel)
-    costStackView.addArrangedSubview(noticeLabel)
-    
-    costContainer.addSubview(divider)
-    
-    costContainer.addSubview(editStackView)
-    editStackView.addArrangedSubview(editIcon)
-    editStackView.addArrangedSubview(editLabel)
+    view.addSubview(costItemView)
     
     view.addSubview(photoSubheader)
     view.addSubview(photoContainer)
@@ -109,32 +80,10 @@ final class ViewController: UIViewController {
     nav?.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     nav?.barTintColor = AppTheme.current().colors.defaultTopBar
     
-    costSubheader.text = Localized.costSubheader
-    costSubheader.setStyles(
-      UILabel.Styles.small,
-      UILabel.ColorStyle.secondary
-    )
-    
-    costContainer.backgroundColor = AppTheme.current().colors.container
-    
-    costStackView.alignment = .center
-    costStackView.axis = .horizontal
-    costStackView.spacing = 16.0
-    costStackView.isLayoutMarginsRelativeArrangement = true
-    costStackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 16)
-    
-    divider.backgroundColor = AppTheme.current().colors.screen
-    
-    costLabel.text = Localized.costLabel
-    costLabel.setStyles(UILabel.Styles.regular, UILabel.ColorStyle.primary)
-    
-    noticeLabel.text = Localized.noticeLabel
-    noticeLabel.setStyles(UILabel.Styles.microNormal, UILabel.ColorStyle.error)
-    
-    editIcon.image = UIImage.Screen5.edit
-    editIcon.tintColor = AppTheme.current().colors.primary500
-    
-    editLabel.text = Localized.editLabel
+    costItemView.subheader = Localized.costSubheader
+    costItemView.firstTitle = Localized.costLabel
+    costItemView.secondTitle = Localized.noticeLabel
+    costItemView.thirdTitle = Localized.editLabel
     
     photoSubheader.text = Localized.photoSubheader
     photoSubheader.setStyles(
@@ -144,13 +93,6 @@ final class ViewController: UIViewController {
     
     photoContainer.backgroundColor = AppTheme.current().colors.container
     collectionView.backgroundColor = .clear
-    
-    editStackView.alignment = .center
-    editStackView.spacing = 32
-    
-    editLabel.setStyles(UILabel.Styles.headline, UILabel.ColorStyle.primary500)
-    
-    arrowImage.image = UIImage.Screen5.go
     
     showAllLabel.text = Localized.showAllLabel
     showAllLabel.setStyles(UILabel.Styles.regular, UILabel.ColorStyle.primary)
@@ -162,19 +104,13 @@ final class ViewController: UIViewController {
     
     showAllQuantityStackView.alignment = .center
     showAllQuantityStackView.spacing = 16
+    
+    arrowImage.image = UIImage.Screen5.go
   }
   
   private func layout() {
     [
-      costSubheader,
-      costContainer,
-      costStackView,
-      costLabel,
-      noticeLabel,
-      divider,
-      editStackView,
-      editIcon,
-      editLabel,
+      costItemView,
       photoSubheader,
       photoContainer,
       collectionView,
@@ -189,42 +125,11 @@ final class ViewController: UIViewController {
     
     // MARK: - Constraints
     let constraints = [
-      costSubheader.topAnchor.constraint(equalTo: margins.topAnchor, constant: 20),
-      costSubheader.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-      costSubheader.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+      costItemView.topAnchor.constraint(equalTo: margins.topAnchor),
+      costItemView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      costItemView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       
-      costContainer.top.constraint(equalTo: costSubheader.bottom, constant: 8),
-      costContainer.leading.constraint(equalTo: view.leading),
-      costContainer.trailing.constraint(equalTo: view.trailing),
-      costContainer.heightAnchor.constraint(equalToConstant: 96),
-      
-      costStackView.top.constraint(equalTo: costContainer.top),
-      costStackView.leading.constraint(equalTo: costContainer.leading, constant: 16),
-      costStackView.trailing.constraint(equalTo: costContainer.trailing),
-      costStackView.bottom.constraint(equalTo: divider.top),
-      costStackView.heightAnchor.constraint(equalToConstant: 48),
-      
-      costLabel.leading.constraint(equalTo: costStackView.leading),
-      costLabel.centerYAnchor.constraint(equalTo: costStackView.centerYAnchor),
-      costLabel.widthAnchor.constraint(equalToConstant: 206),
-      
-      noticeLabel.leading.constraint(equalTo: costLabel.trailing, constant: 16),
-      noticeLabel.centerYAnchor.constraint(equalTo: costStackView.centerYAnchor),
-      noticeLabel.widthAnchor.constraint(equalToConstant: 121),
-      
-      divider.leading.constraint(equalTo: costStackView.leading),
-      divider.trailing.constraint(equalTo: costStackView.trailing),
-      divider.heightAnchor.constraint(equalToConstant: 1),
-      
-      editStackView.top.constraint(equalTo: divider.bottom),
-      editStackView.leading.constraint(equalTo: costContainer.leading, constant: 16),
-      editStackView.trailing.constraint(equalTo: costContainer.trailing, constant: 16),
-      editStackView.bottom.constraint(equalTo: costContainer.bottom),
-      
-      editIcon.height.constraint(equalToConstant: 17.14),
-      editIcon.width.constraint(equalToConstant: 17.14),
-      
-      photoSubheader.top.constraint(equalTo: costContainer.bottom, constant: 20),
+      photoSubheader.top.constraint(equalTo: costItemView.bottom, constant: 20),
       photoSubheader.leading.constraint(equalTo: view.leading, constant: 16),
       photoSubheader.trailing.constraint(equalTo: view.trailing, constant: 16),
       
