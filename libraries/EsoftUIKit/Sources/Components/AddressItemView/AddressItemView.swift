@@ -43,7 +43,7 @@ public final class AddressItemView: View {
      layout()
    }
   
-  private func createUI(){
+  private func createUI() {
     
     let subviews: [UIView] = [
       titleStack,
@@ -62,7 +62,7 @@ public final class AddressItemView: View {
     
   }
   
-  private func configureUI(){
+  private func configureUI() {
     
     titleStack.spacing = 60
     titleStack.alignment = .center
@@ -80,7 +80,7 @@ public final class AddressItemView: View {
     titleStack.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 4, right: 0)
   }
   
-  private func layout(){
+  private func layout() {
     
     activeConstraints = [
       titleStack.topAnchor.constraint(equalTo: topAnchor),
@@ -89,7 +89,7 @@ public final class AddressItemView: View {
       titleStack.bottomAnchor.constraint(equalTo: bottomAnchor),
       
       phoneButton.widthAnchor.constraint(equalToConstant: 24),
-      phoneButton.heightAnchor.constraint(equalToConstant: 24),
+      phoneButton.heightAnchor.constraint(equalToConstant: 24)
     ]
     
     NSLayoutConstraint.activate(activeConstraints)

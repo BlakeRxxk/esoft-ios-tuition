@@ -102,7 +102,7 @@ public final class PreviewItemView: View {
     
     addSubview <^> [
       topView,
-      mainView,
+      mainView
     ]
     
   }
