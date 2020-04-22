@@ -24,10 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     AppTheme.apply(theme: .client)
 
     window = UIWindow()
-    let rootVC = UINavigationController(rootViewController: ViewController())
-    rootVC.navigationBar.setStyles(UINavigationBar.Styles.default)
+    let navigationController = UINavigationController(rootViewController: MortgageListViewController())
+    window?.rootViewController = navigationController
     
-    window?.rootViewController = rootVC
     window?.makeKeyAndVisible()
     
     setupImages()
