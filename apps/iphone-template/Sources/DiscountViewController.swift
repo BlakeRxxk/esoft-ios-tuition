@@ -81,15 +81,15 @@ final class DiscountViewController: UIViewController {
 
     arrowBackImageView.backgroundColor = UIColor.clear
     arrowBackImageView.contentMode = .center
-    arrowBackImageView.image = UIImage(named: "arrow.left.small")
+    arrowBackImageView.image = UIImage.Arrow.Left.base
 
     favouritesImageView.backgroundColor = UIColor.clear
     favouritesImageView.contentMode = .center
-    favouritesImageView.image = UIImage(named: "star.small")
+    favouritesImageView.image = UIImage.Favourites.base
 
     shareImageView.backgroundColor = UIColor.clear
     shareImageView.contentMode = .center
-    shareImageView.image = UIImage(named: "share.small")
+    shareImageView.image = UIImage.Share.base
 
     gradientView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 285.0)
     gradientView.setGradient(

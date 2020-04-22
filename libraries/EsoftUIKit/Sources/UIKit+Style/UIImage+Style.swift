@@ -33,5 +33,22 @@ extension UIImage {
         named("arrow.right.small").withRenderingMode(.alwaysTemplate)
       }
     }
+    public enum Left {
+      public static var base: UIImage {
+        named("arrow.left.base").withRenderingMode(.alwaysTemplate)
+      }
+    }
+  }
+
+  public enum Favourites {
+    public static var base: UIImage {
+      named("star.base").withRenderingMode(.alwaysTemplate)
+    }
+  }
+
+  public enum Share {
+    public static var base: UIImage {
+      named("share.base").withRenderingMode(.alwaysTemplate)
+    }
   }
 }
