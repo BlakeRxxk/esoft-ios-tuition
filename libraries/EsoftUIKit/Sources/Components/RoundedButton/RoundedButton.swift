@@ -37,6 +37,8 @@ public final class RoundedButton: UIButton {
     self.setTitle(title, for: .normal)
     self.backgroundColor = ThemeManager.current().colors.primary500
     self.layer.cornerRadius = 22
+    self.titleLabel?.setStyles(UILabel.Styles.headline)
+    self.titleLabel?.tintColor = .red
   }
 
   private func layout() {
