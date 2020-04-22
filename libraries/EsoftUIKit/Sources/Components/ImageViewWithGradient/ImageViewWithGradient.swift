@@ -1,5 +1,5 @@
 //
-//  IconItemView.swift
+//  ImageViewWithGradient.swift
 //  EsoftUIKit
 //
 //  Copyright © 2020 E-SOFT. All rights reserved.
