@@ -6,4 +6,10 @@
 //
 
 import ThemeManager
+
+public struct Theme {
+  public static let colors = AppTheme.current().colors
+  public static let textColors = AppTheme.current().textColors
+}
+
 public typealias AppTheme = ThemeManager

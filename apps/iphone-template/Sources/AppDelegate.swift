@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     AppTheme.apply(theme: .client)
 
     window = UIWindow()
-    let rootVC = UINavigationController(rootViewController: ViewControllerTask3())
+    let rootVC = UINavigationController(rootViewController: CollectionViewController())
     rootVC.navigationBar.setStyles(UINavigationBar.Styles.default)
     
     window?.rootViewController = rootVC
@@ -34,7 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     return true
   }
-  
 }
 
 extension AppDelegate {
