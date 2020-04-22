@@ -7,6 +7,13 @@
 
 import UIKit
 
+private enum AssociatedKeys {
+  /**
+   Key for associated property
+   */
+  static var style = "EsoftUI_StyleAssociatedKey"
+}
+
 public protocol Stylable: NSObjectProtocol {
   /**
    Set and apply styles to element.
@@ -68,13 +75,6 @@ extension Stylable {
       .flatMap { $0 }
       .forEach { $0(self) }
   }
-}
-
-private enum AssociatedKeys {
-  /**
-   Key for associated property
-   */
-  static var style = "EsoftUI_StyleAssociatedKey"
 }
 
 private extension Stylable {

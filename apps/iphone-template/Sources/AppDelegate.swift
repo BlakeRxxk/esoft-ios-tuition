@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     AppTheme.apply(theme: .client)
 
     window = UIWindow()
-    let rootVC = UINavigationController(rootViewController: ViewController())
+    let rootVC = UINavigationController(rootViewController: ViewControllerTask3())
     rootVC.navigationBar.setStyles(UINavigationBar.Styles.default)
     
     window?.rootViewController = rootVC

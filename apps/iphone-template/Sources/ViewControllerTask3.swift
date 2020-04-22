@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ViewControllerTask3.swift
 //  AppLibrary
 //
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
@@ -9,7 +9,7 @@ import UIKit
 import EsoftUIKit
 import ThemeManager
 
-class ViewController: UIViewController {
+class ViewControllerTask3: UIViewController {
   
   // MARK: - UI
   

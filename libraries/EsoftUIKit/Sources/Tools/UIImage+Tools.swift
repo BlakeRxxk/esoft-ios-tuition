@@ -8,13 +8,6 @@
 import CoreGraphics
 import UIKit
 
-extension Bundle {
-  static var framework: Bundle {
-    class Class {}
-    return Bundle(for: Class.self)
-  }
-}
-
 extension UIImage {
   // resource loader
   static func named(_ name: String) -> UIImage {
@@ -23,5 +16,12 @@ extension UIImage {
       return UIImage()
     }
     return image
+  }
+}
+
+extension Bundle {
+  class Class {}
+  static var framework: Bundle {
+    Bundle(for: Class.self)
   }
 }
