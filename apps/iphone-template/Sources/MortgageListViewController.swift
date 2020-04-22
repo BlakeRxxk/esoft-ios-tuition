@@ -52,7 +52,6 @@ class MortgageListViewController: UIViewController {
   private(set) lazy var bankPaymentTitleLabel: UILabel = UILabel()
   private(set) lazy var bankPaymentValueLabel: UILabel = UILabel()
   
-  
   override func loadView() {
     view = UIView()
   }
@@ -317,7 +316,7 @@ class MortgageListViewController: UIViewController {
       bankPaymentContainer.trailingAnchor.constraint(equalTo: bankRateRow.layoutMarginsGuide.trailingAnchor),
 
       bankRateTitleLabel.bottomAnchor.constraint(equalTo: bankRateValueLabel.topAnchor, constant: -4),
-      bankPaymentTitleLabel.bottomAnchor.constraint(equalTo: bankPaymentValueLabel.topAnchor, constant: -4),
+      bankPaymentTitleLabel.bottomAnchor.constraint(equalTo: bankPaymentValueLabel.topAnchor, constant: -4)
     ]
 
     NSLayoutConstraint.activate(constraints)
