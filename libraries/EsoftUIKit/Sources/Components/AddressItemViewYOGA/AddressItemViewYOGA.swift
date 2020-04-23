@@ -70,6 +70,8 @@ public final class AddressItemViewYOGA: View {
       layout.flexDirection = .row
       layout.alignItems = .center
       layout.justifyContent = .spaceBetween
+      layout.paddingBottom = 4
+      layout.paddingTop = 8
       layout.width = 100%
     }
     

@@ -8,17 +8,16 @@
 import UIKit
 import EsoftUIKit
 import ThemeManager
+import YogaKit
 
 class ViewController: UIViewController {
   
   // MARK: - UI
   
-  private(set) lazy var container = UIView()
-  private(set) lazy var previewItemView = PreviewItemView()
-  private(set) lazy var addressItemView = AddressItemView()
-  private(set) lazy var infoItemView = InfoItemView()
-  
-  private var activeConstraints: [NSLayoutConstraint] = []
+  private(set) lazy var container: UIView = UIView()
+  private(set) lazy var previewItemViewYOGA = PreviewItemViewYOGA()
+  private(set) lazy var addressItemViewYOGA: AddressItemViewYOGA = AddressItemViewYOGA()
+  private(set) lazy var infoItemView: InfoItemViewYOGA = InfoItemViewYOGA()
   
   // MARK: - Life
 
@@ -33,19 +32,9 @@ class ViewController: UIViewController {
   // MARK: - Functions
   
   private func createUI() {
-    let subviews: [UIView] = [
-      container,
-      previewItemView,
-      addressItemView,
-      infoItemView
-    ]
     
-    subviews.forEach {
-      $0.translatesAutoresizingMaskIntoConstraints = false
-    }
- 
-    container.addSubview(previewItemView)
-    container.addSubview(addressItemView)
+    container.addSubview(previewItemViewYOGA)
+    container.addSubview(addressItemViewYOGA)
     container.addSubview(infoItemView)
     
     view.addSubview(container)
@@ -60,15 +49,14 @@ class ViewController: UIViewController {
     
     // container
     container.backgroundColor = AppTheme.current().colors.container
-    
     // previewItemView
-    previewItemView.address = Localized.address
-    previewItemView.currentPrice = Localized.currentPrice
-    previewItemView.price = Localized.price
-    previewItemView.photo = UIImage(named: "photo")
+    previewItemViewYOGA.address = Localized.address
+    previewItemViewYOGA.currentPrice = Localized.currentPrice
+    previewItemViewYOGA.price = Localized.price
+    previewItemViewYOGA.photo = UIImage(named: "photo")
     
     // addressItemView
-    addressItemView.title = Localized.mainTitle
+    addressItemViewYOGA.title = Localized.mainTitle
     
     // infoItemView
     infoItemView.firstTitle = Localized.views
@@ -77,26 +65,39 @@ class ViewController: UIViewController {
   }
   
   private func layout() {
-    let margins = view.layoutMarginsGuide
-    activeConstraints = [
-      container.topAnchor.constraint(equalTo: margins.topAnchor, constant: 10),
-      container.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      container.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      
-      previewItemView.topAnchor.constraint(equalTo: container.topAnchor),
-      previewItemView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-      previewItemView.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-      
-      addressItemView.topAnchor.constraint(equalTo: previewItemView.bottomAnchor, constant: 8),
-      addressItemView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16),
-      addressItemView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16),
-      
-      infoItemView.topAnchor.constraint(equalTo: addressItemView.bottomAnchor, constant: 4),
-      infoItemView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16),
-      infoItemView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16),
-      infoItemView.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -8)
-    ]
-    NSLayoutConstraint.activate(activeConstraints)
+    
+    container.configureLayout { layout in
+      layout.paddingLeft = 16
+      layout.paddingRight = 16
+    }
+    
+    view.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = 100%
+      layout.height = 100%
+    }
+    
+    container.configureLayout { layout in
+      layout.isEnabled = true
+      layout.flexDirection = .column
+      layout.width = YGValue(UIScreen.main.bounds.width)
+      let topBarHeight = UIApplication.shared.statusBarFrame.size.height + (self.navigationController?.navigationBar.frame.height ?? 0.0)
+      layout.marginTop = YGValue(topBarHeight + 10)
+    }
+    
+    infoItemView.configureLayout { layout in
+      layout.isEnabled = true
+    }
+    
+    addressItemViewYOGA.configureLayout { layout in
+      layout.isEnabled = true
+    }
+    
+    previewItemViewYOGA.configureLayout { (layout) in
+      layout.isEnabled = true
+    }
+    
+    view.yoga.applyLayout(preservingOrigin: true)
   }
   
 }

@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     AppTheme.apply(theme: .client)
 
     window = UIWindow()
-    let rootVC = UINavigationController(rootViewController: SecondViewController())
+    let rootVC = UINavigationController(rootViewController: ViewController())
     rootVC.navigationBar.barTintColor = AppTheme.current().colors.defaultTopBar
     rootVC.navigationBar.titleTextAttributes = [
       .foregroundColor: AppTheme.current().textColors.white
