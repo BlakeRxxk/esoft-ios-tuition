@@ -75,9 +75,7 @@ final class ViewController: UIViewController {
                         UILabel.Styles.tiny,
                         UILabel.ColorStyle.primary)
     termLabel.styledText = Localized.termOfUse
-    let str: NSMutableAttributedString = NSMutableAttributedString.init(attributedString: termLabel.attributedText!)
-    str.addAttribute(.foregroundColor, value: ThemeManager.current().colors.brand, range: NSRange(location: 31, length: 30))
-    termLabel.attributedText = str
+    termLabel.colorize(from: 31, to: 60, with: ThemeManager.current().colors.brand)
   }
   
   override func viewDidLayoutSubviews() {
