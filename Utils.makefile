@@ -42,7 +42,10 @@ install_buck:
 	chmod u+x tools/buck
 
 install_pods:
-	cd third-party && bundle exec pod install && cd ..
+	sh tools/scripts/install_pods.sh
+
+clean_pods:
+	sh tools/scripts/clean_pods.sh
 
 check_env:
 ifndef BUCK
@@ -54,4 +57,5 @@ kill_xcode:
 	killall Xcode || true
 
 audit:
-	$(BUCK) audit rules apps/$(APP_PATH)/BUCK > config/gen/$(APP_PATH)-BUCK.py ${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS} ${BUCK_THREADS_OPTIONS} ${BUCK_CACHE_OPTIONS}
+	$(BUCK) audit rules apps/$(APP_PATH)/BUCK > config/gen/$(APP_PATH)-BUCK.py \
+	${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS} ${BUCK_THREADS_OPTIONS} ${BUCK_CACHE_OPTIONS}
