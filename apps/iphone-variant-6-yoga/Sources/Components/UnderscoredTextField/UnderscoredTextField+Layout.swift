@@ -7,13 +7,10 @@
 
 import YogaKit
 
-extension SocialStack {
+extension UnderScoredTextField {
   final class Layout {
     let container: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
-      layout.width = 100%
-      layout.flexDirection = .row
-      layout.justifyContent = .spaceBetween
     }
     
     let socialIcon: YGLayoutConfigurationBlock = { layout in

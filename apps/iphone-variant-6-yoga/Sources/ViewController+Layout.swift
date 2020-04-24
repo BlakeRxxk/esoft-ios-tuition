@@ -47,12 +47,11 @@ extension ViewController {
       layout.isEnabled = true
       layout.marginTop = 52
       layout.paddingHorizontal = 51
-      layout.width = 100%
     }
     
     let termLabel: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
-      layout.marginTop = YGValue(16)
+      layout.marginTop = 16
     }
   }
 }
