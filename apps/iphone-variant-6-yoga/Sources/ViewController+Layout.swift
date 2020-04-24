@@ -25,37 +25,29 @@ extension ViewController {
     
     let phoneTextField: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
-      layout.marginHorizontal = YGValue.small
+      layout.marginHorizontal = 32
       layout.marginTop = 70
     }
     
     let divider: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
       layout.height = 1
-      layout.marginHorizontal = YGValue.small
+      layout.marginHorizontal = 32
       layout.marginTop = 21.5
     }
     
     let continueButton: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
       layout.height = 44
-      layout.marginHorizontal = YGValue.small
+      layout.marginHorizontal = 32
       layout.marginTop = 48
     }
     
-    let socialView: YGLayoutConfigurationBlock = { layout in
+    let socialStack: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
-      layout.height = 32
-      layout.marginHorizontal = 51
       layout.marginTop = 52
-      layout.flexDirection = .row
-      layout.justifyContent = .spaceBetween
-    }
-    
-    let socialIcon: YGLayoutConfigurationBlock = { layout in
-      layout.isEnabled = true
-      layout.width = 32
-      layout.height = 32
+      layout.paddingHorizontal = 51
+      layout.width = 100%
     }
     
     let termLabel: YGLayoutConfigurationBlock = { layout in
@@ -63,8 +55,4 @@ extension ViewController {
       layout.marginTop = YGValue(16)
     }
   }
-}
-
-extension YGValue {
-  public static let small: YGValue = 32
 }

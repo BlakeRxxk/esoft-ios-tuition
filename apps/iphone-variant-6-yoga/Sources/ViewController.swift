@@ -21,12 +21,7 @@ final class ViewController: UIViewController {
   
   private(set) lazy var continueButton: UIButton = UIButton()
   
-  private(set) lazy var socialView: UIView = UIView()
-  
-  private(set) lazy var facebookImageView: UIImageView = UIImageView()
-  private(set) lazy var vkImageView: UIImageView = UIImageView()
-  private(set) lazy var okImageView: UIImageView = UIImageView()
-  private(set) lazy var googleImageView: UIImageView = UIImageView()
+  private(set) lazy var socialStack: SocialStack = SocialStack()
   
   private(set) lazy var termLabel: UILabel = UILabel()
 
@@ -58,16 +53,9 @@ final class ViewController: UIViewController {
       phoneTextField,
       divider,
       continueButton,
-      socialView,
+      socialStack,
       termLabel,
       ].forEach { container.addSubview($0) }
-    
-    [
-      facebookImageView,
-      vkImageView,
-      okImageView,
-      googleImageView,
-      ].forEach { socialView.addSubview($0) }
   }
   
   private func configureUI() {
@@ -87,11 +75,6 @@ final class ViewController: UIViewController {
     continueButton.layer.cornerRadius = 22.0
     continueButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
     continueButton.setTitle(Localized.continueButton, for: .normal)
-    
-    facebookImageView.image = UIImage.Socials.facebook
-    vkImageView.image = UIImage.Socials.vk
-    okImageView.image = UIImage.Socials.ok
-    googleImageView.image = UIImage.Socials.google
     
     termLabel.setStyles(UILabel.Styles.doubleLine,
                         UILabel.Styles.alignCenter,
@@ -116,13 +99,8 @@ final class ViewController: UIViewController {
     phoneTextField.configureLayout(block: layout.phoneTextField)
     divider.configureLayout(block: layout.divider)
     continueButton.configureLayout(block: layout.continueButton)
-    socialView.configureLayout(block: layout.socialView)
+    socialStack.configureLayout(block: layout.socialStack)
     termLabel.configureLayout(block: layout.termLabel)
-    
-    facebookImageView.configureLayout(block: layout.socialIcon)
-    vkImageView.configureLayout(block: layout.socialIcon)
-    okImageView.configureLayout(block: layout.socialIcon)
-    googleImageView.configureLayout(block: layout.socialIcon)
     
     view.yoga.applyLayout(preservingOrigin: true)
   }
