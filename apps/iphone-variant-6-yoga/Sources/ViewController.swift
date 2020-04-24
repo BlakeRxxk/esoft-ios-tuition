@@ -16,8 +16,7 @@ final class ViewController: UIViewController {
   
   private(set) lazy var enterLabel: UILabel = UILabel()
   
-  private(set) lazy var phoneTextField: UITextField = UITextField()
-  private(set) lazy var divider: UIView = UIView()
+  private(set) lazy var phoneTextField: UnderscoredTextField = UnderscoredTextField()
   
   private(set) lazy var continueButton: UIButton = UIButton()
   
@@ -51,7 +50,6 @@ final class ViewController: UIViewController {
     [
       enterLabel,
       phoneTextField,
-      divider,
       continueButton,
       socialStack,
       termLabel,
@@ -64,12 +62,8 @@ final class ViewController: UIViewController {
     enterLabel.setStyles(UILabel.Styles.alignCenter,
                          UILabel.ColorStyle.primary)
     enterLabel.styledText = Localized.enterLabel
-    
-    phoneTextField.attributedPlaceholder = NSAttributedString(string: Localized.phonePlaceholder,
-                                                              attributes: [.foregroundColor: ThemeManager.current().textColors.placeholder])
+
     phoneTextField.placeholder = Localized.phonePlaceholder
-    
-    divider.backgroundColor = ThemeManager.current().colors.divider
     
     continueButton.backgroundColor = ThemeManager.current().colors.brand
     continueButton.layer.cornerRadius = 22.0
@@ -97,7 +91,6 @@ final class ViewController: UIViewController {
     container.configureLayout(block: layout.container)
     enterLabel.configureLayout(block: layout.enterLabel)
     phoneTextField.configureLayout(block: layout.phoneTextField)
-    divider.configureLayout(block: layout.divider)
     continueButton.configureLayout(block: layout.continueButton)
     socialStack.configureLayout(block: layout.socialStack)
     termLabel.configureLayout(block: layout.termLabel)

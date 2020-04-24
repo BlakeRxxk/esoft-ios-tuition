@@ -7,10 +7,27 @@
 
 import UIKit
 import YogaKit
+import ThemeManager
 import BaseUI
 
-public final class UnderScoredTextField : View {
-  public weak var output: SocialStackOutput?
+public final class UnderscoredTextField : View {
+  public var placeholder: String {
+    get {
+      return phoneTextField.placeholder ?? ""
+    }
+    set {
+      phoneTextField.placeholder = newValue
+    }
+  }
+  
+  private(set) lazy var container: UIView = UIView()
+  private(set) lazy var phoneTextField: UITextField = {
+    $0.addTarget(self, action: #selector(phoneTextFieldValueChanged), for: .valueChanged)
+    return $0
+  }(UITextField())
+  private(set) lazy var divider: UIView = UIView()
+  
+  public weak var output: UnderscoredTextFieldOutput?
   
   internal lazy var layout: Layout = Layout()
   
@@ -22,34 +39,33 @@ public final class UnderScoredTextField : View {
   }
   
   private func createUI() {
-    [].forEach { addSubview($0) }
+    [
+      phoneTextField,
+      divider
+      ].forEach { container.addSubview($0) }
+    
+    addSubview(container)
   }
   
   private func configureUI() {
+    phoneTextField.attributedPlaceholder = NSAttributedString.init(string: placeholder, attributes: [.foregroundColor:
+      ThemeManager.current().textColors.placeholder])
+    divider.backgroundColor = ThemeManager.current().colors.divider
   }
   
-  override public func layoutSubviews() {
-    super.layoutSubviews()
+  override public func configureLayout(block: @escaping YGLayoutConfigurationBlock) {
+    container.configureLayout(block: layout.container)
+    phoneTextField.configureLayout(block: layout.phoneTextField)
+    divider.configureLayout(block: layout.divider)
     
-    configureLayout(block: layout.container)
-    
-    yoga.applyLayout(preservingOrigin: true, dimensionFlexibility: .flexibleHeight)
+    super.configureLayout(block: block)
   }
   
-  @objc private func facebookButtonDidPressed() {
-    output?.didTapFacebook()
-  }
-  @objc private func okButtonDidPressed() {
-    output?.didTapVK()
-  }
-  @objc private func vkButtonDidPressed() {
-    output?.didTapOK()
-  }
-  @objc private func googleButtonDidPressed() {
-    output?.didTapGoogle()
+  @objc func phoneTextFieldValueChanged() {
+    output?.valueDidChange(newVal: phoneTextField.text ?? "")
   }
 }
 
-extension SocialStack : UnderScoredTextFieldInput {
+extension UnderscoredTextField : UnderscoredTextFieldInput {
   
 }

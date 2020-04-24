@@ -11,7 +11,6 @@ extension ViewController {
   final class Layout {
     let container: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
-      layout.height = 100%
       layout.width = 100%
       layout.flexDirection = .column
       layout.alignItems = .stretch
@@ -25,15 +24,8 @@ extension ViewController {
     
     let phoneTextField: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
-      layout.marginHorizontal = 32
+      layout.paddingHorizontal = 32
       layout.marginTop = 70
-    }
-    
-    let divider: YGLayoutConfigurationBlock = { layout in
-      layout.isEnabled = true
-      layout.height = 1
-      layout.marginHorizontal = 32
-      layout.marginTop = 21.5
     }
     
     let continueButton: YGLayoutConfigurationBlock = { layout in

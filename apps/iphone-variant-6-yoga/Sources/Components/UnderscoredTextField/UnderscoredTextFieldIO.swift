@@ -7,10 +7,10 @@
 
 import UIKit
 
-public protocol UnderScoredTextFieldInput {
-  
+public protocol UnderscoredTextFieldInput {
+  var placeholder: String { get set }
 }
 
-public protocol UnderScoredTextFieldOutput : AnyObject {
-  
+public protocol UnderscoredTextFieldOutput : AnyObject {
+  func valueDidChange(newVal: String)
 }
