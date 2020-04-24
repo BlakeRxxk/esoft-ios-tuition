@@ -117,6 +117,21 @@ def add_codesign_identity(configs):
             add_item_to_subdict(configs, configuration, "CODE_SIGN_IDENTITY", get_codesign_identity(environment="distribution"))
     return configs
 
+def strip_debug_symbols(configs):
+    for configuration in configs:
+        if configuration not in valid_configurations:
+            fail("Unknown configuration " + configuration)
+
+    configs = dict(configs)
+    for configuration in valid_configurations:
+        if configuration == "Debug":
+            add_item_to_subdict(configs, configuration, "COPY_PHASE_STRIP", "NO")
+        elif configuration == "Profile":
+            add_item_to_subdict(configs, configuration, "COPY_PHASE_STRIP", "NO")
+        elif configuration == "Release":
+            add_item_to_subdict(configs, configuration, "COPY_PHASE_STRIP", "YES")
+    return configs
+
 def get_build_number():
     return read_config_nonempty("buildNumber")
 

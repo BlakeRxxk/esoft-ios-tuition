@@ -9,6 +9,7 @@ load("//config:utils.bzl",
     "optimization_config",
     "add_provisioning_profile_specifier",
     "add_codesign_identity",
+    "strip_debug_symbols",
     "get_build_number",
     "get_short_version",
     "bundle_identifier",
@@ -37,6 +38,7 @@ def app_binary_configs(name="TemplateApp"):
     configs = configs_with_config(config)
     configs = add_provisioning_profile_specifier(configs, "app")
     configs = add_codesign_identity(configs)
+    configs = strip_debug_symbols(configs)
     return configs
 
 def app_test_configs(name):
