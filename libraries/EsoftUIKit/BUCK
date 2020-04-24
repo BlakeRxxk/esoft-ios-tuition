@@ -11,7 +11,7 @@ static_library(
         "//libraries/Atlas:Atlas",
         "//libraries/ThemeManager:ThemeManager",
         "//libraries/AutoLayoutKit:AutoLayoutKit",
-    	"//libraries/BaseUI:BaseUI",
+        "//libraries/BaseUI:BaseUI",
         "//libraries/BaseFRP:BaseFRP",
         "//third-party/Pods:Yoga",
         "//third-party/Pods:YogaKit",

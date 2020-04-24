@@ -27,6 +27,7 @@ static_libraries = [
     "//libraries/AutoLayoutKit:AutoLayoutKit",
     "//libraries/ThemeManager:ThemeManager",
     "//libraries/Logger:Logger",
+    "//libraries/Network:Network",
 ]
 
 prebuilt_frameworks = [
