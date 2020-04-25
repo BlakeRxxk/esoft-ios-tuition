@@ -33,32 +33,32 @@ extension DiscountViewController {
 
     let arrowBackImageView: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
-      layout.width = YGValue(25)
-      layout.height = YGValue(25)
+      layout.width = YGValue(Space.base)
+      layout.height = YGValue(Space.base)
       layout.alignSelf = .flexStart
       layout.position = .absolute
       layout.left = YGValue(14)
-      layout.top = 20%
+      layout.top = YGValue(UIViewController.topbarHeight() - Space.base)
     }
 
     let favouritesImageView: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
-      layout.width = YGValue(25)
-      layout.height = YGValue(25)
+      layout.width = YGValue(Space.base)
+      layout.height = YGValue(Space.base)
       layout.alignSelf = .flexEnd
       layout.position = .absolute
       layout.right = YGValue(48)
-      layout.top = 20%
+      layout.top = YGValue(UIViewController.topbarHeight() - Space.base)
     }
 
     let shareImageView: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
-      layout.width = YGValue(25)
-      layout.height = YGValue(25)
+      layout.width = YGValue(Space.base)
+      layout.height = YGValue(Space.base)
       layout.alignSelf = .flexEnd
       layout.position = .absolute
       layout.right = YGValue(18)
-      layout.top = 20%
+      layout.top = YGValue(UIViewController.topbarHeight() - Space.base)
     }
 
     let companyName: YGLayoutConfigurationBlock = { layout in
