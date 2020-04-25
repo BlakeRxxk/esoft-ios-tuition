@@ -31,6 +31,11 @@ public final class ImageViewWithGradient: View {
     layout()
   }
 
+  public func updateLayout() {
+    configureUI()
+    layout()
+  }
+
   private func createUI() {
     let subviews: [UIView] = [
       container,

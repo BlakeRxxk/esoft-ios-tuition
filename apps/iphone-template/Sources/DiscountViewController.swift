@@ -114,11 +114,11 @@ final class DiscountViewController: UIViewController {
     button.setTitle(title: Localized.useDiscount)
 
     imageViewWithGradient.imageView.pin_setImage(from: URL(string: "https://www.alpinabook.ru/upload/setka-editor/adf/adf5e93695c6631c3d9d1f6cc17db8ba.jpg"))
-    imageViewWithGradient.colors = [.black, .black]
     imageViewWithGradient.locations = (0, 1)
   }
 
   override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
     let containerSize = view.bounds.size
     view.configureLayout(block: { layout in
       layout.isEnabled = true
@@ -141,61 +141,8 @@ final class DiscountViewController: UIViewController {
     button.configureLayout(block: layout.button)
 
     view.yoga.applyLayout(preservingOrigin: true)
-    imageViewWithGradient.colors = [.black, .black]
+    imageViewWithGradient.updateLayout()
   }
-
-//  private func layout() {
-//    [
-//      imageContainer,
-//      bodyContainer,
-//      arrowBackImageView,
-//      favouritesImageView,
-//      shareImageView,
-//      companyName,
-//      categoryLabel,
-//      discountType,
-//      discountDescription,
-//      divider,
-//      whyYouCanUseDescription,
-//      button,
-//      imageViewWithGradient
-//    ].forEach {
-//      $0.translatesAutoresizingMaskIntoConstraints = false
-//    }
-//
-//    let constraints = [
-//      imageViewWithGradient.topAnchor.constraint(equalTo: view.topAnchor),
-//      imageViewWithGradient.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//      imageViewWithGradient.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//
-//      arrowBackImageView.topAnchor.constraint(equalTo: imageViewWithGradient.topAnchor, constant: navBarHeight),
-//      arrowBackImageView.leadingAnchor.constraint(equalTo: imageViewWithGradient.leadingAnchor, constant: 14.0),
-//
-//      favouritesImageView.topAnchor.constraint(equalTo: imageViewWithGradient.topAnchor, constant: navBarHeight),
-//      favouritesImageView.trailingAnchor.constraint(equalTo: shareImageView.leadingAnchor, constant: -10.5),
-//
-//      shareImageView.topAnchor.constraint(equalTo: imageViewWithGradient.topAnchor, constant: navBarHeight + 3.0),
-//      shareImageView.trailingAnchor.constraint(equalTo: imageViewWithGradient.trailingAnchor, constant: -18.0),
-//
-//      bodyContainer.topAnchor.constraint(equalTo: imageViewWithGradient.bottomAnchor, constant: 12.0),
-//      bodyContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//      bodyContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//
-//      companyName.topAnchor.constraint(equalTo: bodyContainer.topAnchor),
-//
-//      categoryLabel.topAnchor.constraint(equalTo: companyName.bottomAnchor, constant: 2.0),
-//
-//      discountType.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: Space.base),
-//
-//      discountDescription.topAnchor.constraint(equalTo: discountType.bottomAnchor, constant: Space.tiny),
-//
-//      divider.heightAnchor.constraint(equalToConstant: 1.0),
-//
-//      whyYouCanUseDescription.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: Space.tiny)
-//    ]
-//
-//    NSLayoutConstraint.activate(constraints)
-//  }
 }
 
 private extension DiscountViewController {
