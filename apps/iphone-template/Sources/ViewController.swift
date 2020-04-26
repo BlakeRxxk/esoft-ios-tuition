@@ -14,14 +14,11 @@ import YogaKit
 final class ViewController: UIViewController {
   
   // MARK: - Outlets
-  private(set) lazy var costItemView: CostItemView = CostItemView()
-  private(set) lazy var photoItemView: PhotoItemView = PhotoItemView()
+  private(set) lazy var container: UIView = UIView()
+  private(set) lazy var costItemViewYoga: CostItemViewYoga = CostItemViewYoga()
+  private(set) lazy var photoItemViewYoga: PhotoItemViewYoga = PhotoItemViewYoga()
   
   // MARK: - View Controller
-  override func loadView() {
-    view = UIView()
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -32,12 +29,14 @@ final class ViewController: UIViewController {
   
   // MARK: - Methods
   private func createUI() {
-    view.addSubview(costItemView)
-    view.addSubview(photoItemView)
+    container.addSubview(costItemViewYoga)
+    container.addSubview(photoItemViewYoga)
+    
+    view.addSubview(container)
   }
   
   private func configureUI() {
-    photoItemView.dataSet = ["0", "2", "3", "4", "5", "6", "7", "7"]
+    photoItemViewYoga.dataSet = ["0", "2", "3", "4", "5", "6", "7", "7"]
     
     view.backgroundColor = AppTheme.current().colors.screen
     
@@ -46,36 +45,40 @@ final class ViewController: UIViewController {
     nav?.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     nav?.barTintColor = AppTheme.current().colors.defaultTopBar
     
-    costItemView.subheader = Localized.costSubheader
-    costItemView.firstTitle = Localized.costLabel
-    costItemView.secondTitle = Localized.noticeLabel
-    costItemView.thirdTitle = Localized.editLabel
+    costItemViewYoga.subheader = Localized.costSubheader
+    costItemViewYoga.firstTitle = Localized.costLabel
+    costItemViewYoga.secondTitle = Localized.noticeLabel
+    costItemViewYoga.thirdTitle = Localized.editLabel
     
-    photoItemView.subheader = Localized.photoSubheader
-    photoItemView.firstTitle = Localized.showAllLabel
-    photoItemView.secondTitle = Localized.showAllQuantityLabel
+    photoItemViewYoga.subheader = Localized.photoSubheader
+    photoItemViewYoga.firstTitle = Localized.showAllLabel
+    photoItemViewYoga.secondTitle = Localized.showAllQuantityLabel
   }
   
   private func layout() {
-    [
-      costItemView,
-      photoItemView
-      ].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+    view.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = 100%
+      layout.height = 100%
+    }
     
-    let margins = view.layoutMarginsGuide
+    container.configureLayout { layout in
+      layout.isEnabled = true
+      layout.flexDirection = .column
+      layout.width = YGValue(UIScreen.main.bounds.width)
+      let topBarHeight = UIApplication.shared.statusBarFrame.size.height +
+        (self.navigationController?.navigationBar.frame.height ?? 0.0)
+      layout.marginTop = YGValue(topBarHeight + 20)
+    }
+    costItemViewYoga.configureLayout { layout in
+      layout.isEnabled = true
+    }
     
-    // MARK: - Constraints
-    let constraints = [
-      costItemView.topAnchor.constraint(equalTo: margins.topAnchor),
-      costItemView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      costItemView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      
-      photoItemView.top.constraint(equalTo: costItemView.bottom),
-      photoItemView.leading.constraint(equalTo: view.leading),
-      photoItemView.trailing.constraint(equalTo: view.trailing)
-    ]
+    photoItemViewYoga.configureLayout { layout in
+      layout.isEnabled = true
+    }
     
-    NSLayoutConstraint.activate(constraints)
+    view.yoga.applyLayout(preservingOrigin: true)
   }
 }
 

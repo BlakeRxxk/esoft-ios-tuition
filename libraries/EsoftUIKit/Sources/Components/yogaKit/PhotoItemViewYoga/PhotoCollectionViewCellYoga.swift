@@ -1,13 +1,13 @@
 //
-//  PhotoCollectionViewCell.swift
-//  AppLibrary
+//  PhotoCollectionViewCellYoga.swift
+//  EsoftUIKit#iphonesimulator-x86_64
 //
-//  Created by wtildestar on 17/04/2020.
+//  Created by wtildestar on 26/04/2020.
 //
 
 import UIKit
 
-final class PhotoCollectionViewCell: UICollectionViewCell {
+final class PhotoCollectionViewCellYoga: UICollectionViewCell {
   
   static let reuseId = "PhotoCollectionViewCell"
   
@@ -45,3 +45,4 @@ final class PhotoCollectionViewCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
 }
+
