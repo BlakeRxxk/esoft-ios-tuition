@@ -30,7 +30,11 @@ final class DiscountViewController: UIViewController {
   private(set) lazy var discountDescription: UILabel = UILabel()
   private(set) lazy var divider: UIView = UIView()
   private(set) lazy var whyYouCanUseDescription: UILabel = UILabel()
-  private(set) lazy var button: RoundedButton = RoundedButton()
+  private(set) lazy var button: UIButton = UIButton()
+
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+      .lightContent
+  }
 
   internal lazy var layout: Layout = Layout()
 
@@ -43,10 +47,6 @@ final class DiscountViewController: UIViewController {
 
     createUI()
     configureUI()
-  }
-
-  override var preferredStatusBarStyle: UIStatusBarStyle {
-      .lightContent
   }
 
   private func createUI() {
@@ -109,7 +109,10 @@ final class DiscountViewController: UIViewController {
 
     divider.backgroundColor = ThemeManager.current().colors.divider
 
-    button.setTitle(title: Localized.useDiscount)
+    button.setTitle(Localized.useDiscount, for: .normal)
+    button.backgroundColor = ThemeManager.current().colors.primary500
+    button.layer.cornerRadius = 22
+    button.titleLabel?.setStyles(UILabel.Styles.headline)
 
     imageViewWithGradient.imageView.pin_setImage(from: URL(string: "https://www.alpinabook.ru/upload/setka-editor/adf/adf5e93695c6631c3d9d1f6cc17db8ba.jpg"))
     imageViewWithGradient.locations = (0, 1)

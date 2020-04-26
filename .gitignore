@@ -17,3 +17,6 @@ tools/buck
 tools/scripts/private.sh
 User.makefile
 config/gen/*
+
+# Cocoapods
+third-party/Pods/*
