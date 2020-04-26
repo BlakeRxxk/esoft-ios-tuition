@@ -68,8 +68,6 @@ final class DiscountViewController: UIViewController {
   private func configureUI() {
     view.backgroundColor = ThemeManager.current().colors.container
 
-    imageContainer.backgroundColor = .red
-
     bodyContainer.axis = .vertical
     bodyContainer.isLayoutMarginsRelativeArrangement = true
     bodyContainer.layoutMargins = UIEdgeInsets(top: Space.small, left: Space.small, bottom: Space.small, right: Space.small)
