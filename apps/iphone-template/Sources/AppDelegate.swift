@@ -8,28 +8,21 @@
 import UIKit
 import PINRemoteImage
 import PINCache
-#if DEBUG
-import DBDebugToolkit
-#endif
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   public var window: UIWindow?
-  
+
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    #if DEBUG
-    DBDebugToolkit.setup()
-    #endif
-
     AppTheme.apply(theme: .client)
-
+    
     window = UIWindow()
     let rootVC = UINavigationController(rootViewController: ViewController())
     rootVC.navigationBar.setStyles(UINavigationBar.Styles.default)
-    
+
     window?.rootViewController = rootVC
     window?.makeKeyAndVisible()
-    
+
     setupImages()
 
     return true

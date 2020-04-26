@@ -6,23 +6,21 @@
 //
 
 import Foundation
+import RxSwift
+public struct NetworkManager {
+  public init() {}
 
-struct NetworkManager {
   static let environment: NetworkEnvironment = .production
   static let MovieAPIKey = ""
   
   let router = Router<MovieApi>()
-  
-  func getNewMovies(page: Int, completion: @escaping (_ movie: [Movie]?, _ error: String?) -> Void) {
-    router.request(.newMovies(page: 1)) { data, response, error in
-      if error != nil {
-        completion(nil, "Please check your network connection.")
-      }
-    }
+  public func getMovies(page: Int) -> Observable<Result<Movie, Error>> {
+    router.request(.newMovies(page: 1))
   }
+
 }
 
-struct MovieApiResponse {
+public struct MovieApiResponse {
   let page: Int
   let numberOfResults: Int
   let numberOfPages: Int
@@ -38,7 +36,7 @@ extension MovieApiResponse: Decodable {
     case movies = "results"
   }
   
-  init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: MovieApiResponseCodingKeys.self)
     
     page = try container.decode(Int.self, forKey: .page)
@@ -49,7 +47,7 @@ extension MovieApiResponse: Decodable {
   }
 }
 
-struct Movie {
+public struct Movie {
   let id: Int
   let posterPath: String
   let backdrop: String
@@ -59,7 +57,7 @@ struct Movie {
   let overview: String
 }
 
-extension Movie: Decodable {
+extension Movie: Codable {
   
   enum MovieCodingKeys: String, CodingKey {
     case id
@@ -71,7 +69,7 @@ extension Movie: Decodable {
     case overview
   }
   
-  init(from decoder: Decoder) throws {
+  public init(from decoder: Decoder) throws {
     let movieContainer = try decoder.container(keyedBy: MovieCodingKeys.self)
     
     id = try movieContainer.decode(Int.self, forKey: .id)

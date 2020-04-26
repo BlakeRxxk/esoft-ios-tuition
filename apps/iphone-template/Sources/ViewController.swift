@@ -10,7 +10,6 @@ import EsoftUIKit
 import ThemeManager
 
 class ViewController: UIViewController {
-  
   // MARK: - UI
   
   private(set) lazy var container: UIView = {
@@ -354,5 +353,4 @@ class ViewController: UIViewController {
     favoriteImage.widthAnchor.constraint(equalToConstant: 10).isActive = true
     favoriteImage.heightAnchor.constraint(equalToConstant: 9.41).isActive = true
   }
-  
 }

@@ -47,7 +47,6 @@ def app_test_configs(name):
         "DEVELOPMENT_LANGUAGE": DEVELOPMENT_LANGUAGE,
         "PRODUCT_BUNDLE_IDENTIFIER": bundle_identifier(suffix=""),
         "DEVELOPMENT_TEAM": get_development_team(),
-        "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
         "BUILD_NUMBER": get_build_number(),
         "PRODUCT_BUNDLE_SHORT_VERSION": get_short_version(),
         "APP_NAME": name,

@@ -28,6 +28,7 @@ static_libraries = [
     "//libraries/ThemeManager:ThemeManager",
     "//libraries/Logger:Logger",
     "//libraries/Network:Network",
+    "//libraries/NetworkDemo:NetworkDemo",
 ]
 
 prebuilt_frameworks = [
@@ -36,7 +37,10 @@ prebuilt_frameworks = [
     "//third-party/Pods:DBDebugToolkit",
     "//third-party/Pods:PINCache",
     "//third-party/Pods:PINRemoteImage",
-    "//third-party/Pods:FLAnimatedImage"
+    "//third-party/Pods:FLAnimatedImage",
+    "//third-party/Pods:RxSwift",
+    "//third-party/Pods:RxCocoa",
+    "//third-party/Pods:RxRelay"
 ]
 
 resource_dependencies = [

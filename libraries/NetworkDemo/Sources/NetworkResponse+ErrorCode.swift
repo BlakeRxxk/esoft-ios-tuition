@@ -43,6 +43,8 @@ extension NetworkResponse {
       return .unreachable
     case 1001:
       return .none
+    case 1002:
+      return .badURL
     default:
       return .unknown
     }

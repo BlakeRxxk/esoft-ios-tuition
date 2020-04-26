@@ -12,11 +12,9 @@ public typealias NetworkRouterCompletion = (_ data: Data?, _ response: URLRespon
 
 protocol NetworkRouter: class {
   associatedtype Endpoint: EndpointType
-  associatedtype APIError: Error
-  associatedtype DTO
-
+  
   func request(_ route: Endpoint, completion: @escaping NetworkRouterCompletion)
-  func request(_ route: Endpoint) -> Observable<Result<DTO, APIError>>
+  func request<T: Codable>(_ route: Endpoint) -> Observable<Result<T, Error>>
   func cancel()
 }
 
@@ -54,22 +52,84 @@ extension APIError: Codable, Equatable {
   }
 }
 
-class Router<Endpoint: EndpointType, DTO: Codable, DTOError: Error>: NetworkRouter {
+public struct TestDTO {
+  public let message: String
+}
+
+extension TestDTO: Codable {
+  enum ResponseKeys: String, CodingKey {
+    case message
+  }
+}
+
+class Router<Endpoint: EndpointType>: NetworkRouter {
   private var task: URLSessionTask?
   
-  func request(_ route: Endpoint) -> Observable<Result<DTO, APIError>> {
+  func request<Content: Codable>(_ route: Endpoint) -> Observable<Result<Content, Error>> {
     guard Reachability.isConnectedToNetwork() else {
-      return .just(.failure(APIError(message: "unreachable", code: 1000)))
+      return .just(
+        .failure(APIError(message: NetworkResponse.unreachable.localizedDescription, code: 1000))
+      )
     }
     
-    do {
+    return Observable.create { [weak self] observer in
+      let session = URLSession.shared
       
-    } catch {
-      return .just( .failure(APIError(message: "cannot build request", code: 1001)))
+      guard let self = self else {
+        observer.onNext(
+          .failure(APIError(message: NetworkResponse.none.localizedDescription, code: 1001))
+        )
+        return Disposables.create()
+      }
+      
+      do {
+        let request = try self.buildRequest(from: route)
+        self.task = session.dataTask(with: request) { data, response, _ in
+          
+          guard let response = response, let data = data else {
+            observer.onNext(
+              .failure(APIError(message: NetworkResponse.unknown.localizedDescription, code: 0))
+            )
+            return
+          }
+          
+          guard let httpResponse = response as? HTTPURLResponse else {
+            observer.onError(APIError(message: NetworkResponse.parsingError.localizedDescription, code: 999))
+            return
+          }
+          
+          guard let contentType = httpResponse.allHeaderFields["Content-Type"] as? String,
+            contentType.contains("application/json") else {
+            observer.onNext(
+              .failure(APIError(message: NetworkResponse.parsingError.localizedDescription, code: 999))
+            )
+            return
+          }
+
+          if httpResponse.statusCode > 299 {
+            let message = NetworkResponse.errorCode(httpResponse.statusCode).localizedDescription
+
+            observer.onNext(
+              .failure(APIError(message: message, code: httpResponse.statusCode))
+            )
+            return
+          }
+
+          print(data)
+
+          observer.onCompleted()
+        }
+      } catch {
+        observer.onNext(
+          .failure(APIError(message: NetworkResponse.badURL.localizedDescription, code: 1002))
+        )
+      }
+
+      self.task?.resume()
+      
+      return Disposables.create(with: self.cancel)
     }
   }
-  
-  
   
   func request(_ route: Endpoint, completion: @escaping NetworkRouterCompletion) {
     let session = URLSession.shared

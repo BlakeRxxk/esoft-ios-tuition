@@ -25,6 +25,7 @@ enum NetworkResponse: LocalizedError, Equatable {
   case gatewayTimeout
   
   case parsingError
+  case badURL
   case unreachable
   case unknown
   
@@ -62,10 +63,10 @@ enum NetworkResponse: LocalizedError, Equatable {
       return "parsingError"
     case .unreachable:
       return "unreachable"
+    case .badURL:
+      return "badURL"
     case .unknown:
       return "unknown"
     }
   }
 }
-
-
