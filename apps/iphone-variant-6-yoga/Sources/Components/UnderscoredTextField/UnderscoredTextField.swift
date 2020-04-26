@@ -10,10 +10,10 @@ import YogaKit
 import ThemeManager
 import BaseUI
 
-public final class UnderscoredTextField : View {
+public final class UnderscoredTextField: View {
   public var placeholder: String {
     get {
-      return phoneTextField.placeholder ?? ""
+      phoneTextField.placeholder ?? ""
     }
     set {
       phoneTextField.placeholder = newValue
@@ -66,6 +66,6 @@ public final class UnderscoredTextField : View {
   }
 }
 
-extension UnderscoredTextField : UnderscoredTextFieldInput {
+extension UnderscoredTextField: UnderscoredTextFieldInput {
   
 }

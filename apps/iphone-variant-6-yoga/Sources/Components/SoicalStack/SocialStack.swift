@@ -9,7 +9,7 @@ import UIKit
 import YogaKit
 import BaseUI
 
-public final class SocialStack : View {
+public final class SocialStack: View {
   public var facebookImage: UIImage {
     get {
       facebookButton.currentImage ?? UIImage()
@@ -78,7 +78,7 @@ public final class SocialStack : View {
       facebookButton,
       vkButton,
       okButton,
-      googleButton,
+      googleButton
       ].forEach { container.addSubview($0) }
     
     addSubview(container)
@@ -118,6 +118,6 @@ public final class SocialStack : View {
   }
 }
 
-extension SocialStack : SocialStackInput {
+extension SocialStack: SocialStackInput {
   
 }

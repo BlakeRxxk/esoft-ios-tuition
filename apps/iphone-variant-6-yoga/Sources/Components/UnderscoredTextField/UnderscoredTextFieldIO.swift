@@ -11,6 +11,6 @@ public protocol UnderscoredTextFieldInput {
   var placeholder: String { get set }
 }
 
-public protocol UnderscoredTextFieldOutput : AnyObject {
+public protocol UnderscoredTextFieldOutput: AnyObject {
   func valueDidChange(newVal: String)
 }

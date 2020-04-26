@@ -14,7 +14,7 @@ public protocol SocialStackInput {
   var googleImage: UIImage { get set }
 }
 
-public protocol SocialStackOutput : AnyObject {
+public protocol SocialStackOutput: AnyObject {
   func didTapFacebook()
   func didTapVK()
   func didTapOK()

@@ -49,7 +49,7 @@ final class ViewController: UIViewController {
     addCloseButtonIfNeeded(target: self)
     
     let constraints = [
-      navigationItem.titleView!.superview!.centerYAnchor.constraint(equalTo: navigationController!.navigationBar.centerYAnchor, constant: -4.0),
+      navigationItem.titleView!.superview!.centerYAnchor.constraint(equalTo: navigationController!.navigationBar.centerYAnchor, constant: -4.0)
     ]
     
     NSLayoutConstraint.activate(constraints)
@@ -64,14 +64,14 @@ final class ViewController: UIViewController {
       divider,
       continueButton,
       socialStackView,
-      termLabel,
+      termLabel
       ].forEach { container.addSubview($0) }
     
     [
       facebookImageView,
       vkImageView,
       okImageView,
-      googleImageView,
+      googleImageView
       ].forEach { socialStackView.addArrangedSubview($0) }
   }
   
