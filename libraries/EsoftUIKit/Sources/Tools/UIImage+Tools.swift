@@ -9,9 +9,10 @@ import CoreGraphics
 import UIKit
 
 extension Bundle {
+  class Class {}
+  
   static var framework: Bundle {
-    class Class {}
-    return Bundle(for: Class.self)
+    Bundle(for: Class.self)
   }
 }
 

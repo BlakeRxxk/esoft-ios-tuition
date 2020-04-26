@@ -26,6 +26,7 @@ static_libraries = [
     "//libraries/EsoftUIKit:EsoftUIKit",
     "//libraries/AutoLayoutKit:AutoLayoutKit",
     "//libraries/ThemeManager:ThemeManager",
+    "//libraries/Logger:Logger",
 ]
 
 prebuilt_frameworks = [
