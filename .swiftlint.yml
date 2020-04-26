@@ -22,7 +22,32 @@ type_body_length:
 function_body_length:
   warning: 100
 
+file_types_order:
+  custom:
+    - supporting_types
+    - main_type
+    - extensions
+
+type_contents_order:
+  custom:
+    - cases
+    - type_aliases
+    - subtypes
+    - stored_type_properties
+    - computed_type_properties
+    - stored_instance_properties
+    - computed_instance_properties
+    - iboutlets
+    - initializers
+    - type_methods
+    - life_cycle_methods
+    - ibactions
+    - other_methods
+    - subscripts
+
 opt_in_rules: # some rules are only opt-in
+  - type_contents_order
+  - file_types_order
   - closing_brace
   - opening_brace
   - return_arrow_whitespace
