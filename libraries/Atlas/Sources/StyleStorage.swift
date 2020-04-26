@@ -12,20 +12,20 @@
  */
 final class StyleStorage {
   /**
-   Stored styles.
-   
-   - note: Don't use manualy.
-   */
-  var styles: [String: [(Stylable) -> Void]] = [:]
-  
-  private init() {}
-  
-  /**
    Shared styles storage.
    
    - note: Don't use manualy.
    */
   static let shared = StyleStorage()
+  
+  /**
+   Stored styles.
+   
+   - note: Don't use manualy.
+   */
+  var styles: [String: [(Stylable) -> Void]] = [:]
+
+  private init() {}
   
   /**
    Register style the processing method for key.

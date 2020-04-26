@@ -33,6 +33,10 @@ final class DiscountViewController: UIViewController {
   private(set) lazy var whyYouCanUseDescription: UILabel = UILabel()
   private(set) lazy var button: UIButton = UIButton()
 
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+      .lightContent
+  }
+
   override func loadView() {
     view = UIView()
   }
@@ -43,10 +47,6 @@ final class DiscountViewController: UIViewController {
     createUI()
     configureUI()
     layout()
-  }
-
-  override var preferredStatusBarStyle: UIStatusBarStyle {
-      .lightContent
   }
 
   private func createUI() {

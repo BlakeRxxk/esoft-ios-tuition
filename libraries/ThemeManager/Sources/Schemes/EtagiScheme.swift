@@ -9,6 +9,31 @@ import UIKit
 import ColorsUI
 import FontsUI
 
+struct EtagiTextColors: ThemeTextColors {
+  var primary: UIColor = UIColor.TextColor.primary
+  var secondary: UIColor = UIColor.TextColor.secondary
+  var placeholder: UIColor = UIColor.TextColor.placeholder
+  var disabled: UIColor = UIColor.TextColor.disabled
+  
+  var white: UIColor = UIColor.TextColor.white
+}
+
+struct EtagiFonts: ThemeFonts {
+  var title1: UIFont = UIFont.title1
+  var title2: UIFont = UIFont.title2
+  var title3: UIFont = UIFont.title3
+  
+  var regular: UIFont = UIFont.regular
+  var regularSemibold: UIFont = UIFont.regularSemibold
+
+  var small: UIFont = UIFont.small
+  var smallSemibold: UIFont = UIFont.smallSemibold
+  
+  var tiny: UIFont = UIFont.tiny
+  
+  var micro: UIFont = UIFont.micro
+}
+
 struct EtagiScheme: ThemeColors {
   var primary500: UIColor = UIColor.Color.mantis500
   var primary400: UIColor = UIColor.Color.mantis400
@@ -58,29 +83,4 @@ struct EtagiScheme: ThemeColors {
     
     return colors.randomElement() ?? colors[0]
   }
-}
-
-struct EtagiTextColors: ThemeTextColors {
-  var primary: UIColor = UIColor.TextColor.primary
-  var secondary: UIColor = UIColor.TextColor.secondary
-  var placeholder: UIColor = UIColor.TextColor.placeholder
-  var disabled: UIColor = UIColor.TextColor.disabled
-  
-  var white: UIColor = UIColor.TextColor.white
-}
-
-struct EtagiFonts: ThemeFonts {
-  var title1: UIFont = UIFont.title1
-  var title2: UIFont = UIFont.title2
-  var title3: UIFont = UIFont.title3
-  
-  var regular: UIFont = UIFont.regular
-  var regularSemibold: UIFont = UIFont.regularSemibold
-
-  var small: UIFont = UIFont.small
-  var smallSemibold: UIFont = UIFont.smallSemibold
-  
-  var tiny: UIFont = UIFont.tiny
-  
-  var micro: UIFont = UIFont.micro
 }
