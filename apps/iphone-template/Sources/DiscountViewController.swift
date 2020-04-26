@@ -31,7 +31,7 @@ final class DiscountViewController: UIViewController {
   private(set) lazy var discountDescription: UILabel = UILabel()
   private(set) lazy var divider: UIView = UIView()
   private(set) lazy var whyYouCanUseDescription: UILabel = UILabel()
-  private(set) lazy var button: RoundedButton = RoundedButton()
+  private(set) lazy var button: UIButton = UIButton()
 
   override func loadView() {
     view = UIView()
@@ -109,7 +109,10 @@ final class DiscountViewController: UIViewController {
 
     divider.backgroundColor = ThemeManager.current().colors.divider
 
-    button.setTitle(title: Localized.useDiscount)
+    button.setTitle(Localized.useDiscount, for: .normal)
+    button.backgroundColor = ThemeManager.current().colors.primary500
+    button.layer.cornerRadius = 22
+    button.titleLabel?.setStyles(UILabel.Styles.headline)
 
     imageViewWithGradient.imageView.pin_setImage(from: URL(string: "https://www.alpinabook.ru/upload/setka-editor/adf/adf5e93695c6631c3d9d1f6cc17db8ba.jpg"))
     imageViewWithGradient.locations = (0, 0.5)
@@ -162,7 +165,9 @@ final class DiscountViewController: UIViewController {
 
       divider.heightAnchor.constraint(equalToConstant: 1.0),
 
-      whyYouCanUseDescription.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: Space.tiny)
+      whyYouCanUseDescription.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: Space.tiny),
+
+      button.heightAnchor.constraint(equalToConstant: Space.large)
     ]
 
     NSLayoutConstraint.activate(constraints)
