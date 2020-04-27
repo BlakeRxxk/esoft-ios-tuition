@@ -42,7 +42,7 @@ public final class SocialStack: View {
       googleButton.setImage(newValue, for: .normal)
     }
   }
-  
+
   private(set) lazy var container: UIView = UIView()
   
   private(set) lazy var facebookButton: UIButton = {
@@ -92,8 +92,10 @@ public final class SocialStack: View {
     googleImage = UIImage.Socials.google
   }
   
-  override public func configureLayout(block: @escaping YGLayoutConfigurationBlock) {
+  override public func layoutSubviews() {
+    super.layoutSubviews()
     
+    configureLayout(block: layout.container) // !
     container.configureLayout(block: layout.container)
     
     facebookButton.configureLayout(block: layout.socialIcon)
@@ -101,7 +103,7 @@ public final class SocialStack: View {
     okButton.configureLayout(block: layout.socialIcon)
     googleButton.configureLayout(block: layout.socialIcon)
     
-    super.configureLayout(block: block)
+    yoga.applyLayout(preservingOrigin: true)
   }
   
   @objc private func facebookButtonDidPressed() {

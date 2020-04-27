@@ -44,24 +44,6 @@ final class ViewController: UIViewController {
     addCloseButtonIfNeeded(target: self)
   }
   
-  override func viewDidLayoutSubviews() {
-    let containerSize = view.bounds.size
-    view.configureLayout(block: { layout in
-      layout.isEnabled = true
-      layout.height = YGValue(containerSize.height)
-      layout.width = YGValue(containerSize.width)
-    })
-    
-    container.configureLayout(block: layout.container)
-    enterLabel.configureLayout(block: layout.enterLabel)
-    phoneTextField.configureLayout(block: layout.phoneTextField)
-    continueButton.configureLayout(block: layout.continueButton)
-    socialStack.configureLayout(block: layout.socialStack)
-    termLabel.configureLayout(block: layout.termLabel)
-    
-    view.yoga.applyLayout(preservingOrigin: true)
-  }
-  
   private func createUI() {
     view.addSubview(container)
     
@@ -94,6 +76,24 @@ final class ViewController: UIViewController {
                         UILabel.ColorStyle.primary)
     termLabel.styledText = Localized.termOfUse
     termLabel.colorize(from: 31, to: 60, with: ThemeManager.current().colors.brand)
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    view.configureLayout(block: { layout in
+      layout.isEnabled = true
+      layout.width = 100%
+      layout.height = 100%
+    })
+    
+    container.configureLayout(block: layout.container)
+    enterLabel.configureLayout(block: layout.enterLabel)
+    phoneTextField.configureLayout(block: layout.phoneTextField)
+    continueButton.configureLayout(block: layout.continueButton)
+    socialStack.configureLayout(block: layout.socialStack)
+    termLabel.configureLayout(block: layout.termLabel)
+    
+    view.yoga.applyLayout(preservingOrigin: true)
   }
 }
 

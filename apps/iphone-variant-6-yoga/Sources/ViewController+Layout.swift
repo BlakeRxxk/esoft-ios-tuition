@@ -13,7 +13,6 @@ extension ViewController {
       layout.isEnabled = true
       layout.width = 100%
       layout.flexDirection = .column
-      layout.alignItems = .stretch
       layout.justifyContent = .flexStart
     }
     
@@ -24,19 +23,21 @@ extension ViewController {
     
     let phoneTextField: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
-      layout.paddingHorizontal = 32
+      layout.height = 42 // !
       layout.marginTop = 70
+      layout.paddingHorizontal = 32
     }
     
     let continueButton: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
       layout.height = 44
-      layout.marginHorizontal = 32
       layout.marginTop = 48
+      layout.marginHorizontal = 32
     }
     
     let socialStack: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
+      layout.height = 32 // !
       layout.marginTop = 52
       layout.paddingHorizontal = 51
     }

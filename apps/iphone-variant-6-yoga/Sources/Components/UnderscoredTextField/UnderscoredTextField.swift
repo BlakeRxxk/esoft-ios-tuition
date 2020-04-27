@@ -21,6 +21,7 @@ public final class UnderscoredTextField: View {
   }
   
   private(set) lazy var container: UIView = UIView()
+  
   private(set) lazy var phoneTextField: UITextField = {
     $0.addTarget(self, action: #selector(phoneTextFieldValueChanged), for: .valueChanged)
     return $0
@@ -53,12 +54,16 @@ public final class UnderscoredTextField: View {
     divider.backgroundColor = ThemeManager.current().colors.divider
   }
   
-  override public func configureLayout(block: @escaping YGLayoutConfigurationBlock) {
+  override public func layoutSubviews() {
+    super.layoutSubviews()
+    
+    configureLayout(block: layout.container) // !
     container.configureLayout(block: layout.container)
+    
     phoneTextField.configureLayout(block: layout.phoneTextField)
     divider.configureLayout(block: layout.divider)
     
-    super.configureLayout(block: block)
+    yoga.applyLayout(preservingOrigin: true)
   }
   
   @objc func phoneTextFieldValueChanged() {
