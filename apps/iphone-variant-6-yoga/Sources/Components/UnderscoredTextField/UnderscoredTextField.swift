@@ -54,16 +54,29 @@ public final class UnderscoredTextField: View {
     divider.backgroundColor = ThemeManager.current().colors.divider
   }
   
-  override public func layoutSubviews() {
-    super.layoutSubviews()
+  override public func updateConstraints() {
+    super.updateConstraints()
+    print("UTF updateConstraints")
     
-    configureLayout(block: layout.container) // !
     container.configureLayout(block: layout.container)
-    
+
     phoneTextField.configureLayout(block: layout.phoneTextField)
     divider.configureLayout(block: layout.divider)
-    
+
     yoga.applyLayout(preservingOrigin: true)
+  }
+  
+  override public func layoutSubviews() {
+    super.layoutSubviews()
+    print("UTF layoutSubviews")
+    
+//    configureLayout(block: layout.container)
+//    container.configureLayout(block: layout.container)
+//    
+//    phoneTextField.configureLayout(block: layout.phoneTextField)
+//    divider.configureLayout(block: layout.divider)
+//    
+//    yoga.applyLayout(preservingOrigin: true)
   }
   
   @objc func phoneTextFieldValueChanged() {

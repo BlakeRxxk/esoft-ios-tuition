@@ -46,25 +46,56 @@ final class ViewController: UIViewController {
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
+    print("viewDidLayoutSubviews")
+    
     view.configureLayout(block: { layout in
       layout.isEnabled = true
       layout.width = 100%
       layout.height = 100%
     })
-    
+
     container.configureLayout(block: layout.container)
+
     enterLabel.configureLayout(block: layout.enterLabel)
     phoneTextField.configureLayout(block: layout.phoneTextField)
     continueButton.configureLayout(block: layout.continueButton)
     socialStack.configureLayout(block: layout.socialStack)
     termLabel.configureLayout(block: layout.termLabel)
-    
+
     view.yoga.applyLayout(preservingOrigin: true)
+  }
+
+    override func updateViewConstraints() {
+    super.updateViewConstraints()
+    print("updateViewConstraints")
+    
+//    view.configureLayout(block: { layout in
+//      layout.isEnabled = true
+//      layout.width = 100%
+//      layout.height = 100%
+//    })
+//
+//    container.configureLayout(block: layout.container)
+//
+//    enterLabel.configureLayout(block: layout.enterLabel)
+//    phoneTextField.configureLayout(block: layout.phoneTextField)
+//    continueButton.configureLayout(block: layout.continueButton)
+//    socialStack.configureLayout(block: layout.socialStack)
+//    termLabel.configureLayout(block: layout.termLabel)
+//
+//    view.yoga.applyLayout(preservingOrigin: true)
+  }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//    view.subviews.forEach {
+//      $0.yoga.markDirty()
+//    }
+//    view.yoga.applyLayout(preservingOrigin: true)
+    super.traitCollectionDidChange(previousTraitCollection)
+//    print("traitCollectionDidChange")
   }
   
   private func createUI() {
-    view.addSubview(container)
-    
     [
       enterLabel,
       phoneTextField,
@@ -72,6 +103,8 @@ final class ViewController: UIViewController {
       socialStack,
       termLabel
       ].forEach { container.addSubview($0) }
+    
+    view.addSubview(container)
   }
   
   private func configureUI() {

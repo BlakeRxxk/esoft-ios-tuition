@@ -23,7 +23,7 @@ extension ViewController {
     
     let phoneTextField: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
-      layout.height = 42 // !
+//      layout.height = 42 // !
       layout.marginTop = 70
       layout.paddingHorizontal = 32
     }
@@ -37,7 +37,7 @@ extension ViewController {
     
     let socialStack: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
-      layout.height = 32 // !
+//      layout.height = 32 // !
       layout.marginTop = 52
       layout.paddingHorizontal = 51
     }

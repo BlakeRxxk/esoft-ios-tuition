@@ -92,18 +92,33 @@ public final class SocialStack: View {
     googleImage = UIImage.Socials.google
   }
   
-  override public func layoutSubviews() {
-    super.layoutSubviews()
+  override public func updateConstraints() {
+    super.updateConstraints()
+    print("SS updateConstraints")
     
-    configureLayout(block: layout.container) // !
     container.configureLayout(block: layout.container)
-    
+
     facebookButton.configureLayout(block: layout.socialIcon)
     vkButton.configureLayout(block: layout.socialIcon)
     okButton.configureLayout(block: layout.socialIcon)
     googleButton.configureLayout(block: layout.socialIcon)
     
     yoga.applyLayout(preservingOrigin: true)
+  }
+  
+  override public func layoutSubviews() {
+    super.layoutSubviews()
+    print("SS layoutSubviews")
+    
+//    configureLayout(block: layout.container)
+//    container.configureLayout(block: layout.container)
+//
+//    facebookButton.configureLayout(block: layout.socialIcon)
+//    vkButton.configureLayout(block: layout.socialIcon)
+//    okButton.configureLayout(block: layout.socialIcon)
+//    googleButton.configureLayout(block: layout.socialIcon)
+//
+//    yoga.applyLayout(preservingOrigin: true)
   }
   
   @objc private func facebookButtonDidPressed() {
