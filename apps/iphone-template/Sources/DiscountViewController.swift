@@ -49,6 +49,33 @@ final class DiscountViewController: UIViewController {
     configureUI()
   }
 
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    let containerSize = view.bounds.size
+    view.configureLayout(block: { layout in
+      layout.isEnabled = true
+      layout.height = YGValue(containerSize.height)
+      layout.width = YGValue(containerSize.width)
+    })
+
+    imageContainer.configureLayout(block: layout.imageContainer)
+    bodyContainer.configureLayout(block: layout.bodyContainer)
+    imageViewWithGradient.configureLayout(block: layout.imageViewWithGradient)
+    arrowBackImageView.configureLayout(block: layout.arrowBackImageView)
+    favouritesImageView.configureLayout(block: layout.favouritesImageView)
+    shareImageView.configureLayout(block: layout.shareImageView)
+    companyName.configureLayout(block: layout.companyName)
+    categoryLabel.configureLayout(block: layout.categoryLabel)
+    discountType.configureLayout(block: layout.discountType)
+    discountDescription.configureLayout(block: layout.discountDescription)
+    divider.configureLayout(block: layout.divider)
+    whyYouCanUseDescription.configureLayout(block: layout.whyYouCanUseDescription)
+    button.configureLayout(block: layout.button)
+
+    view.yoga.applyLayout(preservingOrigin: true)
+    imageViewWithGradient.setImageGradient()
+  }
+
   private func createUI() {
     view.addSubview(imageContainer)
     view.addSubview(bodyContainer)
@@ -115,34 +142,6 @@ final class DiscountViewController: UIViewController {
     button.titleLabel?.setStyles(UILabel.Styles.headline)
 
     imageViewWithGradient.imageView.pin_setImage(from: URL(string: "https://www.alpinabook.ru/upload/setka-editor/adf/adf5e93695c6631c3d9d1f6cc17db8ba.jpg"))
-    imageViewWithGradient.locations = (0, 1)
-  }
-
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    let containerSize = view.bounds.size
-    view.configureLayout(block: { layout in
-      layout.isEnabled = true
-      layout.height = YGValue(containerSize.height)
-      layout.width = YGValue(containerSize.width)
-    })
-
-    imageContainer.configureLayout(block: layout.imageContainer)
-    bodyContainer.configureLayout(block: layout.bodyContainer)
-    imageViewWithGradient.configureLayout(block: layout.imageViewWithGradient)
-    arrowBackImageView.configureLayout(block: layout.arrowBackImageView)
-    favouritesImageView.configureLayout(block: layout.favouritesImageView)
-    shareImageView.configureLayout(block: layout.shareImageView)
-    companyName.configureLayout(block: layout.companyName)
-    categoryLabel.configureLayout(block: layout.categoryLabel)
-    discountType.configureLayout(block: layout.discountType)
-    discountDescription.configureLayout(block: layout.discountDescription)
-    divider.configureLayout(block: layout.divider)
-    whyYouCanUseDescription.configureLayout(block: layout.whyYouCanUseDescription)
-    button.configureLayout(block: layout.button)
-
-    view.yoga.applyLayout(preservingOrigin: true)
-    imageViewWithGradient.updateLayout()
   }
 }
 
