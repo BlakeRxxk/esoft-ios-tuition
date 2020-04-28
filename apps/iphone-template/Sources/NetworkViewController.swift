@@ -13,6 +13,5 @@ public final class NetworkViewController: UIViewController {
   override public func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = AppTheme.current().colors.container
-
   }
 }

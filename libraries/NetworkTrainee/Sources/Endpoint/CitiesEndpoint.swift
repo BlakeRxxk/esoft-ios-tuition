@@ -21,7 +21,7 @@ extension CitiesApi: EndpointType {
   var environmentBaseURL: String {
     switch NetworkManager.environment {
     default:
-      return "https://developers.etagi.com/api/v2/catalogs/"
+      return "https://developers.etagi.com/api/v2/catalogs"
     }
   }
   
@@ -36,7 +36,7 @@ extension CitiesApi: EndpointType {
   var path: String {
     switch self {
     case .cities:
-      return "cities/list"
+      return "/cities/list"
     }
   }
   

@@ -15,6 +15,8 @@ static_library(
         "//libraries/BaseFRP:BaseFRP",
         "//third-party/Pods:Yoga",
         "//third-party/Pods:YogaKit",
+        "//third-party/Pods:IGListKit",
+        "//third-party/Pods:IGListDiffKit",
     ],
     frameworks = [
         "$SDKROOT/System/Library/Frameworks/Foundation.framework",

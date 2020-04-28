@@ -31,6 +31,10 @@ static_libraries = [
     "//libraries/NetworkTrainee:NetworkTrainee",
 ]
 
+prebuilt_test_frameworks = [
+    "//third-party/Pods:OHHTTPStubs"
+]
+
 prebuilt_frameworks = [
     "//third-party/Pods:Yoga",
     "//third-party/Pods:YogaKit",
@@ -41,16 +45,9 @@ prebuilt_frameworks = [
     "//third-party/Pods:RxSwift",
     "//third-party/Pods:RxCocoa",
     "//third-party/Pods:RxRelay",
-    "//third-party/Pods:OHHTTPStubs",
-    "//third-party/Pods:RxBlocking",
-    "//third-party/Pods:RxTest"
-]
-
-prebuilt_test_frameworks = [
-    
-    
-    "//third-party/Pods:RxTest"
-]
+    "//third-party/Pods:IGListKit",
+    "//third-party/Pods:IGListDiffKit",
+] + prebuilt_test_frameworks
 
 resource_dependencies = [
     ":LaunchScreen",
