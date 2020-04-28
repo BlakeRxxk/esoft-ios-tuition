@@ -52,7 +52,8 @@ def app_test_configs(name):
         "APP_NAME": name,
         "PRODUCT_NAME": name,
         "TARGETED_DEVICE_FAMILY": "1,2",
-        "CLANG_ENABLE_CODE_COVERAGE": "YES"
+        "CLANG_ENABLE_CODE_COVERAGE": "YES",
+        "COPY_PHASE_STRIP": "NO"
     }
     config = merge_dict(SHARED_CONFIGS, config)
     config = merge_dict(config, optimization_config())

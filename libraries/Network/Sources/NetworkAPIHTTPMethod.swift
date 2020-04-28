@@ -15,6 +15,6 @@ public enum NetworkAPIHTTPMethod: String {
   case options = "OPTIONS"
   case patch = "PATCH"
   case post = "POST"
-  case put  = "PUT"
+  case put = "PUT"
   case trace = "TRACE"
 }

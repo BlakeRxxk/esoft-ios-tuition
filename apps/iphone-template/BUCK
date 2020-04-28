@@ -28,7 +28,7 @@ static_libraries = [
     "//libraries/ThemeManager:ThemeManager",
     "//libraries/Logger:Logger",
     "//libraries/Network:Network",
-    "//libraries/NetworkDemo:NetworkDemo",
+    "//libraries/NetworkTrainee:NetworkTrainee",
 ]
 
 prebuilt_frameworks = [
@@ -40,7 +40,16 @@ prebuilt_frameworks = [
     "//third-party/Pods:FLAnimatedImage",
     "//third-party/Pods:RxSwift",
     "//third-party/Pods:RxCocoa",
-    "//third-party/Pods:RxRelay"
+    "//third-party/Pods:RxRelay",
+    "//third-party/Pods:OHHTTPStubs",
+    "//third-party/Pods:RxBlocking",
+    "//third-party/Pods:RxTest"
+]
+
+prebuilt_test_frameworks = [
+    
+    
+    "//third-party/Pods:RxTest"
 ]
 
 resource_dependencies = [
@@ -98,8 +107,8 @@ apple_binary(
         "//apps/...",
     ],
     preprocessor_flags=[
-        '-fobjc-arc',
-        '-Wno-objc-designated-initializers',
+        "-fobjc-arc",
+        "-Wno-objc-designated-initializers",
     ],
     configs = app_binary_configs(appTargetName),
     swift_version = native.read_config("swift", "version"),

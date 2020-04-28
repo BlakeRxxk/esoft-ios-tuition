@@ -9,7 +9,11 @@ inhibit_all_warnings!
 
 target 'ThirdPartyDependencies' do
   use_frameworks!
+
   pod 'YogaKit', :binary => true
+
+  pod 'IGListKit', :binary => true
+  pod 'IGListDiffKit', :binary => true
 
   pod 'PINRemoteImage', :binary => true
   pod 'PINCache', :binary => true
@@ -32,4 +36,5 @@ target 'ThirdPartyDependenciesTests' do
 
   pod 'RxBlocking', :binary => true
   pod 'RxTest', :binary => true
+  pod 'OHHTTPStubs/Swift', :binary => true
 end

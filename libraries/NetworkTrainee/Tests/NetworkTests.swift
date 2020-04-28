@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import Network
+@testable import NetworkTrainee
 
 class NetworkTests: XCTestCase {
   

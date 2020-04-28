@@ -16,5 +16,10 @@ static_library(
         "$SDKROOT/System/Library/Frameworks/Foundation.framework",
         "$SDKROOT/System/Library/Frameworks/SystemConfiguration.framework",
     ],
+    test_deps = [
+        "//third-party/Pods:RxTest",
+        "//third-party/Pods:OHHTTPStubs",
+        "//third-party/Pods:RxBlocking"
+    ],
     info_plist_substitutions = info_plist_substitutions("NetworkTests")
 )
