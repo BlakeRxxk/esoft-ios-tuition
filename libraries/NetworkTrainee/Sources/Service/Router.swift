@@ -29,7 +29,8 @@ class Router<Endpoint: EndpointType>: NetworkRouter {
     
     guard Reachability.isConnectedToNetwork() else {
       let err = NSError(domain: NetworkResponse.failed.rawValue, code: 9999)
-      return completion(nil, nil, err)
+      completion(nil, nil, err)
+      return
     }
     
     do {

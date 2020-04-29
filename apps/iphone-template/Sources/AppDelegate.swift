@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     AppTheme.apply(theme: .client)
     
     window = UIWindow()
-    let rootVC = UINavigationController(rootViewController: NetworkViewController())
+    let rootVC = UINavigationController(rootViewController: CitiesViewController())
     rootVC.navigationBar.setStyles(UINavigationBar.Styles.default)
 
     window?.rootViewController = rootVC

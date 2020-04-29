@@ -38,14 +38,14 @@ public struct City {
 
 extension City: Codable, Hashable {
   enum CodingKeys: String, CodingKey {
-    case id = "id"
-    case name = "name"
-    case coords = "coords"
+    case id
+    case name
+    case coords
     case clockWrap = "clock_wrap"
-    case country = "country"
+    case country
     case eOfficeID = "e_office_id"
-    case created = "created"
-    case updated = "updated"
+    case created
+    case updated
   }
   
   public init(from decoder: Decoder) throws {

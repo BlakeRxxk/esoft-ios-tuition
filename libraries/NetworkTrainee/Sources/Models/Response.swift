@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 public struct Response<T: Codable & Hashable> {
   public let success: Bool
   public let status: Int
@@ -26,7 +27,7 @@ extension Response: Codable, Hashable {
     case status
     case data
   }
-  
+
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     

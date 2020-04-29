@@ -9,7 +9,7 @@ import UIKit
 import EsoftUIKit
 import ThemeManager
 
-class ViewController: UIViewController {
+class Task2ViewController: UIViewController {
   // MARK: - UI
   
   private(set) lazy var container: UIView = {

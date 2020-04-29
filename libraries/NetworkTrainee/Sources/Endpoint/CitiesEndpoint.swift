@@ -9,6 +9,7 @@ import Foundation
 
 public enum CitiesApi {
   case cities
+  case districts
 }
 
 enum NetworkEnvironment {
@@ -37,6 +38,8 @@ extension CitiesApi: EndpointType {
     switch self {
     case .cities:
       return "/cities/list"
+    case .districts:
+      return "/districts/list"
     }
   }
   
@@ -49,8 +52,13 @@ extension CitiesApi: EndpointType {
     case .cities:
       return .requestParameters(bodyParameters: nil,
                                 bodyEncoding: .urlEncoding,
-                                urlParameters: ["limit": "10",
+                                urlParameters: ["limit": "50",
                                                 "api_key": "demo_mobile"])
+      
+    case .districts:
+      return .requestParameters(bodyParameters: nil,
+                                bodyEncoding: .urlEncoding,
+                                urlParameters: ["limit": "10", "api_key": "demo_mobile"])
     }
   }
   
