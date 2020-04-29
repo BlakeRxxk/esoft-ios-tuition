@@ -20,7 +20,7 @@ public final class CityViewModel {
 
 extension CityViewModel: ListDiffable {
   public func diffIdentifier() -> NSObjectProtocol {
-    return id as NSObjectProtocol
+    id as NSObjectProtocol
   }
   
   public func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
@@ -32,6 +32,6 @@ extension CityViewModel: ListDiffable {
 
 extension CityViewModel: Equatable {
   public static func == (lhs: CityViewModel, rhs: CityViewModel) -> Bool {
-    return lhs.id == rhs.id
+    lhs.id == rhs.id
   }
 }

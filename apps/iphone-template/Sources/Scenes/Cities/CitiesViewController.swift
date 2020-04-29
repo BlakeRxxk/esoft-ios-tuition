@@ -44,7 +44,7 @@ public final class CitiesViewController: ViewController<BaseListView> {
   override public func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
-    networkManager.getCilies(page: 1) { [unowned self] (res, err) in
+    networkManager.getCilies(page: 1) { [unowned self] (res, _) in
       guard let cities = res else { return }
       
       let tmp = cities.map { CityViewModel(id: $0.id, name: $0.name) }
@@ -65,15 +65,15 @@ public final class CitiesViewController: ViewController<BaseListView> {
 
 extension CitiesViewController: ListAdapterDataSource {
   public func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
-    return data as [ListDiffable]
+    data as [ListDiffable]
   }
   
   public func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
-    return CitiesSectionController()
+    CitiesSectionController()
   }
   
   public func emptyView(for listAdapter: ListAdapter) -> UIView? {
-    return nil
+    nil
   }
 }
 

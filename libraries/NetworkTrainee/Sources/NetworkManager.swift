@@ -81,7 +81,6 @@ public struct NetworkManager {
   }
 }
 
-
 public struct District {
   public let id: Int
   public let name: String

@@ -22,7 +22,7 @@ public final class DistrictsViewModel {
 
 extension DistrictsViewModel: ListDiffable {
   public func diffIdentifier() -> NSObjectProtocol {
-    return id as NSObjectProtocol
+    id as NSObjectProtocol
   }
   
   public func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
@@ -34,6 +34,6 @@ extension DistrictsViewModel: ListDiffable {
 
 extension DistrictsViewModel: Equatable {
   public static func == (lhs: DistrictsViewModel, rhs: DistrictsViewModel) -> Bool {
-    return lhs.id == rhs.id
+    lhs.id == rhs.id
   }
 }
