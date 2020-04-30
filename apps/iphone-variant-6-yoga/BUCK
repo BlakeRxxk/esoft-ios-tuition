@@ -26,13 +26,28 @@ static_libraries = [
     "//libraries/EsoftUIKit:EsoftUIKit",
     "//libraries/AutoLayoutKit:AutoLayoutKit",
     "//libraries/ThemeManager:ThemeManager",
+    "//libraries/Logger:Logger",
+    "//libraries/Network:Network",
+    "//libraries/NetworkTrainee:NetworkTrainee",
+]
+
+prebuilt_test_frameworks = [
+    "//third-party/Pods:OHHTTPStubs"
 ]
 
 prebuilt_frameworks = [
     "//third-party/Pods:Yoga",
     "//third-party/Pods:YogaKit",
     "//third-party/Pods:DBDebugToolkit",
-]
+    "//third-party/Pods:PINCache",
+    "//third-party/Pods:PINRemoteImage",
+    "//third-party/Pods:FLAnimatedImage",
+    "//third-party/Pods:RxSwift",
+    "//third-party/Pods:RxCocoa",
+    "//third-party/Pods:RxRelay",
+    "//third-party/Pods:IGListKit",
+    "//third-party/Pods:IGListDiffKit",
+] + prebuilt_test_frameworks
 
 resource_dependencies = [
     ":LaunchScreen",
@@ -47,7 +62,7 @@ app_tests = [
 ]
 
 appTargetName = "Variant6YogaApp"
-appPath = "iphone-varinat-6-yoga"
+appPath = "iphone-variant-6-yoga"
 
 apple_asset_catalog(
   name = "Icons",
@@ -89,8 +104,8 @@ apple_binary(
         "//apps/...",
     ],
     preprocessor_flags=[
-        '-fobjc-arc',
-        '-Wno-objc-designated-initializers',
+        "-fobjc-arc",
+        "-Wno-objc-designated-initializers",
     ],
     configs = app_binary_configs(appTargetName),
     swift_version = native.read_config("swift", "version"),
