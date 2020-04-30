@@ -7,7 +7,7 @@
 
 import YogaKit
 
-extension ViewController {
+extension MyViewController {
   final class Layout {
     let container: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true

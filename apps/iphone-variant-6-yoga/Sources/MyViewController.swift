@@ -11,7 +11,7 @@ import EsoftUIKit
 import ThemeManager
 import YogaKit
 
-final class ViewController: UIViewController {
+final class MyViewController: UIViewController {
   private(set) lazy var container: UIView = UIView()
   
   private(set) lazy var enterLabel: UILabel = UILabel()
@@ -130,7 +130,7 @@ final class ViewController: UIViewController {
   }
 }
 
-private extension ViewController {
+private extension MyViewController {
   enum Localized {
     static let enterLabel = "Вход в личный кабинет"
     static let phonePlaceholder = "Номер телефона"
