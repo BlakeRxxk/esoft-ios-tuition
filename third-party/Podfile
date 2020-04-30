@@ -18,6 +18,8 @@ target 'ThirdPartyDependencies' do
   pod 'PINRemoteImage', :binary => true
   pod 'PINCache', :binary => true
 
+  pod 'NeedleFoundation', :binary => true
+
   pod 'RxSwift', :binary => true
   pod 'RxCocoa', :binary => true
   pod 'RxRelay', :binary => true

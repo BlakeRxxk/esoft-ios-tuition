@@ -115,3 +115,10 @@ prebuilt_apple_framework(
     preferred_linkage = "shared",
     visibility = ["PUBLIC"],
 )
+
+prebuilt_apple_framework(
+    name = "NeedleFoundation",
+    framework = "_Prebuild/GeneratedFrameworks/NeedleFoundation/NeedleFoundation.framework",
+    preferred_linkage = "shared",
+    visibility = ["PUBLIC"],
+)

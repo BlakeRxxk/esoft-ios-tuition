@@ -47,6 +47,7 @@ prebuilt_frameworks = [
     "//third-party/Pods:RxRelay",
     "//third-party/Pods:IGListKit",
     "//third-party/Pods:IGListDiffKit",
+    "//third-party/Pods:NeedleFoundation",
 ] + prebuilt_test_frameworks
 
 resource_dependencies = [
@@ -54,7 +55,9 @@ resource_dependencies = [
     ":Icons",
 ]
 
-build_phase_scripts = []
+build_phase_scripts = [
+    ":NeedleGenerated",
+]
 
 app_tests = [
     ":UnitTests",
@@ -92,7 +95,7 @@ apple_library(
     configs = library_configs(),
     swift_version = native.read_config("swift", "version"),
     srcs = glob([ "Sources/**/*.swift" ]),
-    deps = [] + framework_binary_dependencies(framework_dependencies) + prebuilt_frameworks + static_libraries,
+    deps = [] + framework_binary_dependencies(framework_dependencies) + prebuilt_frameworks + static_libraries + build_phase_scripts,
     frameworks = additional_frameworks,
 )
 
@@ -180,4 +183,13 @@ apple_test_all(
     additional_tests = app_tests,
     prebuilt_frameworks = prebuilt_frameworks,
     info_plist_substitutions = app_info_plist_substitutions("%sCITests"% appTargetName),
+)
+
+xcode_prebuild_script(
+    name = "NeedleGenerated",
+    cmd = '"${SRCROOT}/../../tools/scripts/generate_di_graph.sh"',
+    inputs = [],
+    outputs = [],
+    input_file_lists = [],
+    output_file_lists = [],
 )

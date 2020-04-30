@@ -7,6 +7,7 @@ PODS:
   - IGListDiffKit (4.0.0)
   - IGListKit (4.0.0):
     - IGListDiffKit (= 4.0.0)
+  - NeedleFoundation (0.14.0)
   - OHHTTPStubs/Core (9.0.0)
   - OHHTTPStubs/Default (9.0.0):
     - OHHTTPStubs/Core
@@ -48,6 +49,7 @@ DEPENDENCIES:
   - HeapInspector
   - IGListDiffKit
   - IGListKit
+  - NeedleFoundation
   - OHHTTPStubs/Swift
   - PINCache
   - PINRemoteImage
@@ -66,6 +68,7 @@ SPEC REPOS:
     - HeapInspector
     - IGListDiffKit
     - IGListKit
+    - NeedleFoundation
     - OHHTTPStubs
     - PINCache
     - PINRemoteImage
@@ -84,6 +87,7 @@ SPEC CHECKSUMS:
   HeapInspector: 121979cf97b186616ddfcd5ec0f61db631556c7b
   IGListDiffKit: 665d6cf43ce726e676013db9c7d6c4294259b6b2
   IGListKit: fd5a5d21935298f5849fa49d426843cff97b77c7
+  NeedleFoundation: ad7a4bcff2a44dc51a097b236f7235694a09dc97
   OHHTTPStubs: cb29d2a9d09a828ecb93349a2b0c64f99e0db89f
   PINCache: ce36ed282031b92fc7733ffe831f474ff80fddc2
   PINRemoteImage: 4ac4011c5caefd6befd99758e09becede05d3226
@@ -96,6 +100,6 @@ SPEC CHECKSUMS:
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 7fe1e66d22cdd2dde8a74ad8abfab9a66ff53b37
+PODFILE CHECKSUM: f1f31e469459dc31791b543f5f9d693ff6ce446b
 
 COCOAPODS: 1.9.1

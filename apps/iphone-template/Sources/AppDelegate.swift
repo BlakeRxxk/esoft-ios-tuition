@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NeedleFoundation
 import PINRemoteImage
 import PINCache
 
@@ -14,13 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   public var window: UIWindow?
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    
+    registerProviderFactories()
+
     AppTheme.apply(theme: .client)
     
     window = UIWindow()
+    let rootComponent = RootComponent()
     let rootVC = UINavigationController(rootViewController: CitiesViewController())
     rootVC.navigationBar.setStyles(UINavigationBar.Styles.default)
 
-    window?.rootViewController = rootVC
+    window?.rootViewController = rootComponent.rootViewController
     window?.makeKeyAndVisible()
 
     setupImages()
