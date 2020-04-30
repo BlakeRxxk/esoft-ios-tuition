@@ -59,3 +59,59 @@ prebuilt_apple_framework(
     preferred_linkage = "shared",
     visibility = ["PUBLIC"],
 )
+
+prebuilt_apple_framework(
+    name = "RxBlocking",
+    framework = "_Prebuild/GeneratedFrameworks/RxBlocking/RxBlocking.framework",
+    preferred_linkage = "shared",
+    visibility = ["PUBLIC"],
+)
+
+prebuilt_apple_framework(
+    name = "RxTest",
+    framework = "_Prebuild/GeneratedFrameworks/RxTest/RxTest.framework",
+    preferred_linkage = "shared",
+    visibility = ["PUBLIC"],
+)
+
+prebuilt_apple_framework(
+    name = "RxCocoa",
+    framework = "_Prebuild/GeneratedFrameworks/RxCocoa/RxCocoa.framework",
+    preferred_linkage = "shared",
+    visibility = ["PUBLIC"],
+)
+
+prebuilt_apple_framework(
+    name = "RxRelay",
+    framework = "_Prebuild/GeneratedFrameworks/RxRelay/RxRelay.framework",
+    preferred_linkage = "shared",
+    visibility = ["PUBLIC"],
+)
+
+prebuilt_apple_framework(
+    name = "RxSwift",
+    framework = "_Prebuild/GeneratedFrameworks/RxSwift/RxSwift.framework",
+    preferred_linkage = "shared",
+    visibility = ["PUBLIC"],
+)
+
+prebuilt_apple_framework(
+    name = "IGListDiffKit",
+    framework = "_Prebuild/GeneratedFrameworks/IGListDiffKit/IGListDiffKit.framework",
+    preferred_linkage = "shared",
+    visibility = ["PUBLIC"],
+)
+
+prebuilt_apple_framework(
+    name = "IGListKit",
+    framework = "_Prebuild/GeneratedFrameworks/IGListKit/IGListKit.framework",
+    preferred_linkage = "shared",
+    visibility = ["PUBLIC"],
+)
+
+prebuilt_apple_framework(
+    name = "OHHTTPStubs",
+    framework = "_Prebuild/GeneratedFrameworks/OHHTTPStubs/OHHTTPStubs.framework",
+    preferred_linkage = "shared",
+    visibility = ["PUBLIC"],
+)

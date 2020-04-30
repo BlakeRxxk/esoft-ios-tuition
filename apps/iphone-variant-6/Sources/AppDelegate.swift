@@ -13,11 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     AppTheme.apply(theme: .client)
-
-    window = UIWindow()
-    let rootVC = UINavigationController(rootViewController: ViewController())
-    rootVC.navigationBar.setStyles(UINavigationBar.Styles.default)
     
+    window = UIWindow()
+    let rootVC = UINavigationController(rootViewController: CitiesViewController())
+    rootVC.navigationBar.setStyles(UINavigationBar.Styles.default)
+
     window?.rootViewController = rootVC
     window?.makeKeyAndVisible()
 

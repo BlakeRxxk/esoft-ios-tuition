@@ -8,14 +8,33 @@ install! 'cocoapods', integrate_targets: false
 inhibit_all_warnings!
 
 target 'ThirdPartyDependencies' do
-  # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
+
   pod 'YogaKit', :binary => true
- 
-  pod 'SwiftLint'
-  pod 'DBDebugToolkit', :binary => true
-  pod 'HeapInspector', :binary => true
+
+  pod 'IGListKit', :binary => true
+  pod 'IGListDiffKit', :binary => true
 
   pod 'PINRemoteImage', :binary => true
   pod 'PINCache', :binary => true
+
+  pod 'RxSwift', :binary => true
+  pod 'RxCocoa', :binary => true
+  pod 'RxRelay', :binary => true
+end
+
+target 'ThirdPartyDependenciesDevelopment' do
+  use_frameworks!
+
+  pod 'SwiftLint'
+  pod 'DBDebugToolkit', :binary => true
+  pod 'HeapInspector', :binary => true
+end
+
+target 'ThirdPartyDependenciesTests' do
+  use_frameworks!
+
+  pod 'RxBlocking', :binary => true
+  pod 'RxTest', :binary => true
+  pod 'OHHTTPStubs/Swift', :binary => true
 end
