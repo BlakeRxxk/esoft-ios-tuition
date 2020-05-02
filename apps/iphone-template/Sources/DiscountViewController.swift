@@ -12,11 +12,10 @@ import EsoftUIKit
 import Atlas
 import PINRemoteImage
 import PINCache
+import YogaKit
 
 import Foundation
 final class DiscountViewController: UIViewController {
-  private lazy var navBarHeight: CGFloat = 56
-
   private(set) lazy var imageViewWithGradient: ImageViewWithGradient = ImageViewWithGradient()
   private(set) lazy var imageContainer: UIView = UIView()
   private(set) lazy var bodyContainer: UIStackView = UIStackView()
@@ -37,6 +36,8 @@ final class DiscountViewController: UIViewController {
       .lightContent
   }
 
+  internal lazy var layout: Layout = Layout()
+
   override func loadView() {
     view = UIView()
   }
@@ -46,7 +47,33 @@ final class DiscountViewController: UIViewController {
 
     createUI()
     configureUI()
-    layout()
+  }
+
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    let containerSize = view.bounds.size
+    view.configureLayout(block: { layout in
+      layout.isEnabled = true
+      layout.height = YGValue(containerSize.height)
+      layout.width = YGValue(containerSize.width)
+    })
+
+    imageContainer.configureLayout(block: layout.imageContainer)
+    bodyContainer.configureLayout(block: layout.bodyContainer)
+    imageViewWithGradient.configureLayout(block: layout.imageViewWithGradient)
+    arrowBackImageView.configureLayout(block: layout.arrowBackImageView)
+    favouritesImageView.configureLayout(block: layout.favouritesImageView)
+    shareImageView.configureLayout(block: layout.shareImageView)
+    companyName.configureLayout(block: layout.companyName)
+    categoryLabel.configureLayout(block: layout.categoryLabel)
+    discountType.configureLayout(block: layout.discountType)
+    discountDescription.configureLayout(block: layout.discountDescription)
+    divider.configureLayout(block: layout.divider)
+    whyYouCanUseDescription.configureLayout(block: layout.whyYouCanUseDescription)
+    button.configureLayout(block: layout.button)
+
+    view.yoga.applyLayout(preservingOrigin: true)
+    imageViewWithGradient.setImageGradient()
   }
 
   private func createUI() {
@@ -115,62 +142,6 @@ final class DiscountViewController: UIViewController {
     button.titleLabel?.setStyles(UILabel.Styles.headline)
 
     imageViewWithGradient.imageView.pin_setImage(from: URL(string: "https://www.alpinabook.ru/upload/setka-editor/adf/adf5e93695c6631c3d9d1f6cc17db8ba.jpg"))
-    imageViewWithGradient.locations = (0, 0.5)
-  }
-
-  private func layout() {
-    [
-      imageContainer,
-      bodyContainer,
-      arrowBackImageView,
-      favouritesImageView,
-      shareImageView,
-      companyName,
-      categoryLabel,
-      discountType,
-      discountDescription,
-      divider,
-      whyYouCanUseDescription,
-      button,
-      imageViewWithGradient
-    ].forEach {
-      $0.translatesAutoresizingMaskIntoConstraints = false
-    }
-
-    let constraints = [
-      imageViewWithGradient.topAnchor.constraint(equalTo: view.topAnchor),
-      imageViewWithGradient.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      imageViewWithGradient.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-
-      arrowBackImageView.topAnchor.constraint(equalTo: imageViewWithGradient.topAnchor, constant: navBarHeight),
-      arrowBackImageView.leadingAnchor.constraint(equalTo: imageViewWithGradient.leadingAnchor, constant: 14.0),
-
-      favouritesImageView.topAnchor.constraint(equalTo: imageViewWithGradient.topAnchor, constant: navBarHeight),
-      favouritesImageView.trailingAnchor.constraint(equalTo: shareImageView.leadingAnchor, constant: -10.5),
-
-      shareImageView.topAnchor.constraint(equalTo: imageViewWithGradient.topAnchor, constant: navBarHeight + 3.0),
-      shareImageView.trailingAnchor.constraint(equalTo: imageViewWithGradient.trailingAnchor, constant: -18.0),
-
-      bodyContainer.topAnchor.constraint(equalTo: imageViewWithGradient.bottomAnchor, constant: 12.0),
-      bodyContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      bodyContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-
-      companyName.topAnchor.constraint(equalTo: bodyContainer.topAnchor),
-
-      categoryLabel.topAnchor.constraint(equalTo: companyName.bottomAnchor, constant: 2.0),
-
-      discountType.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: Space.base),
-
-      discountDescription.topAnchor.constraint(equalTo: discountType.bottomAnchor, constant: Space.tiny),
-
-      divider.heightAnchor.constraint(equalToConstant: 1.0),
-
-      whyYouCanUseDescription.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: Space.tiny),
-
-      button.heightAnchor.constraint(equalToConstant: Space.large)
-    ]
-
-    NSLayoutConstraint.activate(constraints)
   }
 }
 

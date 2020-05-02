@@ -16,12 +16,6 @@ public final class ImageViewWithGradient: View {
   private(set) lazy var gradientView: UIView = UIView()
 
   public lazy var imageView: UIImageView = UIImageView()
-  public lazy var colors: [UIColor] = [
-    UIColor.Color.shadow,
-    UIColor.clear
-  ]
-  public lazy var direction: DirectionGradient = .vertically
-  public lazy var locations: (Double, Double) = (0, 1)
 
   override public init() {
     super.init()
@@ -29,6 +23,17 @@ public final class ImageViewWithGradient: View {
     createUI()
     configureUI()
     layout()
+  }
+
+  public func setImageGradient(colors: [UIColor] = [ UIColor.Color.shadow,
+                                                UIColor.clear ],
+                               direction: DirectionGradient = .vertically,
+                               locations: (Double, Double) = (0, 1)) {
+    gradientView.setGradient(
+      colors: colors,
+      direction: direction,
+      locations: locations
+    )
   }
 
   private func createUI() {
@@ -57,12 +62,6 @@ public final class ImageViewWithGradient: View {
     imageView.contentMode = .center
     imageView.layer.masksToBounds = true
     imageView.contentMode = .scaleAspectFill
-
-    gradientView.setGradient(
-      colors: colors,
-      direction: direction,
-      locations: locations
-    )
   }
 
   private func layout() {
