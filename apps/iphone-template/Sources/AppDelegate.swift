@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let rootComponent = RootComponent()
 
     window?.rootViewController = rootComponent.rootViewController
+    // let navController = UINavigationController(rootViewController: ViewController())
+    // window?.rootViewController = navController
     window?.makeKeyAndVisible()
 
     setupImages()

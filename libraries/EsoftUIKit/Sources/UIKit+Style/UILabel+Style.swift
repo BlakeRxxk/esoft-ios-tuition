@@ -59,6 +59,11 @@ extension UILabel {
       .foregroundColor: ThemeManager.current().textColors.primary
     ])
     
+    public static let microNormal = lineSpacingMicro + makeStyle(name: "microNormal", attributes: [
+      .font: UIFont.microNormal,
+      .foregroundColor: ThemeManager.current().textColors.primary
+    ])
+    
     public static let uppercased = Style(name: "uppercased") { (label: UILabel) in
       guard let text = label.text,
         let attributedString = label.attributedText else { return }
@@ -187,11 +192,16 @@ extension UILabel {
       label.textColor = ThemeManager.current().colors.primary500
     }
     
+    private static let red = Style(name: "color.red") { (label: UILabel) in
+      label.textColor = ThemeManager.current().colors.error
+    }
+    
     public static let primary = black
     public static let primary500 = green
     public static let secondary = gray
     public static let placeholders = placeholder
     public static let disabled = ghost
+    public static let error = red
     
     public static let inverse = Style(name: "label.colorStyle.inverse") { (label: UILabel) in
       label.textColor = ThemeManager.current().textColors.white
