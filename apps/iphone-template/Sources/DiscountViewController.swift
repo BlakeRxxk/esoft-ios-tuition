@@ -10,16 +10,17 @@ import AutoLayoutKit
 import ThemeManager
 import EsoftUIKit
 import Atlas
+import PINRemoteImage
+import PINCache
 
 import Foundation
 final class DiscountViewController: UIViewController {
   private lazy var navBarHeight: CGFloat = 56
 
+  private(set) lazy var imageViewWithGradient: ImageViewWithGradient = ImageViewWithGradient()
   private(set) lazy var imageContainer: UIView = UIView()
   private(set) lazy var bodyContainer: UIStackView = UIStackView()
 
-  private(set) lazy var gradientView: UIView = UIView()
-  private(set) lazy var logoImageView: UIImageView = UIImageView()
   private(set) lazy var arrowBackImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
   private(set) lazy var favouritesImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
   private(set) lazy var shareImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
@@ -51,8 +52,7 @@ final class DiscountViewController: UIViewController {
   private func createUI() {
     view.addSubview(imageContainer)
     view.addSubview(bodyContainer)
-    imageContainer.addSubview(logoImageView)
-    imageContainer.addSubview(gradientView)
+    imageContainer.addSubview(imageViewWithGradient)
     imageContainer.addSubview(arrowBackImageView)
     imageContainer.addSubview(favouritesImageView)
     imageContainer.addSubview(shareImageView)
@@ -73,33 +73,20 @@ final class DiscountViewController: UIViewController {
     bodyContainer.layoutMargins = UIEdgeInsets(top: Space.small, left: Space.small, bottom: Space.small, right: Space.small)
     bodyContainer.spacing = Space.small
 
-    logoImageView.backgroundColor = UIColor.white
-    logoImageView.contentMode = .center
-    logoImageView.image = UIImage(named: "companyLogotype")
-    logoImageView.layer.masksToBounds = true
-    logoImageView.contentMode = .scaleAspectFill
-
     arrowBackImageView.backgroundColor = UIColor.clear
     arrowBackImageView.contentMode = .center
     arrowBackImageView.image = UIImage.Arrow.Left.base
+    arrowBackImageView.tintColor = UIColor.TextColor.white
 
     favouritesImageView.backgroundColor = UIColor.clear
     favouritesImageView.contentMode = .center
     favouritesImageView.image = UIImage.Favourites.base
+    favouritesImageView.tintColor = UIColor.TextColor.white
 
     shareImageView.backgroundColor = UIColor.clear
     shareImageView.contentMode = .center
     shareImageView.image = UIImage.Share.base
-
-    gradientView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 285.0)
-    gradientView.setGradient(
-      colors: [
-        UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.24),
-        UIColor.clear
-      ],
-      direction: .vertically,
-      locations: (0, 0.5)
-    )
+    shareImageView.tintColor = UIColor.TextColor.white
 
     companyName.text = Localized.companyName
     companyName.setStyles(UILabel.Styles.title3)
@@ -124,16 +111,17 @@ final class DiscountViewController: UIViewController {
 
     button.setTitle(Localized.useDiscount, for: .normal)
     button.backgroundColor = ThemeManager.current().colors.primary500
-    button.titleLabel?.setStyles(UILabel.Styles.headline)
     button.layer.cornerRadius = 22
+    button.titleLabel?.setStyles(UILabel.Styles.headline)
+
+    imageViewWithGradient.imageView.pin_setImage(from: URL(string: "https://www.alpinabook.ru/upload/setka-editor/adf/adf5e93695c6631c3d9d1f6cc17db8ba.jpg"))
+    imageViewWithGradient.locations = (0, 0.5)
   }
 
   private func layout() {
     [
       imageContainer,
       bodyContainer,
-      gradientView,
-      logoImageView,
       arrowBackImageView,
       favouritesImageView,
       shareImageView,
@@ -143,34 +131,27 @@ final class DiscountViewController: UIViewController {
       discountDescription,
       divider,
       whyYouCanUseDescription,
-      button
+      button,
+      imageViewWithGradient
     ].forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
     let constraints = [
-      imageContainer.topAnchor.constraint(equalTo: view.topAnchor),
-      imageContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      imageContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      imageViewWithGradient.topAnchor.constraint(equalTo: view.topAnchor),
+      imageViewWithGradient.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      imageViewWithGradient.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 
-      gradientView.topAnchor.constraint(equalTo: imageContainer.topAnchor),
+      arrowBackImageView.topAnchor.constraint(equalTo: imageViewWithGradient.topAnchor, constant: navBarHeight),
+      arrowBackImageView.leadingAnchor.constraint(equalTo: imageViewWithGradient.leadingAnchor, constant: 14.0),
 
-      logoImageView.topAnchor.constraint(equalTo: imageContainer.topAnchor, constant: Space.small),
-      logoImageView.heightAnchor.constraint(equalTo: logoImageView.widthAnchor, multiplier: 1.0/1.5),
-      logoImageView.leadingAnchor.constraint(equalTo: imageContainer.leadingAnchor),
-      logoImageView.trailingAnchor.constraint(equalTo: imageContainer.trailingAnchor),
-      logoImageView.bottomAnchor.constraint(equalTo: imageContainer.bottomAnchor),
-
-      arrowBackImageView.topAnchor.constraint(equalTo: imageContainer.topAnchor, constant: navBarHeight),
-      arrowBackImageView.leadingAnchor.constraint(equalTo: imageContainer.leadingAnchor, constant: 14.0),
-
-      favouritesImageView.topAnchor.constraint(equalTo: imageContainer.topAnchor, constant: navBarHeight),
+      favouritesImageView.topAnchor.constraint(equalTo: imageViewWithGradient.topAnchor, constant: navBarHeight),
       favouritesImageView.trailingAnchor.constraint(equalTo: shareImageView.leadingAnchor, constant: -10.5),
 
-      shareImageView.topAnchor.constraint(equalTo: imageContainer.topAnchor, constant: navBarHeight + 3.0),
-      shareImageView.trailingAnchor.constraint(equalTo: imageContainer.trailingAnchor, constant: -18.0),
+      shareImageView.topAnchor.constraint(equalTo: imageViewWithGradient.topAnchor, constant: navBarHeight + 3.0),
+      shareImageView.trailingAnchor.constraint(equalTo: imageViewWithGradient.trailingAnchor, constant: -18.0),
 
-      bodyContainer.topAnchor.constraint(equalTo: imageContainer.bottomAnchor, constant: 12.0),
+      bodyContainer.topAnchor.constraint(equalTo: imageViewWithGradient.bottomAnchor, constant: 12.0),
       bodyContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       bodyContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 
