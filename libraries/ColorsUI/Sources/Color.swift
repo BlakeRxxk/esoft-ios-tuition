@@ -161,5 +161,9 @@ extension UIColor {
     @nonobjc public static var iron: UIColor {
       UIColor(red: 0.89, green: 0.89, blue: 0.9, alpha: 1)
     }
+
+    @nonobjc public static var shadow: UIColor {
+      UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.24)
+    }
   }
 }

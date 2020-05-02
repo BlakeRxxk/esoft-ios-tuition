@@ -19,13 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     registerProviderFactories()
 
     AppTheme.apply(theme: .client)
-    
+
     window = UIWindow()
     let rootComponent = RootComponent()
 
     window?.rootViewController = rootComponent.rootViewController
     // let navController = UINavigationController(rootViewController: ViewController())
     // window?.rootViewController = navController
+    // window?.rootViewController = DiscountViewController()
+
     window?.makeKeyAndVisible()
 
     setupImages()
