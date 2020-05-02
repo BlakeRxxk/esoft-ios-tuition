@@ -22,8 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     window = UIWindow()
     let rootComponent = RootComponent()
-    let rootVC = UINavigationController(rootViewController: CitiesViewController())
-    rootVC.navigationBar.setStyles(UINavigationBar.Styles.default)
 
     window?.rootViewController = rootComponent.rootViewController
     window?.makeKeyAndVisible()

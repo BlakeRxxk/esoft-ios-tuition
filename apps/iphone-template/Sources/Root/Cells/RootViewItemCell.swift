@@ -1,5 +1,5 @@
 //
-//  CityCell.swift
+//  RootViewItemCell.swift
 //  AppLibrary
 //
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
@@ -8,15 +8,28 @@
 import UIKit
 import YogaKit
 
-public final class CityCell: UICollectionViewCell {
-  private static let reuseIdentifier: String = "CityCellID"
+public final class RootViewItemCell: UICollectionViewCell {
+  private static let reuseIdentifier: String = "RootViewItemCellID"
+  
+  public var name: String {
+    get {
+      title.styledText ?? ""
+    }
+    set {
+      title.styledText = newValue
+      title.yoga.markDirty()
+    }
+  }
   
   private(set) lazy var title: UILabel = UILabel()
+  
+  public weak var output: RootViewItemOutput?
   
   override init(frame: CGRect = .zero) {
     super.init(frame: frame)
     
     createUI()
+    configureUI()
   }
   
   required init?(coder: NSCoder) {
@@ -26,10 +39,6 @@ public final class CityCell: UICollectionViewCell {
   override public func prepareForReuse() {
     super.prepareForReuse()
     title.styledText = ""
-  }
-  
-  private func createUI() {
-    contentView.addSubview(title)
   }
   
   override public func layoutSubviews() {
@@ -50,4 +59,19 @@ public final class CityCell: UICollectionViewCell {
     
     contentView.yoga.applyLayout(preservingOrigin: true)
   }
+  
+  @objc private func handleTapAction() {
+    output?.didTapRow(in: self)
+  }
+  
+  private func createUI() {
+    contentView.addSubview(title)
+  }
+  
+  private func configureUI() {
+    let action = UITapGestureRecognizer(target: self, action: #selector(handleTapAction) )
+    addGestureRecognizer(action)
+  }
 }
+
+extension RootViewItemCell: RootViewItemInput {}

@@ -21,6 +21,10 @@ public final class DistrictCell: UICollectionViewCell {
     createUI()
   }
   
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   override public func prepareForReuse() {
     super.prepareForReuse()
     title.styledText = ""
@@ -30,11 +34,7 @@ public final class DistrictCell: UICollectionViewCell {
     contentView.addSubview(title)
     title.setStyles(UILabel.Styles.title2)
   }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
+
   override public func layoutSubviews() {
     super.layoutSubviews()
     

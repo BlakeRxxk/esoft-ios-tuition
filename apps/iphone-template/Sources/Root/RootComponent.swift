@@ -11,6 +11,14 @@ import Foundation
 public final class RootComponent: BootstrapComponent {
   
   var rootViewController: UIViewController {
-    return CitiesViewController()
+    
+    let root = UINavigationController(rootViewController: RootViewController(objectsBuilder: objectsComponent))
+      
+    root.navigationBar.setStyles(UINavigationBar.Styles.default)
+    return root
+  }
+  
+  var objectsComponent: ObjectsComponent {
+      ObjectsComponent(parent: self)
   }
 }

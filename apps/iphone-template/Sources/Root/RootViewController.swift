@@ -10,7 +10,6 @@ import EsoftUIKit
 import BaseUI
 import IGListKit
 import YogaKit
-import NetworkTrainee
 
 public final class RootViewController: ViewController<BaseListView> {
   internal var data: [ListDiffable] = [
@@ -21,6 +20,15 @@ public final class RootViewController: ViewController<BaseListView> {
     RootViewItemViewModel(id: 5, name: "Task 5"),
     RootViewItemViewModel(id: 6, name: "Task 6")
   ]
+  
+  private var objectsBuilder: ObjectsBuilder
+  
+  init(objectsBuilder: ObjectsBuilder) {
+    self.objectsBuilder = objectsBuilder
+    super.init(viewCreator: BaseListView.init)
+
+    configureUI()
+  }
 
   override public func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
@@ -51,7 +59,7 @@ extension RootViewController: ListAdapterDataSource {
   }
   
   public func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
-    CitiesSectionController()
+    RootViewItemSectionController(output: self)
   }
   
   public func emptyView(for listAdapter: ListAdapter) -> UIView? {
@@ -59,31 +67,13 @@ extension RootViewController: ListAdapterDataSource {
   }
 }
 
-
-public final class RootViewItemViewModel {
-  let id: Int
-  let name: String
-  
-  public init(id: Int, name: String) {
-    self.id = id
-    self.name = name
-  }
-}
-
-extension RootViewItemViewModel: ListDiffable {
-  public func diffIdentifier() -> NSObjectProtocol {
-    id as NSObjectProtocol
-  }
-  
-  public func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-    guard self !== object else { return true }
-    guard let object = object as? RootViewItemViewModel else { return false }
-    return id == object.id && name == object.name
-  }
-}
-
-extension RootViewItemViewModel: Equatable {
-  public static func == (lhs: RootViewItemViewModel, rhs: RootViewItemViewModel) -> Bool {
-    lhs.id == rhs.id
+extension RootViewController: RootViewItemSectionOutput {
+  public func didTapAction(in cell: RootViewItemInput) {
+    switch cell.name {
+    case "Task 3":
+      show(objectsBuilder.objectsViewController, sender: nil)
+    default:
+      return
+    }
   }
 }
