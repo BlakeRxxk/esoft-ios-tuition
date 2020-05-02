@@ -11,8 +11,9 @@ import Foundation
 public final class RootComponent: BootstrapComponent {
   
   var rootViewController: UIViewController {
-    
-    let root = UINavigationController(rootViewController: RootViewController(objectsBuilder: objectsComponent))
+    let rootViewController = RootViewController(objectsBuilder: objectsComponent,
+                                                sellerTicketBuilder: sellerTicketComponent)
+    let root = UINavigationController(rootViewController: rootViewController)
       
     root.navigationBar.setStyles(UINavigationBar.Styles.default)
     return root
@@ -20,5 +21,9 @@ public final class RootComponent: BootstrapComponent {
   
   var objectsComponent: ObjectsComponent {
       ObjectsComponent(parent: self)
+  }
+  
+  var sellerTicketComponent: SellerTicketComponent {
+    SellerTicketComponent(parent: self)
   }
 }

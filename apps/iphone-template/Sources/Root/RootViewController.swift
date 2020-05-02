@@ -22,9 +22,12 @@ public final class RootViewController: ViewController<BaseListView> {
   ]
   
   private var objectsBuilder: ObjectsBuilder
-  
-  init(objectsBuilder: ObjectsBuilder) {
+  private var sellerTicketBuilder: SellerTicketBuilder
+
+  init(objectsBuilder: ObjectsBuilder,
+       sellerTicketBuilder: SellerTicketBuilder) {
     self.objectsBuilder = objectsBuilder
+    self.sellerTicketBuilder = sellerTicketBuilder
     super.init(viewCreator: BaseListView.init)
 
     configureUI()
@@ -72,6 +75,8 @@ extension RootViewController: RootViewItemSectionOutput {
     switch cell.name {
     case "Task 3":
       show(objectsBuilder.objectsViewController, sender: nil)
+    case "Task 5":
+      show(sellerTicketBuilder.sellerTicketViewController, sender: nil)
     default:
       return
     }

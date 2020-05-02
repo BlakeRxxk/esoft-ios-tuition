@@ -73,7 +73,7 @@ public final class PhotoItemViewYoga: View {
     layout.sectionInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
     let cv: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     cv.isScrollEnabled = false
-    cv.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.reuseId)
+    cv.register(PhotoCollectionViewCellYoga.self, forCellWithReuseIdentifier: PhotoCollectionViewCellYoga.reuseId)
     return cv
   }()
   private var activeConstraints: [NSLayoutConstraint] = []
@@ -194,7 +194,7 @@ extension PhotoItemViewYoga: UICollectionViewDelegateFlowLayout, UICollectionVie
   }
   
   public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.reuseId, for: indexPath) as! PhotoCollectionViewCell
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCellYoga.reuseId, for: indexPath) as! PhotoCollectionViewCellYoga
     cell.set(index: data[indexPath.row])
     return cell
   }

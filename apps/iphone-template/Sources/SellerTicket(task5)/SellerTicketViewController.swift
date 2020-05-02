@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SellerTicketViewController.swift
 //  AppLibrary
 //
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
@@ -11,7 +11,7 @@ import ThemeManager
 import AutoLayoutKit
 import YogaKit
 
-final class ViewController: UIViewController {
+final class SellerTicketViewController: UIViewController {
   
   // MARK: - Outlets
   private(set) lazy var container: UIView = UIView()
@@ -24,6 +24,10 @@ final class ViewController: UIViewController {
     
     createUI()
     configureUI()
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
     layout()
   }
   
@@ -41,10 +45,7 @@ final class ViewController: UIViewController {
     view.backgroundColor = AppTheme.current().colors.screen
     
     navigationItem.title = Localized.title
-    let nav = self.navigationController?.navigationBar
-    nav?.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-    nav?.barTintColor = AppTheme.current().colors.defaultTopBar
-    
+
     costItemViewYoga.subheader = Localized.costSubheader
     costItemViewYoga.firstTitle = Localized.costLabel
     costItemViewYoga.secondTitle = Localized.noticeLabel
@@ -56,20 +57,20 @@ final class ViewController: UIViewController {
   }
   
   private func layout() {
+    
+    let yogaContainer = view.bounds.size
     view.configureLayout { layout in
       layout.isEnabled = true
-      layout.width = 100%
-      layout.height = 100%
+      layout.width = YGValue(yogaContainer.width)
+      layout.height = YGValue(yogaContainer.height)
     }
     
     container.configureLayout { layout in
       layout.isEnabled = true
       layout.flexDirection = .column
-      layout.width = YGValue(UIScreen.main.bounds.width)
-      let topBarHeight = UIApplication.shared.statusBarFrame.size.height +
-        (self.navigationController?.navigationBar.frame.height ?? 0.0)
-      layout.marginTop = YGValue(topBarHeight + 20)
+      layout.width = 100%
     }
+
     costItemViewYoga.configureLayout { layout in
       layout.isEnabled = true
     }
@@ -82,7 +83,7 @@ final class ViewController: UIViewController {
   }
 }
 
-private extension ViewController {
+private extension SellerTicketViewController {
   enum Localized {
     static let title = "Title"
     static let costSubheader = "Стоимость объекта"
