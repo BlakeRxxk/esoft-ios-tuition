@@ -23,7 +23,7 @@ public final class PhotoItemViewYoga: View {
   
   public var dataSet: [String] {
     get {
-      return dataSet
+      dataSet
     }
     set {
       data = newValue
@@ -185,25 +185,34 @@ public final class PhotoItemViewYoga: View {
 extension PhotoItemViewYoga: PhotoItemViewInput {}
 
 extension PhotoItemViewYoga: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: 80, height: 80)
+  public func collectionView(_ collectionView: UICollectionView,
+                             layout collectionViewLayout: UICollectionViewLayout,
+                             sizeForItemAt indexPath: IndexPath) -> CGSize {
+    CGSize(width: 80, height: 80)
   }
   
-  public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return data.count
+  public func collectionView(_ collectionView: UICollectionView,
+                             numberOfItemsInSection section: Int) -> Int {
+    data.count
   }
   
-  public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCellYoga.reuseId, for: indexPath) as! PhotoCollectionViewCellYoga
+  public func collectionView(_ collectionView: UICollectionView,
+                             cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCellYoga.reuseId,
+                                                  for: indexPath) as! PhotoCollectionViewCellYoga
     cell.set(index: data[indexPath.row])
     return cell
   }
   
-  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return CGFloat(0)
+  public func collectionView(_ collectionView: UICollectionView,
+                             layout collectionViewLayout: UICollectionViewLayout,
+                             minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    CGFloat(0)
   }
   
-  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return CGFloat(8)
+  public func collectionView(_ collectionView: UICollectionView,
+                             layout collectionViewLayout: UICollectionViewLayout,
+                             minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    CGFloat(8)
   }
 }

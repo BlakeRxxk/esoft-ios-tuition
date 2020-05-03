@@ -71,6 +71,9 @@ disabled_rules:
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - third-party
   - apps/iphone-template/Sources/Generated/
+  - libraries/Network/Tests/Extensions/URLSessionRxTests.swift
+  - libraries/Network/Tests/NetworkAPITokenAuthenticatorTests.swift
+  - libraries/Network/Tests/NetworkAPIProtocolTests.swift
   - tools
 
 # configurable rules can be customized from this configuration file

@@ -24,12 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let rootComponent = RootComponent()
 
     window?.rootViewController = rootComponent.rootViewController
-    // let navController = UINavigationController(rootViewController: ViewController())
-    // window?.rootViewController = navController
-    // window?.rootViewController = DiscountViewController()
 
-    // let navigationController = UINavigationController(rootViewController: MortgageListViewController())
-    // window?.rootViewController = navigationController
     window?.makeKeyAndVisible()
 
     setupImages()

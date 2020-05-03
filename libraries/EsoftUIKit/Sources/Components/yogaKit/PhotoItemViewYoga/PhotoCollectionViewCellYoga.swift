@@ -19,15 +19,19 @@ final class PhotoCollectionViewCellYoga: UICollectionViewCell {
     iv.layer.cornerRadius = 8
     return iv
   }()
-  
-  func set(index: String) {
-    bg.image = UIImage(named: index)
-  }
-  
+
   override init(frame: CGRect) {
     super.init(frame: .zero)
     
     setupUI()
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  func set(index: String) {
+    bg.image = UIImage(named: index)
   }
   
   private func setupUI() {
@@ -41,8 +45,4 @@ final class PhotoCollectionViewCellYoga: UICollectionViewCell {
     ])
   }
   
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
 }
-

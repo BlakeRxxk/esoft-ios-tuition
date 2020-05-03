@@ -23,7 +23,7 @@ public final class PhotoItemView: View {
   
   public var dataSet: [String] {
     get {
-      return dataSet
+      dataSet
     }
     set {
       data = newValue
@@ -57,7 +57,7 @@ public final class PhotoItemView: View {
       arrowImage.image = newValue ?? UIImage()
     }
   }
-
+  
   private(set) lazy var photoSubheader: UILabel = UILabel()
   private(set) lazy var photoContainer: UIView = UIView()
   private(set) lazy var showAllStackView: UIStackView = UIStackView()
@@ -79,12 +79,12 @@ public final class PhotoItemView: View {
   private var activeConstraints: [NSLayoutConstraint] = []
   override public init() {
     super.init()
-
+    
     createUI()
     configureUI()
     layout()
   }
-
+  
   private func createUI() {
     let subviews: [UIView] = [
       mainContainer,
@@ -97,11 +97,11 @@ public final class PhotoItemView: View {
       showAllQuantityLabel,
       arrowImage
     ]
-
+    
     subviews.forEach {
       $0.translatesAutoresizingMaskIntoConstraints = false
     }
-
+    
     mainContainer.addSubview(photoSubheader)
     mainContainer.addSubview(photoContainer)
     
@@ -116,7 +116,7 @@ public final class PhotoItemView: View {
       mainContainer
     ]
   }
-
+  
   private func configureUI() {
     collectionView.delegate = self
     collectionView.dataSource = self
@@ -131,17 +131,17 @@ public final class PhotoItemView: View {
     collectionView.backgroundColor = .clear
     
     showAllLabel.setStyles(UILabel.Styles.regular, UILabel.ColorStyle.primary)
-
+    
     showAllQuantityLabel.setStyles(UILabel.Styles.regular, UILabel.ColorStyle.primary)
-
+    
     showAllStackView.alignment = .center
-
+    
     showAllQuantityStackView.alignment = .center
     showAllQuantityStackView.spacing = 16
-
+    
     arrowImage.image = UIImage.Screen5.go
   }
-
+  
   private func layout() {
     activeConstraints = [
       mainContainer.top.constraint(equalTo: top),
@@ -171,13 +171,13 @@ public final class PhotoItemView: View {
       showAllLabel.top.constraint(equalTo: showAllStackView.top, constant: 13),
       showAllLabel.bottom.constraint(equalTo: showAllStackView.bottom, constant: -13),
       showAllLabel.leading.constraint(equalTo: showAllStackView.leading),
-
+      
       showAllQuantityLabel.centerYAnchor.constraint(equalTo: showAllLabel.centerYAnchor),
-
+      
       arrowImage.heightAnchor.constraint(equalToConstant: 24),
       arrowImage.widthAnchor.constraint(equalToConstant: 24)
     ]
-
+    
     NSLayoutConstraint.activate(activeConstraints)
   }
 }
@@ -185,25 +185,34 @@ public final class PhotoItemView: View {
 extension PhotoItemView: PhotoItemViewInput {}
 
 extension PhotoItemView: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: 80, height: 80)
+  public func collectionView(_ collectionView: UICollectionView,
+                             layout collectionViewLayout: UICollectionViewLayout,
+                             sizeForItemAt indexPath: IndexPath) -> CGSize {
+    CGSize(width: 80, height: 80)
   }
   
-  public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return data.count
+  public func collectionView(_ collectionView: UICollectionView,
+                             numberOfItemsInSection section: Int) -> Int {
+    data.count
   }
   
-  public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCellYoga.reuseId, for: indexPath) as! PhotoCollectionViewCellYoga
+  public func collectionView(_ collectionView: UICollectionView,
+                             cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCellYoga.reuseId,
+                                                  for: indexPath) as! PhotoCollectionViewCellYoga
     cell.set(index: data[indexPath.row])
     return cell
   }
   
-  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return CGFloat(0)
+  public func collectionView(_ collectionView: UICollectionView,
+                             layout collectionViewLayout: UICollectionViewLayout,
+                             minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    CGFloat(0)
   }
   
-  public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return CGFloat(8)
+  public func collectionView(_ collectionView: UICollectionView,
+                             layout collectionViewLayout: UICollectionViewLayout,
+                             minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    CGFloat(8)
   }
 }

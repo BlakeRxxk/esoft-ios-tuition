@@ -14,4 +14,3 @@ public protocol CostItemViewYogaInput {
   var icon: UIImage? { get set }
   var thirdTitle: String { get set }
 }
-

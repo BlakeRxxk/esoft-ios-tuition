@@ -7,14 +7,12 @@
 
 import UIKit
 import EsoftUIKit
-import ThemeManager
-import AutoLayoutKit
 import YogaKit
 
 final class SellerTicketViewController: UIViewController {
   
   // MARK: - Outlets
-  private(set) lazy var container: UIView = UIView()
+
   private(set) lazy var costItemViewYoga: CostItemViewYoga = CostItemViewYoga()
   private(set) lazy var photoItemViewYoga: PhotoItemViewYoga = PhotoItemViewYoga()
   
@@ -28,15 +26,34 @@ final class SellerTicketViewController: UIViewController {
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    layout()
+
+    let yogaContainer = view.bounds.size
+    view.configureLayout { layout in
+      layout.isEnabled = true
+      layout.flexDirection = .column
+      layout.width = YGValue(yogaContainer.width)
+      layout.height = YGValue(yogaContainer.height)
+    }
+
+    costItemViewYoga.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = 100%
+      layout.height = YGValueAuto
+    }
+    
+    photoItemViewYoga.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = 100%
+      layout.height = YGValueAuto
+    }
+    
+    view.yoga.applyLayout(preservingOrigin: true, dimensionFlexibility: .flexibleHeight)
   }
   
   // MARK: - Methods
   private func createUI() {
-    container.addSubview(costItemViewYoga)
-    container.addSubview(photoItemViewYoga)
-    
-    view.addSubview(container)
+    view.addSubview(costItemViewYoga)
+    view.addSubview(photoItemViewYoga)
   }
   
   private func configureUI() {
@@ -54,32 +71,6 @@ final class SellerTicketViewController: UIViewController {
     photoItemViewYoga.subheader = Localized.photoSubheader
     photoItemViewYoga.firstTitle = Localized.showAllLabel
     photoItemViewYoga.secondTitle = Localized.showAllQuantityLabel
-  }
-  
-  private func layout() {
-    
-    let yogaContainer = view.bounds.size
-    view.configureLayout { layout in
-      layout.isEnabled = true
-      layout.width = YGValue(yogaContainer.width)
-      layout.height = YGValue(yogaContainer.height)
-    }
-    
-    container.configureLayout { layout in
-      layout.isEnabled = true
-      layout.flexDirection = .column
-      layout.width = 100%
-    }
-
-    costItemViewYoga.configureLayout { layout in
-      layout.isEnabled = true
-    }
-    
-    photoItemViewYoga.configureLayout { layout in
-      layout.isEnabled = true
-    }
-    
-    view.yoga.applyLayout(preservingOrigin: true)
   }
 }
 

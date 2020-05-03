@@ -14,4 +14,3 @@ public protocol PhotoItemViewInput {
   var secondTitle: String { get set }
   var icon: UIImage? { get set }
 }
-

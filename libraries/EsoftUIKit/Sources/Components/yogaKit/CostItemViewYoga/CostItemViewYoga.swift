@@ -9,7 +9,6 @@ import UIKit
 import BaseUI
 import BaseFRP
 import ThemeManager
-import AutoLayoutKit
 import YogaKit
 
 public final class CostItemViewYoga: View {
@@ -68,15 +67,12 @@ public final class CostItemViewYoga: View {
   private(set) lazy var editStackView: UIView = UIView()
   private(set) lazy var editIcon: UIImageView = UIImageView()
   private(set) lazy var editLabel: UILabel = UILabel()
-  
-//  private var activeConstraints: [NSLayoutConstraint] = []
-  
+
   override public init() {
     super.init()
     
     createUI()
     configureUI()
-    layout()
   }
   
   private func createUI() {
@@ -105,11 +101,7 @@ public final class CostItemViewYoga: View {
     )
     
     costContainer.backgroundColor = ThemeManager.current().colors.container
-    
-//    costStackView.alignment = .center
-//    costStackView.isLayoutMarginsRelativeArrangement = true
-//    costStackView.layoutMargins = UIEdgeInsets(top: 13, left: 16, bottom: 13, right: 16)
-    
+
     divider.backgroundColor = ThemeManager.current().colors.screen
     
     costLabel.setStyles(UILabel.Styles.regular, UILabel.ColorStyle.primary)
@@ -120,14 +112,10 @@ public final class CostItemViewYoga: View {
     editIcon.tintColor = ThemeManager.current().colors.primary500
     
     editLabel.setStyles(UILabel.Styles.headline, UILabel.ColorStyle.primary500)
-    
-//    editStackView.alignment = .center
-//    editStackView.spacing = 32
-//    editStackView.isLayoutMarginsRelativeArrangement = true
-//    editStackView.layoutMargins = UIEdgeInsets(top: 13, left: 16, bottom: 13, right: 16)
   }
   
-  private func layout() {
+  override public func layoutSubviews() {
+    super.layoutSubviews()
     mainContainer.configureLayout { layout in
       layout.isEnabled = true
     }
@@ -188,43 +176,6 @@ public final class CostItemViewYoga: View {
     editLabel.configureLayout { layout in
       layout.isEnabled = true
     }
-    
-//    activeConstraints = [
-//      mainContainer.top.constraint(equalTo: top),
-//      mainContainer.leading.constraint(equalTo: leading),
-//      mainContainer.trailing.constraint(equalTo: trailing),
-//      mainContainer.bottom.constraint(equalTo: bottom),
-//
-//      costSubheader.topAnchor.constraint(equalTo: mainContainer.topAnchor, constant: 20),
-//      costSubheader.leadingAnchor.constraint(equalTo: mainContainer.leadingAnchor, constant: 16),
-//      costSubheader.trailingAnchor.constraint(equalTo: mainContainer.trailingAnchor, constant: -16),
-//
-//      costContainer.top.constraint(equalTo: costSubheader.bottom, constant: 8),
-//      costContainer.leading.constraint(equalTo: mainContainer.leading),
-//      costContainer.trailing.constraint(equalTo: mainContainer.trailing),
-//      costContainer.bottom.constraint(equalTo: mainContainer.bottom),
-//
-//      costStackView.top.constraint(equalTo: costContainer.top),
-//      costStackView.leading.constraint(equalTo: costContainer.leading),
-//      costStackView.trailing.constraint(equalTo: costContainer.trailing),
-//      costStackView.bottom.constraint(equalTo: divider.top),
-//
-//      noticeLabel.leading.constraint(equalTo: costLabel.trailing),
-//
-//      divider.leading.constraint(equalTo: costStackView.leading),
-//      divider.trailing.constraint(equalTo: costStackView.trailing),
-//      divider.heightAnchor.constraint(equalToConstant: 1),
-//
-//      editStackView.top.constraint(equalTo: divider.bottom),
-//      editStackView.leading.constraint(equalTo: costContainer.leading),
-//      editStackView.trailing.constraint(equalTo: costContainer.trailing),
-//      editStackView.bottom.constraint(equalTo: costContainer.bottom),
-//
-//      editIcon.height.constraint(equalToConstant: 17.14),
-//      editIcon.width.constraint(equalToConstant: 17.14)
-//    ]
-//
-//    NSLayoutConstraint.activate(activeConstraints)
   }
 }
 

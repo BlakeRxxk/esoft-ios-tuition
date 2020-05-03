@@ -6,4 +6,5 @@
 //
 
 import ThemeManager
+
 public typealias AppTheme = ThemeManager

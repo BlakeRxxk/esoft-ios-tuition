@@ -5,6 +5,7 @@
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import AutoLayoutKit
 import ThemeManager
@@ -14,7 +15,6 @@ import PINRemoteImage
 import PINCache
 import YogaKit
 
-import Foundation
 final class DiscountViewController: UIViewController {
   private(set) lazy var imageViewWithGradient: ImageViewWithGradient = ImageViewWithGradient()
   private(set) lazy var imageContainer: UIView = UIView()
