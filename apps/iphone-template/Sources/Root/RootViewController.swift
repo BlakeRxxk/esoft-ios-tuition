@@ -24,13 +24,16 @@ public final class RootViewController: ViewController<BaseListView> {
   private var objectsBuilder: ObjectsBuilder
   private var sellerTicketBuilder: SellerTicketBuilder
   private var discountBuilder: DiscountBuilder
-  
+  private var mortgageBuilder: MortgageBuilder
+
   init(objectsBuilder: ObjectsBuilder,
        sellerTicketBuilder: SellerTicketBuilder,
-       discountBuilder: DiscountBuilder) {
+       discountBuilder: DiscountBuilder,
+       mortgageBuilder: MortgageBuilder) {
     self.objectsBuilder = objectsBuilder
     self.sellerTicketBuilder = sellerTicketBuilder
     self.discountBuilder = discountBuilder
+    self.mortgageBuilder = mortgageBuilder
 
     super.init(viewCreator: BaseListView.init)
 
@@ -81,6 +84,8 @@ extension RootViewController: RootViewItemSectionOutput {
       show(discountBuilder.discountViewController, sender: nil)
     case "Task 3":
       show(objectsBuilder.objectsViewController, sender: nil)
+    case "Task 4":
+      show(mortgageBuilder.mortgageListViewController, sender: nil)
     case "Task 5":
       show(sellerTicketBuilder.sellerTicketViewController, sender: nil)
     default:
