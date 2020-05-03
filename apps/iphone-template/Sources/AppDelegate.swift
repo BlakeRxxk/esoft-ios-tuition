@@ -28,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // window?.rootViewController = navController
     // window?.rootViewController = DiscountViewController()
 
+    // let navigationController = UINavigationController(rootViewController: MortgageListViewController())
+    // window?.rootViewController = navigationController
     window?.makeKeyAndVisible()
 
     setupImages()

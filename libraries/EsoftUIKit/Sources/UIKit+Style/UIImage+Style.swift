@@ -8,6 +8,12 @@
 import UIKit
 
 extension UIImage {
+  public enum Filter {
+    public static var base: UIImage {
+      named("ic_sort").withRenderingMode(.alwaysTemplate)
+    }
+  }
+  
   public enum Call {
     public static var left: UIImage {
       named("call.left.base").withRenderingMode(.alwaysTemplate)
@@ -61,13 +67,21 @@ extension UIImage {
       named("share.base").withRenderingMode(.alwaysTemplate)
     }
   }
-  
+
   public enum Logo {
     public static var base: UIImage {
       named("logo.base").withRenderingMode(.alwaysTemplate)
     }
     public static var small: UIImage {
       named("logo.small").withRenderingMode(.alwaysTemplate)
+    }
+  }
+
+  public enum Bank {
+    public enum Gazprombank {
+      public static var base: UIImage {
+        named("gazprombank").withRenderingMode(.alwaysOriginal)
+      }
     }
   }
 }
