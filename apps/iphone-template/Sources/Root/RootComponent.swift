@@ -12,7 +12,8 @@ public final class RootComponent: BootstrapComponent {
   
   var rootViewController: UIViewController {
     let rootViewController = RootViewController(objectsBuilder: objectsComponent,
-                                                sellerTicketBuilder: sellerTicketComponent)
+                                                sellerTicketBuilder: sellerTicketComponent,
+                                                discountBuilder: discountComponent)
     let root = UINavigationController(rootViewController: rootViewController)
       
     root.navigationBar.setStyles(UINavigationBar.Styles.default)
@@ -25,5 +26,9 @@ public final class RootComponent: BootstrapComponent {
   
   var sellerTicketComponent: SellerTicketComponent {
     SellerTicketComponent(parent: self)
+  }
+  
+  var discountComponent: DiscountComponent {
+    DiscountComponent(parent: self)
   }
 }

@@ -23,11 +23,15 @@ public final class RootViewController: ViewController<BaseListView> {
   
   private var objectsBuilder: ObjectsBuilder
   private var sellerTicketBuilder: SellerTicketBuilder
-
+  private var discountBuilder: DiscountBuilder
+  
   init(objectsBuilder: ObjectsBuilder,
-       sellerTicketBuilder: SellerTicketBuilder) {
+       sellerTicketBuilder: SellerTicketBuilder,
+       discountBuilder: DiscountBuilder) {
     self.objectsBuilder = objectsBuilder
     self.sellerTicketBuilder = sellerTicketBuilder
+    self.discountBuilder = discountBuilder
+
     super.init(viewCreator: BaseListView.init)
 
     configureUI()
@@ -73,6 +77,8 @@ extension RootViewController: ListAdapterDataSource {
 extension RootViewController: RootViewItemSectionOutput {
   public func didTapAction(in cell: RootViewItemInput) {
     switch cell.name {
+    case "Task 2":
+      show(discountBuilder.discountViewController, sender: nil)
     case "Task 3":
       show(objectsBuilder.objectsViewController, sender: nil)
     case "Task 5":
