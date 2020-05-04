@@ -7,7 +7,7 @@
 
 import YogaKit
 
-extension MyViewController {
+extension LoginViewController {
   final class Layout {
     let container: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
@@ -21,10 +21,16 @@ extension MyViewController {
       layout.marginTop = 44
     }
     
+    let phoneTextFieldContainer: YGLayoutConfigurationBlock = { layout in
+      layout.isEnabled = true
+      layout.height = 42
+      layout.marginTop = 70
+    }
+    
     let phoneTextField: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
-//      layout.height = 42 // !
-      layout.marginTop = 70
+      layout.width = 100%
+      layout.height = 100%
       layout.paddingHorizontal = 32
     }
     
@@ -35,10 +41,16 @@ extension MyViewController {
       layout.marginHorizontal = 32
     }
     
+    let socialStackContainer: YGLayoutConfigurationBlock = { layout in
+      layout.isEnabled = true
+      layout.height = 32
+      layout.marginTop = 52
+    }
+    
     let socialStack: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
-//      layout.height = 32 // !
-      layout.marginTop = 52
+      layout.width = 100%
+      layout.height = 100%
       layout.paddingHorizontal = 51
     }
     

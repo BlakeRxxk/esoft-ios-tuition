@@ -10,18 +10,18 @@ import UIKit
 import EsoftUIKit
 import ThemeManager
 import YogaKit
+import NetworkTrainee
 
-final class MyViewController: UIViewController {
+final class LoginViewController: UIViewController {
+  var networkManager = NetworkManager()
+  
   private(set) lazy var container: UIView = UIView()
-  
   private(set) lazy var enterLabel: UILabel = UILabel()
-  
+  private(set) lazy var phoneTextFieldContainer: UIView = UIView()
   private(set) lazy var phoneTextField: UnderscoredTextField = UnderscoredTextField()
-  
   private(set) lazy var continueButton: UIButton = UIButton()
-  
+  private(set) lazy var socialStackContainer: UIView = UIView()
   private(set) lazy var socialStack: SocialStack = SocialStack()
-  
   private(set) lazy var termLabel: UILabel = UILabel()
   
   internal lazy var layout: Layout = Layout()
@@ -46,7 +46,6 @@ final class MyViewController: UIViewController {
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    print("viewDidLayoutSubviews")
     
     view.configureLayout(block: { layout in
       layout.isEnabled = true
@@ -57,50 +56,25 @@ final class MyViewController: UIViewController {
     container.configureLayout(block: layout.container)
 
     enterLabel.configureLayout(block: layout.enterLabel)
+    phoneTextFieldContainer.configureLayout(block: layout.phoneTextFieldContainer)
     phoneTextField.configureLayout(block: layout.phoneTextField)
     continueButton.configureLayout(block: layout.continueButton)
+    socialStackContainer.configureLayout(block: layout.socialStackContainer)
     socialStack.configureLayout(block: layout.socialStack)
     termLabel.configureLayout(block: layout.termLabel)
 
     view.yoga.applyLayout(preservingOrigin: true)
   }
-
-    override func updateViewConstraints() {
-    super.updateViewConstraints()
-    print("updateViewConstraints")
-    
-//    view.configureLayout(block: { layout in
-//      layout.isEnabled = true
-//      layout.width = 100%
-//      layout.height = 100%
-//    })
-//
-//    container.configureLayout(block: layout.container)
-//
-//    enterLabel.configureLayout(block: layout.enterLabel)
-//    phoneTextField.configureLayout(block: layout.phoneTextField)
-//    continueButton.configureLayout(block: layout.continueButton)
-//    socialStack.configureLayout(block: layout.socialStack)
-//    termLabel.configureLayout(block: layout.termLabel)
-//
-//    view.yoga.applyLayout(preservingOrigin: true)
-  }
-
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-//    view.subviews.forEach {
-//      $0.yoga.markDirty()
-//    }
-//    view.yoga.applyLayout(preservingOrigin: true)
-    super.traitCollectionDidChange(previousTraitCollection)
-//    print("traitCollectionDidChange")
-  }
   
   private func createUI() {
+    phoneTextFieldContainer.addSubview(phoneTextField)
+    socialStackContainer.addSubview(socialStack)
+    
     [
       enterLabel,
-      phoneTextField,
+      phoneTextFieldContainer,
       continueButton,
-      socialStack,
+      socialStackContainer,
       termLabel
       ].forEach { container.addSubview($0) }
     
@@ -130,7 +104,7 @@ final class MyViewController: UIViewController {
   }
 }
 
-private extension MyViewController {
+private extension LoginViewController {
   enum Localized {
     static let enterLabel = "Вход в личный кабинет"
     static let phonePlaceholder = "Номер телефона"

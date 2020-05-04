@@ -12,7 +12,7 @@ extension UnderscoredTextField {
     let container: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
       layout.width = 100%
-//      layout.height = 100% // !
+      layout.height = 100%
       layout.flexDirection = .column
     }
     

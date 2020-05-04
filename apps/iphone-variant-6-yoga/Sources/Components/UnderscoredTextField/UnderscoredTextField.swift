@@ -20,8 +20,6 @@ public final class UnderscoredTextField: View {
     }
   }
   
-  private(set) lazy var container: UIView = UIView()
-  
   private(set) lazy var phoneTextField: UITextField = {
     $0.addTarget(self, action: #selector(phoneTextFieldValueChanged), for: .valueChanged)
     return $0
@@ -43,9 +41,7 @@ public final class UnderscoredTextField: View {
     [
       phoneTextField,
       divider
-      ].forEach { container.addSubview($0) }
-    
-    addSubview(container)
+      ].forEach { addSubview($0) }
   }
   
   private func configureUI() {
@@ -54,29 +50,15 @@ public final class UnderscoredTextField: View {
     divider.backgroundColor = ThemeManager.current().colors.divider
   }
   
-  override public func updateConstraints() {
-    super.updateConstraints()
-    print("UTF updateConstraints")
-    
-    container.configureLayout(block: layout.container)
+  override public func layoutSubviews() {
+    super.layoutSubviews()
+
+    configureLayout(block: layout.container)
 
     phoneTextField.configureLayout(block: layout.phoneTextField)
     divider.configureLayout(block: layout.divider)
-
-    yoga.applyLayout(preservingOrigin: true)
-  }
-  
-  override public func layoutSubviews() {
-    super.layoutSubviews()
-    print("UTF layoutSubviews")
     
-//    configureLayout(block: layout.container)
-//    container.configureLayout(block: layout.container)
-//    
-//    phoneTextField.configureLayout(block: layout.phoneTextField)
-//    divider.configureLayout(block: layout.divider)
-//    
-//    yoga.applyLayout(preservingOrigin: true)
+    yoga.applyLayout(preservingOrigin: true)
   }
   
   @objc func phoneTextFieldValueChanged() {
