@@ -196,6 +196,11 @@ extension UILabel {
       label.textColor = ThemeManager.current().colors.error
     }
     
+    private static let brandColor = Style(name: "color.brand") { (label: UILabel) in
+      label.textColor = ThemeManager.current().colors.brand
+    }
+    
+    public static let brand = brandColor
     public static let primary = black
     public static let primary500 = green
     public static let secondary = gray

@@ -4,7 +4,6 @@
 //
 //  Copyright © 2020 E-SOFT. All rights reserved.
 //
-
 import UIKit
 
 extension UIImage {
@@ -82,6 +81,27 @@ extension UIImage {
       public static var base: UIImage {
         named("gazprombank").withRenderingMode(.alwaysOriginal)
       }
+    }
+  }
+
+  public enum Close {
+    public static var base: UIImage {
+      named("close.base").withRenderingMode(.alwaysTemplate)
+    }
+  }
+  
+  public enum Socials {
+    public static var facebook: UIImage {
+      named("facebook")
+    }
+    public static var vk: UIImage {
+      named("vk")
+    }
+    public static var ok: UIImage {
+      named("ok")
+    }
+    public static var google: UIImage {
+      named("google")
     }
   }
 }
