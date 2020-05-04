@@ -29,6 +29,7 @@ static_libraries = [
     "//libraries/Logger:Logger",
     "//libraries/Network:Network",
     "//libraries/NetworkTrainee:NetworkTrainee",
+    "//libraries/StateKit:StateKit",
 ]
 
 prebuilt_test_frameworks = [

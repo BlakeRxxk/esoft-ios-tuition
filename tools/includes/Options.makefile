@@ -1,3 +1,19 @@
+export APP_PATH=iphone-template
+export APP_NAME=TemplateApp
+
+export BUCK_OPTIONS=\
+	--config custom.appVersion="1.0.0" \
+	--config custom.developmentCodeSignIdentity="${DEVELOPMENT_CODE_SIGN_IDENTITY}" \
+	--config custom.distributionCodeSignIdentity="${DISTRIBUTION_CODE_SIGN_IDENTITY}" \
+	--config custom.developmentTeam="${DEVELOPMENT_TEAM}" \
+	--config custom.baseApplicationBundleId="${BUNDLE_ID}" \
+	--config custom.isInternalBuild="${IS_INTERNAL_BUILD}" \
+	--config custom.isAppStoreBuild="${IS_APPSTORE_BUILD}" \
+	--config custom.appStoreId="${APPSTORE_ID}" \
+	--config custom.buildNumber="${BUILD_NUMBER}" \
+	--config custom.entitlementsApp="${ENTITLEMENTS_APP}" \
+	--config custom.developmentProvisioningProfileApp="${DEVELOPMENT_PROVISIONING_PROFILE_APP}" \
+	--config custom.distributionProvisioningProfileApp="${DISTRIBUTION_PROVISIONING_PROFILE_APP}" \
 
 export BUCK_DEBUG_OPTIONS=\
 	--config custom.other_cflags="-O0 -D DEBUG" \
@@ -36,26 +52,3 @@ ifneq ($(BUCK_DIR_CACHE),)
 		--config cache.dir="$(BUCK_DIR_CACHE)" \
 		--config cache.dir_mode="readwrite"
 endif
-
-install_buck:
-	curl https://jitpack.io/com/github/airbnb/buck/4bd1a08625454c5034eb6ef6193e94f9e6e62a62/buck-4bd1a08625454c5034eb6ef6193e94f9e6e62a62.pex --output tools/buck
-	chmod u+x tools/buck
-
-install_pods:
-	sh tools/scripts/install_pods.sh
-
-clean_pods:
-	sh tools/scripts/clean_pods.sh
-
-check_env:
-ifndef BUCK
-	$(error BUCK is not set)
-endif
-	sh tools/scripts/check_env.sh
-
-kill_xcode:
-	killall Xcode || true
-
-audit:
-	$(BUCK) audit rules apps/$(APP_PATH)/BUCK > config/gen/$(APP_PATH)-BUCK.py \
-	${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS} ${BUCK_THREADS_OPTIONS} ${BUCK_CACHE_OPTIONS}
