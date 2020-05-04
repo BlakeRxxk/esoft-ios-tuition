@@ -1,9 +1,9 @@
-////
-////  NetworkAPITokenAuthenticatorTests.swift
-////  NetworkTests
-////
-////  Copyright © 2020 E-SOFT, OOO. All rights reserved.
-////
+//
+//  NetworkAPITokenAuthenticatorTests.swift
+//  NetworkTests
+//
+//  Copyright © 2020 E-SOFT, OOO. All rights reserved.
+//
 //
 //import XCTest
 //import RxSwift

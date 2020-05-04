@@ -1,9 +1,9 @@
-////
-////  NetworkAPIProtocolTests.swift
-////  NetworkTests
-////
-////  Copyright © 2020 E-SOFT, OOO. All rights reserved.
-////
+//
+//  NetworkAPIProtocolTests.swift
+//  NetworkTests
+//
+//  Copyright © 2020 E-SOFT, OOO. All rights reserved.
+//
 //
 //import XCTest
 //import RxSwift

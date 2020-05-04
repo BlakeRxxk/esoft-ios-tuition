@@ -7,6 +7,16 @@
 
 import Foundation
 
+public struct District {
+  public let id: Int
+  public let name: String
+  
+  public init(id: Int, name: String) {
+    self.id = id
+    self.name = name
+  }
+}
+
 public struct NetworkManager {
   static let environment: NetworkEnvironment = .production
 
@@ -78,16 +88,6 @@ public struct NetworkManager {
     case 600: return .failure(NetworkResponse.outdated.rawValue)
     default: return .failure(NetworkResponse.failed.rawValue)
     }
-  }
-}
-
-public struct District {
-  public let id: Int
-  public let name: String
-  
-  public init(id: Int, name: String) {
-    self.id = id
-    self.name = name
   }
 }
 

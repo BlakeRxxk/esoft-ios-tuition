@@ -21,16 +21,6 @@ public final class DistrictCell: UICollectionViewCell {
     createUI()
   }
   
-  override public func prepareForReuse() {
-    super.prepareForReuse()
-    title.styledText = ""
-  }
-  
-  private func createUI() {
-    contentView.addSubview(title)
-    title.setStyles(UILabel.Styles.title2)
-  }
-  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -52,6 +42,16 @@ public final class DistrictCell: UICollectionViewCell {
     }
     
     contentView.yoga.applyLayout(preservingOrigin: true)
+  }
+
+  override public func prepareForReuse() {
+    super.prepareForReuse()
+    title.styledText = ""
+  }
+  
+  private func createUI() {
+    contentView.addSubview(title)
+    title.setStyles(UILabel.Styles.title2)
   }
 }
 
