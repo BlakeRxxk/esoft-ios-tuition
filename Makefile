@@ -2,40 +2,12 @@
 
 # Use local version of Buck
 BUCK=tools/buck
+buck_out = $(shell $(BUCK) root)/buck-out
 xctool=tools/xctool/bin/xctool
 swiftlint=third-party/Pods/SwiftLint/swiftlint
 
-include User.makefile
-include Utils.makefile
-
-BUCK_OPTIONS=\
-	--config custom.appVersion="1.0.0" \
-	--config custom.developmentCodeSignIdentity="${DEVELOPMENT_CODE_SIGN_IDENTITY}" \
-	--config custom.distributionCodeSignIdentity="${DISTRIBUTION_CODE_SIGN_IDENTITY}" \
-	--config custom.developmentTeam="${DEVELOPMENT_TEAM}" \
-	--config custom.baseApplicationBundleId="${BUNDLE_ID}" \
-	--config custom.isInternalBuild="${IS_INTERNAL_BUILD}" \
-	--config custom.isAppStoreBuild="${IS_APPSTORE_BUILD}" \
-	--config custom.appStoreId="${APPSTORE_ID}" \
-	--config custom.buildNumber="${BUILD_NUMBER}" \
-	--config custom.entitlementsApp="${ENTITLEMENTS_APP}" \
-	--config custom.developmentProvisioningProfileApp="${DEVELOPMENT_PROVISIONING_PROFILE_APP}" \
-	--config custom.distributionProvisioningProfileApp="${DISTRIBUTION_PROVISIONING_PROFILE_APP}" \
-
-clean: kill_xcode
-	rm -rf **/**/*.xcworkspace
-	rm -rf **/**/*.xcodeproj
-	rm -rf **/*.xcworkspace
-	rm -rf **/*.xcodeproj
-	rm -rf *.xcworkspace
-	rm -rf *.xcodeproj
-	rm -rf buck-out
-
-lint:
-	${swiftlint} lint
-
-autocorrect:
-	${swiftlint} autocorrect
+include tools/includes/Options.makefile
+include tools/includes/Utils.makefile
 
 targets:
 	$(BUCK) targets //... ${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS}
@@ -58,11 +30,10 @@ debug:
 
 build_debug: check_env
 	$(BUCK) build \
-	//apps/$(APP_PATH):AppPackage#iphoneos-arm64,iphoneos-armv7 \
-	//apps/$(APP_PATH):$(APP_NAME)#dwarf-and-dsym,iphoneos-arm64,iphoneos-armv7 \
+	//apps/$(APP_PATH):AppPackage \
+	//apps/$(APP_PATH):$(APP_NAME)#dwarf-and-dsym \
 	${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS} ${BUCK_THREADS_OPTIONS} ${BUCK_CACHE_OPTIONS}
 
-buck_out = $(shell $(BUCK) root)/buck-out
 tests:
 	@rm -f $(buck_out)/tmp/*.profraw
 	@rm -f $(buck_out)/gen/*.profdata
