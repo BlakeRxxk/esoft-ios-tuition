@@ -25,15 +25,18 @@ public final class RootViewController: ViewController<BaseListView> {
   private var sellerTicketBuilder: SellerTicketBuilder
   private var discountBuilder: DiscountBuilder
   private var mortgageBuilder: MortgageBuilder
+  private var loggedOutBuilder: LoggedOutBuilder
 
   init(objectsBuilder: ObjectsBuilder,
        sellerTicketBuilder: SellerTicketBuilder,
        discountBuilder: DiscountBuilder,
-       mortgageBuilder: MortgageBuilder) {
+       mortgageBuilder: MortgageBuilder,
+       loggedOutBuilder: LoggedOutBuilder) {
     self.objectsBuilder = objectsBuilder
     self.sellerTicketBuilder = sellerTicketBuilder
     self.discountBuilder = discountBuilder
     self.mortgageBuilder = mortgageBuilder
+    self.loggedOutBuilder = loggedOutBuilder
 
     super.init(viewCreator: BaseListView.init)
 
@@ -88,6 +91,8 @@ extension RootViewController: RootViewItemSectionOutput {
       show(mortgageBuilder.mortgageListViewController, sender: nil)
     case "Task 5":
       show(sellerTicketBuilder.sellerTicketViewController, sender: nil)
+    case "Task 6":
+      present(loggedOutBuilder.loggedOutViewController, animated: true)
     default:
       return
     }

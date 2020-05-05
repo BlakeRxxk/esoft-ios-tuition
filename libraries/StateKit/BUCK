@@ -7,7 +7,6 @@ static_library(
         "Sources/**/*.swift",
     ]),
     deps = [
-        "//libraries/Logger:Logger",
         "//third-party/Pods:RxSwift",
         "//third-party/Pods:RxCocoa",
         "//third-party/Pods:RxRelay"

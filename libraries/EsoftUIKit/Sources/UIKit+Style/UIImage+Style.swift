@@ -4,6 +4,7 @@
 //
 //  Copyright © 2020 E-SOFT. All rights reserved.
 //
+
 import UIKit
 
 extension UIImage {
@@ -103,5 +104,21 @@ extension UIImage {
     public static var google: UIImage {
       named("google")
     }
+  }
+  
+  public static var arrowDown: UIImage {
+    named("arrow.down").withRenderingMode(.alwaysTemplate)
+  }
+  
+  public static var eye: UIImage {
+    named("eye").withRenderingMode(.alwaysTemplate)
+  }
+  
+  public static var starSmall: UIImage {
+    named("star.small").withRenderingMode(.alwaysTemplate)
+  }
+  
+  public static var favorit: UIImage {
+    named("favorit").withRenderingMode(.alwaysTemplate)
   }
 }

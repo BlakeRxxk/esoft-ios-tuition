@@ -1,5 +1,5 @@
-export APP_PATH=iphone-template
-export APP_NAME=TemplateApp
+export APP_PATH=iphone-tuition
+export APP_NAME=TuitionApp
 
 export BUCK_OPTIONS=\
 	--config custom.appVersion="1.0.0" \

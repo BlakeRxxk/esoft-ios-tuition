@@ -41,7 +41,7 @@ final class LoginViewController: UIViewController {
     super.viewWillAppear(animated)
     navigationItem.setStyles(UINavigationItem.Styles.logo)
     navigationController?.navigationBar.setStyles(UINavigationBar.Styles.auth)
-    addCloseButtonIfNeeded(target: self)
+    addCloseButtonIfNeeded(target: self, action: #selector(handleDismiss))
   }
   
   override func viewDidLayoutSubviews() {
@@ -101,6 +101,10 @@ final class LoginViewController: UIViewController {
                         UILabel.ColorStyle.primary)
     termLabel.styledText = Localized.termOfUse
     termLabel.colorize(from: 31, to: 60, with: ThemeManager.current().colors.brand)
+  }
+  
+  @objc private func handleDismiss(sender: UIButton) {
+    dismiss(animated: true, completion: nil)
   }
 }
 

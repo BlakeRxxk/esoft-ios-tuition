@@ -14,7 +14,8 @@ public final class RootComponent: BootstrapComponent {
     let rootViewController = RootViewController(objectsBuilder: objectsComponent,
                                                 sellerTicketBuilder: sellerTicketComponent,
                                                 discountBuilder: discountComponent,
-                                                mortgageBuilder: mortgageComponent)
+                                                mortgageBuilder: mortgageComponent,
+                                                loggedOutBuilder: loggedOutComponent)
 
     let root = UINavigationController(rootViewController: rootViewController)
       
@@ -36,5 +37,9 @@ public final class RootComponent: BootstrapComponent {
   
   var mortgageComponent: MortgageComponent {
     MortgageComponent(parent: self)
+  }
+  
+  var loggedOutComponent: LoggedOutComponent {
+    LoggedOutComponent(parent: self)
   }
 }
