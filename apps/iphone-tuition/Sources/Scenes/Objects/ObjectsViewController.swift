@@ -27,7 +27,6 @@ final class ObjectsViewController: UIViewController {
     configureUI()
   }
   
-  
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     layout()
