@@ -39,7 +39,7 @@ final class ObjectsViewController: UIViewController {
     container.addSubview(previewItemViewYOGA)
     container.addSubview(addressItemViewYOGA)
     container.addSubview(infoItemView)
-    
+    // test
     view.addSubview(container)
   }
   
