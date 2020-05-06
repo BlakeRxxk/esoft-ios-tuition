@@ -14,6 +14,7 @@ static_library(
         "//libraries/BaseUI:BaseUI",
         "//libraries/BaseFRP:BaseFRP",
         "//libraries/ShimmerUI:ShimmerUI",
+        "//libraries/AnimateUI:AnimateUI",
         "//third-party/Pods:Yoga",
         "//third-party/Pods:YogaKit",
         "//third-party/Pods:IGListKit",
