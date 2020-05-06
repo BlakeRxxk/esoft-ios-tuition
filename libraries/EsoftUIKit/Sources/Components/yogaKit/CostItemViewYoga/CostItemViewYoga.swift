@@ -73,6 +73,7 @@ public final class CostItemViewYoga: View {
     
     createUI()
     configureUI()
+    layout()
   }
   
   private func createUI() {
@@ -114,8 +115,7 @@ public final class CostItemViewYoga: View {
     editLabel.setStyles(UILabel.Styles.headline, UILabel.ColorStyle.primary500)
   }
   
-  override public func layoutSubviews() {
-    super.layoutSubviews()
+  private func layout() {
     mainContainer.configureLayout { layout in
       layout.isEnabled = true
     }
