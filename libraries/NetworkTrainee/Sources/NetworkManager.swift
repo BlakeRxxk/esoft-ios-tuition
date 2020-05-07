@@ -11,6 +11,7 @@ public struct NetworkManager {
   static let environment: NetworkEnvironment = .production
 
   private let router = Router<CitiesApi>()
+  private let objectsRouter = Router<ObjectsApi>()
   public init() {}
   
   public func getCilies(page: Int, completion: @escaping (_ movie: [City]?, _ error: String?) -> Void) {
@@ -59,6 +60,34 @@ public struct NetworkManager {
           do {
             let jsonData = try JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
             let wrapper = try JSONDecoder().decode(Response<[District]>.self, from: responseData)
+            completion(wrapper.data, nil)
+          } catch {
+            completion(nil, NetworkResponse.unableToDecode.rawValue)
+          }
+        case .failure(let networkFailureError):
+          completion(nil, networkFailureError)
+        }
+      }
+    }
+  }
+  
+  public func getObjects(completion: @escaping (_ movie: [Objects]?, _ error: String?) -> Void) {
+    objectsRouter.request(.objects) { data, response, error in
+      if error != nil {
+        completion(nil, "Please check your network connection.")
+      }
+      
+      if let response = response as? HTTPURLResponse {
+        let result = self.handleNetworkResponse(response)
+        switch result {
+        case .success:
+          guard let responseData = data else {
+            completion(nil, NetworkResponse.noData.rawValue)
+            return
+          }
+          do {
+            let jsonData = try JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
+            let wrapper = try JSONDecoder().decode(Response<[Objects]>.self, from: responseData)
             completion(wrapper.data, nil)
           } catch {
             completion(nil, NetworkResponse.unableToDecode.rawValue)

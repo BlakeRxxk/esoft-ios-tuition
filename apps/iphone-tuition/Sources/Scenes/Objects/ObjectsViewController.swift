@@ -9,8 +9,14 @@ import UIKit
 import EsoftUIKit
 import ThemeManager
 import YogaKit
+import NetworkTrainee
+import IGListKit
+import BaseUI
 
-final class ObjectsViewController: UIViewController {
+final class ObjectsViewController: UIViewController{
+  
+  var networkManager = NetworkManager()
+  private var data: [Objects] = []
   
   // MARK: - UI
   
@@ -19,12 +25,27 @@ final class ObjectsViewController: UIViewController {
   private(set) lazy var addressItemViewYOGA: AddressItemViewYOGA = AddressItemViewYOGA()
   private(set) lazy var infoItemView: InfoItemViewYOGA = InfoItemViewYOGA()
   
+//  init() {
+//    super.init(viewCreator: BaseListView.init)
+//    
+////    configureUI()
+//  }
+  
   // MARK: - Life
   override func viewDidLoad() {
     super.viewDidLoad()
 
     createUI()
     configureUI()
+    
+    networkManager.getObjects() { [weak self] (res, _) in
+      guard
+        let self = self,
+        let objects = res else { return }
+      
+      print(objects)
+    }
+    
   }
   
   override func viewDidLayoutSubviews() {
@@ -35,11 +56,9 @@ final class ObjectsViewController: UIViewController {
   // MARK: - Functions
   
   private func createUI() {
-    
     container.addSubview(previewItemViewYOGA)
     container.addSubview(addressItemViewYOGA)
     container.addSubview(infoItemView)
-    // test
     view.addSubview(container)
   }
   
