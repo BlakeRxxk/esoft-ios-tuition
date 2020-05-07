@@ -1,0 +1,16 @@
+load("//config:buck_rule_macros.bzl", "static_library")
+load("//config:configs.bzl", "info_plist_substitutions")
+
+static_library(
+    name = "ShimmerUI",
+    srcs = glob([
+        "Sources/**/*.swift",
+    ]),
+    deps = [],
+    frameworks = [
+        "$SDKROOT/System/Library/Frameworks/Foundation.framework",
+        "$SDKROOT/System/Library/Frameworks/UIKit.framework",
+    ],
+    test_deps = [],
+    info_plist_substitutions = info_plist_substitutions("ShimmerUITests")
+)
