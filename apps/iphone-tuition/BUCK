@@ -30,6 +30,7 @@ static_libraries = [
     "//libraries/Network:Network",
     "//libraries/NetworkTrainee:NetworkTrainee",
     "//libraries/StateKit:StateKit",
+    "//libraries/Currency:Currency",
 ]
 
 prebuilt_test_frameworks = [
