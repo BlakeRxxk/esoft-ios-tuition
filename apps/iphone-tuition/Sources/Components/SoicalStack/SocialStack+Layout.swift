@@ -1,6 +1,6 @@
 //
 //  SpecialistView+Layout.swift
-//  ESUIKit
+//  AppLibrary
 //
 //  Copyright © 2019 E-SOFT. All rights reserved.
 //
