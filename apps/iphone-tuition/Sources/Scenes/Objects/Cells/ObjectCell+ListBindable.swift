@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+import IGListKit
+
+extension ObjectCell: ListBindable {
+  public func bindViewModel(_ viewModel: Any) {
+    guard let viewModel = viewModel as? ObjectViewModel else { return }
+    previewItemViewYOGA.price = viewModel.id
+    
+    layoutSubviews()
+  }
+}

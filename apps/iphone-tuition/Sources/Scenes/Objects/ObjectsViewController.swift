@@ -13,123 +13,175 @@ import NetworkTrainee
 import IGListKit
 import BaseUI
 
-final class ObjectsViewController: UIViewController{
+final class ObjectsViewController: ViewController<BaseListView>{
   
   var networkManager = NetworkManager()
-  private var data: [Objects] = []
+  private var data: [ObjectViewModel] = []
   
   // MARK: - UI
   
-  private(set) lazy var container: UIView = UIView()
-  private(set) lazy var previewItemViewYOGA = PreviewItemViewYOGA()
-  private(set) lazy var addressItemViewYOGA: AddressItemViewYOGA = AddressItemViewYOGA()
-  private(set) lazy var infoItemView: InfoItemViewYOGA = InfoItemViewYOGA()
+//  private(set) lazy var container: UIView = UIView()
+//  private(set) lazy var previewItemViewYOGA = PreviewItemViewYOGA()
+//  private(set) lazy var addressItemViewYOGA: AddressItemViewYOGA = AddressItemViewYOGA()
+//  private(set) lazy var infoItemView: InfoItemViewYOGA = InfoItemViewYOGA()
   
-//  init() {
-//    super.init(viewCreator: BaseListView.init)
-//    
-////    configureUI()
-//  }
+  init() {
+    super.init(viewCreator: BaseListView.init)
+    
+    configureUI()
+  }
   
   // MARK: - Life
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
-    createUI()
-    configureUI()
+  
+  override public func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
     
     networkManager.getObjects() { [weak self] (res, _) in
       guard
         let self = self,
         let objects = res else { return }
       
+      let tmp = objects.map { ObjectViewModel(id: $0.id, description: $0.description) }
+       self.data.append(contentsOf: tmp)
+      
       print(objects)
+      
+      DispatchQueue.main.async {
+        self.specializedView.adapter?.performUpdates(animated: true)
+      }
     }
-    
   }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    layout()
+    
+    let container = view.bounds.size
+    view.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = YGValue(container.width)
+      layout.height = YGValue(container.height)
+    }
+    
+    specializedView.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = YGValue(container.width)
+      layout.height = YGValue(container.height)
+    }
+
+    view.yoga.applyLayout(preservingOrigin: true)
+    
+//    layout()
   }
   
   // MARK: - Functions
   
-  private func createUI() {
-    container.addSubview(previewItemViewYOGA)
-    container.addSubview(addressItemViewYOGA)
-    container.addSubview(infoItemView)
-    view.addSubview(container)
-  }
-  
   private func configureUI() {
-    // view
-    view.backgroundColor = AppTheme.current().colors.screen
-    
-    // navigation
-    navigationItem.title = "Title"
-    
-    // container
-    container.backgroundColor = AppTheme.current().colors.container
-    // previewItemView
-    previewItemViewYOGA.address = Localized.address
-    previewItemViewYOGA.currentPrice = Localized.currentPrice
-    previewItemViewYOGA.price = Localized.price
-    previewItemViewYOGA.photo = UIImage(named: "photo")
-    
-    // addressItemView
-    addressItemViewYOGA.title = Localized.mainTitle
-    
-    // infoItemView
-    infoItemView.firstTitle = Localized.views
-    infoItemView.secondTitle = Localized.favorits
-    infoItemView.thirdTitle = Localized.codeObject
+    specializedView.adapter?.dataSource = self
+    specializedView.adapter?.scrollViewDelegate = self
+    view.backgroundColor = AppTheme.current().colors.container
   }
   
-  private func layout() {
-    container.configureLayout { layout in
-      layout.paddingLeft = 16
-      layout.paddingRight = 16
-    }
-    
-    view.configureLayout { layout in
-      layout.isEnabled = true
-      layout.width = 100%
-      layout.height = 100%
-    }
-    
-    container.configureLayout { layout in
-      layout.isEnabled = true
-      layout.flexDirection = .column
-      layout.width = YGValue(UIScreen.main.bounds.width)
-      layout.marginTop = YGValue(8)
-    }
-    
-    infoItemView.configureLayout { layout in
-      layout.isEnabled = true
-    }
-    
-    addressItemViewYOGA.configureLayout { layout in
-      layout.isEnabled = true
-    }
-    
-    previewItemViewYOGA.configureLayout { (layout) in
-      layout.isEnabled = true
-    }
-    
-    view.yoga.applyLayout(preservingOrigin: true)
-  }
+//  private func createUI() {
+//    container.addSubview(previewItemViewYOGA)
+//    container.addSubview(addressItemViewYOGA)
+//    container.addSubview(infoItemView)
+//    view.addSubview(container)
+//  }
+  
+//  private func configureUI() {
+//    // view
+//    view.backgroundColor = AppTheme.current().colors.screen
+//
+//    // navigation
+//    navigationItem.title = "Title"
+//
+//    // container
+//    container.backgroundColor = AppTheme.current().colors.container
+//    // previewItemView
+//    previewItemViewYOGA.address = Localized.address
+//    previewItemViewYOGA.currentPrice = Localized.currentPrice
+//    previewItemViewYOGA.price = Localized.price
+//    previewItemViewYOGA.photo = UIImage(named: "photo")
+//
+//    // addressItemView
+//    addressItemViewYOGA.title = Localized.mainTitle
+//
+//    // infoItemView
+//    infoItemView.firstTitle = Localized.views
+//    infoItemView.secondTitle = Localized.favorits
+//    infoItemView.thirdTitle = Localized.codeObject
+//  }
+  
+//  private func layout() {
+//    container.configureLayout { layout in
+//      layout.paddingLeft = 16
+//      layout.paddingRight = 16
+//    }
+//
+//    view.configureLayout { layout in
+//      layout.isEnabled = true
+//      layout.width = 100%
+//      layout.height = 100%
+//    }
+//
+//    container.configureLayout { layout in
+//      layout.isEnabled = true
+//      layout.flexDirection = .column
+//      layout.width = YGValue(UIScreen.main.bounds.width)
+//      layout.marginTop = YGValue(8)
+//    }
+//
+//    infoItemView.configureLayout { layout in
+//      layout.isEnabled = true
+//    }
+//
+//    addressItemViewYOGA.configureLayout { layout in
+//      layout.isEnabled = true
+//    }
+//
+//    previewItemViewYOGA.configureLayout { (layout) in
+//      layout.isEnabled = true
+//    }
+//
+//    view.yoga.applyLayout(preservingOrigin: true)
+//  }
   
 }
 
-private extension ObjectsViewController {
-  enum Localized {
-    static let price = "2 300 000 руб."
-    static let currentPrice = "2 200 000 руб."
-    static let address = "Тюмень, Центр: КПД, Республики"
-    static let mainTitle = "Пансионат, 1-комн., 18 м², этаж 3/8, 69 444 руб./м²"
-    static let views = "314"
-    static let favorits = "7,4"
-    static let codeObject = "Код объекта: 773355"
+//private extension ObjectsViewController {
+//  enum Localized {
+//    static let price = "2 300 000 руб."
+//    static let currentPrice = "2 200 000 руб."
+//    static let address = "Тюмень, Центр: КПД, Республики"
+//    static let mainTitle = "Пансионат, 1-комн., 18 м², этаж 3/8, 69 444 руб./м²"
+//    static let views = "314"
+//    static let favorits = "7,4"
+//    static let codeObject = "Код объекта: 773355"
+//  }
+//}
+
+extension ObjectsViewController: ListAdapterDataSource {
+  public func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
+    data as [ListDiffable]
+  }
+  
+  public func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
+    ObjectsSectionController()
+  }
+  
+  public func emptyView(for listAdapter: ListAdapter) -> UIView? {
+    nil
+  }
+}
+
+extension ObjectsViewController: UIScrollViewDelegate {
+  public func scrollViewWillEndDragging(_ scrollView: UIScrollView,
+                                        withVelocity velocity: CGPoint,
+                                        targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    let distance = scrollView.contentSize.height - (targetContentOffset.pointee.y + scrollView.bounds.height)
+    
+    if distance < 300 {
+      // put your updating code here
+    }
   }
 }
