@@ -76,6 +76,10 @@ final class DiscountViewController: UIViewController {
     imageViewWithGradient.setImageGradient()
   }
 
+  @objc func pressBackOnNavbar(sender: UITapGestureRecognizer) {
+    self.navigationController?.popViewController(animated: true)
+  }
+
   private func createUI() {
     view.addSubview(imageContainer)
     view.addSubview(bodyContainer)
@@ -94,16 +98,20 @@ final class DiscountViewController: UIViewController {
 
   private func configureUI() {
     view.backgroundColor = ThemeManager.current().colors.container
+    self.navigationController?.isNavigationBarHidden = true
 
     bodyContainer.axis = .vertical
     bodyContainer.isLayoutMarginsRelativeArrangement = true
     bodyContainer.layoutMargins = UIEdgeInsets(top: Space.small, left: Space.small, bottom: Space.small, right: Space.small)
     bodyContainer.spacing = Space.small
 
+    let pressBackOnNavbar = UITapGestureRecognizer(target: self, action: #selector(self.pressBackOnNavbar))
     arrowBackImageView.backgroundColor = UIColor.clear
     arrowBackImageView.contentMode = .center
     arrowBackImageView.image = UIImage.Arrow.Left.base
     arrowBackImageView.tintColor = UIColor.TextColor.white
+    arrowBackImageView.isUserInteractionEnabled = true
+    arrowBackImageView.addGestureRecognizer(pressBackOnNavbar)
 
     favouritesImageView.backgroundColor = UIColor.clear
     favouritesImageView.contentMode = .center
