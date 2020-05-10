@@ -51,12 +51,7 @@ final class DiscountViewController: UIViewController {
 
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    let containerSize = view.bounds.size
-    view.configureLayout(block: { layout in
-      layout.isEnabled = true
-      layout.height = YGValue(containerSize.height)
-      layout.width = YGValue(containerSize.width)
-    })
+    view.configureLayout(block: { $0.isEnabled = true })
 
     imageContainer.configureLayout(block: layout.imageContainer)
     bodyContainer.configureLayout(block: layout.bodyContainer)
