@@ -17,14 +17,14 @@ extension Currency {
   
   public func amount(in currency: CCY) -> Currency {
     let exchangeRate = Currency.exchangeRates.filter { rate -> Bool in
-      rate.rhs == currency || rate.lhs == currency
+      rate.to == currency || rate.from == currency
     }
 
     guard let rate = exchangeRate.first else {
       return Currency(amt: money.0.floatValue, currency: currency)
     }
     
-    if rate.lhs == currency {
+    if rate.from == currency {
       return Currency(amt: money.0.floatValue * rate.inverseRate, currency: currency)
     } else {
       return Currency(amt: money.0.floatValue * rate.rate, currency: currency)

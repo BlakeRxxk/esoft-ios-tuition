@@ -27,9 +27,9 @@ final class CurrencyExtensionsTests: XCTestCase {
   func testCurencyAmount() {
     XCTAssert(usd?.amount(in: .EUR) == Currency(amt: 100, currency: .EUR))
 
-    let rate: ExchangeRate = ExchangeRate(lhs: .USD, rhs: .EUR, rate: 0.93)
-    let rate2: ExchangeRate = ExchangeRate(lhs: .USD, rhs: .RUB, rate: 73.78)
-    let rate3: ExchangeRate = ExchangeRate(lhs: .GBP, rhs: .USD, rate: 1.24)
+    let rate: ExchangeRate = ExchangeRate(from: .USD, to: .EUR, rate: 0.93)
+    let rate2: ExchangeRate = ExchangeRate(from: .USD, to: .RUB, rate: 73.78)
+    let rate3: ExchangeRate = ExchangeRate(from: .GBP, to: .USD, rate: 1.24)
     Currency.exchangeRates.insert(rate2)
     Currency.exchangeRates.insert(rate)
     Currency.exchangeRates.insert(rate3)

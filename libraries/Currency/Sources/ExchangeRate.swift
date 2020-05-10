@@ -8,8 +8,8 @@
 import Foundation
 
 public struct ExchangeRate: Hashable {
-  public let lhs: CCY
-  public let rhs: CCY
+  public let from: CCY
+  public let to: CCY
   public let rate: Float
   
   public var inverseRate: Float {
@@ -19,7 +19,7 @@ public struct ExchangeRate: Hashable {
 
 extension ExchangeRate: CustomStringConvertible {
   public var description: String {
-    "\(lhs)-\(rhs): \(rate)"
+    "\(from)-\(to): \(rate)"
   }
 }
 
