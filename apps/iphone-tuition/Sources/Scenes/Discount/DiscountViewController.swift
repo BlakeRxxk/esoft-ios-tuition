@@ -20,7 +20,7 @@ final class DiscountViewController: UIViewController {
   private(set) lazy var imageContainer: UIView = UIView()
   private(set) lazy var bodyContainer: UIStackView = UIStackView()
 
-  private(set) lazy var arrowBackImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+  private(set) lazy var arrowBackButton: UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
   private(set) lazy var favouritesImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
   private(set) lazy var shareImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
 
@@ -61,7 +61,7 @@ final class DiscountViewController: UIViewController {
     imageContainer.configureLayout(block: layout.imageContainer)
     bodyContainer.configureLayout(block: layout.bodyContainer)
     imageViewWithGradient.configureLayout(block: layout.imageViewWithGradient)
-    arrowBackImageView.configureLayout(block: layout.arrowBackImageView)
+    arrowBackButton.configureLayout(block: layout.arrowBackButton)
     favouritesImageView.configureLayout(block: layout.favouritesImageView)
     shareImageView.configureLayout(block: layout.shareImageView)
     companyName.configureLayout(block: layout.companyName)
@@ -76,7 +76,7 @@ final class DiscountViewController: UIViewController {
     imageViewWithGradient.setImageGradient()
   }
 
-  @objc func pressBackOnNavbar(sender: UITapGestureRecognizer) {
+  @objc func pressBackOnNavbar(sender: UIButton!) {
     self.navigationController?.popViewController(animated: true)
     self.navigationController?.isNavigationBarHidden = false
   }
@@ -85,7 +85,7 @@ final class DiscountViewController: UIViewController {
     view.addSubview(imageContainer)
     view.addSubview(bodyContainer)
     imageContainer.addSubview(imageViewWithGradient)
-    imageContainer.addSubview(arrowBackImageView)
+    imageContainer.addSubview(arrowBackButton)
     imageContainer.addSubview(favouritesImageView)
     imageContainer.addSubview(shareImageView)
     bodyContainer.addArrangedSubview(companyName)
@@ -107,12 +107,10 @@ final class DiscountViewController: UIViewController {
     bodyContainer.spacing = Space.small
 
     let pressBackOnNavbar = UITapGestureRecognizer(target: self, action: #selector(self.pressBackOnNavbar))
-    arrowBackImageView.backgroundColor = UIColor.clear
-    arrowBackImageView.contentMode = .center
-    arrowBackImageView.image = UIImage.Arrow.Left.base
-    arrowBackImageView.tintColor = UIColor.TextColor.white
-    arrowBackImageView.isUserInteractionEnabled = true
-    arrowBackImageView.addGestureRecognizer(pressBackOnNavbar)
+    arrowBackButton.backgroundColor = UIColor.clear
+    arrowBackButton.setImage(UIImage.Arrow.Left.base, for: .normal)
+    arrowBackButton.tintColor = UIColor.TextColor.white
+    arrowBackButton.addGestureRecognizer(pressBackOnNavbar)
 
     favouritesImageView.backgroundColor = UIColor.clear
     favouritesImageView.contentMode = .center
