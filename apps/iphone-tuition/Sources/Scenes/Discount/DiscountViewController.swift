@@ -18,7 +18,7 @@ import YogaKit
 final class DiscountViewController: UIViewController {
   private(set) lazy var imageViewWithGradient: ImageViewWithGradient = ImageViewWithGradient()
   private(set) lazy var imageContainer: UIView = UIView()
-  private(set) lazy var bodyContainer: UIStackView = UIStackView()
+  private(set) lazy var bodyContainer: UIView = UIView()
 
   private(set) lazy var arrowBackButton: UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
   private(set) lazy var favouritesImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
@@ -88,23 +88,18 @@ final class DiscountViewController: UIViewController {
     imageContainer.addSubview(arrowBackButton)
     imageContainer.addSubview(favouritesImageView)
     imageContainer.addSubview(shareImageView)
-    bodyContainer.addArrangedSubview(companyName)
-    bodyContainer.addArrangedSubview(categoryLabel)
-    bodyContainer.addArrangedSubview(discountType)
-    bodyContainer.addArrangedSubview(discountDescription)
-    bodyContainer.addArrangedSubview(divider)
-    bodyContainer.addArrangedSubview(whyYouCanUseDescription)
-    bodyContainer.addArrangedSubview(button)
+    bodyContainer.addSubview(companyName)
+    bodyContainer.addSubview(categoryLabel)
+    bodyContainer.addSubview(discountType)
+    bodyContainer.addSubview(discountDescription)
+    bodyContainer.addSubview(divider)
+    bodyContainer.addSubview(whyYouCanUseDescription)
+    bodyContainer.addSubview(button)
   }
 
   private func configureUI() {
     view.backgroundColor = ThemeManager.current().colors.container
     self.navigationController?.isNavigationBarHidden = true
-
-    bodyContainer.axis = .vertical
-    bodyContainer.isLayoutMarginsRelativeArrangement = true
-    bodyContainer.layoutMargins = UIEdgeInsets(top: Space.small, left: Space.small, bottom: Space.small, right: Space.small)
-    bodyContainer.spacing = Space.small
 
     let pressBackOnNavbar = UITapGestureRecognizer(target: self, action: #selector(self.pressBackOnNavbar))
     arrowBackButton.backgroundColor = UIColor.clear
