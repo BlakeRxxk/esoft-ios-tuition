@@ -78,6 +78,7 @@ final class DiscountViewController: UIViewController {
 
   @objc func pressBackOnNavbar(sender: UITapGestureRecognizer) {
     self.navigationController?.popViewController(animated: true)
+    self.navigationController?.isNavigationBarHidden = false
   }
 
   private func createUI() {
