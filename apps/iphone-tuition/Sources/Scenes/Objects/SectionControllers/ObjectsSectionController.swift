@@ -15,9 +15,12 @@ public final class ObjectsSectionController: ListSectionController {
     guard let context = collectionContext else { return CGSize() }
     
     let width: CGFloat = context.containerSize.width
-    let height: CGFloat = context.containerSize.height
-    
-    return CGSize(width: width, height: height)
+    return CGSize(width: width, height: 343)
+  }
+  
+  override init() {
+    super.init()
+//    inset = UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
   }
   
   override public func cellForItem(at index: Int) -> UICollectionViewCell {
@@ -27,7 +30,7 @@ public final class ObjectsSectionController: ListSectionController {
                                                         at: index) as? ObjectCell else {
                                                           return UICollectionViewCell()
     }
-  
+   
     cell.bindViewModel(object)
     return cell
   }

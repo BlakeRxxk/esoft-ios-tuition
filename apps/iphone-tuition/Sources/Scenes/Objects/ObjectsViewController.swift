@@ -18,12 +18,7 @@ final class ObjectsViewController: ViewController<BaseListView>{
   var networkManager = NetworkManager()
   private var data: [ObjectViewModel] = []
   
-  // MARK: - UI
-  
-//  private(set) lazy var container: UIView = UIView()
-//  private(set) lazy var previewItemViewYOGA = PreviewItemViewYOGA()
-//  private(set) lazy var addressItemViewYOGA: AddressItemViewYOGA = AddressItemViewYOGA()
-//  private(set) lazy var infoItemView: InfoItemViewYOGA = InfoItemViewYOGA()
+  // MARK: - Init
   
   init() {
     super.init(viewCreator: BaseListView.init)
@@ -41,10 +36,22 @@ final class ObjectsViewController: ViewController<BaseListView>{
         let self = self,
         let objects = res else { return }
       
-      let tmp = objects.map { ObjectViewModel(id: $0.id, description: $0.description) }
-       self.data.append(contentsOf: tmp)
-      
-      print(objects)
+      let tmp = objects.map { ObjectViewModel(id: $0.id,
+                                              price: $0.price,
+                                              oldPrice: $0.oldPrice ?? "",
+                                              city: $0.city,
+                                              district: $0.district,
+                                              street: $0.street,
+                                              house: $0.house,
+                                              type: $0.type,
+                                              roomsCount: $0.roomsCount,
+                                              areaFlat: $0.areaFlat,
+                                              floorsNum: $0.floorsNum,
+                                              floorsCnt: $0.floorsCnt,
+                                              priceAr: $0.priceAr,
+                                              photos: $0.photos)
+      }
+      self.data.append(contentsOf: tmp)
       
       DispatchQueue.main.async {
         self.specializedView.adapter?.performUpdates(animated: true)
@@ -78,73 +85,7 @@ final class ObjectsViewController: ViewController<BaseListView>{
   private func configureUI() {
     specializedView.adapter?.dataSource = self
     specializedView.adapter?.scrollViewDelegate = self
-    view.backgroundColor = AppTheme.current().colors.container
   }
-  
-//  private func createUI() {
-//    container.addSubview(previewItemViewYOGA)
-//    container.addSubview(addressItemViewYOGA)
-//    container.addSubview(infoItemView)
-//    view.addSubview(container)
-//  }
-  
-//  private func configureUI() {
-//    // view
-//    view.backgroundColor = AppTheme.current().colors.screen
-//
-//    // navigation
-//    navigationItem.title = "Title"
-//
-//    // container
-//    container.backgroundColor = AppTheme.current().colors.container
-//    // previewItemView
-//    previewItemViewYOGA.address = Localized.address
-//    previewItemViewYOGA.currentPrice = Localized.currentPrice
-//    previewItemViewYOGA.price = Localized.price
-//    previewItemViewYOGA.photo = UIImage(named: "photo")
-//
-//    // addressItemView
-//    addressItemViewYOGA.title = Localized.mainTitle
-//
-//    // infoItemView
-//    infoItemView.firstTitle = Localized.views
-//    infoItemView.secondTitle = Localized.favorits
-//    infoItemView.thirdTitle = Localized.codeObject
-//  }
-  
-//  private func layout() {
-//    container.configureLayout { layout in
-//      layout.paddingLeft = 16
-//      layout.paddingRight = 16
-//    }
-//
-//    view.configureLayout { layout in
-//      layout.isEnabled = true
-//      layout.width = 100%
-//      layout.height = 100%
-//    }
-//
-//    container.configureLayout { layout in
-//      layout.isEnabled = true
-//      layout.flexDirection = .column
-//      layout.width = YGValue(UIScreen.main.bounds.width)
-//      layout.marginTop = YGValue(8)
-//    }
-//
-//    infoItemView.configureLayout { layout in
-//      layout.isEnabled = true
-//    }
-//
-//    addressItemViewYOGA.configureLayout { layout in
-//      layout.isEnabled = true
-//    }
-//
-//    previewItemViewYOGA.configureLayout { (layout) in
-//      layout.isEnabled = true
-//    }
-//
-//    view.yoga.applyLayout(preservingOrigin: true)
-//  }
   
 }
 

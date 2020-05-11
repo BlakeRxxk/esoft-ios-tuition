@@ -96,9 +96,12 @@ public final class PreviewItemViewYOGA: View {
     
     image.layer.cornerRadius = 8
     image.clipsToBounds = true
+    image.backgroundColor = .gray
     
     favoriteButton.setBackgroundImage(UIImage.favorit, for: .normal)
     favoriteButton.tintColor = ThemeManager.current().colors.container
+    
+    addressLabel.numberOfLines = 0
     
     currentPriceLabel.setStyles(
       UILabel.Styles.title3

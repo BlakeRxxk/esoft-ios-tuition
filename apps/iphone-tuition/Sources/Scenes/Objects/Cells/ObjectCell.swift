@@ -54,7 +54,7 @@ public final class ObjectCell: UICollectionViewCell {
 
   override public func layoutSubviews() {
     super.layoutSubviews()
-
+    
       contentView.configureLayout { layout in
         layout.isEnabled = true
         layout.width = 100%
@@ -69,7 +69,9 @@ public final class ObjectCell: UICollectionViewCell {
         layout.paddingLeft = 16
         layout.paddingRight = 16
       }
-    container.backgroundColor = .orange
+    
+      container.backgroundColor = .orange
+//    print(container.frame.height)
 
       infoItemView.configureLayout { layout in
         layout.isEnabled = true

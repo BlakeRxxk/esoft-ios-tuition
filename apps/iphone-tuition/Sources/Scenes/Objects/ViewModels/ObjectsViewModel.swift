@@ -7,14 +7,54 @@
 
 import Foundation
 import IGListKit
+import NetworkTrainee
 
 public final class ObjectViewModel {
   let id: String
-  let description: String
+  let price: String
+  let oldPrice: String
+  let city: String
+  let district: String
+  let street: String
+  let house: String
+  let type: String
+  let roomsCount: String
+  let areaFlat: String
+  let floorsNum: String
+  let floorsCnt: String
+  let priceAr: String
+  let photos: [ObjectPhotos]
+//  let viewsCount: String
   
-  public init(id: String, description: String) {
+  public init(id: String,
+              price: String,
+              oldPrice: String,
+              city: String,
+              district: String,
+              street: String,
+              house: String,
+              type: String,
+              roomsCount: String,
+              areaFlat: String,
+              floorsNum: String,
+              floorsCnt: String,
+              priceAr: String,
+              photos: [ObjectPhotos]) {
     self.id = id
-    self.description = description
+    self.price = price
+    self.oldPrice = oldPrice
+    self.city = city
+    self.district = district
+    self.street = street
+    self.house = house
+    self.type = type
+    self.roomsCount = roomsCount
+    self.areaFlat = areaFlat
+    self.floorsNum = floorsNum
+    self.floorsCnt = floorsCnt
+    self.priceAr = priceAr
+    self.photos = photos
+//    self.viewsCount = viewsCount
   }
 }
 
@@ -26,7 +66,7 @@ extension ObjectViewModel: ListDiffable {
   public func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
     guard self !== object else { return true }
     guard let object = object as? ObjectViewModel else { return false }
-    return id == object.id && description == object.description
+    return id == object.id
   }
 }
 
