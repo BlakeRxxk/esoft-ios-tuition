@@ -15,7 +15,7 @@ public final class ObjectsSectionController: ListSectionController {
     guard let context = collectionContext else { return CGSize() }
     
     let width: CGFloat = context.containerSize.width
-    return CGSize(width: width, height: 343)
+    return CGSize(width: width, height: 350) // 343
   }
   
   override init() {

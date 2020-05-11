@@ -9,6 +9,7 @@ import UIKit
 import BaseUI
 import BaseFRP
 import ThemeManager
+import YogaKit
 
 public final class PreviewItemViewYOGA: View {
   
@@ -48,21 +49,45 @@ public final class PreviewItemViewYOGA: View {
     }
   }
   
+  public var dataSet: [String] {
+    get {
+      dataSet
+    }
+    set {
+      data = newValue
+      collectionView.reloadData()
+    }
+  }
+  
   // topView
   private(set) lazy var topView = UIView()
   private(set) lazy var topViewStack = UIView()
   private(set) lazy var currentPriceLabel = UILabel()
   private(set) lazy var priceStack = UIView()
   private(set) lazy var priceImage = UIImageView()
+  
   private(set) lazy var priceLabel = UILabel()
   private(set) lazy var addressLabel = UILabel()
   
   // mainView
   private(set) lazy var mainView = UIView()
   private(set) lazy var image = UIImageView()
+  
+  private(set) lazy var data: [String] = []
+  private(set) lazy var collectionView: UICollectionView = {
+    let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+//    layout.sectionInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+    let cv: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+//    cv.isScrollEnabled = false
+    layout.scrollDirection = .horizontal
+    cv.isPagingEnabled = true
+    cv.register(PreviewImageCell.self, forCellWithReuseIdentifier: PreviewImageCell.reuseId)
+    return cv
+  }()
+  
   private(set) lazy var favoriteButton = UIButton()
   
-  private var activeConstraints: [NSLayoutConstraint] = []
+//  private var activeConstraints: [NSLayoutConstraint] = []
   
   override public init() {
     super.init()
@@ -73,6 +98,24 @@ public final class PreviewItemViewYOGA: View {
   }
   
   private func createUI() {
+    
+    let subviews: [UIView] = [
+      topView,
+      topViewStack,
+      currentPriceLabel,
+      priceStack,
+      priceImage,
+      priceLabel,
+      addressLabel,
+      mainView,
+      image,
+      collectionView
+    ]
+    
+    subviews.forEach {
+      $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     topView.addSubview(topViewStack)
     topViewStack.addSubview(currentPriceLabel)
     topViewStack.addSubview(priceStack)
@@ -80,7 +123,8 @@ public final class PreviewItemViewYOGA: View {
     priceStack.addSubview(priceLabel)
     topView.addSubview(addressLabel)
     
-    mainView.addSubview(image)
+//    mainView.addSubview(image)
+    mainView.addSubview(collectionView)
     mainView.addSubview(favoriteButton)
     
     addSubview <^> [
@@ -90,6 +134,13 @@ public final class PreviewItemViewYOGA: View {
   }
   
   private func configureUI() {
+    
+    collectionView.backgroundColor = .white
+    
+    collectionView.delegate = self
+    collectionView.dataSource = self
+    collectionView.layer.cornerRadius = 8
+    collectionView.clipsToBounds = true
     
     priceImage.image = UIImage.arrowDown
     priceImage.tintColor = ThemeManager.current().colors.primary500
@@ -178,6 +229,12 @@ public final class PreviewItemViewYOGA: View {
       layout.height = 207
     }
     
+    collectionView.configureLayout { layout in
+      layout.isEnabled = true
+      layout.height = 207
+      layout.width = 100%
+    }
+    
     favoriteButton.configureLayout { layout in
       layout.isEnabled = true
       layout.width = 23
@@ -192,3 +249,32 @@ public final class PreviewItemViewYOGA: View {
 }
 
 extension PreviewItemViewYOGA: PreviewItemViewInputYOGA {}
+
+extension PreviewItemViewYOGA: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+  
+  public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    data.count
+  }
+  
+  public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PreviewImageCell.reuseId, for: indexPath) as! PreviewImageCell
+      cell.set(photoName: data[indexPath.row])
+      return cell
+  }
+  
+  public func collectionView(_ collectionView: UICollectionView,
+                             layout collectionViewLayout: UICollectionViewLayout,
+                             sizeForItemAt indexPath: IndexPath) -> CGSize {
+    let width = collectionView.frame.width
+    print(width)
+    return CGSize(width: width, height: 207)
+  }
+  
+  public func collectionView(_ collectionView: UICollectionView,
+                             layout collectionViewLayout: UICollectionViewLayout,
+                             minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    CGFloat(0)
+  }
+  
+}

@@ -84,7 +84,7 @@ public final class ObjectCell: UICollectionViewCell {
       previewItemViewYOGA.configureLayout { (layout) in
         layout.isEnabled = true
       }
-
+    
       contentView.yoga.applyLayout(preservingOrigin: true)
   }
 }

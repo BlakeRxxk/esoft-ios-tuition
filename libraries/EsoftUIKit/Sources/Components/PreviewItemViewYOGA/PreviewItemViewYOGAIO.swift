@@ -10,6 +10,7 @@ import UIKit
 public protocol PreviewItemViewInputYOGA {
   var currentPrice: String { get set }
   var price: String { get set }
+  var dataSet: [String] { get set }
   var address: String { get set }
   var photo: UIImage? { get set }
 }

@@ -46,16 +46,10 @@ extension ObjectCell: ListBindable {
     
     addressItemViewYOGA.title = "\(type), \(roomsCount), \(areaFlat), \(floorsNum), \(priceAr)"
     
-    let dataImg =  viewModel.photos.map { $0.fileName }
+    let dataImg = viewModel.photos.map { $0.fileName }
+    previewItemViewYOGA.dataSet = dataImg
+
     print(dataImg)
-    
-//    for item in viewModel.photos {
-//      print(item.fileName)
-//    }
-//    print("VIEWMODELPHOTOS", viewModel.photos, "\n")
-    
-    // infoItem
-//    let viewsCount = viewModel.viewsCount
     
     layoutSubviews()
   }
