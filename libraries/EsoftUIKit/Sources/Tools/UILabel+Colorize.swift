@@ -1,17 +1,14 @@
 //
-//  SocialStack.swift
-//  AppLibrary
+//  UIImage+Tools.swift
+//  EsoftUIKit
 //
-//  Created by nedstar on 24.04.2020.
+//  Copyright © 2020 E-SOFT. All rights reserved.
 //
 
 import UIKit
-import YogaKit
-import ThemeManager
-import BaseUI
 
 extension UILabel {
-  func colorize(from: Int, to: Int, with color: UIColor) {
+  public func colorize(from: Int, to: Int, with color: UIColor) {
     guard let atrText = self.attributedText else {
       return
     }
