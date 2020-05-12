@@ -12,5 +12,5 @@ public protocol UnderscoredTextFieldInput {
 }
 
 public protocol UnderscoredTextFieldOutput: AnyObject {
-  func valueDidChange(newVal: String)
+  func valueDidChange(sender: UnderscoredTextField, newVal: String)
 }
