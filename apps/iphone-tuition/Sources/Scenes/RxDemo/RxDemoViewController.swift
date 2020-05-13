@@ -29,7 +29,6 @@ final class RxDemoViewController: UIViewController {
     
     view.backgroundColor = AppTheme.current().colors.container
     
-    
 //    button.rx
 //      .tap
 //      .startWith("tap me")
