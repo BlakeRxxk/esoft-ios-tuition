@@ -38,16 +38,16 @@ final class RxDemoViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    let url = URL(string: "https://developers.etagi.com/api/v2/catalogs/cities/list?api_key=demo_mobile&limit=10")!
-  
-    networkAPI
-      .getCities(url: url)
-      .subscribe(onSuccess: { res in
-          print(res)
-        }) { err in
-          print(err)
-      }
-      .disposed(by: disposeBag)
+//    let url = URL(string: "https://developers.etagi.com/api/v2/catalogs/cities/list?api_key=demo_mobile&limit=10")!
+//
+//    networkAPI
+//      .getCities(url: url)
+//      .subscribe(onSuccess: { res in
+//          print(res)
+//        }) { err in
+//          print(err)
+//      }
+//      .disposed(by: disposeBag)
   }
 
   override func viewDidLayoutSubviews() {
