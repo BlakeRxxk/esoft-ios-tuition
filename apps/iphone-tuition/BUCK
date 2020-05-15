@@ -35,6 +35,10 @@ static_libraries = [
     "//libraries/ListKit:ListKit",
     "//libraries/RxExtensions:RxExtensions",
     "//libraries/URLRequestKit:URLRequestKit",
+    "//scenarios/Specialists/SpecialistsCore:SpecialistsCore",
+    "//scenarios/Specialists/SpecialistsImplementation:SpecialistsImplementation",
+    "//scenarios/Specialists/SpecialistsUI:SpecialistsUI",
+    "//integrations/TuitionIntegrations:TuitionIntegrations",
 ]
 
 prebuilt_test_frameworks = [

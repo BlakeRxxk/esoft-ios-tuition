@@ -7,6 +7,8 @@
 
 import Foundation
 import NeedleFoundation
+import SpecialistsCore
+import SpecialistsImplementation
 import UIKit
 
 // MARK: - Registration
