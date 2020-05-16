@@ -143,13 +143,13 @@ extension UIButton {
     
     public static let cardActions = Style(name: "cardActions") { (button: UIButton) in
       let tintColor: UIColor = button.tintColor
-
+      
       if let image = button.image(for: .normal) {
         button.setColorizedImage(image, color: tintColor, for: .normal)
         button.setColorizedImage(image, color: .highlighted(from: tintColor), for: .highlighted)
         button.setColorizedImage(image, color: .highlighted(from: tintColor, alpha: 0.5), for: .disabled)
       }
-
+      
       button.configureLayout { layout in
         layout.height = YGValue.large
         layout.width = YGValue.large
@@ -288,7 +288,7 @@ extension UIButton {
       layout.right = YGValueZero
       layout.isEnabled = true
     }
-
+    
     let bottomBorder = UIView()
     bottomBorder.appendStyle(UIView.Styles.divider)
     bottomBorder.configureLayout { layout in
@@ -298,7 +298,7 @@ extension UIButton {
       layout.right = YGValueZero
       layout.isEnabled = true
     }
-
+    
     addSubview(topBorder)
     addSubview(bottomBorder)
   }
@@ -321,9 +321,9 @@ extension UIButton {
         centerX.constraint(equalTo: indicator.centerX),
         centerY.constraint(equalTo: indicator.centerY)
       ])
-
+      
       indicator.startAnimating()
-
+      
     } else {
       if let indicator = viewWithTag(tag) as? UIActivityIndicatorView {
         indicator.stopAnimating()

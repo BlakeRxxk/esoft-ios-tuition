@@ -7,6 +7,12 @@ static_library(
         "Sources/**/*.swift",
     ]),
     deps = [
+        "//third-party/Pods:Yoga",
+        "//third-party/Pods:YogaKit",
+        "//third-party/Pods:IGListKit",
+        "//third-party/Pods:IGListDiffKit",
+        "//libraries/EsoftUIKit:EsoftUIKit",
+        "//libraries/CDNImageLink:CDNImageLink",
         "//scenarios/Specialists/SpecialistsCore:SpecialistsCore",
         "//scenarios/Specialists/SpecialistsImplementation:SpecialistsImplementation"
     ],

@@ -39,6 +39,7 @@ static_libraries = [
     "//scenarios/Specialists/SpecialistsImplementation:SpecialistsImplementation",
     "//scenarios/Specialists/SpecialistsUI:SpecialistsUI",
     "//integrations/TuitionIntegrations:TuitionIntegrations",
+    "//libraries/CDNImageLink:CDNImageLink",
 ]
 
 prebuilt_test_frameworks = [

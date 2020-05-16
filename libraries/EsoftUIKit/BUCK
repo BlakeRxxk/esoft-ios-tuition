@@ -8,6 +8,9 @@ static_library(
     ]),
     deps = [
         ":EsoftUIKitMedia",
+        "//third-party/Pods:PINCache",
+        "//third-party/Pods:PINRemoteImage",
+        "//third-party/Pods:FLAnimatedImage",
         "//libraries/Atlas:Atlas",
         "//libraries/ThemeManager:ThemeManager",
         "//libraries/AutoLayoutKit:AutoLayoutKit",
@@ -17,6 +20,7 @@ static_library(
         "//libraries/AnimateUI:AnimateUI",
         "//third-party/Pods:Yoga",
         "//third-party/Pods:YogaKit",
+        "//libraries/ListKit:ListKit",
         "//third-party/Pods:IGListKit",
         "//third-party/Pods:IGListDiffKit",
     ],
