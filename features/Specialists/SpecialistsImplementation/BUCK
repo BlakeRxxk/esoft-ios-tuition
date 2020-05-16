@@ -7,7 +7,7 @@ static_library(
         "Sources/**/*.swift",
     ]),
     deps = [
-        "//scenarios/Specialists/SpecialistsCore:SpecialistsCore",
+        "//features/Specialists/SpecialistsCore:SpecialistsCore",
     ],
     frameworks = [
         "$SDKROOT/System/Library/Frameworks/Foundation.framework",

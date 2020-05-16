@@ -77,19 +77,19 @@ extension RxDemoViewController {
     objectSignal
       .bind(to: adapter.rx.objects(for: source))
       .disposed(by: disposeBag)
-    //
-    //    let networkRequest = networkAPI
-    //      .getSpecialists(url: URL(string: "https://developers.etagi.com/api/v2/staff?&api_key=demo_lk_ios")!)
-    //      .share()
     
-    objectSignal.onNext(showSkeleton())
-    //    networkRequest
-    //      .elements()
-    //      .compactMap { $0.data }
-    //      .map { $0.map { $0.asViewModel() } }
-    //      .map { $0.mapToSpecialistsSections() }
-    //      .bind(to: adapter.rx.objects(for: source))
-    //      .disposed(by: disposeBag)
+        let networkRequest = networkAPI
+          .getSpecialists(url: URL(string: "https://developers.etagi.com/api/v2/staff?&api_key=demo_lk_ios")!)
+          .share()
+    
+//    objectSignal.onNext(showSkeleton())
+        networkRequest
+          .elements()
+          .compactMap { $0.data }
+          .map { $0.map { $0.asViewModel() } }
+          .map { $0.mapToSpecialistsSections() }
+          .bind(to: adapter.rx.objects(for: source))
+          .disposed(by: disposeBag)
   }
   
   func showSkeleton() -> [SpecialistsSections] {
