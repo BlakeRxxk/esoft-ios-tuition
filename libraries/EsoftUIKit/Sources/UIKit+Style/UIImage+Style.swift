@@ -7,6 +7,28 @@
 import UIKit
 
 extension UIImage {
+  public enum Stub {
+    public static var specialists: UIImage {
+      return named("stub.specialists").withRenderingMode(.alwaysTemplate)
+    }
+    
+    public static var favorites: UIImage {
+      return named("stub.favorites").withRenderingMode(.alwaysTemplate)
+    }
+    
+    public static var tickets: UIImage {
+      return named("stub.tickets").withRenderingMode(.alwaysTemplate)
+    }
+    
+    public static var search: UIImage {
+      return named("stub.search").withRenderingMode(.alwaysTemplate)
+    }
+    
+    public static var chat: UIImage {
+      return named("stub.chat").withRenderingMode(.alwaysTemplate)
+    }
+  }
+  
   public enum Filter {
     public static var base: UIImage {
       named("ic_sort").withRenderingMode(.alwaysTemplate)
@@ -24,7 +46,7 @@ extension UIImage {
   }
   
   public enum Consultant {
-    public static var left: UIImage {
+    public static var base: UIImage {
       named("consultant.base").withRenderingMode(.alwaysTemplate)
     }
   }

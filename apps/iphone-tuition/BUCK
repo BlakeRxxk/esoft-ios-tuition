@@ -30,6 +30,15 @@ static_libraries = [
     "//libraries/Network:Network",
     "//libraries/NetworkTrainee:NetworkTrainee",
     "//libraries/StateKit:StateKit",
+    "//libraries/Currency:Currency",
+    "//libraries/Localized:Localized",
+    "//libraries/ListKit:ListKit",
+    "//libraries/RxExtensions:RxExtensions",
+    "//libraries/URLRequestKit:URLRequestKit",
+    "//scenarios/Specialists/SpecialistsCore:SpecialistsCore",
+    "//scenarios/Specialists/SpecialistsImplementation:SpecialistsImplementation",
+    "//scenarios/Specialists/SpecialistsUI:SpecialistsUI",
+    "//integrations/TuitionIntegrations:TuitionIntegrations",
 ]
 
 prebuilt_test_frameworks = [
@@ -54,6 +63,7 @@ prebuilt_frameworks = [
 resource_dependencies = [
     ":LaunchScreen",
     ":Icons",
+    ":Localizations",
 ]
 
 build_phase_scripts = [
@@ -83,6 +93,15 @@ apple_resource(
         "Resources/Base.lproj/LaunchScreen.storyboard",
     ],
     visibility = ["PUBLIC"],
+)
+
+apple_resource(
+    name = "Localizations",
+    visibility = ["//apps/%s:"%appPath],
+    files = [],
+    variants = glob([
+        "Resources/*.lproj/Localizable.strings",
+    ]),
 )
 
 apple_library(

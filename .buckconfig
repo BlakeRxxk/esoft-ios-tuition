@@ -32,4 +32,5 @@
   ide = xcode
   allow_symlinks = forbid
   ignore = tools, \
+           vendor, \
            .git, \
