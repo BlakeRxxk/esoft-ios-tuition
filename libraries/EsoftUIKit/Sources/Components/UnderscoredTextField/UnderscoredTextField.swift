@@ -27,14 +27,27 @@ public final class UnderscoredTextField: View {
       formattedTextField.placeholder = newValue
     }
   }
-  
+  public var isSecureTextEntry: Bool {
+    get {
+      formattedTextField.isSecureTextEntry
+    }
+    set {
+      formattedTextField.isSecureTextEntry = newValue
+      
+      if isSecureTextEntry {
+        showTextButton.setImage(UIImage.eye, for: .normal)
+      } else {
+        showTextButton.setImage(UIImage.eyeSolid, for: .normal)
+      }
+
+    }
+  }
   public var errorMessage: String? {
     didSet {
       // Цвета стоит заменить на rx?
       if errorMessage == nil {
         divider.backgroundColor = ThemeManager.current().colors.divider
-      }
-      else {
+      } else {
         divider.backgroundColor = ThemeManager.current().colors.error
         errorLabel.styledText = errorMessage // заменить на rx
       }
@@ -42,13 +55,13 @@ public final class UnderscoredTextField: View {
     }
   }
   
+  private(set) lazy var textFieldConatainer: UIView = UIView()
   private(set) lazy var formattedTextField: FormattedTextField = FormattedTextField()
-  //  private(set) lazy var showTextButton: UIButton =
+  private(set) lazy var showTextButton: UIButton = UIButton()
   private(set) lazy var divider: UIView = UIView()
-  private(set) lazy var errorLabel: UILabel = UILabel();
+  private(set) lazy var errorLabel: UILabel = UILabel()
   
   public weak var output: UnderscoredTextFieldOutput?
-  
   private var layoutController: LayoutController = LayoutController()
   
   public init(type: UnderscoredTextFieldType) {
@@ -59,14 +72,21 @@ public final class UnderscoredTextField: View {
   }
   
   private func createUI(_ type: UnderscoredTextFieldType) {
+    textFieldConatainer.addSubview(formattedTextField)
+    if type == .password {
+      textFieldConatainer.addSubview(showTextButton)
+    }
+    
     [
-      formattedTextField,
+      textFieldConatainer,
       divider
       ].forEach { addSubview($0) }
   }
   
   private func configureUI(_ type: UnderscoredTextFieldType) {
     switch type {
+      
+    // Сделать билдер?
     case .password:
       formattedTextField.isSecureTextEntry = true
     case .phone:
@@ -74,6 +94,10 @@ public final class UnderscoredTextField: View {
       formattedTextField.formatter = formatPhoneNumber
     }
     formattedTextField.output = self
+    
+    showTextButton.setImage(UIImage.eye, for: .normal)
+    showTextButton.imageView?.tintColor = ThemeManager.current().textColors.secondary
+    showTextButton.addTarget(self, action: #selector(didTouchshowTextButton), for: .touchUpInside)
     
     divider.backgroundColor = ThemeManager.current().colors.divider
     
@@ -94,19 +118,33 @@ public final class UnderscoredTextField: View {
       layout.flexDirection = .column
     })
     
-    formattedTextField.configureLayout(block: { layout in
+    textFieldConatainer.configureLayout(block: { layout in
       layout.isEnabled = true
       layout.height = YGValue(containerSize.height - 23)
+      layout.flexDirection = .row
+    })
+    
+    formattedTextField.configureLayout(block: { layout in
+      layout.isEnabled = true
+      layout.width = 1
+      layout.flexGrow = 1
+    })
+    showTextButton.configureLayout(block: { layout in
+      layout.isEnabled = true
+      layout.width = 22
+      layout.height = 15
+      layout.marginTop = 3
+      layout.marginLeft = 9
     })
     divider.configureLayout(block: {layout in
       layout.isEnabled = true
       layout.height = 1
     })
     
+    // Как-то по-другому можно сделать это?
     if errorMessage == nil {
       layoutController.hide(errorLabel)
-    }
-    else {
+    } else {
       layoutController.show(errorLabel, in: self, with: { layout in
         layout.isEnabled = true
         layout.height = 18
@@ -115,6 +153,10 @@ public final class UnderscoredTextField: View {
     }
     
     yoga.applyLayout(preservingOrigin: true)
+  }
+  
+  @objc func didTouchshowTextButton() {
+    self.isSecureTextEntry = !self.isSecureTextEntry
   }
 }
 

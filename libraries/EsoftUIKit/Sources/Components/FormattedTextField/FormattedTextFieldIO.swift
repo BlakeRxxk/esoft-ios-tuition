@@ -8,7 +8,6 @@
 import UIKit
 
 public protocol FormattedTextFieldInput {
-  // Стартовое значение?
 }
 
 public protocol FormattedTextFieldOutput: AnyObject {

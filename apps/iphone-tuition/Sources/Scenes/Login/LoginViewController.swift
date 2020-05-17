@@ -108,17 +108,16 @@ final class LoginViewController: UIViewController {
     termLabel.colorize(from: 31, to: 60, with: ThemeManager.current().colors.brand)
   }
   
-  private func bind(){
+  private func bind() {
     // Ниже тест
-    var count = 0;
+    var count = 0
     // сделать error на rx (и не как next?)
     continueButton.rx
       .tap
       .bind(onNext: { [unowned self] in
         if count % 2 == 0 {
           self.phoneTextField.errorMessage = "Отсутствует интернет соединение"
-        }
-        else {
+        } else {
           self.phoneTextField.errorMessage = nil
         }
         count += 1

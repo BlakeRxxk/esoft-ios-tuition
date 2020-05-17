@@ -12,7 +12,7 @@ import BaseUI
 
 // Нужен ли вообще этот компонент? (Вроде да)
 // Нельзя ли как-то расширить UITextField? (Вроде нет)
-public final class FormattedTextField : View {
+public final class FormattedTextField: View {
   public var placeholder: String {
     get {
       textField.placeholder ?? ""
@@ -31,17 +31,14 @@ public final class FormattedTextField : View {
   }
   public var keyboardType: UIKeyboardType {
     get {
-      return textField.keyboardType
+      textField.keyboardType
     }
     set {
       textField.keyboardType = newValue
     }
   }
+  
   public var formatter: ((String) -> String)?
-  
-  public weak var output: FormattedTextFieldOutput?
-  
-  internal lazy var layout: Layout = Layout()
   
   private(set) lazy var textField: UITextField = {
     // заменить на rx
@@ -49,10 +46,11 @@ public final class FormattedTextField : View {
     return $0
   }(UITextField())
   
+  public weak var output: FormattedTextFieldOutput?
+  
   public override init() {
     super.init()
     
-    configureUI()
     createUI()
   }
   
@@ -60,15 +58,19 @@ public final class FormattedTextField : View {
     addSubview(textField)
   }
   
-  private func configureUI() {
-  }
-  
   override public func layoutSubviews() {
     super.layoutSubviews()
-
-    configureLayout(block: layout.container)
-
-    textField.configureLayout(block: layout.textField)
+    
+    configureLayout(block: { layout in
+      layout.isEnabled = true
+      layout.width = 100%
+      layout.height = 100%
+      layout.flexDirection = .column
+    })
+    
+    textField.configureLayout(block: { layout in
+      layout.isEnabled = true
+    })
     
     yoga.applyLayout(preservingOrigin: true)
   }

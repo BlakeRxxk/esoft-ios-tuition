@@ -9,23 +9,23 @@ import UIKit
 extension UIImage {
   public enum Stub {
     public static var specialists: UIImage {
-      return named("stub.specialists").withRenderingMode(.alwaysTemplate)
+      named("stub.specialists").withRenderingMode(.alwaysTemplate)
     }
     
     public static var favorites: UIImage {
-      return named("stub.favorites").withRenderingMode(.alwaysTemplate)
+      named("stub.favorites").withRenderingMode(.alwaysTemplate)
     }
     
     public static var tickets: UIImage {
-      return named("stub.tickets").withRenderingMode(.alwaysTemplate)
+      named("stub.tickets").withRenderingMode(.alwaysTemplate)
     }
     
     public static var search: UIImage {
-      return named("stub.search").withRenderingMode(.alwaysTemplate)
+      named("stub.search").withRenderingMode(.alwaysTemplate)
     }
     
     public static var chat: UIImage {
-      return named("stub.chat").withRenderingMode(.alwaysTemplate)
+      named("stub.chat").withRenderingMode(.alwaysTemplate)
     }
   }
   
