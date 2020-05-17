@@ -56,8 +56,6 @@ public final class ImageViewWithGradient: View {
   }
 
   private func configureUI() {
-    container.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-
     imageView.backgroundColor = UIColor.white
     imageView.contentMode = .center
     imageView.layer.masksToBounds = true
@@ -75,7 +73,6 @@ public final class ImageViewWithGradient: View {
       imageView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
       imageView.trailingAnchor.constraint(equalTo: container.trailingAnchor),
       imageView.bottomAnchor.constraint(equalTo: container.bottomAnchor),
-      imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.0/1.5),
 
       gradientView.topAnchor.constraint(equalTo: container.topAnchor),
       gradientView.leadingAnchor.constraint(equalTo: container.leadingAnchor),

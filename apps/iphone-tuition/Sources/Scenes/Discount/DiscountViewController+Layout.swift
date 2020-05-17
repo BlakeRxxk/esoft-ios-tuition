@@ -32,7 +32,7 @@ extension DiscountViewController {
       layout.justifyContent = .flexStart
     }
 
-    let arrowBackImageView: YGLayoutConfigurationBlock = { layout in
+    let arrowBackButton: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
       layout.width = YGValue(Space.base)
       layout.height = YGValue(Space.base)

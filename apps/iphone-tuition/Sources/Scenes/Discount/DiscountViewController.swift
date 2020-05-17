@@ -18,9 +18,9 @@ import YogaKit
 final class DiscountViewController: UIViewController {
   private(set) lazy var imageViewWithGradient: ImageViewWithGradient = ImageViewWithGradient()
   private(set) lazy var imageContainer: UIView = UIView()
-  private(set) lazy var bodyContainer: UIStackView = UIStackView()
+  private(set) lazy var bodyContainer: UIView = UIView()
 
-  private(set) lazy var arrowBackImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+  private(set) lazy var arrowBackButton: UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
   private(set) lazy var favouritesImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
   private(set) lazy var shareImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
 
@@ -51,17 +51,12 @@ final class DiscountViewController: UIViewController {
 
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    let containerSize = view.bounds.size
-    view.configureLayout(block: { layout in
-      layout.isEnabled = true
-      layout.height = YGValue(containerSize.height)
-      layout.width = YGValue(containerSize.width)
-    })
+    view.configureLayout(block: { $0.isEnabled = true })
 
     imageContainer.configureLayout(block: layout.imageContainer)
     bodyContainer.configureLayout(block: layout.bodyContainer)
     imageViewWithGradient.configureLayout(block: layout.imageViewWithGradient)
-    arrowBackImageView.configureLayout(block: layout.arrowBackImageView)
+    arrowBackButton.configureLayout(block: layout.arrowBackButton)
     favouritesImageView.configureLayout(block: layout.favouritesImageView)
     shareImageView.configureLayout(block: layout.shareImageView)
     companyName.configureLayout(block: layout.companyName)
@@ -76,34 +71,36 @@ final class DiscountViewController: UIViewController {
     imageViewWithGradient.setImageGradient()
   }
 
+  @objc func pressBackOnNavbar(sender: UIButton!) {
+    self.navigationController?.popViewController(animated: true)
+    self.navigationController?.isNavigationBarHidden = false
+  }
+
   private func createUI() {
     view.addSubview(imageContainer)
     view.addSubview(bodyContainer)
     imageContainer.addSubview(imageViewWithGradient)
-    imageContainer.addSubview(arrowBackImageView)
+    imageContainer.addSubview(arrowBackButton)
     imageContainer.addSubview(favouritesImageView)
     imageContainer.addSubview(shareImageView)
-    bodyContainer.addArrangedSubview(companyName)
-    bodyContainer.addArrangedSubview(categoryLabel)
-    bodyContainer.addArrangedSubview(discountType)
-    bodyContainer.addArrangedSubview(discountDescription)
-    bodyContainer.addArrangedSubview(divider)
-    bodyContainer.addArrangedSubview(whyYouCanUseDescription)
-    bodyContainer.addArrangedSubview(button)
+    bodyContainer.addSubview(companyName)
+    bodyContainer.addSubview(categoryLabel)
+    bodyContainer.addSubview(discountType)
+    bodyContainer.addSubview(discountDescription)
+    bodyContainer.addSubview(divider)
+    bodyContainer.addSubview(whyYouCanUseDescription)
+    bodyContainer.addSubview(button)
   }
 
   private func configureUI() {
     view.backgroundColor = ThemeManager.current().colors.container
+    self.navigationController?.isNavigationBarHidden = true
 
-    bodyContainer.axis = .vertical
-    bodyContainer.isLayoutMarginsRelativeArrangement = true
-    bodyContainer.layoutMargins = UIEdgeInsets(top: Space.small, left: Space.small, bottom: Space.small, right: Space.small)
-    bodyContainer.spacing = Space.small
-
-    arrowBackImageView.backgroundColor = UIColor.clear
-    arrowBackImageView.contentMode = .center
-    arrowBackImageView.image = UIImage.Arrow.Left.base
-    arrowBackImageView.tintColor = UIColor.TextColor.white
+    let pressBackOnNavbar = UITapGestureRecognizer(target: self, action: #selector(self.pressBackOnNavbar))
+    arrowBackButton.backgroundColor = UIColor.clear
+    arrowBackButton.setImage(UIImage.Arrow.Left.base, for: .normal)
+    arrowBackButton.tintColor = UIColor.TextColor.white
+    arrowBackButton.addGestureRecognizer(pressBackOnNavbar)
 
     favouritesImageView.backgroundColor = UIColor.clear
     favouritesImageView.contentMode = .center
