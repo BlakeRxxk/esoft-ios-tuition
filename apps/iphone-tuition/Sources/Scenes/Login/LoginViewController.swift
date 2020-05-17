@@ -109,9 +109,9 @@ final class LoginViewController: UIViewController {
   }
   
   private func bind(){
-    // сделать error на rx (и не как next?)
     // Ниже тест
     var count = 0;
+    // сделать error на rx (и не как next?)
     continueButton.rx
       .tap
       .bind(onNext: { [unowned self] in
