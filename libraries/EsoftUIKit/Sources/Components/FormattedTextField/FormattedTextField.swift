@@ -78,6 +78,7 @@ public final class FormattedTextField : View {
       // заменить на rx
       textField.text = formatter(textField.text ?? "")
     }
+    // Сделать так, чтобы он возвращал неотформатированную строчку?
     output?.valueDidChange(sender: self, newVal: textField.text ?? "")
   }
 }

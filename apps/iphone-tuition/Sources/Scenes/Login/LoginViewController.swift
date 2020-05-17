@@ -11,14 +11,17 @@ import EsoftUIKit
 import ThemeManager
 import YogaKit
 import NetworkTrainee
+import RxSwift
+import RxCocoa
 
 final class LoginViewController: UIViewController {
   var networkManager = NetworkManager()
+  var disposeBag = DisposeBag()
   
   private(set) lazy var container: UIView = UIView()
   private(set) lazy var enterLabel: UILabel = UILabel()
   private(set) lazy var phoneTextFieldContainer: UIView = UIView()
-  private(set) lazy var phoneTextField: UnderscoredTextField = UnderscoredTextField(type: .password)
+  private(set) lazy var phoneTextField: UnderscoredTextField = UnderscoredTextField(type: .phone)
   private(set) lazy var continueButton: UIButton = UIButton()
   private(set) lazy var socialStackContainer: UIView = UIView()
   private(set) lazy var socialStack: SocialStack = SocialStack()
@@ -35,6 +38,7 @@ final class LoginViewController: UIViewController {
     
     createUI()
     configureUI()
+    bind()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -102,6 +106,24 @@ final class LoginViewController: UIViewController {
                         UILabel.ColorStyle.primary)
     termLabel.styledText = Localized.termOfUse
     termLabel.colorize(from: 31, to: 60, with: ThemeManager.current().colors.brand)
+  }
+  
+  private func bind(){
+    // сделать error на rx (и не как next?)
+    // Ниже тест
+    var count = 0;
+    continueButton.rx
+      .tap
+      .bind(onNext: { [unowned self] in
+        if count % 2 == 0 {
+          self.phoneTextField.errorMessage = "Отсутствует интернет соединение"
+        }
+        else {
+          self.phoneTextField.errorMessage = nil
+        }
+        count += 1
+      })
+      .disposed(by: disposeBag)
   }
   
   @objc private func handleDismiss(sender: UIButton) {

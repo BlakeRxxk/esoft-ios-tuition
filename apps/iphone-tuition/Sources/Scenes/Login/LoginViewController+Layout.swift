@@ -23,7 +23,7 @@ extension LoginViewController {
     
     let phoneTextFieldContainer: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
-      layout.height = 42
+      layout.height = 64
       layout.marginTop = 70
     }
     
@@ -37,7 +37,7 @@ extension LoginViewController {
     let continueButton: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
       layout.height = 44
-      layout.marginTop = 48
+      layout.marginTop = 26
       layout.marginHorizontal = 32
     }
     
