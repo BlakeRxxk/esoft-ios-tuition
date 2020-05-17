@@ -9,6 +9,7 @@ import UIKit
 import YogaKit
 import ThemeManager
 import BaseUI
+import PhoneNumberFormat
 
 public enum UnderscoredTextFieldType {
   case phone
@@ -45,6 +46,13 @@ public final class UnderscoredTextField: View {
   }
   
   private func configureUI(_ type: UnderscoredTextFieldType) {
+    switch type {
+    case .password:
+      formattedTextField.isSecureTextEntry = true
+    case .phone:
+      formattedTextField.keyboardType = .numberPad
+      formattedTextField.formatter = formatPhoneNumber
+    }
     formattedTextField.output = self
     
     divider.backgroundColor = ThemeManager.current().colors.divider

@@ -39,6 +39,8 @@ static_libraries = [
     "//scenarios/Specialists/SpecialistsImplementation:SpecialistsImplementation",
     "//scenarios/Specialists/SpecialistsUI:SpecialistsUI",
     "//integrations/TuitionIntegrations:TuitionIntegrations",
+    "//libraries/PhoneNumberFormat:PhoneNumberFormat",
+    "//libraries/libphonenumber:libphonenumber",
 ]
 
 prebuilt_test_frameworks = [

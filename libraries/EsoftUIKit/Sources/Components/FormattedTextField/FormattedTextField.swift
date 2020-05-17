@@ -10,6 +10,8 @@ import YogaKit
 import ThemeManager
 import BaseUI
 
+// Нужен ли вообще этот компонент? (Вроде да)
+// Нельзя ли как-то расширить UITextField? (Вроде нет)
 public final class FormattedTextField : View {
   public var placeholder: String {
     get {
@@ -27,6 +29,14 @@ public final class FormattedTextField : View {
       textField.isSecureTextEntry = newValue
     }
   }
+  public var keyboardType: UIKeyboardType {
+    get {
+      return textField.keyboardType
+    }
+    set {
+      textField.keyboardType = newValue
+    }
+  }
   public var formatter: ((String) -> String)?
   
   public weak var output: FormattedTextFieldOutput?
@@ -34,14 +44,14 @@ public final class FormattedTextField : View {
   internal lazy var layout: Layout = Layout()
   
   private(set) lazy var textField: UITextField = {
-    $0.addTarget(self, action: #selector(textFieldValueChanged), for: .valueChanged)
+    // заменить на rx
+    $0.addTarget(self, action: #selector(textFieldValueChanged), for: .editingChanged)
     return $0
   }(UITextField())
   
-  public init(formatter: @escaping ((String)->String)) {
+  public override init() {
     super.init()
     
-    self.formatter = formatter
     configureUI()
     createUI()
   }
@@ -64,6 +74,10 @@ public final class FormattedTextField : View {
   }
   
   @objc func textFieldValueChanged() {
+    if let formatter = self.formatter {
+      // заменить на rx
+      textField.text = formatter(textField.text ?? "")
+    }
     output?.valueDidChange(sender: self, newVal: textField.text ?? "")
   }
 }

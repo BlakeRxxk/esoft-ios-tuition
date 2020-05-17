@@ -8,8 +8,7 @@
 import UIKit
 
 public protocol FormattedTextFieldInput {
-  var placeholder: String { get set }
-  var isSecureTextEntry: Bool { get set }
+  // Стартовое значение?
 }
 
 public protocol FormattedTextFieldOutput: AnyObject {

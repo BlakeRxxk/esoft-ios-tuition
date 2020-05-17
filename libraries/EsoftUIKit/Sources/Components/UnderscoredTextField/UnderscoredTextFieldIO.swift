@@ -8,7 +8,6 @@
 import UIKit
 
 public protocol UnderscoredTextFieldInput {
-  var placeholder: String { get set }
 }
 
 public protocol UnderscoredTextFieldOutput: AnyObject {
