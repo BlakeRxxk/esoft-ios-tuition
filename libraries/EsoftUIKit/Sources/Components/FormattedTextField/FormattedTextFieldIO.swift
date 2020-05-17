@@ -10,7 +10,6 @@ import UIKit
 public protocol FormattedTextFieldInput {
   var placeholder: String { get set }
   var isSecureTextEntry: Bool { get set }
-  var format: String? { get set }
 }
 
 public protocol FormattedTextFieldOutput: AnyObject {

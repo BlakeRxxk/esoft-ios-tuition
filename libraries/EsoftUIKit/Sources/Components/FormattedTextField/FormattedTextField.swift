@@ -27,7 +27,7 @@ public final class FormattedTextField : View {
       textField.isSecureTextEntry = newValue
     }
   }
-  public var format: String?
+  public var formatter: ((String) -> String)?
   
   public weak var output: FormattedTextFieldOutput?
   
@@ -38,9 +38,10 @@ public final class FormattedTextField : View {
     return $0
   }(UITextField())
   
-  public override init() {
+  public init(formatter: @escaping ((String)->String)) {
     super.init()
     
+    self.formatter = formatter
     configureUI()
     createUI()
   }
