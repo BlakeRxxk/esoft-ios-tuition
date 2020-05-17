@@ -132,7 +132,11 @@ extension UIImage {
   }
   
   public static var eye: UIImage {
-    named("eye").withRenderingMode(.alwaysTemplate)
+    named("eye.regular").withRenderingMode(.alwaysTemplate)
+  }
+  
+  public static var eyeSolid: UIImage {
+    named("eye.solid").withRenderingMode(.alwaysTemplate)
   }
   
   public static var starSmall: UIImage {
