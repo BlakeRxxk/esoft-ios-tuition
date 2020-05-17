@@ -37,9 +37,12 @@ extension UIView {
     }
   }
 
-  public func setGradient(colors: [UIColor], direction: DirectionGradient = .horizontally, locations: (Double, Double) = (0, 1)) {
+  public func setGradient(colors: [UIColor],
+                          direction: DirectionGradient = .horizontally,
+                          locations: (Double, Double) = (0, 1),
+                          size: CGSize) {
     let gradientLayer = CAGradientLayer()
-    gradientLayer.frame.size = frame.size
+    gradientLayer.frame.size = size
     gradientLayer.colors = colors.map { $0.cgColor }
     gradientLayer.locations = [NSNumber(value: locations.0), NSNumber(value: locations.1)]
     gradientLayer.startPoint = direction.startPoint

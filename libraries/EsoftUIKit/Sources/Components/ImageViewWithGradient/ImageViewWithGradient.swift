@@ -32,7 +32,8 @@ public final class ImageViewWithGradient: View {
     gradientView.setGradient(
       colors: colors,
       direction: direction,
-      locations: locations
+      locations: locations,
+      size: frame.size
     )
   }
 

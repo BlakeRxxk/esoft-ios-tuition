@@ -14,142 +14,89 @@ import Atlas
 import PINRemoteImage
 import PINCache
 import YogaKit
+import BaseUI
+import IGListKit
 
-final class DiscountViewController: UIViewController {
-  private(set) lazy var imageViewWithGradient: ImageViewWithGradient = ImageViewWithGradient()
-  private(set) lazy var imageContainer: UIView = UIView()
-  private(set) lazy var bodyContainer: UIView = UIView()
-
-  private(set) lazy var arrowBackButton: UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-  private(set) lazy var favouritesImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-  private(set) lazy var shareImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-
-  private(set) lazy var companyName: UILabel = UILabel()
-  private(set) lazy var categoryLabel: UILabel = UILabel()
-  private(set) lazy var discountType: UILabel = UILabel()
-  private(set) lazy var discountDescription: UILabel = UILabel()
-  private(set) lazy var divider: UIView = UIView()
-  private(set) lazy var whyYouCanUseDescription: UILabel = UILabel()
-  private(set) lazy var button: UIButton = UIButton()
+final class DiscountViewController: ViewController<BaseListView> {
+  var data: [DiscountViewModel] = [
+    DiscountViewModel(id: 1,
+                      companyName: "Hoff",
+                      category: "Мебель, товары для дома",
+                      discountType: "Основная скидка",
+                      discountDescription: String(format: "15 000 руб. Скидка предоставляется в рамках программы \"Новое жилье с мебелью Hoff\". ",
+                      "Акция не распротстраняется, и еще тут много очень текста, который скроется"),
+                      whyYouCanUseDescription: "Вы совершили сделку с нашей компанией, теперь вам доступна скидка более высокого уровня, чем приветственная.",
+                      useDiscount: "Воспользоваться скидкой")
+  ]
 
   override var preferredStatusBarStyle: UIStatusBarStyle {
-      .lightContent
+    .lightContent
   }
 
-  internal lazy var layout: Layout = Layout()
+  init() {
+    super.init(viewCreator: BaseListView.init)
 
-  override func loadView() {
-    view = UIView()
+    configureUI()
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      self.navigationController?.setNavigationBarHidden(true, animated: animated)
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+      super.viewWillDisappear(animated)
+      self.navigationController?.setNavigationBarHidden(false, animated: animated)
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    createUI()
-    configureUI()
   }
 
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    view.configureLayout(block: { $0.isEnabled = true })
+    let container = view.bounds.size
+    view.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = YGValue(container.width)
+      layout.height = YGValue(container.height)
+    }
 
-    imageContainer.configureLayout(block: layout.imageContainer)
-    bodyContainer.configureLayout(block: layout.bodyContainer)
-    imageViewWithGradient.configureLayout(block: layout.imageViewWithGradient)
-    arrowBackButton.configureLayout(block: layout.arrowBackButton)
-    favouritesImageView.configureLayout(block: layout.favouritesImageView)
-    shareImageView.configureLayout(block: layout.shareImageView)
-    companyName.configureLayout(block: layout.companyName)
-    categoryLabel.configureLayout(block: layout.categoryLabel)
-    discountType.configureLayout(block: layout.discountType)
-    discountDescription.configureLayout(block: layout.discountDescription)
-    divider.configureLayout(block: layout.divider)
-    whyYouCanUseDescription.configureLayout(block: layout.whyYouCanUseDescription)
-    button.configureLayout(block: layout.button)
-
+    specializedView.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = YGValue(container.width)
+      layout.height = YGValue(container.height)
+    }
     view.yoga.applyLayout(preservingOrigin: true)
-    imageViewWithGradient.setImageGradient()
+    configureUI()
   }
 
   @objc func pressBackOnNavbar(sender: UIButton!) {
     self.navigationController?.popViewController(animated: true)
-    self.navigationController?.isNavigationBarHidden = false
-  }
-
-  private func createUI() {
-    view.addSubview(imageContainer)
-    view.addSubview(bodyContainer)
-    imageContainer.addSubview(imageViewWithGradient)
-    imageContainer.addSubview(arrowBackButton)
-    imageContainer.addSubview(favouritesImageView)
-    imageContainer.addSubview(shareImageView)
-    bodyContainer.addSubview(companyName)
-    bodyContainer.addSubview(categoryLabel)
-    bodyContainer.addSubview(discountType)
-    bodyContainer.addSubview(discountDescription)
-    bodyContainer.addSubview(divider)
-    bodyContainer.addSubview(whyYouCanUseDescription)
-    bodyContainer.addSubview(button)
   }
 
   private func configureUI() {
+    specializedView.adapter?.dataSource = self
+//    specializedView.adapter?.scrollViewDelegate = self
     view.backgroundColor = ThemeManager.current().colors.container
-    self.navigationController?.isNavigationBarHidden = true
-
-    let pressBackOnNavbar = UITapGestureRecognizer(target: self, action: #selector(self.pressBackOnNavbar))
-    arrowBackButton.backgroundColor = UIColor.clear
-    arrowBackButton.setImage(UIImage.Arrow.Left.base, for: .normal)
-    arrowBackButton.tintColor = UIColor.TextColor.white
-    arrowBackButton.addGestureRecognizer(pressBackOnNavbar)
-
-    favouritesImageView.backgroundColor = UIColor.clear
-    favouritesImageView.contentMode = .center
-    favouritesImageView.image = UIImage.Favourites.base
-    favouritesImageView.tintColor = UIColor.TextColor.white
-
-    shareImageView.backgroundColor = UIColor.clear
-    shareImageView.contentMode = .center
-    shareImageView.image = UIImage.Share.base
-    shareImageView.tintColor = UIColor.TextColor.white
-
-    companyName.text = Localized.companyName
-    companyName.setStyles(UILabel.Styles.title3)
-
-    categoryLabel.attributedText = NSAttributedString(string: Localized.category, attributes: [.kern: -0.08])
-    categoryLabel.setStyles(UILabel.Styles.tiny)
-    categoryLabel.textColor = UIColor.TextColor.placeholder
-
-    discountType.text = Localized.discountType
-    discountType.setStyles(UILabel.Styles.title3)
-
-    discountDescription.text = Localized.discountDescription
-    discountDescription.setStyles(UILabel.Styles.regular)
-    discountDescription.numberOfLines = 3
-
-    whyYouCanUseDescription.attributedText = NSAttributedString(string: Localized.whyYouCanUseDescription, attributes: [.kern: -0.08])
-    whyYouCanUseDescription.setStyles(UILabel.Styles.tiny)
-    whyYouCanUseDescription.textColor = UIColor.TextColor.placeholder
-    whyYouCanUseDescription.numberOfLines = 0
-
-    divider.backgroundColor = ThemeManager.current().colors.divider
-
-    button.setTitle(Localized.useDiscount, for: .normal)
-    button.backgroundColor = ThemeManager.current().colors.primary500
-    button.layer.cornerRadius = 22
-    button.titleLabel?.setStyles(UILabel.Styles.headline)
-
-    imageViewWithGradient.imageView.pin_setImage(from: URL(string: "https://www.alpinabook.ru/upload/setka-editor/adf/adf5e93695c6631c3d9d1f6cc17db8ba.jpg"))
   }
 }
 
-private extension DiscountViewController {
-  enum Localized {
-    static let companyName = "Hoff"
-    static let category = "Мебель, товары для дома"
-    static let discountType = "Основная скидка"
-    static let discountDescription = "15 000 руб. Скидка предоставляется в рамках программы \"Новое жилье с мебелью Hoff\"."
-    + " Акция не распротстраняется, и еще тут много очень текста, который скроется"
-    static let whyYouCanUseDescription = "Вы совершили сделку с нашей компанией, теперь вам доступна скидка более высокого уровня, чем приветственная."
-    static let useDiscount = "Воспользоваться скидкой"
+extension DiscountViewController: ListAdapterDataSource {
+  public func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
+    data as [ListDiffable]
+  }
+
+  public func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
+    DiscountSectionController(pressBackOnNavbar: pressBackOnNavbar)
+  }
+
+  public func emptyView(for listAdapter: ListAdapter) -> UIView? {
+    nil
   }
 }
+
+//extension DiscountViewController: UIScrollViewDelegate {
+//
+//}
