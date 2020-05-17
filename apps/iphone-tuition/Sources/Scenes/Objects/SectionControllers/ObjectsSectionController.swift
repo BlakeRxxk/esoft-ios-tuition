@@ -15,12 +15,42 @@ public final class ObjectsSectionController: ListSectionController {
     guard let context = collectionContext else { return CGSize() }
     
     let width: CGFloat = context.containerSize.width
-    return CGSize(width: width, height: 350) // 343
+    
+    let addressFont = UIFont.systemFont(ofSize: 15)
+    let address = "\(object!.city), \(object!.district), \(object!.street), \(object!.house) test test test"
+    print(address)
+    
+    // addressItem
+    func typeFlat(_ type: String) -> String {
+        switch type {
+        case "flat":
+            return "Квартира"
+        case "pansion":
+            return "Пансионат"
+        default:
+            return ""
+        }
+    }
+    let type = typeFlat(object!.type)
+    let roomsCount = "\(object!.roomsCount)-комн."
+    let areaFlat = "\(Int(Float(object!.areaFlat)!)) м²"
+    let floorsNum = "этаж \(object!.floorsNum)/\(object!.floorsCnt)"
+    let priceAr = "\(object!.priceAr) руб./м²"
+    
+    let title = "\(type), \(roomsCount), \(areaFlat), \(floorsNum), \(priceAr)"
+    print(title)
+    
+    let calculateheight = 293 + (address.height(width: width , font: addressFont)) + (title.height(width: width - 60, font: addressFont))
+    print(title.height(width: width - 70, font: addressFont))
+    print("calculateheight : ", calculateheight)
+//    print("calculateheight ", calculateheight)
+    
+    return CGSize(width: width, height: calculateheight) // 343
   }
   
   override init() {
     super.init()
-//    inset = UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
+    inset = UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
   }
   
   override public func cellForItem(at index: Int) -> UICollectionViewCell {

@@ -267,7 +267,7 @@ extension PreviewItemViewYOGA: UICollectionViewDelegateFlowLayout, UICollectionV
                              layout collectionViewLayout: UICollectionViewLayout,
                              sizeForItemAt indexPath: IndexPath) -> CGSize {
     let width = collectionView.frame.width
-    print(width)
+//    print(width)
     return CGSize(width: width, height: 207)
   }
   

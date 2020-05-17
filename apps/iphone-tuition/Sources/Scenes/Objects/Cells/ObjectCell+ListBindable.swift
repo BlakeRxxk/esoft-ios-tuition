@@ -24,7 +24,7 @@ extension ObjectCell: ListBindable {
     
     previewItemViewYOGA.currentPrice = price
     previewItemViewYOGA.price = oldPrice
-    previewItemViewYOGA.address = "\(city), \(district), \(street), \(house)"
+    previewItemViewYOGA.address = "\(city), \(district), \(street), \(house) test test test"
     
     // addressItem
     func typeFlat(_ type: String) -> String {
@@ -48,8 +48,6 @@ extension ObjectCell: ListBindable {
     
     let dataImg = viewModel.photos.map { $0.fileName }
     previewItemViewYOGA.dataSet = dataImg
-
-    print(dataImg)
     
     layoutSubviews()
   }
