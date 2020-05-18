@@ -100,6 +100,9 @@ final class LoginViewController: UIViewController {
     continueButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
     continueButton.setTitle(Localized.continueButton, for: .normal)
     
+    socialStack.socialList = [.facebook, .ok, .vk]
+    socialStack.output = self
+    
     termLabel.setStyles(UILabel.Styles.doubleLine,
                         UILabel.Styles.alignCenter,
                         UILabel.Styles.tiny,
@@ -120,6 +123,7 @@ final class LoginViewController: UIViewController {
         } else {
           self.phoneTextField.errorMessage = nil
         }
+        self.socialStack.socialList = [.facebook, .ok, .vk, .google]
         count += 1
       })
       .disposed(by: disposeBag)
@@ -127,6 +131,12 @@ final class LoginViewController: UIViewController {
   
   @objc private func handleDismiss(sender: UIButton) {
     dismiss(animated: true, completion: nil)
+  }
+}
+
+extension LoginViewController: SocialStackOutput {
+  func didTapSocial(social: SocialProviders) {
+    print(social)
   }
 }
 

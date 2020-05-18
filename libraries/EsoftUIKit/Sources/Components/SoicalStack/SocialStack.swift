@@ -10,108 +10,48 @@ import YogaKit
 import BaseUI
 
 public final class SocialStack: View {
-  public var facebookImage: UIImage {
+  public var socialList: [SocialProviders] {
     get {
-      facebookButton.currentImage ?? UIImage()
+      return socialButtons.map { SocialProviders(rawValue: $0.tag)! }
     }
-    set {
-      facebookButton.setImage(newValue, for: .normal)
-    }
-  }
-  public var vkImage: UIImage {
-    get {
-      vkButton.currentImage ?? UIImage()
-    }
-    set {
-      vkButton.setImage(newValue, for: .normal)
-    }
-  }
-  public var okImage: UIImage {
-    get {
-      okButton.currentImage ?? UIImage()
-    }
-    set {
-      okButton.setImage(newValue, for: .normal)
-    }
-  }
-  public var googleImage: UIImage {
-    get {
-      googleButton.currentImage ?? UIImage()
-    }
-    set {
-      googleButton.setImage(newValue, for: .normal)
+    set(socialList) {
+      socialButtons.forEach {layoutController.hide($0)}
+      socialButtons = socialList.map {
+        var button = SocialButtonBuilder().build(social: $0)
+        button.addTarget(self, action: #selector(socialDidPressed), for: .touchUpInside)
+        return button
+      }
+      socialButtons.forEach {
+        addSubview($0)
+      }
+      
+      // Перерисовать
+//      self.yoga.markDirty() // ошибка
+      self.setNeedsLayout() // Надо?
     }
   }
   
-  private(set) lazy var facebookButton: UIButton = {
-    $0.addTarget(self, action: #selector(facebookButtonDidPressed), for: .touchUpInside)
-    return $0
-  }(UIButton())
-  private(set) lazy var vkButton: UIButton = {
-    $0.addTarget(self, action: #selector(vkButtonDidPressed), for: .touchUpInside)
-    return $0
-  }(UIButton())
-  private(set) lazy var okButton: UIButton = {
-    $0.addTarget(self, action: #selector(okButtonDidPressed), for: .touchUpInside)
-    return $0
-  }(UIButton())
-  private(set) lazy var googleButton: UIButton = {
-    $0.addTarget(self, action: #selector(vkButtonDidPressed), for: .touchUpInside)
-    return $0
-  }(UIButton())
+  private(set) var socialButtons: [UIButton] = []
   
   public weak var output: SocialStackOutput?
-  
+  private var layoutController: LayoutController = LayoutController()
   internal lazy var layout: Layout = Layout()
-  
-  override public init() {
-    super.init()
-    
-    createUI()
-    configureUI()
-  }
-  
-  private func createUI() {
-    [
-      facebookButton,
-      vkButton,
-      okButton,
-      googleButton
-      ].forEach { addSubview($0) }
-  }
-  
-  private func configureUI() {
-    // Default values
-    facebookImage = UIImage.Socials.facebook
-    vkImage = UIImage.Socials.vk
-    okImage = UIImage.Socials.ok
-    googleImage = UIImage.Socials.google
-  }
   
   override public func layoutSubviews() {
     super.layoutSubviews()
     
     configureLayout(block: layout.container)
 
-    facebookButton.configureLayout(block: layout.socialIcon)
-    vkButton.configureLayout(block: layout.socialIcon)
-    okButton.configureLayout(block: layout.socialIcon)
-    googleButton.configureLayout(block: layout.socialIcon)
+    socialButtons.forEach {
+      $0.configureLayout(block: layout.socialIcon)
+    }
 
     yoga.applyLayout(preservingOrigin: true)
   }
   
-  @objc private func facebookButtonDidPressed() {
-    output?.didTapFacebook()
-  }
-  @objc private func okButtonDidPressed() {
-    output?.didTapVK()
-  }
-  @objc private func vkButtonDidPressed() {
-    output?.didTapOK()
-  }
-  @objc private func googleButtonDidPressed() {
-    output?.didTapGoogle()
+  @objc private func socialDidPressed(sender: UIButton!) {
+    guard let social = SocialProviders(rawValue: sender.tag) else { return }
+    output?.didTapSocial(social: social)
   }
 }
 

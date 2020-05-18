@@ -8,15 +8,9 @@
 import UIKit
 
 public protocol SocialStackInput {
-  var facebookImage: UIImage { get set }
-  var vkImage: UIImage { get set }
-  var okImage: UIImage { get set }
-  var googleImage: UIImage { get set }
+  var socialList: [SocialProviders] { get set }
 }
 
 public protocol SocialStackOutput: AnyObject {
-  func didTapFacebook()
-  func didTapVK()
-  func didTapOK()
-  func didTapGoogle()
+  func didTapSocial(social: SocialProviders)
 }
