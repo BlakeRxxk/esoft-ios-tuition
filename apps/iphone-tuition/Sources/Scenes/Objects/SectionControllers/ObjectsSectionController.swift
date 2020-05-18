@@ -16,9 +16,16 @@ public final class ObjectsSectionController: ListSectionController {
     
     let width: CGFloat = context.containerSize.width
     
-    let addressFont = UIFont.systemFont(ofSize: 15)
-    let address = "\(object!.city), \(object!.district), \(object!.street), \(object!.house) test test test"
-    print(address)
+    let addressFont = UIFont.systemFont(ofSize: 13)
+    
+    let city = object!.city
+    let district = object!.district
+    let street = object!.street
+    let house = object!.house
+    let address = "\(city), \(district), \(street), \(house)"
+
+    print("ADDRESS - ", address)
+    print("ADDRESS - ", address.height(width: width, font: addressFont))
     
     // addressItem
     func typeFlat(_ type: String) -> String {
@@ -38,12 +45,13 @@ public final class ObjectsSectionController: ListSectionController {
     let priceAr = "\(object!.priceAr) руб./м²"
     
     let title = "\(type), \(roomsCount), \(areaFlat), \(floorsNum), \(priceAr)"
-    print(title)
+    print("TITLE - ", title)
+    print("TITLE - ", title.height(width: width - 70, font: addressFont))
     
-    let calculateheight = 293 + (address.height(width: width , font: addressFont)) + (title.height(width: width - 60, font: addressFont))
+    let calculateheight = 293 + (address.height(width: width - 32, font: addressFont)) + (title.height(width: width - 60, font: addressFont))
     print(title.height(width: width - 70, font: addressFont))
+    
     print("calculateheight : ", calculateheight)
-//    print("calculateheight ", calculateheight)
     
     return CGSize(width: width, height: calculateheight) // 343
   }
@@ -60,7 +68,6 @@ public final class ObjectsSectionController: ListSectionController {
                                                         at: index) as? ObjectCell else {
                                                           return UICollectionViewCell()
     }
-   
     cell.bindViewModel(object)
     return cell
   }

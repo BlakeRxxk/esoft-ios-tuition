@@ -19,6 +19,7 @@ public final class PreviewItemViewYOGA: View {
     }
     set {
       currentPriceLabel.styledText = newValue
+      currentPriceLabel.yoga.markDirty()
     }
   }
 
@@ -28,6 +29,7 @@ public final class PreviewItemViewYOGA: View {
     }
     set {
       priceLabel.styledText = newValue
+      priceLabel.yoga.markDirty()
     }
   }
 
@@ -37,6 +39,7 @@ public final class PreviewItemViewYOGA: View {
     }
     set {
       addressLabel.styledText = newValue
+      addressLabel.yoga.markDirty()
     }
   }
 
@@ -99,22 +102,22 @@ public final class PreviewItemViewYOGA: View {
   
   private func createUI() {
     
-    let subviews: [UIView] = [
-      topView,
-      topViewStack,
-      currentPriceLabel,
-      priceStack,
-      priceImage,
-      priceLabel,
-      addressLabel,
-      mainView,
-      image,
-      collectionView
-    ]
-    
-    subviews.forEach {
-      $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+//    let subviews: [UIView] = [
+//      topView,
+//      topViewStack,
+//      currentPriceLabel,
+//      priceStack,
+//      priceImage,
+//      priceLabel,
+//      addressLabel,
+//      mainView,
+//      image,
+//      collectionView
+//    ]
+//
+//    subviews.forEach {
+//      $0.translatesAutoresizingMaskIntoConstraints = false
+//    }
     
     topView.addSubview(topViewStack)
     topViewStack.addSubview(currentPriceLabel)
@@ -183,6 +186,7 @@ public final class PreviewItemViewYOGA: View {
     
     topView.configureLayout { layout in
       layout.isEnabled = true
+      layout.flexDirection = .column
       layout.paddingTop = 12
       layout.paddingBottom = 8
     }

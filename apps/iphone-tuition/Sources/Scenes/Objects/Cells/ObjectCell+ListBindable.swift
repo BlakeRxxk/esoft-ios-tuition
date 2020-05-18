@@ -24,8 +24,7 @@ extension ObjectCell: ListBindable {
     
     previewItemViewYOGA.currentPrice = price
     previewItemViewYOGA.price = oldPrice
-    previewItemViewYOGA.address = "\(city), \(district), \(street), \(house) test test test"
-    
+    previewItemViewYOGA.address = "\(city), \(district), \(street), \(house)"
     // addressItem
     func typeFlat(_ type: String) -> String {
       switch type {
