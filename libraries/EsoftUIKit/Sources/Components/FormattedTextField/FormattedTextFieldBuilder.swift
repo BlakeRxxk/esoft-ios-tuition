@@ -39,7 +39,7 @@ class FormattedTextFieldBuilder {
   }
   
   private func build() -> FormattedTextField {
-    return self.textField
+    self.textField
   }
   
   func build(_ type: FormattedTextFieldType) -> FormattedTextField {
@@ -52,13 +52,13 @@ class FormattedTextFieldBuilder {
   }
   
   func buildPassword() -> FormattedTextField {
-    return self
+    self
       .set(security: true)
       .build()
   }
   
   func buildPhone() -> FormattedTextField {
-    return self
+    self
       .set(formatter: formatPhoneNumber)
       .set(keyboardType: .numberPad)
       .build()

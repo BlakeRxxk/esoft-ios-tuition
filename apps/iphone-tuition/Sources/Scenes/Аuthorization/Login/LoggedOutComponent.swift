@@ -16,6 +16,10 @@ protocol LoggedOutBuilder {
 class LoggedOutComponent: Component<EmptyDependency>, LoggedOutBuilder {
   
   var loggedOutViewController: UIViewController {
-    UINavigationController(rootViewController: LoginViewController())
+    UINavigationController(rootViewController: LoginViewController(passwordBuilder: passwordComponent))
+  }
+  
+  var passwordComponent: PasswordComponent {
+    PasswordComponent(parent: self)
   }
 }

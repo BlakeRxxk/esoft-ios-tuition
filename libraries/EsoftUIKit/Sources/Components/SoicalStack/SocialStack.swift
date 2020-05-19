@@ -12,7 +12,7 @@ import BaseUI
 public final class SocialStack: View {
   public var socialList: [SocialProviders] {
     get {
-      return socialButtons.map { SocialProviders(rawValue: $0.tag)! }
+      socialButtons.map { SocialProviders(rawValue: $0.tag)! }
     }
     set(socialList) {
       socialButtons.forEach {layoutController.hide($0)}

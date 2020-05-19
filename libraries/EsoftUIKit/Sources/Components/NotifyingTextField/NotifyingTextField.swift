@@ -32,7 +32,6 @@ public final class NotifyingTextField: View {
   
   public weak var output: NotifyingTextFieldOutput?
   
-  
   public init(type: FormattedTextFieldType) {
     super.init()
     
@@ -127,7 +126,6 @@ public final class NotifyingTextField: View {
     messageLabel.styledText = nil
   }
   
-  
   @objc func didTouchshowTextButton() {
     formattedTextField!.isSecureTextEntry = !formattedTextField!.isSecureTextEntry
   }
@@ -142,7 +140,7 @@ extension NotifyingTextField: FormattedTextFieldOutput {
 extension NotifyingTextField: NotifyingTextFieldInput {
   public var errorMessage: String? {
     get {
-      return getMessage(by: ThemeManager.current().colors.error)
+      getMessage(by: ThemeManager.current().colors.error)
     }
     set {
       if let message = newValue {

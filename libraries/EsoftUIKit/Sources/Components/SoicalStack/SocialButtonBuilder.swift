@@ -47,7 +47,7 @@ class SocialButtonBuilder {
   }
   
   func build() -> UIButton {
-    return self.button
+    self.button
   }
 }
 
@@ -66,28 +66,28 @@ extension SocialButtonBuilder {
   }
   
   func buildVKButton() -> UIButton {
-    return self
+    self
       .set(icon: SocialProviders.vk.getImage())
       .set(tag: SocialProviders.vk.rawValue)
       .build()
   }
   
   func buildOKButton() -> UIButton {
-    return self
+    self
       .set(icon: SocialProviders.ok.getImage())
       .set(tag: SocialProviders.ok.rawValue)
       .build()
   }
   
   func buildGoogleButton() -> UIButton {
-    return self
+    self
       .set(icon: SocialProviders.google.getImage())
       .set(tag: SocialProviders.google.rawValue)
       .build()
   }
   
   func buildFacebookButton() -> UIButton {
-    return self
+    self
       .set(icon: SocialProviders.facebook.getImage())
       .set(tag: SocialProviders.facebook.rawValue)
       .build()

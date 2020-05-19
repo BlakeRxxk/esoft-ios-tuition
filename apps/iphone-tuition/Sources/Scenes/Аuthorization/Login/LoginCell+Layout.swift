@@ -7,7 +7,7 @@
 
 import YogaKit
 
-extension LoginViewController {
+extension LoginCell {
   final class Layout {
     let container: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true

@@ -5,144 +5,98 @@
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
 //
 
-import Atlas
 import UIKit
-import EsoftUIKit
-import ThemeManager
-import YogaKit
-import NetworkTrainee
 import RxSwift
 import RxCocoa
+import YogaKit
+import Network
+import BaseUI
+import EsoftUIKit
+import ListKit
+import IGListKit
+import ThemeManager
+import Localized
 
-final class LoginViewController: UIViewController {
-  var disposeBag = DisposeBag()
+final class LoginViewController: ViewController<BaseListView> {
+  private var passwordBuilder: PasswordBuilder // нужен ли он вообще здесь? (как организуется переход от сцене к сцене?)
   
-  private(set) lazy var container: UIView = UIView()
-  private(set) lazy var enterLabel: UILabel = UILabel()
-  private(set) lazy var phoneTextFieldContainer: UIView = UIView()
-  private(set) lazy var phoneTextField: NotifyingTextField = NotifyingTextField(type: .phone)
-  private(set) lazy var continueButton: UIButton = UIButton()
-  private(set) lazy var socialStackContainer: UIView = UIView()
-  private(set) lazy var socialStack: SocialStack = SocialStack()
-  private(set) lazy var termLabel: UILabel = UILabel()
-  
-  internal lazy var layout: Layout = Layout()
-  
-  override func loadView() {
-    view = UIView()
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  public init(passwordBuilder: PasswordBuilder) {
+    self.passwordBuilder = passwordBuilder
     
-    createUI()
+    super.init(viewCreator: BaseListView.init)
+    
     configureUI()
-    bind()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     navigationItem.setStyles(UINavigationItem.Styles.logo)
     navigationController?.navigationBar.setStyles(UINavigationBar.Styles.auth)
-    addBackButtonIfNeeded(target: self, action: #selector(handleDismiss))
+    addCloseButtonIfNeeded(target: self, action: #selector(handleDismiss))
   }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     
-    let containerSize = view.bounds.size
-    view.configureLayout(block: { layout in
+    let container = view.bounds.size
+    view.configureLayout { layout in
       layout.isEnabled = true
-      layout.height = YGValue(containerSize.height)
-      layout.width = YGValue(containerSize.width)
-    })
-
-    container.configureLayout(block: layout.container)
-
-    enterLabel.configureLayout(block: layout.enterLabel)
-    phoneTextFieldContainer.configureLayout(block: layout.phoneTextFieldContainer)
-    phoneTextField.configureLayout(block: layout.phoneTextField)
-    continueButton.configureLayout(block: layout.continueButton)
-    socialStackContainer.configureLayout(block: layout.socialStackContainer)
-    socialStack.configureLayout(block: layout.socialStack)
-    termLabel.configureLayout(block: layout.termLabel)
-
+      layout.width = YGValue(container.width)
+      layout.height = YGValue(container.height)
+    }
+    
+    specializedView.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = YGValue(container.width)
+      layout.height = YGValue(container.height)
+    }
+    
     view.yoga.applyLayout(preservingOrigin: true)
   }
   
-  private func createUI() {
-    phoneTextFieldContainer.addSubview(phoneTextField)
-    socialStackContainer.addSubview(socialStack)
+  override public func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
     
-    [
-      enterLabel,
-      phoneTextFieldContainer,
-      continueButton,
-      socialStackContainer,
-      termLabel
-      ].forEach { container.addSubview($0) }
-    
-    view.addSubview(container)
+    self.specializedView.adapter?.performUpdates(animated: true)
   }
   
   private func configureUI() {
+    specializedView.adapter?.dataSource = self
+    
     view.backgroundColor = ThemeManager.current().colors.container
-    
-    enterLabel.setStyles(UILabel.Styles.alignCenter,
-                         UILabel.ColorStyle.primary)
-    enterLabel.styledText = Localized.enterLabel
-    
-    phoneTextField.placeholder = Localized.phonePlaceholder
-    phoneTextField.output = self
-    
-    continueButton.backgroundColor = ThemeManager.current().colors.brand
-    continueButton.layer.cornerRadius = 22.0
-    continueButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
-    continueButton.setTitle(Localized.continueButton, for: .normal)
-    
-    socialStack.socialList = [.facebook, .ok, .vk, .google]
-    socialStack.output = self
-    
-    termLabel.setStyles(UILabel.Styles.doubleLine,
-                        UILabel.Styles.alignCenter,
-                        UILabel.Styles.tiny,
-                        UILabel.ColorStyle.primary)
-    termLabel.styledText = Localized.termOfUse
-    termLabel.colorize(from: 31, to: 60, with: ThemeManager.current().colors.brand)
-  }
-  
-  private func bind() {
-    // сделать error на rx (и не как next?)
-    continueButton.rx
-      .tap
-      .bind(onNext: { [unowned self] in
-        print("tap")
-      })
-      .disposed(by: disposeBag)
   }
   
   @objc private func handleDismiss(sender: UIButton) {
+    // перевести на rx
     dismiss(animated: true, completion: nil)
   }
 }
 
-extension LoginViewController: SocialStackOutput {
+extension LoginViewController: LoginSectionControllerOutput {
   func didTapSocial(social: SocialProviders) {
     print(social)
   }
-}
-
-extension LoginViewController: NotifyingTextFieldOutput {
-  func valueDidChange(sender: NotifyingTextField, newVal: String) {
+  
+  func didTapContinueButton() {
+    print("tap")
+//    self.show(self.passwordBuilder.passwordViewController, sender: nil)
+  }
+  
+  func phoneDidChange(newVal: String) {
     print(newVal)
   }
 }
 
-private extension LoginViewController {
-  enum Localized {
-    static let enterLabel = "Вход в личный кабинет"
-    static let phonePlaceholder = "Номер телефона"
-    static let continueButton = "Продолжить"
-    static let termOfUse = "Авторизуясь, вы соглашаетесь с правилами пользования сервисом"
+extension LoginViewController: ListAdapterDataSource {
+  public func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
+    [LoginViewModel(id: 0, keyboardHeight: 180)]
+  }
+  
+  public func listAdapter(_ listAdapter: ListAdapter, sectionControllerFor object: Any) -> ListSectionController {
+    LoginSectionController(output: self)
+  }
+  
+  public func emptyView(for listAdapter: ListAdapter) -> UIView? {
+    nil
   }
 }
