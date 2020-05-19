@@ -49,7 +49,7 @@ public final class RootComponent: BootstrapComponent {
     CitiesComponent(parent: self)
   }
   
-  var rxdemo: RxDemoComponent {
-    RxDemoComponent(parent: self)
+  var rxdemo: SpecialistsComponent {
+    SpecialistsComponent(parent: self)
   }
 }

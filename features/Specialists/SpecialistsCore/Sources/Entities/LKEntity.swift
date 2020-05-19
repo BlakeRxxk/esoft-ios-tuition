@@ -1,5 +1,5 @@
 //
-//  LK.swift
+//  LKEntity.swift
 //  SpecialistsCore
 //
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct LK {
+public struct LKEntity {
   public var id: Int
   
   public init(id: Int) {
@@ -15,7 +15,7 @@ public struct LK {
   }
 }
 
-extension LK: Codable, Hashable {
+extension LKEntity: Codable, Hashable {
   enum CodingKeys: String, CodingKey {
     case id
   }

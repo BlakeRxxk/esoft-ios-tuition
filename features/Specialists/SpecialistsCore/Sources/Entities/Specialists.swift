@@ -11,7 +11,7 @@ public struct Specialist {
   public let id: String
   public let fio: String
   public let lkId: Int?
-  public let lk: LK?
+  public let lk: LKEntity?
   public let phone: String?
   public let email: String?
   public let photoUrl: String?
@@ -26,7 +26,7 @@ public struct Specialist {
               phone: String?,
               email: String?,
               photoUrl: String?,
-              lk: LK?,
+              lk: LKEntity?,
               position: String?,
               positionID: String?,
               managerID: String?,

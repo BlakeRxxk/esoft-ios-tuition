@@ -8,6 +8,10 @@ static_library(
     ]),
     deps = [
         "//features/Specialists/SpecialistsCore:SpecialistsCore",
+        "//libraries/StateKit:StateKit",
+        "//third-party/Pods:RxSwift",
+        "//third-party/Pods:RxCocoa",
+        "//third-party/Pods:RxRelay",
     ],
     frameworks = [
         "$SDKROOT/System/Library/Frameworks/Foundation.framework",

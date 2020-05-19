@@ -19,8 +19,7 @@ public struct SpecialistsRequest {
   public init(scope: SpecialistScope = .all,
               cityID: Int = 23,
               query: String = "",
-              page: Int
-  ) {
+              page: Int) {
     self.scope = scope
     self.cityID = cityID
     self.query = query

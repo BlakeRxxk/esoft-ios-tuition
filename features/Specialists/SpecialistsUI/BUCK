@@ -11,7 +11,9 @@ static_library(
         "//third-party/Pods:YogaKit",
         "//third-party/Pods:IGListKit",
         "//third-party/Pods:IGListDiffKit",
+        "//libraries/Localized:Localized",
         "//libraries/EsoftUIKit:EsoftUIKit",
+        "//libraries/ListKit:ListKit",
         "//libraries/CDNImageLink:CDNImageLink",
         "//features/Specialists/SpecialistsCore:SpecialistsCore",
         "//features/Specialists/SpecialistsImplementation:SpecialistsImplementation"
