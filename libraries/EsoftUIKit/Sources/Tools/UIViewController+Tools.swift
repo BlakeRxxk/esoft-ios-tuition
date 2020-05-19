@@ -26,4 +26,14 @@ extension UIViewController {
     item.action = action
     navigationItem.leftBarButtonItem = item
   }
+  
+  public func addBackButtonIfNeeded(target: AnyObject = self as AnyObject, action: Selector) {
+    guard navigationController?.viewControllers.first === self else { return }
+    
+    let item = UIBarButtonItem()
+    item.setStyles(UIBarButtonItem.Styles.back)
+    item.target = target
+    item.action = action
+    navigationItem.leftBarButtonItem = item
+  }
 }

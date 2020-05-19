@@ -17,5 +17,10 @@ extension UIBarButtonItem {
       item.style = .plain
       item.image = UIImage.Close.base
     }
+    
+    public static let back = Atlas.Style(name: "back") { (item: UIBarButtonItem) in
+      item.style = .plain
+      item.image = UIImage.Arrow.Left.base
+    }
   }
 }

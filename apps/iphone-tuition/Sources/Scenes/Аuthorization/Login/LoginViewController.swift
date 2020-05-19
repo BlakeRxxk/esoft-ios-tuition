@@ -15,7 +15,6 @@ import RxSwift
 import RxCocoa
 
 final class LoginViewController: UIViewController {
-  var networkManager = NetworkManager()
   var disposeBag = DisposeBag()
   
   private(set) lazy var container: UIView = UIView()
@@ -45,7 +44,7 @@ final class LoginViewController: UIViewController {
     super.viewWillAppear(animated)
     navigationItem.setStyles(UINavigationItem.Styles.logo)
     navigationController?.navigationBar.setStyles(UINavigationBar.Styles.auth)
-    addCloseButtonIfNeeded(target: self, action: #selector(handleDismiss))
+    addBackButtonIfNeeded(target: self, action: #selector(handleDismiss))
   }
   
   override func viewDidLayoutSubviews() {
@@ -94,13 +93,14 @@ final class LoginViewController: UIViewController {
     enterLabel.styledText = Localized.enterLabel
     
     phoneTextField.placeholder = Localized.phonePlaceholder
+    phoneTextField.output = self
     
     continueButton.backgroundColor = ThemeManager.current().colors.brand
     continueButton.layer.cornerRadius = 22.0
     continueButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
     continueButton.setTitle(Localized.continueButton, for: .normal)
     
-    socialStack.socialList = [.facebook, .ok, .vk]
+    socialStack.socialList = [.facebook, .ok, .vk, .google]
     socialStack.output = self
     
     termLabel.setStyles(UILabel.Styles.doubleLine,
@@ -112,19 +112,11 @@ final class LoginViewController: UIViewController {
   }
   
   private func bind() {
-    // Ниже тест
-    var count = 0
     // сделать error на rx (и не как next?)
     continueButton.rx
       .tap
       .bind(onNext: { [unowned self] in
-        if count % 2 == 0 {
-          self.phoneTextField.errorMessage = "Отсутствует интернет соединение"
-        } else {
-          self.phoneTextField.errorMessage = nil
-        }
-        self.socialStack.socialList = [.facebook, .ok, .vk, .google]
-        count += 1
+        print("tap")
       })
       .disposed(by: disposeBag)
   }
@@ -137,6 +129,12 @@ final class LoginViewController: UIViewController {
 extension LoginViewController: SocialStackOutput {
   func didTapSocial(social: SocialProviders) {
     print(social)
+  }
+}
+
+extension LoginViewController: NotifyingTextFieldOutput {
+  func valueDidChange(sender: NotifyingTextField, newVal: String) {
+    print(newVal)
   }
 }
 
