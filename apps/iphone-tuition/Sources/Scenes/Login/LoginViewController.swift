@@ -21,7 +21,7 @@ final class LoginViewController: UIViewController {
   private(set) lazy var container: UIView = UIView()
   private(set) lazy var enterLabel: UILabel = UILabel()
   private(set) lazy var phoneTextFieldContainer: UIView = UIView()
-  private(set) lazy var phoneTextField: UnderscoredTextField = UnderscoredTextField(type: .phone)
+  private(set) lazy var phoneTextField: NotifyingTextField = NotifyingTextField(type: .phone)
   private(set) lazy var continueButton: UIButton = UIButton()
   private(set) lazy var socialStackContainer: UIView = UIView()
   private(set) lazy var socialStack: SocialStack = SocialStack()

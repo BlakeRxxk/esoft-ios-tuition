@@ -10,8 +10,6 @@ import YogaKit
 import ThemeManager
 import BaseUI
 
-// Нужен ли вообще этот компонент? (Вроде да)
-// Нельзя ли как-то расширить UITextField? (Вроде нет)
 public final class FormattedTextField: View {
   public var placeholder: String {
     get {
@@ -80,7 +78,7 @@ public final class FormattedTextField: View {
       // заменить на rx
       textField.text = formatter(textField.text ?? "")
     }
-    // Сделать так, чтобы он возвращал неотформатированную строчку?
+    // Сделать так, чтобы он возвращал неотформатированную строку?
     output?.valueDidChange(sender: self, newVal: textField.text ?? "")
   }
 }

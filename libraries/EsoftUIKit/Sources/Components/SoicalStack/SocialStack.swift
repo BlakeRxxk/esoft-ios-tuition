@@ -27,7 +27,7 @@ public final class SocialStack: View {
       
       // Перерисовать
 //      self.yoga.markDirty() // ошибка
-      self.setNeedsLayout() // Надо?
+//      self.setNeedsLayout() // Надо?
     }
   }
   
