@@ -17,39 +17,13 @@ public final class ObjectsSectionController: ListSectionController {
     let width: CGFloat = context.containerSize.width
     
     let addressFont = UIFont.systemFont(ofSize: 13)
-    
     let city = object!.city
     let district = object!.district
     let street = object!.street
     let house = object!.house
     let address = "\(city), \(district), \(street), \(house)"
-
-    print("ADDRESS - ", address)
-    print("ADDRESS - ", address.height(width: width, font: addressFont))
     
-    // addressItem
-    func typeFlat(_ type: String) -> String {
-        switch type {
-        case "flat":
-            return "Квартира"
-        case "pansion":
-            return "Пансионат"
-        default:
-            return ""
-        }
-    }
-    let type = typeFlat(object!.type)
-    let roomsCount = "\(object!.roomsCount)-комн."
-    let areaFlat = "\(Int(Float(object!.areaFlat)!)) м²"
-    let floorsNum = "этаж \(object!.floorsNum)/\(object!.floorsCnt)"
-    let priceAr = "\(object!.priceAr) руб./м²"
-    
-    let title = "\(type), \(roomsCount), \(areaFlat), \(floorsNum), \(priceAr)"
-    print("TITLE - ", title)
-    print("TITLE - ", title.height(width: width - 70, font: addressFont))
-    
-    let calculateheight = 293 + (address.height(width: width - 32, font: addressFont)) + (title.height(width: width - 60, font: addressFont))
-    print(title.height(width: width - 70, font: addressFont))
+    let calculateheight = 327 + (address.height(width: width - 32, font: addressFont))
     
     print("calculateheight : ", calculateheight)
     

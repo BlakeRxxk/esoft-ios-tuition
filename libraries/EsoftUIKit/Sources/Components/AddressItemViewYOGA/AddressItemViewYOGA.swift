@@ -72,13 +72,14 @@ public final class AddressItemViewYOGA: View {
       layout.justifyContent = .spaceBetween
       layout.paddingBottom = 4
       layout.paddingTop = 8
+      layout.height = 48
       layout.width = 100%
     }
     
     mainTitle.configureLayout { layout in
       layout.isEnabled = true
       layout.flexShrink = 1
-      layout.marginRight = 60
+      layout.width = 80%
     }
     
     phoneButton.configureLayout { layout in

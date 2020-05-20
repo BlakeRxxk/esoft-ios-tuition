@@ -123,7 +123,8 @@ public final class InfoItemViewYOGA: View {
     infoStack.configureLayout { layout in
       layout.isEnabled = true
       layout.flexDirection = .row
-      layout.paddingTop = 4
+      layout.height = 24
+//      layout.paddingTop = 4
       layout.paddingBottom = 8
       layout.alignItems = .center
       layout.justifyContent = .spaceBetween
