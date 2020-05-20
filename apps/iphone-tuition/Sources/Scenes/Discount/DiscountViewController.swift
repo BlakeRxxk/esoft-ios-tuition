@@ -51,7 +51,7 @@ final class DiscountViewController: ViewController<BaseListView> {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    automaticallyAdjustsScrollViewInsets = false
   }
 
   override func viewDidLayoutSubviews() {
@@ -78,7 +78,7 @@ final class DiscountViewController: ViewController<BaseListView> {
 
   private func configureUI() {
     specializedView.adapter?.dataSource = self
-//    specializedView.adapter?.scrollViewDelegate = self
+    specializedView.adapter?.scrollViewDelegate = self
     view.backgroundColor = ThemeManager.current().colors.container
   }
 }
@@ -97,6 +97,6 @@ extension DiscountViewController: ListAdapterDataSource {
   }
 }
 
-//extension DiscountViewController: UIScrollViewDelegate {
-//
-//}
+extension DiscountViewController: UIScrollViewDelegate {
+
+}

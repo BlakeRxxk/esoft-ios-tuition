@@ -14,7 +14,7 @@ extension DiscountCell {
     static let imageContainer: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
       layout.width = 100%
-      layout.height = 40%
+      layout.height = 50%
       layout.justifyContent = .flexStart
     }
 

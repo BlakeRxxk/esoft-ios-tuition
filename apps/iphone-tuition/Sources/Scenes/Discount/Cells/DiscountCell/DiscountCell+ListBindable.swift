@@ -19,7 +19,9 @@ extension DiscountCell: ListBindable {
     guard let viewModel = viewModel as? DiscountViewModel else { return }
     companyName.styledText = viewModel.companyName
     self.pressBackOnNavbar = pressBackOnNavbar
+
     button.setTitle(viewModel.useDiscount, for: .normal)
+    button.titleLabel?.setStyles(UILabel.Styles.headline)
     whyYouCanUseDescription.attributedText = NSAttributedString(string: viewModel.whyYouCanUseDescription, attributes: [.kern: -0.08])
     discountDescription.text = viewModel.discountDescription
     discountType.text = viewModel.discountType

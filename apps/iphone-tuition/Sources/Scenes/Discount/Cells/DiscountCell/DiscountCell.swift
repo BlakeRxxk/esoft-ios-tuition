@@ -100,7 +100,6 @@ public final class DiscountCell: UICollectionViewCell {
 
     button.backgroundColor = ThemeManager.current().colors.primary500
     button.layer.cornerRadius = 22
-    button.titleLabel?.setStyles(UILabel.Styles.headline)
 
     imageViewWithGradient.imageView.pin_setImage(from: URL(string: "https://www.alpinabook.ru/upload/setka-editor/adf/adf5e93695c6631c3d9d1f6cc17db8ba.jpg"))
     imageViewWithGradient.setImageGradient()
