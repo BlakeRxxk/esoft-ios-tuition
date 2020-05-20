@@ -6,6 +6,7 @@
 //
 
 import StateKit
+import SpecialistsCore
 
 public final class SpecialistsListState: Store {
   
@@ -19,7 +20,14 @@ public final class SpecialistsListState: Store {
 
 extension SpecialistsListState {
   public struct State: Equatable {
+    public var isAuth: Bool = false
     public var initialLoading: Bool = false
+    public var isLoading: Bool = false
+    public var error: Bool = false
+    public var specialists: [Specialist] = []
+    public var page: Int = 1
+    public var pages: Int = 1
+    public var scope: SpecialistScope = .all
   }
   
   public enum Action {
