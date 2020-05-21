@@ -11,6 +11,27 @@ public struct Request {
   private var params: CombinedParams
 
   public var absoluteString: String {
+    let request = makeRequest()
+
+    return request.url?.absoluteString ?? ""
+  }
+  
+  public var absoluteURL: URL? {
+    let request = makeRequest()
+
+    return request.url?.absoluteURL
+  }
+  
+  public init(@RequestBuilder builder: () -> RequestParam) {
+    let params = builder()
+    if !(params is CombinedParams) {
+      self.params = CombinedParams(children: [params])
+    } else {
+      self.params = builder() as! CombinedParams
+    }
+  }
+  
+  private func makeRequest() -> URLRequest {
     guard var components = URLComponents(string: params.children!.filter { $0.type == .endpoint }[0].value as! String) else {
       fatalError("Missing Endpoint in Request body")
     }
@@ -28,17 +49,6 @@ public struct Request {
     }
     
     // BUILD REQUEST
-    let request = URLRequest(url: components.url!)
-    
-    return request.url?.absoluteString ?? ""
-  }
-  
-  public init(@RequestBuilder builder: () -> RequestParam) {
-    let params = builder()
-    if !(params is CombinedParams) {
-      self.params = CombinedParams(children: [params])
-    } else {
-      self.params = builder() as! CombinedParams
-    }
+    return URLRequest(url: components.url!)
   }
 }
