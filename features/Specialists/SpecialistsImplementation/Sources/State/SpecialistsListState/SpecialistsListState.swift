@@ -9,11 +9,12 @@ import StateKit
 import SpecialistsCore
 
 public final class SpecialistsListState: Store {
-  
   public let initialState: SpecialistsListState.State
+  private let useCase: SpecialistsUseCase
   
-  public init() {
-    
+  public init(useCase: SpecialistsUseCase) {
+    self.useCase = useCase
+
     initialState = State()
   }
 }
@@ -36,12 +37,13 @@ extension SpecialistsListState {
   
   public enum Mutation {
     case setError
+    case setResult([Specialist])
   }
-  
+
   public func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case .refreshMySpecialists:
-      return .just(.setError)
+      return useCase.invoke(request: SpecialistsRequest(page: 1)).map { .setResult($0) }
     }
   }
   
@@ -50,6 +52,10 @@ extension SpecialistsListState {
     case .setError:
       var newState = state
       newState.initialLoading = true
+      return newState
+    case let .setResult(res):
+      var newState = state
+      newState.specialists = res
       return newState
     }
   }

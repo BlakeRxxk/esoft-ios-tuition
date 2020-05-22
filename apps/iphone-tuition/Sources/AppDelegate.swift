@@ -22,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window = UIWindow()
     let rootComponent = RootComponent()
 
+//    window?.rootViewController = rootComponent.rootViewController
+//    let navigation = UINavigationController(rootViewController: MvvmSample())
+//    AppCoordinator(window: window!).start()
     window?.rootViewController = rootComponent.rootViewController
     window?.makeKeyAndVisible()
 

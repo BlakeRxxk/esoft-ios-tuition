@@ -59,6 +59,14 @@ public final class SpecialistCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
+  override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    subviews.forEach {
+      $0.yoga.markDirty()
+    }
+    yoga.applyLayout(preservingOrigin: true)
+    super.traitCollectionDidChange(previousTraitCollection)
+  }
+  
   override public func prepareForReuse() {
     super.prepareForReuse()
     specialistID = 0

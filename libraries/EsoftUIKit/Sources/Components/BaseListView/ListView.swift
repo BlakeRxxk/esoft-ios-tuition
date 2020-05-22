@@ -11,14 +11,18 @@ import YogaKit
 import IGListKit
 import BaseUI
 import ThemeManager
+import AutoLayoutKit
 
 public class BaseListView: View {
   public private(set) var adapter: ListAdapter?
-  public private(set) var flowLayout: ListCollectionViewLayout = ListCollectionViewLayout(stickyHeaders: false,
-                                                                                          scrollDirection: .vertical,
-                                                                                          topContentInset: .zero,
-                                                                                          stretchToEdge: true)
-  public private(set) lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+  public private(set) lazy var refreshControl = UIRefreshControl()
+  public private(set) lazy var activityIndicator: ActivityIndicatorView = ActivityIndicatorView()
+  public private(set) var flowLayout = ListCollectionViewLayout(stickyHeaders: false,
+                                                                scrollDirection: .vertical,
+                                                                topContentInset: .zero,
+                                                                stretchToEdge: true)
+  public private(set) lazy var collectionView = UICollectionView(frame: .zero,
+                                                                 collectionViewLayout: flowLayout)
 
   override public init() {
     super.init()
@@ -35,8 +39,23 @@ public class BaseListView: View {
   }
   
   private func configureUI() {
-    collectionView.backgroundColor = ThemeManager.current().colors.container
+    collectionView.setStyles(UIView.Styles.defaultBackground)
     adapter?.collectionView = collectionView
+    
+    refreshControl.tintColor = .clear
+    refreshControl.subviews.first?.alpha = 0
+    refreshControl.addSubview(activityIndicator)
+    activityIndicator.activity.setStyles(ActivityIndicator.Styles.default)
+    activityIndicator.activity.startAnimating()
+    
+    refreshControl.tintColor = ThemeManager.current().colors.primary500
+    collectionView.refreshControl = refreshControl
+    activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+
+    NSLayoutConstraint.activate([
+      refreshControl.centerX.constraint(equalTo: activityIndicator.centerX),
+      refreshControl.centerY.constraint(equalTo: activityIndicator.centerY)
+    ])
   }
   
   override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -46,7 +65,7 @@ public class BaseListView: View {
     yoga.applyLayout(preservingOrigin: true)
     super.traitCollectionDidChange(previousTraitCollection)
   }
-  
+
   override public func layoutSubviews() {
     super.layoutSubviews()
     
@@ -61,6 +80,12 @@ public class BaseListView: View {
       layout.width = 100%
       layout.height = 100%
     }
+  }
+  
+  public func reloadContent() {
+    adapter?.reloadData(completion: nil)
+    activityIndicator.yoga.markDirty()
+    refreshControl.layoutIfNeeded()
   }
 }
 
