@@ -43,9 +43,8 @@ public final class AddressItemViewYOGA: View {
    }
   
   private func createUI() {
-    
+   
     addSubview(titleStack)
-    
     titleStack.addSubview(mainTitle)
     titleStack.addSubview(phoneButton)
   }

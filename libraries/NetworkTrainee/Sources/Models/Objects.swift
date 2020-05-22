@@ -24,6 +24,7 @@ public struct Objects {
   public let priceAr: String
   public let photos: [ObjectPhotos]
   public let viewsCount: String?
+  public let isFavorite: String?
 }
 
 public struct ObjectPhotos {
@@ -32,22 +33,23 @@ public struct ObjectPhotos {
 
 extension Objects: Codable, Hashable {
   enum CodingKeys: String, CodingKey {
-      case id
-      case description
-      case price
-      case oldPrice = "old_price"
-      case city
-      case district
-      case street
-      case house
-      case type
-      case roomsCount = "rooms_count"
-      case areaFlat = "area_flat"
-      case floorsNum = "floors_num"
-      case floorsCnt = "floors_cnt"
-      case priceAr = "price_ar"
-      case photos
-      case viewsCount = "views_count"
+    case id
+    case description
+    case price
+    case oldPrice = "old_price"
+    case city
+    case district
+    case street
+    case house
+    case type
+    case roomsCount = "rooms_count"
+    case areaFlat = "area_flat"
+    case floorsNum = "floors_num"
+    case floorsCnt = "floors_cnt"
+    case priceAr = "price_ar"
+    case photos
+    case viewsCount = "views_count"
+    case isFavorite = "is_favorite"
   }
 }
 

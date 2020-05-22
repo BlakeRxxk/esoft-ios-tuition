@@ -124,7 +124,6 @@ public final class InfoItemViewYOGA: View {
       layout.isEnabled = true
       layout.flexDirection = .row
       layout.height = 24
-//      layout.paddingTop = 4
       layout.paddingBottom = 8
       layout.alignItems = .center
       layout.justifyContent = .spaceBetween

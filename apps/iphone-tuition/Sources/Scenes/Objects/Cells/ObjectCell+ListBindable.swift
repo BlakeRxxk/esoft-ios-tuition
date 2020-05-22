@@ -8,13 +8,11 @@
 import Foundation
 import IGListKit
 
-
 extension ObjectCell: ListBindable {
   public func bindViewModel(_ viewModel: Any) {
     guard let viewModel = viewModel as? ObjectViewModel else { return }
     
     // previewItem
-    
     let price = viewModel.price
     let oldPrice = viewModel.oldPrice
     let city = viewModel.city
@@ -22,9 +20,10 @@ extension ObjectCell: ListBindable {
     let street = viewModel.street
     let house = viewModel.house
     
-    previewItemViewYOGA.currentPrice = price
-    previewItemViewYOGA.price = oldPrice
+    previewItemViewYOGA.currentPrice = "\(price) руб."
+    previewItemViewYOGA.oldPrice = "\(oldPrice)"
     previewItemViewYOGA.address = "\(city), \(district), \(street), \(house)"
+    
     // addressItem
     func typeFlat(_ type: String) -> String {
       switch type {
@@ -43,10 +42,14 @@ extension ObjectCell: ListBindable {
     let floorsNum = "этаж \(viewModel.floorsNum)/\(viewModel.floorsCnt)"
     let priceAr = "\(viewModel.priceAr) руб./м²"
     
-    addressItemViewYOGA.title = "\(type), \(roomsCount), \(areaFlat), \(floorsNum), \(priceAr)"
+    previewItemViewYOGA.objectsDescription = "\(type), \(roomsCount), \(areaFlat), \(floorsNum), \(priceAr)"
     
     let dataImg = viewModel.photos.map { $0.fileName }
-    previewItemViewYOGA.dataSet = dataImg
+    previewItemViewYOGA.photos = dataImg
+    
+    previewItemViewYOGA.views = "\(viewModel.viewsCount)"
+    previewItemViewYOGA.favorites = "\(viewModel.isFavorite)"
+    previewItemViewYOGA.code = "\(viewModel.id)"
     
     layoutSubviews()
   }

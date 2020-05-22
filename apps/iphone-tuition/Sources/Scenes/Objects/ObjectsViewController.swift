@@ -13,7 +13,7 @@ import NetworkTrainee
 import IGListKit
 import BaseUI
 
-final class ObjectsViewController: ViewController<BaseListView>{
+final class ObjectsViewController: ViewController<BaseListView> {
   
   var networkManager = NetworkManager()
   private var data: [ObjectViewModel] = []
@@ -31,11 +31,12 @@ final class ObjectsViewController: ViewController<BaseListView>{
   override public func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
-    networkManager.getObjects() { [weak self] (res, _) in
+    networkManager.getObjects { [weak self] (res, _) in
       guard
         let self = self,
         let objects = res else { return }
       
+      print(objects)
       let tmp = objects.map { ObjectViewModel(id: $0.id,
                                               price: $0.price,
                                               oldPrice: $0.oldPrice ?? "",
@@ -49,7 +50,9 @@ final class ObjectsViewController: ViewController<BaseListView>{
                                               floorsNum: $0.floorsNum,
                                               floorsCnt: $0.floorsCnt,
                                               priceAr: $0.priceAr,
-                                              photos: $0.photos)
+                                              photos: $0.photos,
+                                              viewsCount: $0.viewsCount ?? "",
+                                              isFavorite: $0.isFavorite ?? "")
       }
       self.data.append(contentsOf: tmp)
       

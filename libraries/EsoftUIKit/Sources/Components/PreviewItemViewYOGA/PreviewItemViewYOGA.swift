@@ -22,17 +22,22 @@ public final class PreviewItemViewYOGA: View {
       currentPriceLabel.yoga.markDirty()
     }
   }
-
-  public var price: String {
+  
+  public var oldPrice: String {
     get {
       priceLabel.styledText ?? ""
     }
     set {
-      priceLabel.styledText = newValue
+      if newValue.isEmpty {
+        priceStack.isHidden = true
+      } else {
+        priceStack.isHidden = false
+        priceLabel.styledText = "\(newValue) руб."
+      }
       priceLabel.yoga.markDirty()
     }
   }
-
+  
   public var address: String {
     get {
       addressLabel.styledText ?? ""
@@ -42,23 +47,63 @@ public final class PreviewItemViewYOGA: View {
       addressLabel.yoga.markDirty()
     }
   }
-
-  public var photo: UIImage? {
+  
+  public var photos: [String] {
     get {
-      image.image
+      photos
     }
     set {
-      image.image = newValue
+      photosItems = newValue
+      collectionView.reloadData()
     }
   }
   
-  public var dataSet: [String] {
+  public var objectsDescription: String {
     get {
-      dataSet
+      mainTitle.styledText ?? ""
     }
     set {
-      data = newValue
-      collectionView.reloadData()
+      mainTitle.styledText = newValue
+    }
+  }
+  
+  public var views: String {
+    get {
+      viewsCount.styledText ?? ""
+    }
+    set {
+      if newValue.isEmpty {
+        viewsView.isHidden = true
+      } else {
+        viewsView.isHidden = false
+        viewsCount.styledText = newValue
+      }
+      viewsCount.yoga.markDirty()
+    }
+  }
+  
+  public var favorites: String {
+    get {
+      favoriteCount.styledText ?? ""
+    }
+    set {
+      if newValue.isEmpty {
+        favoriteView.isHidden = true
+      } else {
+        favoriteView.isHidden = false
+        favoriteCount.styledText = newValue
+      }
+      favoriteCount.yoga.markDirty()
+    }
+  }
+  
+  public var code: String {
+    get {
+      codeObject.styledText ?? ""
+    }
+    set {
+      codeObject.styledText = "Код объекта: \(newValue)"
+      codeObject.yoga.markDirty()
     }
   }
   
@@ -68,7 +113,6 @@ public final class PreviewItemViewYOGA: View {
   private(set) lazy var currentPriceLabel = UILabel()
   private(set) lazy var priceStack = UIView()
   private(set) lazy var priceImage = UIImageView()
-  
   private(set) lazy var priceLabel = UILabel()
   private(set) lazy var addressLabel = UILabel()
   
@@ -76,12 +120,10 @@ public final class PreviewItemViewYOGA: View {
   private(set) lazy var mainView = UIView()
   private(set) lazy var image = UIImageView()
   
-  private(set) lazy var data: [String] = []
+  private(set) lazy var photosItems: [String] = []
   private(set) lazy var collectionView: UICollectionView = {
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-//    layout.sectionInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
     let cv: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-//    cv.isScrollEnabled = false
     layout.scrollDirection = .horizontal
     cv.isPagingEnabled = true
     cv.register(PreviewImageCell.self, forCellWithReuseIdentifier: PreviewImageCell.reuseId)
@@ -90,7 +132,20 @@ public final class PreviewItemViewYOGA: View {
   
   private(set) lazy var favoriteButton = UIButton()
   
-//  private var activeConstraints: [NSLayoutConstraint] = []
+  private(set) lazy var titleStack: UIView = UIView()
+  private(set) lazy var mainTitle: UILabel = UILabel()
+  private(set) lazy var phoneButton: UIButton = UIButton()
+  
+  // INFO STACK
+  private(set) lazy var infoStack: UIView = UIView()
+  private(set) lazy var viewsView: UIView = UIView()
+  private(set) lazy var countsWrapped: UIView = UIView()
+  private(set) lazy var viewsImage: UIImageView = UIImageView()
+  private(set) lazy var viewsCount: UILabel = UILabel()
+  private(set) lazy var favoriteView: UIView = UIView()
+  private(set) lazy var favoriteImage: UIImageView = UIImageView()
+  private(set) lazy var favoriteCount: UILabel = UILabel()
+  private(set) lazy var codeObject: UILabel = UILabel()
   
   override public init() {
     super.init()
@@ -102,23 +157,6 @@ public final class PreviewItemViewYOGA: View {
   
   private func createUI() {
     
-//    let subviews: [UIView] = [
-//      topView,
-//      topViewStack,
-//      currentPriceLabel,
-//      priceStack,
-//      priceImage,
-//      priceLabel,
-//      addressLabel,
-//      mainView,
-//      image,
-//      collectionView
-//    ]
-//
-//    subviews.forEach {
-//      $0.translatesAutoresizingMaskIntoConstraints = false
-//    }
-    
     topView.addSubview(topViewStack)
     topViewStack.addSubview(currentPriceLabel)
     topViewStack.addSubview(priceStack)
@@ -126,17 +164,65 @@ public final class PreviewItemViewYOGA: View {
     priceStack.addSubview(priceLabel)
     topView.addSubview(addressLabel)
     
-//    mainView.addSubview(image)
     mainView.addSubview(collectionView)
     mainView.addSubview(favoriteButton)
     
+    titleStack.addSubview(mainTitle)
+    titleStack.addSubview(phoneButton)
+    
+    infoStack.addSubview(viewsView)
+    infoStack.addSubview(countsWrapped)
+    
+    countsWrapped.addSubview(viewsView)
+    countsWrapped.addSubview(favoriteView)
+    
+    infoStack.addSubview(codeObject)
+    
+    viewsView.addSubview(viewsImage)
+    viewsView.addSubview(viewsCount)
+    
+    favoriteView.addSubview(favoriteImage)
+    favoriteView.addSubview(favoriteCount)
+    
     addSubview <^> [
       topView,
-      mainView
+      mainView,
+      titleStack,
+      infoStack
     ]
   }
   
   private func configureUI() {
+    
+    viewsImage.image = UIImage.eye
+    viewsImage.tintColor = ThemeManager.current().textColors.secondary
+    favoriteImage.image = UIImage.starSmall
+    favoriteImage.tintColor = ThemeManager.current().textColors.secondary
+    
+    viewsCount.setStyles(
+      UILabel.Styles.micro,
+      UILabel.ColorStyle.placeholders
+    )
+    
+    favoriteCount.setStyles(
+      UILabel.Styles.micro,
+      UILabel.ColorStyle.placeholders
+    )
+    
+    codeObject.setStyles(
+      UILabel.Styles.micro,
+      UILabel.ColorStyle.placeholders
+    )
+    
+    mainTitle.numberOfLines = 0
+    
+    mainTitle.setStyles(
+      UILabel.Styles.tiny,
+      UILabel.ColorStyle.primary
+    )
+    
+    phoneButton.setBackgroundImage(UIImage.Call.right, for: .normal)
+    phoneButton.tintColor = ThemeManager.current().colors.primary500
     
     collectionView.backgroundColor = .white
     
@@ -248,6 +334,82 @@ public final class PreviewItemViewYOGA: View {
       layout.right = 12.5
     }
     
+    titleStack.configureLayout { layout in
+      layout.isEnabled = true
+      layout.flexDirection = .row
+      layout.alignItems = .center
+      layout.justifyContent = .spaceBetween
+      layout.paddingBottom = 4
+      layout.paddingTop = 8
+      layout.height = 48
+      layout.width = 100%
+    }
+    
+    mainTitle.configureLayout { layout in
+      layout.isEnabled = true
+      layout.flexShrink = 1
+      layout.width = 80%
+    }
+    
+    phoneButton.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = 24
+      layout.height = 24
+    }
+    
+    infoStack.configureLayout { layout in
+      layout.isEnabled = true
+      layout.flexDirection = .row
+      layout.height = 24
+      layout.paddingBottom = 8
+      layout.alignItems = .center
+      layout.justifyContent = .spaceBetween
+    }
+    
+    countsWrapped.configureLayout { layout in
+      layout.isEnabled = true
+      layout.flexDirection = .row
+    }
+    
+    viewsView.configureLayout { layout in
+      layout.isEnabled = true
+      layout.flexDirection = .row
+      layout.alignItems = .center
+    }
+    
+    viewsImage.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = 11
+      layout.height = 7.5
+    }
+    
+    viewsCount.configureLayout { layout in
+      layout.isEnabled = true
+      layout.marginLeft = 5
+    }
+    
+    favoriteView.configureLayout { layout in
+      layout.isEnabled = true
+      layout.marginLeft = 22
+      layout.flexDirection = .row
+      layout.alignItems = .center
+    }
+    
+    favoriteImage.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = 10
+      layout.height = 9.41
+    }
+    
+    favoriteCount.configureLayout { layout in
+      layout.isEnabled = true
+      layout.marginLeft = 5
+    }
+    
+    codeObject.configureLayout { (layout) in
+      layout.isEnabled = true
+    }
+    
   }
   
 }
@@ -257,21 +419,21 @@ extension PreviewItemViewYOGA: PreviewItemViewInputYOGA {}
 extension PreviewItemViewYOGA: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
   
   public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    data.count
+    photosItems.count
   }
   
   public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PreviewImageCell.reuseId, for: indexPath) as! PreviewImageCell
-      cell.set(photoName: data[indexPath.row])
-      return cell
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PreviewImageCell.reuseId, for: indexPath) as! PreviewImageCell
+    cell.set(photoName: photosItems[indexPath.row])
+    return cell
   }
   
   public func collectionView(_ collectionView: UICollectionView,
                              layout collectionViewLayout: UICollectionViewLayout,
                              sizeForItemAt indexPath: IndexPath) -> CGSize {
     let width = collectionView.frame.width
-//    print(width)
+
     return CGSize(width: width, height: 207)
   }
   

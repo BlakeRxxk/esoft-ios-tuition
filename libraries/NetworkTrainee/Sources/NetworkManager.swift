@@ -99,10 +99,10 @@ public struct NetworkManager {
     }
   }
   
-  public func fetchImage(withPhotoName photoName: String, completion: @escaping (UIImage) -> ()) {
+  public func fetchImage(withPhotoName photoName: String, completion: @escaping (UIImage) -> Void) {
     let baseUrl = "https://cdn.esoft.digital/640480\(photoName)"
     guard let url = URL(string: baseUrl) else { return }
-    URLSession.shared.dataTask(with: url) { (data, response, error) in
+    URLSession.shared.dataTask(with: url) { (data, _, error) in
       if let error = error {
         print("Failed to fetch image with error: ", error.localizedDescription)
         return

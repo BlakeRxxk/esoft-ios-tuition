@@ -15,7 +15,7 @@ extension String {
         
         let size = self.boundingRect(with: textSize,
                                      options: [.usesLineFragmentOrigin, .usesFontLeading],
-                                     attributes: [NSAttributedString.Key.font : font],
+                                     attributes: [NSAttributedString.Key.font: font],
                                      context: nil)
         return ceil(size.height)
     }
