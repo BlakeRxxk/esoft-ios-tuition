@@ -152,7 +152,7 @@ extension UIImage {
 }
 
 extension Bundle {
-  class Class {}
+  final class Class {}
   
   static var framework: Bundle {
     Bundle(for: Class.self)

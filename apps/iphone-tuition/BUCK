@@ -35,12 +35,11 @@ static_libraries = [
     "//libraries/ListKit:ListKit",
     "//libraries/RxExtensions:RxExtensions",
     "//libraries/URLRequestKit:URLRequestKit",
-    "//scenarios/Specialists/SpecialistsCore:SpecialistsCore",
-    "//scenarios/Specialists/SpecialistsImplementation:SpecialistsImplementation",
-    "//scenarios/Specialists/SpecialistsUI:SpecialistsUI",
+    "//features/Specialists/SpecialistsCore:SpecialistsCore",
+    "//features/Specialists/SpecialistsImplementation:SpecialistsImplementation",
+    "//features/Specialists/SpecialistsUI:SpecialistsUI",
     "//integrations/TuitionIntegrations:TuitionIntegrations",
-    "//libraries/PhoneNumberFormat:PhoneNumberFormat",
-    "//libraries/libphonenumber:libphonenumber",
+    "//libraries/CDNImageLink:CDNImageLink",
 ]
 
 prebuilt_test_frameworks = [
@@ -116,7 +115,9 @@ apple_library(
     tests = app_tests,
     configs = library_configs(),
     swift_version = native.read_config("swift", "version"),
-    srcs = glob([ "Sources/**/*.swift" ]),
+    srcs = glob([ "Sources/**/*.swift" ], exclude = [
+        "Sources/Features/**/*.swift"
+    ]),
     deps = [] + framework_binary_dependencies(framework_dependencies) + prebuilt_frameworks + static_libraries + build_phase_scripts,
     frameworks = additional_frameworks,
 )

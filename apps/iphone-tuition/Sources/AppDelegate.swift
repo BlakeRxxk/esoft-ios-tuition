@@ -22,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window = UIWindow()
     let rootComponent = RootComponent()
 
+//    window?.rootViewController = rootComponent.rootViewController
+//    let navigation = UINavigationController(rootViewController: MvvmSample())
+//    AppCoordinator(window: window!).start()
     window?.rootViewController = rootComponent.rootViewController
     window?.makeKeyAndVisible()
 
@@ -45,7 +48,7 @@ extension AppDelegate {
 private extension AppDelegate {
   enum Constants {
     static let fetchInterval: Double = 900.0
-    static let maxProgressiveSize: CGSize = CGSize.init(width: 1024, height: 1024)
+    static let maxProgressiveSize: CGSize = CGSize(width: 1024, height: 1024)
     static let diskLimit: UInt = 50 * 1024 * 1024 // limit cache with 50MB
     static let ageLimit: TimeInterval = 60 * 60 * 24 * 10 // limit cache age with 10 days
   }

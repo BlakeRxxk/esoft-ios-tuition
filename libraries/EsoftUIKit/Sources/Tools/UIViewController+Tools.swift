@@ -16,7 +16,7 @@ extension UIViewController {
     let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
     return navBarHeight + statusBarHeight
   }
-
+  
   public func addCloseButtonIfNeeded(target: AnyObject = self as AnyObject, action: Selector) {
     guard navigationController?.viewControllers.first === self else { return }
     

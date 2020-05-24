@@ -29,7 +29,7 @@ public final class RootViewController: ViewController<BaseListView> {
   private var mortgageBuilder: MortgageBuilder
   private var loggedOutBuilder: LoggedOutBuilder
   private var citiesBuilder: CitiesBuilder
-  private var rxdemoBuilder: RxDemoBuilder
+  private var rxdemoBuilder: SpecialistsBuilder
   
   init(objectsBuilder: ObjectsBuilder,
        sellerTicketBuilder: SellerTicketBuilder,
@@ -37,7 +37,7 @@ public final class RootViewController: ViewController<BaseListView> {
        mortgageBuilder: MortgageBuilder,
        loggedOutBuilder: LoggedOutBuilder,
        citiesBuilder: CitiesBuilder,
-       rxdemoBuilder: RxDemoBuilder) {
+       rxdemoBuilder: SpecialistsBuilder) {
     self.objectsBuilder = objectsBuilder
     self.sellerTicketBuilder = sellerTicketBuilder
     self.discountBuilder = discountBuilder

@@ -2,104 +2,123 @@
 //  IconItemView.swift
 //  EsoftUIKit
 //
-//  Copyright © 2020 E-SOFT. All rights reserved.
+//  Copyright © 2019 E-SOFT. All rights reserved.
 //
 
 import UIKit
+import YogaKit
 import BaseUI
-import BaseFRP
 
 public final class IconItemView: View {
-  public var viewUUID: String = UUID().uuidString
-
+  public var viewID: String = ""
   public var title: String {
     get {
-      titleLabel.text ?? ""
+      titleLabel.styledText ?? ""
     }
     set {
-      titleLabel.text = newValue
+      titleLabel.styledText = newValue
     }
   }
   
   public var leftIcon: UIImage? {
     get {
-      iconView.image
+      leftIconView.image
     }
     set {
-      iconView.image = newValue ?? UIImage()
+      leftIconView.image = newValue ?? UIImage()
+      leftIconView.yoga.markDirty()
     }
   }
-
-  private(set) lazy var containerStack: UIStackView = UIStackView()
-  private(set) lazy var iconView: UIImageView = UIImageView()
-  private(set) lazy var titleLabel: UILabel = UILabel()
   
-  private var activeConstraints: [NSLayoutConstraint] = []
-
+  public var rightIcon: UIImage? {
+    get {
+      rightIconView.image
+    }
+    set {
+      rightIconView.image = newValue ?? UIImage()
+    }
+  }
+  
+  public var topBorderMode: IconItemView.TopBorderMode = .default {
+    didSet {
+      updateControlElements()
+    }
+  }
+  
+  public var bottomBorderMode: IconItemView.BottomBorderMode = .default {
+    didSet {
+      updateControlElements()
+    }
+  }
+  
+  public var leftIconMode: IconItemView.LeftButtonMode = .default {
+    didSet {
+      //      leftIconView.yoga.markDirty()
+      updateControlElements()
+    }
+  }
+  
+  public var rightIconMode: IconItemView.RightButtonMode = .default {
+    didSet {
+      rightIconView.yoga.markDirty()
+      updateControlElements()
+    }
+  }
+  
+  public weak var output: IconItemViewOutput?
+  
+  private(set) lazy var topDivider: UIView = UIView()
+  private(set) lazy var leftIconView: IconView = IconView()
+  private(set) lazy var rightIconView: IconView = IconView()
+  private(set) lazy var titleLabel: UILabel = UILabel()
+  private(set) lazy var bottomDivider: UIView = UIView()
+  
+  internal lazy var layout: Layout = Layout()
+  internal lazy var layoutController: LayoutController = LayoutController()
+  
   override public init() {
     super.init()
     
     createUI()
     configureUI()
-    layout()
+  }
+  
+  override public func layoutSubviews() {
+    super.layoutSubviews()
+    configureLayout(block: layout.container)
+    
+    titleLabel.configureLayout(block: layout.title)
+    
+    yoga.applyLayout(preservingOrigin: true)
   }
   
   private func createUI() {
-    let subviews: [UIView] = [
-      containerStack,
-      iconView,
-      titleLabel
-    ]
-    
-    subviews.forEach {
-      $0.translatesAutoresizingMaskIntoConstraints = false
-    }
-
-    containerStack.addArrangedSubview(iconView)
-    containerStack.addArrangedSubview(titleLabel)
-    
-    addSubview <^> [
-      containerStack
-    ]
+    addSubview(titleLabel)
   }
-
+  
   private func configureUI() {
-    iconView.image = UIImage.Call.right
+    topDivider.setStyles(UIView.Styles.divider)
+    bottomDivider.setStyles(UIView.Styles.divider)
     
-    iconView.tintColor = UIColor(red: 0.204, green: 0.78, blue: 0.349, alpha: 1)
-    containerStack.alignment = .center
-    containerStack.axis = .horizontal
-    containerStack.spacing = 32.0
-    containerStack.isLayoutMarginsRelativeArrangement = true
-    containerStack.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    titleLabel.setStyles(
+      UILabel.Styles.regular,
+      UILabel.Styles.singleLine
+    )
     
-    titleLabel.textColor = UIColor(red: 0.204, green: 0.78, blue: 0.349, alpha: 1)
-    titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-
-    let paragraphStyle = NSMutableParagraphStyle()
-    paragraphStyle.lineHeightMultiple = 1.08
-    
-    titleLabel.attributedText = NSMutableAttributedString(string: "title",
-                                                          attributes: [
-                                                            NSAttributedString.Key.kern: -0.41,
-                                                            NSAttributedString.Key.paragraphStyle: paragraphStyle])
+    let action = UITapGestureRecognizer(target: self, action: #selector(handleTapAction) )
+    addGestureRecognizer(action)
   }
   
-  private func layout() {
-    activeConstraints = [
-      containerStack.topAnchor.constraint(equalTo: topAnchor),
-      containerStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-      containerStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-      containerStack.bottomAnchor.constraint(equalTo: bottomAnchor),
-      
-      iconView.heightAnchor.constraint(equalToConstant: Space.base),
-      iconView.widthAnchor.constraint(equalToConstant: Space.base)
-    ]
-    
-    NSLayoutConstraint.activate(activeConstraints)
+  private func updateControlElements() {
+    updateTopBorder()
+    updateBottomBorder()
+    updateLeftIcon()
+    updateRightIcon()
   }
   
-  @objc func handleAction() {}
+  @objc private func handleTapAction() {
+    output?.didTapAction(in: self)
+  }
 }
 
 extension IconItemView: IconItemViewInput {}

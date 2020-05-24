@@ -1,6 +1,6 @@
 //
 //  PersonNameFactory.swift
-//  ESUIKit
+//  EsoftUIKit
 //
 //  Copyright © 2020 E-SOFT. All rights reserved.
 //
@@ -25,7 +25,7 @@ public enum PersonNameFactory {
     if splittedName.count >= 2 {
       components.familyName = splittedName[1]
     }
-
+    
     components.givenName = splittedName.first
     
     return components

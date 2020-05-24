@@ -7,15 +7,17 @@
 
 import Atlas
 import UIKit
+import RxSwift
+import RxCocoa
 import EsoftUIKit
 import ThemeManager
 import YogaKit
 import NetworkTrainee
-import RxSwift
-import RxCocoa
+import RxExtensions
 
 final class PasswordViewController: UIViewController {
-  var disposeBag = DisposeBag()
+  var networkManager = NetworkManager()
+  private let disposeBag: DisposeBag = DisposeBag()
   
   private(set) lazy var container: UIView = UIView()
   private(set) lazy var enterLabel: UILabel = UILabel()
@@ -37,7 +39,16 @@ final class PasswordViewController: UIViewController {
     
     createUI()
     configureUI()
-    bind()
+    
+    RxKeyboard
+      .instance
+      .visibleHeight
+      .drive(onNext: { [unowned self] keyboardVisibleHeight in
+        self.view.yoga.paddingBottom = YGValue(keyboardVisibleHeight)
+        self.view.yoga.applyLayout(preservingOrigin: true)
+        self.view.layoutIfNeeded()
+      })
+      .disposed(by: disposeBag)
   }
   
   override func viewWillAppear(_ animated: Bool) {

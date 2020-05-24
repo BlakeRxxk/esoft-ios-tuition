@@ -1,6 +1,6 @@
 //
 //  InputPresenter.swift
-//  ESUIKit
+//  EsoftUIKit
 //
 //  Copyright © 2019 E-SOFT. All rights reserved.
 //
@@ -8,6 +8,9 @@
 import Foundation
 
 public protocol InputPresenterStyle {
+  /// The maximum length of text input without formatting.
+  var maximalLength: Int { get }
+  
   /// Remove formatting and trash from string.
   ///
   /// - note: The method can be invoked on the part of the string.
@@ -25,9 +28,6 @@ public protocol InputPresenterStyle {
   ///
   /// - returns: A string with applied formatting.
   func appendedFormatting(to string: String) -> String
-  
-  /// The maximum length of text input without formatting.
-  var maximalLength: Int { get }
 }
 
 public class InputPresenter: NSObject {
