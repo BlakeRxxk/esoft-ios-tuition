@@ -35,6 +35,8 @@ static_libraries = [
     "//libraries/ListKit:ListKit",
     "//libraries/RxExtensions:RxExtensions",
     "//libraries/URLRequestKit:URLRequestKit",
+    "//libraries/libphonenumber:libphonenumber",
+    "//libraries/PhoneNumberFormat:PhoneNumberFormat",
     "//features/Specialists/SpecialistsCore:SpecialistsCore",
     "//features/Specialists/SpecialistsImplementation:SpecialistsImplementation",
     "//features/Specialists/SpecialistsUI:SpecialistsUI",
