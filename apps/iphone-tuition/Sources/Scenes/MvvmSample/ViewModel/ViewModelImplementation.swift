@@ -12,15 +12,6 @@ import IGListDiffKit.IGListDiffable
 import SpecialistsUI
 import EsoftUIKit
 
-protocol ViewModel: class {
-  // Input
-  var loadSpecialists: PublishRelay<()> { get }
-  var refresh: PublishRelay<()> { get }
-  
-  // Output
-  var specialists: BehaviorRelay<[SpecialistViewModel]> { get }
-}
-  
 final class ViewModelImplementation: ViewModel {
   private let disposeBag = DisposeBag()
 
