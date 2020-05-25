@@ -35,8 +35,7 @@ final class ObjectsViewController: ViewController<BaseListView> {
       guard
         let self = self,
         let objects = res else { return }
-      
-      print(objects)
+        
       let tmp = objects.map { ObjectViewModel(id: $0.id,
                                               price: $0.price,
                                               oldPrice: $0.oldPrice ?? "",

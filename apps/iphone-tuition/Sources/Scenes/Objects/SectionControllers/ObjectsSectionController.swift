@@ -43,7 +43,16 @@ public final class ObjectsSectionController: ListSectionController {
     let house = object!.house
     let address = "\(city), \(district), \(street), \(house)"
     
-    let calculateheight = 327 + (address.height(width: width - 32, font: addressFont))
+    let addressHeight = CGFloat(address.height(width: width - 32, font: addressFont))
+    
+    print(addressHeight)
+    
+    var height: CGFloat = 0
+    if addressHeight > 30 {
+      height += 2
+    }
+    
+    let calculateheight = 327 + addressHeight + height
     
     print("calculateheight : ", calculateheight)
     
