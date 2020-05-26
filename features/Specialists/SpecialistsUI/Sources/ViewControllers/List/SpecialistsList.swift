@@ -44,9 +44,9 @@ public final class SpecialistsList: ViewController<BaseListView> {
     super.viewDidAppear(animated)
 
     store?.action.onNext(.refreshMySpecialists)
-    store?.action.onNext(.refreshMySpecialists)
-    store?.action.onNext(.refreshMySpecialists)
-    store?.action.onNext(.refreshMySpecialists)
+//    store?.action.onNext(.refreshMySpecialists)
+//    store?.action.onNext(.refreshMySpecialists)
+//    store?.action.onNext(.refreshMySpecialists)
   }
   
   private func configureUI() {

@@ -16,6 +16,7 @@ public final class RootComponent: BootstrapComponent {
                                                 discountBuilder: discountComponent,
                                                 mortgageBuilder: mortgageComponent,
                                                 loggedOutBuilder: loggedOutComponent,
+                                                authCitiesBuilder: authCitiesComponent,
                                                 citiesBuilder: citiesComponent,
                                                 rxdemoBuilder: rxdemo)
 
@@ -43,6 +44,10 @@ public final class RootComponent: BootstrapComponent {
   
   var loggedOutComponent: LoggedOutComponent {
     LoggedOutComponent(parent: self)
+  }
+  
+  var authCitiesComponent: AuthCitiesComponent {
+    AuthCitiesComponent(parent: self)
   }
   
   var citiesComponent: CitiesComponent {

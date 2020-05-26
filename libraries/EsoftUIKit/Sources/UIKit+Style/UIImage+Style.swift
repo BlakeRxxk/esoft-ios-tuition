@@ -112,6 +112,10 @@ extension UIImage {
     }
   }
   
+  public static var info : UIImage {
+    named("info").withRenderingMode(.alwaysTemplate)
+  }
+  
   public enum Socials {
     public static var facebook: UIImage {
       named("facebook")
@@ -124,6 +128,12 @@ extension UIImage {
     }
     public static var google: UIImage {
       named("google")
+    }
+  }
+  
+  public enum Spinners {
+    public static var base: UIImage {
+      named("spinner").withRenderingMode(.alwaysTemplate)
     }
   }
   

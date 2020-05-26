@@ -28,6 +28,7 @@ public final class RootViewController: ViewController<BaseListView> {
   private var discountBuilder: DiscountBuilder
   private var mortgageBuilder: MortgageBuilder
   private var loggedOutBuilder: LoggedOutBuilder
+  private var authCitiesBuilder: AuthCitiesBuilder
   private var citiesBuilder: CitiesBuilder
   private var rxdemoBuilder: SpecialistsBuilder
   
@@ -36,6 +37,7 @@ public final class RootViewController: ViewController<BaseListView> {
        discountBuilder: DiscountBuilder,
        mortgageBuilder: MortgageBuilder,
        loggedOutBuilder: LoggedOutBuilder,
+       authCitiesBuilder: AuthCitiesBuilder,
        citiesBuilder: CitiesBuilder,
        rxdemoBuilder: SpecialistsBuilder) {
     self.objectsBuilder = objectsBuilder
@@ -43,6 +45,7 @@ public final class RootViewController: ViewController<BaseListView> {
     self.discountBuilder = discountBuilder
     self.mortgageBuilder = mortgageBuilder
     self.loggedOutBuilder = loggedOutBuilder
+    self.authCitiesBuilder = authCitiesBuilder
     self.citiesBuilder = citiesBuilder
     self.rxdemoBuilder = rxdemoBuilder
     
@@ -100,7 +103,7 @@ extension RootViewController: RootViewItemSectionOutput {
     case "Task 5":
       show(sellerTicketBuilder.sellerTicketViewController, sender: nil)
     case "Task 6":
-      present(loggedOutBuilder.loggedOutViewController, animated: true)
+      present(authCitiesBuilder.authCitiesViewController, animated: true)
     case "Cities RxDemo":
       show(citiesBuilder.citiesViewController, sender: nil)
     case "Simple RxDemo":

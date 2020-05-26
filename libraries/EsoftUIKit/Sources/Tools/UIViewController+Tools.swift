@@ -36,4 +36,14 @@ extension UIViewController {
     item.action = action
     navigationItem.leftBarButtonItem = item
   }
+  
+  public func addInfoButtonIfNeeded(target: AnyObject = self as AnyObject, action: Selector) {
+    guard navigationController?.viewControllers.first === self else { return }
+    
+    let item = UIBarButtonItem()
+    item.setStyles(UIBarButtonItem.Styles.info)
+    item.target = target
+    item.action = action
+    navigationItem.rightBarButtonItem = item
+  }
 }
