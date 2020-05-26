@@ -8,6 +8,7 @@
 import UIKit
 import NeedleFoundation
 import Foundation
+import Authorization
 
 protocol AuthCitiesBuilder{
   var authCitiesViewController: UIViewController { get }
@@ -15,6 +16,6 @@ protocol AuthCitiesBuilder{
 
 class AuthCitiesComponent: Component<EmptyDependency>, AuthCitiesBuilder {
   var authCitiesViewController: UIViewController {
-    UINavigationController(rootViewController: AuthCitiesViewController())
+    UINavigationController(rootViewController: Authorization.CitiesViewController())
   }
 }

@@ -5,14 +5,14 @@
 //  Created by nedstar on 26.05.2020.
 //
 
-
 import UIKit
 import BaseUI
 import EsoftUIKit
 import YogaKit
 import RxSwift
 import RxCocoa
-final class AuthCitiesViewController: ViewController<BaseListView> {
+
+final public class CitiesViewController: ViewController<BaseListView> {
   public var disposeBag: DisposeBag = DisposeBag()
   
   let searchController = UISearchController(searchResultsController: nil)
@@ -73,13 +73,13 @@ final class AuthCitiesViewController: ViewController<BaseListView> {
   }
 }
 
-extension AuthCitiesViewController: UISearchResultsUpdating {
+extension CitiesViewController: UISearchResultsUpdating {
   public func updateSearchResults(for searchController: UISearchController) {
     print(searchController.searchBar.text!)
   }
 }
 
-extension AuthCitiesViewController {
+extension CitiesViewController {
   enum Localized {
     public static let city = "Город"
     public static let close = "Закрыть"

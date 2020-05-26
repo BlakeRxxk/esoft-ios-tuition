@@ -8,13 +8,13 @@
 import UIKit
 import NeedleFoundation
 import Foundation
+import Authorization
 
 protocol PasswordBuilder {
   var passwordViewController: UIViewController { get }
 }
 
 class PasswordComponent: Component<EmptyDependency>, PasswordBuilder {
-  
   var passwordViewController: UIViewController {
     UINavigationController(rootViewController: PasswordViewController())
   }

@@ -1,4 +1,5 @@
 ../../features/Specialists/SpecialistsCore/Sources/
 ../../features/Specialists/SpecialistsUI/Sources/
 ../../features/Specialists/SpecialistsImplementation/Sources/
+../../features/Authorization/Authorization/Sources/
 ../../integrations/TuitionIntegrations/Sources/

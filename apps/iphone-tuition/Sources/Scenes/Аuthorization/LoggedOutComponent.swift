@@ -8,18 +8,14 @@
 import UIKit
 import NeedleFoundation
 import Foundation
+import Authorization
 
 protocol LoggedOutBuilder {
   var loggedOutViewController: UIViewController { get }
 }
 
 class LoggedOutComponent: Component<EmptyDependency>, LoggedOutBuilder {
-  
   var loggedOutViewController: UIViewController {
-    UINavigationController(rootViewController: LoginViewController(passwordBuilder: passwordComponent))
-  }
-  
-  var passwordComponent: PasswordComponent {
-    PasswordComponent(parent: self)
+    UINavigationController(rootViewController: LoginViewController())
   }
 }

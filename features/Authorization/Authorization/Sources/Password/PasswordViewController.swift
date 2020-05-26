@@ -7,4 +7,4 @@
 
 import UIKit
 
-final class PasswordViewController: UIViewController {}
+final public class PasswordViewController: UIViewController {}

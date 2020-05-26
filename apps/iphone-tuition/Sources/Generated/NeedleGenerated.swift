@@ -5,6 +5,7 @@
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
 //
 
+import Authorization
 import Foundation
 import NeedleFoundation
 import SpecialistsCore
@@ -16,9 +17,6 @@ import UIKit
 
 public func registerProviderFactories() {
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->SellerTicketComponent") { component in
-        return EmptyDependencyProvider(component: component)
-    }
-    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->LoggedOutComponent->PasswordComponent") { component in
         return EmptyDependencyProvider(component: component)
     }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->AuthCitiesComponent") { component in
