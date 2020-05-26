@@ -46,4 +46,25 @@ extension UIViewController {
     item.action = action
     navigationItem.rightBarButtonItem = item
   }
+  
+  public func addLeftButtonIfNeeded(target: AnyObject = self as AnyObject, title: String, action: Selector) {
+    guard navigationController?.viewControllers.first === self else { return }
+    
+    let item = UIBarButtonItem()
+    item.title = title
+    item.target = target
+    item.action = action
+    navigationItem.leftBarButtonItem = item
+  }
+  
+  public func setupSearchController(searchController: UISearchController, searchResultsUpdater: UISearchResultsUpdating) {
+    searchController.searchResultsUpdater = searchResultsUpdater
+    searchController.dimsBackgroundDuringPresentation = false
+    definesPresentationContext = true // что это?
+    if #available(iOS 11, *) {
+        self.navigationItem.searchController = searchController
+        self.navigationItem.searchController?.isActive = true
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+    }
+  }
 }

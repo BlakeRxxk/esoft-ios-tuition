@@ -12,7 +12,6 @@ import EsoftUIKit
 import YogaKit
 import RxSwift
 import RxCocoa
-
 final class AuthCitiesViewController: ViewController<BaseListView> {
   public var disposeBag: DisposeBag = DisposeBag()
   
@@ -22,6 +21,18 @@ final class AuthCitiesViewController: ViewController<BaseListView> {
     super.init(viewCreator: BaseListView.init)
     
     configureUI()
+  }
+  
+  override public func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    navigationController?.navigationBar.setStyles(UINavigationBar.Styles.modal)
+    
+    addLeftButtonIfNeeded(target: self, title: Localized.close, action: #selector(handleDismiss))
+    navigationItem.title = Localized.city
+    addInfoButtonIfNeeded(target: self, action: #selector(handleModal))
+    
+    setupSearchController(searchController: searchController, searchResultsUpdater: self)
   }
   
   override public func viewDidLayoutSubviews() {
@@ -51,5 +62,26 @@ final class AuthCitiesViewController: ViewController<BaseListView> {
     view.setStyles(UIView.Styles.whiteBackground)
     
     specializedView.setStyles(UIView.Styles.defaultBackground)
+  }
+  
+  @objc private func handleDismiss(sender: UIButton) {
+    dismiss(animated: true, completion: nil)
+  }
+  
+  @objc private func handleModal(sender: UIButton) {
+    print("info")
+  }
+}
+
+extension AuthCitiesViewController: UISearchResultsUpdating {
+  public func updateSearchResults(for searchController: UISearchController) {
+    print(searchController.searchBar.text!)
+  }
+}
+
+extension AuthCitiesViewController {
+  enum Localized {
+    public static let city = "Город"
+    public static let close = "Закрыть"
   }
 }
