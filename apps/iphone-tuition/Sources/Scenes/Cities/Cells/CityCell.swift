@@ -10,7 +10,7 @@ import YogaKit
 
 public final class CityCell: UICollectionViewCell {
   private static let reuseIdentifier: String = "CityCellID"
-  
+
   private(set) lazy var title: UILabel = UILabel()
   
   override init(frame: CGRect = .zero) {
