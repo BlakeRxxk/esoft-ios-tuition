@@ -2,7 +2,7 @@
 //  LoggedOutComponent.swift
 //  AppLibrary
 //
-//  Copyright © 2020 E-SOFT. All rights reserved.
+//  Created by nedstar on 26.05.2020.
 //
 
 import UIKit
