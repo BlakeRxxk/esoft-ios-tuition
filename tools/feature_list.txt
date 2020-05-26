@@ -1,3 +1,6 @@
+../../features/SellerTicket/SellerTicketCore/Sources/
+../../features/SellerTicket/SellerTicketUI/Sources/
+../../features/SellerTicket/SellerTicketImplementation/Sources/
 ../../features/Specialists/SpecialistsCore/Sources/
 ../../features/Specialists/SpecialistsUI/Sources/
 ../../features/Specialists/SpecialistsImplementation/Sources/
