@@ -24,7 +24,7 @@ public final class CityViewModel: NSObject {
   }
   
   public func regionsToString() -> String? {
-    return regions?.joined(separator: ", ")
+    regions?.joined(separator: ", ")
   }
 }
 
