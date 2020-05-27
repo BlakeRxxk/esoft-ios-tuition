@@ -49,6 +49,10 @@ public protocol Stylable: NSObjectProtocol {
 extension Stylable {
   
   public func setStyles(_ styles: Style...) {
+    setStyles(styles)
+  }
+  
+  public func setStyles(_ styles: [Style]) {
     self.styles = styles
       .map { $0.name }
       .joined(separator: " ")

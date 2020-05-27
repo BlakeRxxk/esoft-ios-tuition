@@ -25,7 +25,7 @@ extension UIBarButtonItem {
     
     public static let info = Atlas.Style(name: "info") { (item: UIBarButtonItem) in
       item.style = .plain
-      item.image = UIImage.info
+      item.image = UIImage.Info.base
     }
   }
 }

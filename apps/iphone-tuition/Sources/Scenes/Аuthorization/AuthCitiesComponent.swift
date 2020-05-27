@@ -10,12 +10,15 @@ import NeedleFoundation
 import Foundation
 import Authorization
 
-protocol AuthCitiesBuilder{
+protocol AuthCitiesBuilder {
   var authCitiesViewController: UIViewController { get }
 }
 
 class AuthCitiesComponent: Component<EmptyDependency>, AuthCitiesBuilder {
   var authCitiesViewController: UIViewController {
-    UINavigationController(rootViewController: Authorization.CitiesViewController())
+    let viewController = Authorization.CitiesViewController()
+    viewController.store = CitiesViewControllerState()
+    
+    return UINavigationController(rootViewController: viewController)
   }
 }

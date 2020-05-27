@@ -12,23 +12,23 @@ import BaseFRP
 
 public final class ListHeader: View {
   public var headerTitle: String {
+    get {
+      title.styledText ?? ""
+    }
     set {
       title.styledText = newValue
       title.yoga.markDirty()
     }
-    get {
-      return title.styledText ?? ""
-    }
   }
   
   public var iconImage: UIImage? {
+    get {
+      iconImageView.image
+    }
     set {
       guard let newImage = newValue else { return }
       iconImageView.image = newImage
 //      iconImageView.yoga.markDirty()
-    }
-    get {
-      return iconImageView.image
     }
   }
   

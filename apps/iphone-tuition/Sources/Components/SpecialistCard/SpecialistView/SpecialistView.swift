@@ -13,33 +13,33 @@ import BaseFRP
 
 public final class SpecialistView: View {
   public var fullName: String {
+    get {
+      fullNameLabel.styledText ?? ""
+    }
     set {
       fullNameLabel.styledText = newValue
       avatarView.fullName = newValue
       fullNameLabel.yoga.markDirty()
     }
-    get {
-      return fullNameLabel.styledText ?? ""
-    }
   }
   
   public var position: String {
+    get {
+      positionLabel.styledText ?? ""
+    }
     set {
       positionLabel.styledText = newValue
       positionLabel.yoga.markDirty()
     }
-    get {
-      return positionLabel.styledText ?? ""
-    }
   }
   
   public var avatarURL: URL? {
+    get {
+      avatarView.imageURL
+    }
     set {
       avatarView.imageURL = newValue
       avatarView.yoga.markDirty()
-    }
-    get {
-      return avatarView.imageURL
     }
   }
   

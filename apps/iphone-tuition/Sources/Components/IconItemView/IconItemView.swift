@@ -14,7 +14,7 @@ public final class IconItemView: View {
   public var viewID: String = ""
   public var title: String {
     get {
-      return titleLabel.styledText ?? ""
+      titleLabel.styledText ?? ""
     }
     set {
       titleLabel.styledText = newValue
@@ -23,7 +23,7 @@ public final class IconItemView: View {
   
   public var leftIcon: UIImage? {
     get {
-      return leftIconView.image
+      leftIconView.image
     }
     set {
       leftIconView.image = newValue ?? UIImage()
@@ -33,7 +33,7 @@ public final class IconItemView: View {
   
   public var rightIcon: UIImage? {
     get {
-      return rightIconView.image
+      rightIconView.image
     }
     set {
       rightIconView.image = newValue ?? UIImage()

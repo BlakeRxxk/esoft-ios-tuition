@@ -112,10 +112,6 @@ extension UIImage {
     }
   }
   
-  public static var info : UIImage {
-    named("info").withRenderingMode(.alwaysTemplate)
-  }
-  
   public enum Socials {
     public static var facebook: UIImage {
       named("facebook")
@@ -134,6 +130,12 @@ extension UIImage {
   public enum Spinners {
     public static var base: UIImage {
       named("spinner").withRenderingMode(.alwaysTemplate)
+    }
+  }
+
+  public enum Info {
+    public static var base: UIImage {
+      named("info").withRenderingMode(.alwaysTemplate)
     }
   }
   

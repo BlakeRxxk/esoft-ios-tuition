@@ -56,6 +56,8 @@ final public class CitiesViewController: ViewController<BaseListView> {
   
   override public func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
+    
+    store?.action.onNext(.`init`)
   }
   
   private func configureUI() {
@@ -75,6 +77,7 @@ final public class CitiesViewController: ViewController<BaseListView> {
 
 extension CitiesViewController: UISearchResultsUpdating {
   public func updateSearchResults(for searchController: UISearchController) {
+    // Изменять State
     print(searchController.searchBar.text!)
   }
 }

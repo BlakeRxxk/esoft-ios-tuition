@@ -7,47 +7,6 @@
 
 import Foundation
 
-class ImageLinkBuilder {
-  private var link: String
-  private var size: CDNImageSizes = .resize640x480
-  private var type: CDNImageTypes?
-  private var source: CDNHosts = .cloudEsoft
-
-  init(_ baseURL: String) {
-    self.link = baseURL
-  }
-
-  @discardableResult
-  func set(size: CDNImageSizes) -> ImageLinkBuilder {
-    self.size = size
-
-    return self
-  }
-
-  @discardableResult
-  func set(type: CDNImageTypes) -> ImageLinkBuilder {
-    self.type = type
-
-    return self
-  }
-
-  @discardableResult
-  func set(source: CDNHosts) -> ImageLinkBuilder {
-    self.source = source
-
-    return self
-  }
-
-  func build() -> String {
-    let addressString: String = [self.source.rawValue, self.size.rawValue, self.type?.rawValue, self.link]
-      .compactMap { $0 }
-      .joined(separator: "/")
-      .replacingOccurrences(of: "\\/{2,}", with: "\\/", options: .regularExpression)
-
-    return "https://\(addressString)"
-  }
-}
-
 enum CDNImageTypes: String {
   case typeStatic = "static"
   case media
@@ -112,4 +71,45 @@ enum CDNHosts: String {
   case apiMediaEtagi = "api-media.etagi.com"
   case cdnMediaEtagi = "cdn-media.etagi.com"
   case apiMediaNovoe = "api-media.novoe.od.ua"
+}
+
+class ImageLinkBuilder {
+  private var link: String
+  private var size: CDNImageSizes = .resize640x480
+  private var type: CDNImageTypes?
+  private var source: CDNHosts = .cloudEsoft
+
+  init(_ baseURL: String) {
+    self.link = baseURL
+  }
+
+  @discardableResult
+  func set(size: CDNImageSizes) -> ImageLinkBuilder {
+    self.size = size
+
+    return self
+  }
+
+  @discardableResult
+  func set(type: CDNImageTypes) -> ImageLinkBuilder {
+    self.type = type
+
+    return self
+  }
+
+  @discardableResult
+  func set(source: CDNHosts) -> ImageLinkBuilder {
+    self.source = source
+
+    return self
+  }
+
+  func build() -> String {
+    let addressString: String = [self.source.rawValue, self.size.rawValue, self.type?.rawValue, self.link]
+      .compactMap { $0 }
+      .joined(separator: "/")
+      .replacingOccurrences(of: "\\/{2,}", with: "\\/", options: .regularExpression)
+
+    return "https://\(addressString)"
+  }
 }

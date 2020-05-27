@@ -9,9 +9,13 @@ import UIKit
 import YogaKit
 
 public final class IconView: UIView {
+  override public var intrinsicContentSize: CGSize {
+    imageView.yoga.intrinsicSize
+  }
+
   public var image: UIImage {
     get {
-      return imageView.image ?? UIImage()
+      imageView.image ?? UIImage()
     }
     set {
       invalidateIntrinsicContentSize()
@@ -27,20 +31,18 @@ public final class IconView: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
+
     setupView()
   }
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
+
     setupView()
   }
   
   private func setupView() {
     addSubview(imageView)
-  }
-  
-  override public var intrinsicContentSize: CGSize {
-    return imageView.yoga.intrinsicSize
   }
   
   override public func layoutSubviews() {

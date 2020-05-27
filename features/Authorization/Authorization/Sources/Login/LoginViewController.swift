@@ -9,7 +9,7 @@ import UIKit
 import BaseUI
 import EsoftUIKit
 
-final public class LoginViewController: ViewController<BaseListView>  {
+final public class LoginViewController: ViewController<BaseListView> {
   public init() {
     super.init(viewCreator: BaseListView.init)
     

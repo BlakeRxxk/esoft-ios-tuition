@@ -19,4 +19,3 @@ class PasswordComponent: Component<EmptyDependency>, PasswordBuilder {
     UINavigationController(rootViewController: PasswordViewController())
   }
 }
-

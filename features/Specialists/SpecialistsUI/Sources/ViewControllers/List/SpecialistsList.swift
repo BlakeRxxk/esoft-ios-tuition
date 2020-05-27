@@ -42,7 +42,7 @@ public final class SpecialistsList: ViewController<BaseListView> {
   
   override public func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-
+    
     store?.action.onNext(.refreshMySpecialists)
 //    store?.action.onNext(.refreshMySpecialists)
 //    store?.action.onNext(.refreshMySpecialists)
