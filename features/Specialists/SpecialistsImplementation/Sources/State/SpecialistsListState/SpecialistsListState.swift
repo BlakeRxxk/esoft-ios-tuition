@@ -10,8 +10,9 @@ import SpecialistsCore
 
 public final class SpecialistsListState: Store {
   public let initialState: SpecialistsListState.State
-  
-  public init() {
+  private var useCase: SpecialistsUseCase
+  public init(useCase: SpecialistsUseCase) {
+    self.useCase = useCase
     initialState = State()
   }
 }
@@ -29,6 +30,7 @@ extension SpecialistsListState {
   }
   
   public enum Action {
+    case loadNext
     case refreshMySpecialists
   }
   
@@ -39,6 +41,8 @@ extension SpecialistsListState {
 
   public func mutate(action: Action) -> Observable<Mutation> {
     switch action {
+    case .loadNext:
+      return useCase.invoke(request: SpecialistsRequest(page: 5)).map { .setResult($0) }
     case .refreshMySpecialists:
       return .just(.setError)
     }

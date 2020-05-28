@@ -35,6 +35,8 @@ static_libraries = [
     "//libraries/ListKit:ListKit",
     "//libraries/RxExtensions:RxExtensions",
     "//libraries/URLRequestKit:URLRequestKit",
+    "//libraries/RealmKit:RealmKit",
+    "//libraries/StorageKit:StorageKit",
     "//features/Specialists/SpecialistsCore:SpecialistsCore",
     "//features/Specialists/SpecialistsImplementation:SpecialistsImplementation",
     "//features/Specialists/SpecialistsUI:SpecialistsUI",
@@ -43,7 +45,8 @@ static_libraries = [
 ]
 
 prebuilt_test_frameworks = [
-    "//third-party/Pods:OHHTTPStubs"
+    "//third-party/Pods:OHHTTPStubs",
+    "//third-party/Pods:RxBlocking"
 ]
 
 prebuilt_frameworks = [
@@ -59,6 +62,8 @@ prebuilt_frameworks = [
     "//third-party/Pods:IGListKit",
     "//third-party/Pods:IGListDiffKit",
     "//third-party/Pods:NeedleFoundation",
+    "//third-party/Pods:Realm",
+    "//third-party/Pods:RealmSwift",
 ] + prebuilt_test_frameworks
 
 resource_dependencies = [

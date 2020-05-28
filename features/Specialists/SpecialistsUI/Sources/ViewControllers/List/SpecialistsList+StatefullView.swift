@@ -11,6 +11,7 @@ import ListKit
 import SpecialistsImplementation
 import StateKit
 import IGListDiffKit.IGListDiffable
+import RxExtensions
 
 extension SpecialistsList: StatefullView {
   public func bind(store: SpecialistsListState) {
@@ -31,8 +32,15 @@ extension SpecialistsList: StatefullView {
       }
     })
     
+    rx
+      .viewWillAppear
+      .map { _ in SpecialistsListState.Action.refreshMySpecialists }
+      .asDriver(onErrorJustReturn: .refreshMySpecialists)
+      .drive()
+      .disposed(by: disposeBag)
+    
     let skeleton = state
-      .filter { $0.initialLoading == true}
+      .filter { $0.initialLoading == true }
       .map { _ in [
         ListHeaderSkeletonViewModel(id: 0),
         ListSkeletonViewModel(id: 1),

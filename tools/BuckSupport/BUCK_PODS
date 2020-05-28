@@ -122,3 +122,17 @@ prebuilt_apple_framework(
     preferred_linkage = "shared",
     visibility = ["PUBLIC"],
 )
+
+prebuilt_apple_framework(
+    name = "Realm",
+    framework = "_Prebuild/GeneratedFrameworks/Realm/Realm.framework",
+    preferred_linkage = "shared",
+    visibility = ["PUBLIC"],
+)
+
+prebuilt_apple_framework(
+    name = "RealmSwift",
+    framework = "_Prebuild/GeneratedFrameworks/RealmSwift/RealmSwift.framework",
+    preferred_linkage = "shared",
+    visibility = ["PUBLIC"],
+)
