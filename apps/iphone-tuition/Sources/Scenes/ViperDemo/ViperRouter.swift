@@ -8,10 +8,6 @@
 import Foundation
 import UIKit
 
-protocol ViperRouter: AnyObject {
-  func showDetail()
-}
-
 final class ViperRouterImplementation: ViperRouter {
   var presentingView: UIViewController?
   
@@ -23,4 +19,8 @@ final class ViperRouterImplementation: ViperRouter {
     
     presentingView?.show(test, sender: nil)
   }
+}
+
+protocol ViperRouter: AnyObject {
+  func showDetail()
 }

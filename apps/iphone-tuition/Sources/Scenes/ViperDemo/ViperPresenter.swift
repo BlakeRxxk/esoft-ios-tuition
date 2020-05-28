@@ -9,12 +9,6 @@ import Foundation
 
 typealias LoadCitiesHandler = (_ cities: [CityViewModel]) -> Void
 
-protocol ViperPresenter: AnyObject {
-  func loadCities(completion: @escaping LoadCitiesHandler)
-  
-  func showDetail()
-}
-
 final class ViperPresenterImplementation {
   let interactor: ViperInteractor
   let router: ViperRouter
@@ -23,6 +17,12 @@ final class ViperPresenterImplementation {
     self.interactor = interactor
     self.router = router
   }
+}
+
+protocol ViperPresenter: AnyObject {
+  func loadCities(completion: @escaping LoadCitiesHandler)
+  
+  func showDetail()
 }
 
 extension ViperPresenterImplementation: ViperPresenter {

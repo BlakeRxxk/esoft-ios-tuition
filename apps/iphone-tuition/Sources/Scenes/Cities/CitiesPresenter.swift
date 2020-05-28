@@ -11,12 +11,6 @@ import UIKit
 
 typealias ShowCitiesCompletionHandler = (_ cities: [CityViewModel]) -> Void
 
-protocol CitiesPresenter {
-  func loadCities(completion: @escaping ShowCitiesCompletionHandler)
-  
-  func showDetails()
-}
-
 class CitiesPresenterImplementation {
   private let interactor: CitiesInteractor
   private let router: CitiesRouter
@@ -35,6 +29,12 @@ class CitiesPresenterImplementation {
     guard let presentingViewController = presentingViewController else { return }
     router.presentingViewController(presentingViewController: presentingViewController)
   }
+}
+
+protocol CitiesPresenter {
+  func loadCities(completion: @escaping ShowCitiesCompletionHandler)
+  
+  func showDetails()
 }
 
 extension CitiesPresenterImplementation: CitiesPresenter {

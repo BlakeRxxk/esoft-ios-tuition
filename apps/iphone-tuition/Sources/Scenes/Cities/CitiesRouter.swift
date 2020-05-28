@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
+class CitiesRouterImplementation {
+  var presentingViewController: UIViewController?
+}
+
 protocol CitiesRouter {
   func showDetail()
   func presentingViewController(presentingViewController: UIViewController)
-}
-
-class CitiesRouterImplementation {
-  var presentingViewController: UIViewController?
 }
 
 extension CitiesRouterImplementation: CitiesRouter {

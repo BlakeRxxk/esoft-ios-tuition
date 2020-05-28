@@ -10,16 +10,16 @@ import NetworkTrainee
 
 typealias FetchCitiesCompletionHandler = (_ cities: [City]) -> Void
 
-protocol CitiesInteractor {
-  func fetchCities(completion: @escaping FetchCitiesCompletionHandler)
-}
-
 class CitiesInteractorImplementation {
   let networkManager: NetworkManager
   
   init(networkManager: NetworkManager) {
     self.networkManager = networkManager
   }
+}
+
+protocol CitiesInteractor {
+  func fetchCities(completion: @escaping FetchCitiesCompletionHandler)
 }
 
 extension CitiesInteractorImplementation: CitiesInteractor {

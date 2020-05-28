@@ -10,16 +10,16 @@ import NetworkTrainee
 
 typealias FetchCitiesHandler = (_ cities: [City]) -> Void
 
-protocol ViperInteractor: AnyObject {
-  func fetchCities(completion: @escaping FetchCitiesHandler)
-}
-
 final class ViperInteractorImplementation {
   let serviceAPI: NetworkManager
   
   init(serviceAPI: NetworkManager) {
     self.serviceAPI = serviceAPI
   }
+}
+
+protocol ViperInteractor: AnyObject {
+  func fetchCities(completion: @escaping FetchCitiesHandler)
 }
 
 extension ViperInteractorImplementation: ViperInteractor {
