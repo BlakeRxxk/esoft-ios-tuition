@@ -1,8 +1,8 @@
 //
-//  CitiesViewController.swift
+//  ViperViewController.swift
 //  AppLibrary
 //
-//  Copyright © 2020 E-SOFT, OOO. All rights reserved.
+//  Created by Blake Rxxk on 25.05.2020.
 //
 
 import Foundation
@@ -13,14 +13,13 @@ import IGListKit
 import YogaKit
 import ListKit
 
-public final class CitiesViewController: ViewController<BaseListView> {
-  let presenter: CitiesPresenter
-  
+public final class ViperViewController: ViewController<BaseListView> {
+  var presenter: ViperPresenter
+
   var data: [CityViewModel] = []
   
-  init(presenter: CitiesPresenter) {
+  init(presenter: ViperPresenter) {
     self.presenter = presenter
-    
     super.init(viewCreator: BaseListView.init)
     
     configureUI()
@@ -45,12 +44,11 @@ public final class CitiesViewController: ViewController<BaseListView> {
   
   override public func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    presenter.loadCities { [unowned self] viewModesl in
-      self.data.append(contentsOf: viewModesl)
-
+    presenter.loadCities { [unowned self] cities in
+      self.data.append(contentsOf: cities)
+      
       DispatchQueue.main.async { [unowned self] in
         self.specializedView.adapter?.performUpdates(animated: true)
-        self.specializedView.refreshControl.endRefreshing()
       }
     }
   }
@@ -63,12 +61,11 @@ public final class CitiesViewController: ViewController<BaseListView> {
   }
   
   @objc func refresh(_ sender: AnyObject) {
-    print("refresh")
-    presenter.showDetails()
+    presenter.showDetail()
   }
 }
 
-extension CitiesViewController: ListAdapterDataSource {
+extension ViperViewController: ListAdapterDataSource {
   public func objects(for listAdapter: ListAdapter) -> [ListDiffable] {
     data as [ListDiffable]
   }
@@ -82,7 +79,7 @@ extension CitiesViewController: ListAdapterDataSource {
   }
 }
 
-extension CitiesViewController: UIScrollViewDelegate {
+extension ViperViewController: UIScrollViewDelegate {
   public func scrollViewWillEndDragging(_ scrollView: UIScrollView,
                                         withVelocity velocity: CGPoint,
                                         targetContentOffset: UnsafeMutablePointer<CGPoint>) {
