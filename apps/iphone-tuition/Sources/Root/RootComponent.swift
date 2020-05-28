@@ -48,8 +48,12 @@ public final class RootComponent: BootstrapComponent {
   var rxdemo: SpecialistsComponent {
     SpecialistsComponent(parent: self)
   }
-  
+
   var citiesComponent: CitiesComponent {
     CitiesComponent(parent: self)
+  }
+
+  var rxdemo: SpecialistsComponent {
+    SpecialistsComponent(parent: self)
   }
 }
