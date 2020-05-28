@@ -15,7 +15,7 @@ public struct City {
   
   public init(id: Int,
               name: String,
-              regions: [String]?,
+              regions: [String]? = nil,
               isComingSoon: Bool = false) {
     self.id = id
     self.name = name

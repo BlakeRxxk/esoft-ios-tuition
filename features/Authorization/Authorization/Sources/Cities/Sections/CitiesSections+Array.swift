@@ -9,7 +9,7 @@ import EsoftUIKit
 import IGListDiffKit.IGListDiffable
 
 extension Array {
-  public func mapToAuthCitiesSections() -> [CitiesSections] {
+  public func mapToCitiesSections() -> [CitiesSections] {
     map { obj -> CitiesSections in
       switch obj {
       case is ListHeaderViewModel:
@@ -17,9 +17,11 @@ extension Array {
       case is LocationViewModel:
         return .location(obj as! LocationViewModel)
       case is CityViewModel:
-        return .cities(obj as! CityViewModel)
+        return .city(obj as! CityViewModel)
+      case is MessageViewModel:
+        return .message(obj as! MessageViewModel)
       default:
-        return .cities(obj as! CityViewModel) // заменить
+        return .city(obj as! CityViewModel) // заменить
       }
     }
   }

@@ -1,24 +1,24 @@
 //
-//  CountryViewModel.swift
+//  MessageViewModel.swift
 //  Authorization#iphonesimulator-x86_64
 //
-//  Created by nedstar on 26.05.2020.
+//  Created by nedstar on 27.05.2020.
 //
 
 import IGListKit
 
-public final class LocationViewModel: NSObject {
+public final class MessageViewModel: NSObject {
   public let id: Int
-  public let name: String
+  public let message: String
   
   public init(id: Int,
-              name: String) {
+              message: String) {
     self.id = id
-    self.name = name
+    self.message = message
   }
 }
 
-extension LocationViewModel: ListDiffable {
+extension MessageViewModel: ListDiffable {
   public func diffIdentifier() -> NSObjectProtocol {
     self
   }
@@ -30,8 +30,8 @@ extension LocationViewModel: ListDiffable {
   }
 }
 
-extension LocationViewModel {
-  public static func == (lhs: LocationViewModel, rhs: LocationViewModel) -> Bool {
+extension MessageViewModel {
+  public static func == (lhs: MessageViewModel, rhs: MessageViewModel) -> Bool {
     lhs.id == rhs.id
   }
 }

@@ -15,7 +15,7 @@ public final class CityViewModel: NSObject {
   
   public init(id: Int,
               name: String,
-              regions: [String]?,
+              regions: [String]? = nil,
               isComingSoon: Bool = false) {
     self.id = id
     self.name = name
@@ -30,13 +30,13 @@ public final class CityViewModel: NSObject {
 
 extension CityViewModel: ListDiffable {
   public func diffIdentifier() -> NSObjectProtocol {
-    id as NSObjectProtocol
+    self
   }
   
   public func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
     guard self !== object else { return true }
     guard let object = object as? CityViewModel else { return false }
-    return id == object.id
+    return self == object
   }
 }
 

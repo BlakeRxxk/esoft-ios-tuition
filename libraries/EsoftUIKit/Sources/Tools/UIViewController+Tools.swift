@@ -37,7 +37,7 @@ extension UIViewController {
     navigationItem.leftBarButtonItem = item
   }
   
-  public func addInfoButtonIfNeeded(target: AnyObject = self as AnyObject, action: Selector) {
+  public func addInfoButtonIfNeeded(target: AnyObject? = self as AnyObject, action: Selector?) {
     guard navigationController?.viewControllers.first === self else { return }
     
     let item = UIBarButtonItem()
@@ -57,7 +57,7 @@ extension UIViewController {
     navigationItem.leftBarButtonItem = item
   }
   
-  public func setupSearchController(searchController: UISearchController, searchResultsUpdater: UISearchResultsUpdating) {
+  public func setupSearchController(searchController: UISearchController, searchResultsUpdater: UISearchResultsUpdating? = nil) {
     searchController.searchResultsUpdater = searchResultsUpdater
     searchController.dimsBackgroundDuringPresentation = false
     definesPresentationContext = true // что это?

@@ -11,6 +11,7 @@ import EsoftUIKit
 import YogaKit
 import RxSwift
 import RxCocoa
+import RxExtensions
 
 final public class CitiesViewController: ViewController<BaseListView> {
   public var disposeBag: DisposeBag = DisposeBag()
@@ -18,6 +19,7 @@ final public class CitiesViewController: ViewController<BaseListView> {
   let searchController = UISearchController(searchResultsController: nil)
   
   public init() {
+    
     super.init(viewCreator: BaseListView.init)
     
     configureUI()
@@ -29,20 +31,21 @@ final public class CitiesViewController: ViewController<BaseListView> {
     navigationController?.navigationBar.setStyles(UINavigationBar.Styles.modal)
     
     addLeftButtonIfNeeded(target: self, title: Localized.close, action: #selector(handleDismiss))
-    navigationItem.title = Localized.city
-    addInfoButtonIfNeeded(target: self, action: #selector(handleModal))
     
-    setupSearchController(searchController: searchController, searchResultsUpdater: self)
+    navigationItem.title = Localized.city
+    
+    addInfoButtonIfNeeded(target: self, action: #selector(handleAlert))
+    
+    setupSearchController(searchController: searchController)
   }
   
   override public func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     
-    let container = view.bounds.size
     view.configureLayout { layout in
       layout.isEnabled = true
-      layout.width = YGValue(container.width)
-      layout.height = YGValue(container.height)
+      layout.width = 100%
+      layout.height = 100%
     }
     
     specializedView.configureLayout { layout in
@@ -57,7 +60,18 @@ final public class CitiesViewController: ViewController<BaseListView> {
   override public func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
-    store?.action.onNext(.`init`)
+    let countries = [
+      Country(id: 0, name: "Россия", cities: [
+        City(id: 0, name: "Москва", regions: ["Химки"]),
+        City(id: 1, name: "Тюмень")
+      ]),
+      Country(id: 1, name: "Германия", cities: [
+        City(id: 2, name: "Берлин", regions: ["Мюнхен", "Гамбург", "Кёльн", "Штуртгарт", "Лейпциг", "Бремен", "Ганновер"]),
+        City(id: 3, name: "Дюссельдорф", regions: [], isComingSoon: true)
+      ])
+    ]
+    
+    store?.action.onNext(.setCountries(countries))
   }
   
   private func configureUI() {
@@ -70,15 +84,12 @@ final public class CitiesViewController: ViewController<BaseListView> {
     dismiss(animated: true, completion: nil)
   }
   
-  @objc private func handleModal(sender: UIButton) {
-    print("info")
-  }
-}
-
-extension CitiesViewController: UISearchResultsUpdating {
-  public func updateSearchResults(for searchController: UISearchController) {
-    // Изменять State
-    print(searchController.searchBar.text!)
+  @objc private func handleAlert(sender: UIButton) {
+    let alert = UIAlertView(title: nil, message: Localized.info, delegate: nil, cancelButtonTitle: "OK")
+    
+    // set styles
+    
+    alert.show()
   }
 }
 
@@ -86,5 +97,14 @@ extension CitiesViewController {
   enum Localized {
     public static let city = "Город"
     public static let close = "Закрыть"
+    public static let location = "Ваше местоположение"
+    public static let message = """
+Это список городов присутствия компании “Этажи”.
+Если Вашего города нет в списке,\
+значит мы еще не открыли в нем офис, но возможно он появится в ближайшем будущем.
+"""
+    public static let info = """
+Выберите офис компании “Этажи” в Вашем городе. Если города нет в списке, значит мы еще не открыли в нем офис, но возможно он появится в ближайшем будущем.
+"""
   }
 }

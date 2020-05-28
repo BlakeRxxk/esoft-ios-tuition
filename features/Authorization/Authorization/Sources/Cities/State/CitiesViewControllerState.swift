@@ -23,39 +23,40 @@ extension CitiesViewControllerState {
   }
   
   public enum Action {
-    case `init`
+    case setCountries([Country])
+    case changeFilter(String?)
     case startSearching
-    case stopSearching(String?)
+    case stopSearching
   }
   
   public enum Mutation {
-    case setInit
-    case setSearching // startSearching?
+    case setCountries([Country])
+    case setSearching
     case setFilter(String?)
   }
 
   public func mutate(action: Action) -> Observable<Mutation> {
     switch action {
-    case .`init`:
-      return .just(.setInit)
+    case let .setCountries(countries):
+      return .just(.setCountries(countries))
     case .startSearching:
       return .just(.setSearching)
-    case let .stopSearching(filter):
-      return .just(.setFilter(filter))
+    case .stopSearching:
+      return .just(.setSearching)
+    case let .changeFilter(filer):
+      return .just(.setFilter(filer))
     }
   }
   
   public func reduce(state: State, mutation: Mutation) -> State {
     var newState = state
     switch mutation {
-    case .setInit:
-      return state
+    case let .setCountries(countries):
+      newState.countries = countries
     case let .setFilter(filter):
       newState.filter = filter
-      print("new filter: \(filter)")
-      newState.isSearching = false
     case .setSearching:
-      newState.isSearching = true
+      newState.isSearching = !state.isSearching
     }
     return newState
   }
