@@ -1,13 +1,13 @@
 //
-//  Empty.swift
-//  AtlasTests
+//  SpecialistsGatewayImplementationTests.swift
+//  SpecialistsImplementationTests
 //
-//  Copyright © 2020 E-SOFT. All rights reserved.
+//  Copyright © 2020 E-SOFT, OOO. All rights reserved.
 //
 
 import XCTest
 
-final class AtlasTests: XCTestCase {
+final class SpecialistsGatewayImplementationTests: XCTestCase {
   
   func testExample() {
     // This is an example of a functional test case.

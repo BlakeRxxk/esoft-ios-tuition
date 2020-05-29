@@ -8,5 +8,5 @@
 import RxSwift
 
 public protocol SpecialistsUseCase {
-  func invoke(request: SpecialistsRequest) -> Observable<[Specialist]>
+  func invoke(request: SpecialistsRequest) -> Observable<([Specialist], pages: Int)>
 }

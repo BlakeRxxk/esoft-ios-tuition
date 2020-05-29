@@ -7,6 +7,7 @@
 
 import Foundation
 import NeedleFoundation
+import Network
 import NetworkTrainee
 import SpecialistsCore
 import SpecialistsImplementation

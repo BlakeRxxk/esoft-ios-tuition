@@ -11,9 +11,9 @@ import SpecialistsCore
 
 final class CatalogsAPI: NetworkAPI {
 
-  func getCities(url: URL) -> Observable<Event<Response<[City]>>> {
-    request(url: url).asObservable().materialize()
-  }
+//  func getCities(url: URL) -> Observable<Event<Response<[City]>>> {
+//    request(url: url).asObservable().materialize()
+//  }
 
   func getSpecialists(url: URL) -> Observable<Event<Response<[Specialist]>>> {
     request(url: url).asObservable().materialize()
