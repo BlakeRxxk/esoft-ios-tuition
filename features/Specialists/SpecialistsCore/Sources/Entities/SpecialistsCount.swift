@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 public struct SpecialistsCount {
   public let count: String
   public let countryCode: String

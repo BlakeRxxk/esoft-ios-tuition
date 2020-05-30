@@ -1,13 +1,13 @@
 //
 //  Empty.swift
-//  SpyKitTests
+//  TuituionCoreTests
 //
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
 //
 
 import XCTest
 
-final class SpyKitTests: XCTestCase {
+final class TuituionCoreTests: XCTestCase {
   
   func testExample() {
     // This is an example of a functional test case.

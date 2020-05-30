@@ -12,6 +12,7 @@ import NetworkTrainee
 import SpecialistsCore
 import SpecialistsImplementation
 import SpecialistsUI
+import TuituionCore
 import UIKit
 
 // MARK: - Registration

@@ -10,7 +10,7 @@ import RxSwift
 
 final class SpecialistsRepositoryMock: SpecialistsRepository {
   func getListCount(cityID: Int, searchQuery: String?) -> Single<SpecialistsCount> {
-    return Single.just(SpecialistsCount(count: "145", countryCode: "RU"))
+    Single.just(SpecialistsCount(count: "145", countryCode: "RU"))
   }
   
   func getList(page: Int, cityID: Int, searchQuery: String?) -> Single<[Specialist]> {

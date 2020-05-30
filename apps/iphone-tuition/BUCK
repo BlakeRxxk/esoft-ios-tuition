@@ -40,6 +40,7 @@ static_libraries = [
     "//features/Specialists/SpecialistsCore:SpecialistsCore",
     "//features/Specialists/SpecialistsImplementation:SpecialistsImplementation",
     "//features/Specialists/SpecialistsUI:SpecialistsUI",
+    "//features/TuituionCore/TuituionCore:TuituionCore",
     "//integrations/TuitionIntegrations:TuitionIntegrations",
     "//libraries/CDNImageLink:CDNImageLink",
 ]

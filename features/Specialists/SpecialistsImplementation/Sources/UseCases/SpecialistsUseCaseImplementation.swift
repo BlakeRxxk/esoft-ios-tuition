@@ -2,7 +2,7 @@
 //  SpecialistsUseCaseImplementation.swift
 //  SpecialistsImplementation
 //
-//  Created by Blake Rxxk on 19.05.2020.
+//  Copyright © 2020 E-SOFT, OOO. All rights reserved.
 //
 
 import RxSwift
@@ -21,19 +21,18 @@ extension SpecialistsUseCaseImplementation: SpecialistsUseCase {
   public func invoke(request: SpecialistsRequest) -> Observable<([Specialist], pages: Int)> {
     switch request.scope {
     case .all:
-
-      return specialistRepository
+      let countObservable = specialistRepository
         .getListCount(cityID: request.cityID, searchQuery: request.query)
-        .catchError { _ -> PrimitiveSequence<SingleTrait, SpecialistsCount> in
-          .just(SpecialistsCount(count: "0", countryCode: "RU"))
-      }.asObservable()
-        .flatMapLatest { [weak self] totalCount -> Observable<([Specialist], pages: Int)> in
-          guard let self = self else {
-            return .empty()
-          }
-          return self.specialistRepository.getList(page: request.page, cityID: request.cityID, searchQuery: request.query).asObservable().map { specialists -> ([Specialist], pages: Int) in
-            return (specialists, pages: Int(totalCount.count)! / 15)
-          }
+        .asObservable()
+      
+      let specialistsObservable = specialistRepository
+        .getList(page: request.page, cityID: request.cityID, searchQuery: request.query)
+        .asObservable()
+      
+      return Observable
+        .zip(specialistsObservable, countObservable)
+        .flatMapLatest { result -> Observable<([Specialist], pages: Int)> in
+          .just((result.0, pages: Int(result.1.count)! / 15))
       }
       
     case .my:
