@@ -1,3 +1,6 @@
+../../features/Objects/ObjectsUI/Sources/
+../../features/Objects/ObjectsImplementation/Sources/
+../../features/Objects/ObjectsCore/Sources/
 ../../features/Specialists/SpecialistsCore/Sources/
 ../../features/Specialists/SpecialistsUI/Sources/
 ../../features/Specialists/SpecialistsImplementation/Sources/

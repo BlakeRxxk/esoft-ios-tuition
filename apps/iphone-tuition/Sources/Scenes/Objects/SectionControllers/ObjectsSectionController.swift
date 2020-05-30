@@ -7,9 +7,10 @@
 
 import Foundation
 import IGListKit
+import EsoftUIKit
 
 public final class ObjectsSectionController: ListSectionController {
-  private var object: ObjectViewModel?
+  private var object: ObjectsViewModel?
   
   override init() {
     super.init()
@@ -28,7 +29,7 @@ public final class ObjectsSectionController: ListSectionController {
   }
   
   override public func didUpdate(to object: Any) {
-    self.object = object as? ObjectViewModel
+    self.object = object as? ObjectsViewModel
   }
   
   override public func sizeForItem(at index: Int) -> CGSize {

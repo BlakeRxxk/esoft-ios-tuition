@@ -7,10 +7,11 @@
 
 import Foundation
 import IGListKit
+import EsoftUIKit
 
 extension ObjectCell: ListBindable {
   public func bindViewModel(_ viewModel: Any) {
-    guard let viewModel = viewModel as? ObjectViewModel else { return }
+    guard let viewModel = viewModel as? ObjectsViewModel else { return }
     
     // previewItem
     let price = viewModel.price
@@ -43,9 +44,9 @@ extension ObjectCell: ListBindable {
     let priceAr = "\(viewModel.priceAr) руб./м²"
     
     previewItemViewYOGA.objectsDescription = "\(type), \(roomsCount), \(areaFlat), \(floorsNum), \(priceAr)"
-    
-    let dataImg = viewModel.photos.map { $0.fileName }
-    previewItemViewYOGA.photos = dataImg
+
+//    let dataImg = viewModel.photos.map { $0.fileName }
+//    previewItemViewYOGA.photos = dataImg
     
     previewItemViewYOGA.views = "\(viewModel.viewsCount)"
     previewItemViewYOGA.favorites = "\(viewModel.isFavorite)"
