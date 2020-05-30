@@ -24,15 +24,15 @@ extension SellerTicketUseCaseImplementation: SellerTicketUseCase {
       return sellerTicketRepository
         .getSingle(with: request.id)
         .catchError { _ -> PrimitiveSequence<SingleTrait, SellerTicket> in
-          .just(SellerTicket)
+          .just(SellerTicket(id: "1", price: "1535"))
       }.asObservable()
-        
+
       //        .getList(page: request.page, cityID: request.cityID, searchQuery: request.query)
       //        .catchError { _ -> PrimitiveSequence<SingleTrait, [SellerTicket]> in
       //          .just([])
     //        }.asObservable()
     case .my:
-      return .just(SellerTicket)
+      return .just(SellerTicket(id: "1", price: "1500"))
     }
   }
 }

@@ -44,7 +44,7 @@ extension SellerTicketList: StatefullView {
       .map { $0.mapToSellerTicketSections() }
     
     let empty = state
-      .filter { $0.initialLoading == false && $0.specialists.isEmpty }
+//      .filter { $0.initialLoading == false && $0.specialists.isEmpty }
       .map { _ in [
         EmptyListViewModel(title: "Empty", message: Localized.search, image: UIImage.Stub.specialists)
         ]}

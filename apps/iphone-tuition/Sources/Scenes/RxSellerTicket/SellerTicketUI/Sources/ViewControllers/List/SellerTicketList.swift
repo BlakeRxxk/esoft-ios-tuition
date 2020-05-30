@@ -44,10 +44,10 @@ public final class SellerTicketList: ViewController<BaseListView> {
   override public func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
-    store?.action.onNext(.refreshMySpecialists)
-    store?.action.onNext(.refreshMySpecialists)
-    store?.action.onNext(.refreshMySpecialists)
-    store?.action.onNext(.refreshMySpecialists)
+    store?.action.onNext(.refreshMySellerTicket)
+    store?.action.onNext(.refreshMySellerTicket)
+    store?.action.onNext(.refreshMySellerTicket)
+    store?.action.onNext(.refreshMySellerTicket)
   }
   
   private func configureUI() {

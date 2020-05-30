@@ -13,6 +13,12 @@ import EsoftUIKit
 
 public final class SellerTicketCell: UICollectionViewCell {
   private static let reuseIdentifier: String = "SellerTicketCellID"
+  
+  private(set) lazy var container: UIView = UIView()
+  private(set) lazy var costItemViewYoga: CostItemViewYoga = CostItemViewYoga()
+  private(set) lazy var photoItemViewYoga: PhotoItemViewYoga = PhotoItemViewYoga()
+  
+  
 //  public var specialistID: Int = 0
 //  public var isChatAvaliable: Bool = false
   
@@ -63,16 +69,55 @@ public final class SellerTicketCell: UICollectionViewCell {
   
   override public func prepareForReuse() {
     super.prepareForReuse()
+    
+    // costItemViewYoga
+    costItemViewYoga.subheader = ""
+    costItemViewYoga.firstTitle = ""
+    costItemViewYoga.secondTitle = ""
+    costItemViewYoga.thirdTitle = ""
+    costItemViewYoga.icon = UIImage()
+    
+    // photoItemViewYoga
+    photoItemViewYoga.subheader = ""
+    photoItemViewYoga.firstTitle = ""
+    photoItemViewYoga.secondTitle = ""
+    photoItemViewYoga.icon = UIImage()
+    
 //    specialistID = 0
 //    isChatAvaliable = false
 //    specialistView.position = ""
 //    specialistView.avatarURL = nil
 //    chatRow.setStyles(IconItemView.Styles.inactive)
   }
-  
+//
   override public func layoutSubviews() {
     super.layoutSubviews()
     
+    contentView.backgroundColor = AppTheme.current().colors.screen
+    
+    contentView.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = 100%
+      layout.height = 100%
+    }
+    
+    container.configureLayout { layout in
+      layout.isEnabled = true
+      layout.flexDirection = .column
+      layout.width = YGValue(UIScreen.main.bounds.width)
+    }
+    
+    costItemViewYoga.configureLayout { layout in
+      layout.isEnabled = true
+    }
+    
+    photoItemViewYoga.configureLayout { layout in
+      layout.isEnabled = true
+    }
+    
+    contentView.yoga.applyLayout(preservingOrigin: true)
+    
+//
 //    contentView.configureLayout { layout in
 //      layout.isEnabled = true
 //      layout.width = 100%
@@ -102,6 +147,11 @@ public final class SellerTicketCell: UICollectionViewCell {
   
   private func createUI() {
     contentView.addSubview <^> [
+      
+      container,
+      costItemViewYoga,
+      photoItemViewYoga
+      
 //      specialistView,
 //      phoneRow,
 //      chatRow
@@ -109,7 +159,7 @@ public final class SellerTicketCell: UICollectionViewCell {
   }
   
   private func configureUI() {
-    contentView.setStyles(UIView.Styles.whiteBackground)
+//    contentView.setStyles(UIView.Styles.whiteBackground)
 //    specialistView.setStyles(SpecialistView.Styles.withAction)
 //
 //    phoneRow.viewID = SpecialistCellRow.phone.rawValue
@@ -120,11 +170,11 @@ public final class SellerTicketCell: UICollectionViewCell {
 //    chatRow.viewID = SpecialistCellRow.chat.rawValue
 //    chatRow.leftIcon = UIImage.Consultant.base
 //    chatRow.setStyles(IconItemView.Styles.inactive)
-//
+
 //    let action = UITapGestureRecognizer(target: self, action: #selector(handleTapAction) )
 //    specialistView.addGestureRecognizer(action)
-//  }
-//
+  }
+
 //  @objc private func handleTapAction() {
 //    output?.didTapSpecialist(in: self)
 //  }
@@ -137,7 +187,7 @@ public final class SellerTicketCell: UICollectionViewCell {
 //    case phone = "phoneRow"
 //    case chat = "chatRow"
 //  }
-//
+
 //  public func didTapAction(in view: IconItemViewInput) {
 //    let row = SpecialistCellRow.init(rawValue: view.viewID)
 //    switch row {
@@ -148,7 +198,7 @@ public final class SellerTicketCell: UICollectionViewCell {
 //    case .none: break
 //    }
 //  }
-//
+
 //  private func didTapCallRow() {
 //    output?.didTapPhone(in: self)
 //  }
@@ -160,4 +210,4 @@ public final class SellerTicketCell: UICollectionViewCell {
 //  private func formatPhoneNumber(number: String) -> String {
 //    number
 //  }
-}
+//}

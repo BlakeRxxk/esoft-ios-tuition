@@ -24,14 +24,14 @@ extension SellerTicketListState {
     public var initialLoading: Bool = false
     public var isLoading: Bool = false
     public var error: Bool = false
-    public var specialists: [Specialist] = []
+    public var sellerTicket: SellerTicket?
     public var page: Int = 1
     public var pages: Int = 1
-    public var scope: SpecialistScope = .all
+    public var scope: SellerTicketScope = .all
   }
   
   public enum Action {
-    case refreshMySpecialists
+    case refreshMySellerTicket
   }
   
   public enum Mutation {
@@ -40,7 +40,7 @@ extension SellerTicketListState {
   
   public func mutate(action: Action) -> Observable<Mutation> {
     switch action {
-    case .refreshMySpecialists:
+    case .refreshMySellerTicket:
       return .just(.setError)
     }
   }
