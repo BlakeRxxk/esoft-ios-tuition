@@ -7,6 +7,10 @@
 
 import Foundation
 import NeedleFoundation
+<<<<<<< HEAD
+=======
+import NetworkTrainee
+>>>>>>> master
 import SpecialistsCore
 import SpecialistsImplementation
 import SpecialistsUI

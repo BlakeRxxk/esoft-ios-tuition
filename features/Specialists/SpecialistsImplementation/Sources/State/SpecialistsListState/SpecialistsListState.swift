@@ -9,11 +9,18 @@ import StateKit
 import SpecialistsCore
 
 public final class SpecialistsListState: Store {
+<<<<<<< HEAD
   
   public let initialState: SpecialistsListState.State
   
   public init() {
     
+=======
+  public let initialState: SpecialistsListState.State
+  private var useCase: SpecialistsUseCase
+  public init(useCase: SpecialistsUseCase) {
+    self.useCase = useCase
+>>>>>>> master
     initialState = State()
   }
 }
@@ -31,15 +38,29 @@ extension SpecialistsListState {
   }
   
   public enum Action {
+<<<<<<< HEAD
+=======
+    case loadNext
+>>>>>>> master
     case refreshMySpecialists
   }
   
   public enum Mutation {
     case setError
+<<<<<<< HEAD
   }
   
   public func mutate(action: Action) -> Observable<Mutation> {
     switch action {
+=======
+    case setResult([Specialist])
+  }
+
+  public func mutate(action: Action) -> Observable<Mutation> {
+    switch action {
+    case .loadNext:
+      return useCase.invoke(request: SpecialistsRequest(page: 5)).map { .setResult($0) }
+>>>>>>> master
     case .refreshMySpecialists:
       return .just(.setError)
     }
@@ -51,6 +72,13 @@ extension SpecialistsListState {
       var newState = state
       newState.initialLoading = true
       return newState
+<<<<<<< HEAD
+=======
+    case let .setResult(res):
+      var newState = state
+      newState.specialists = res
+      return newState
+>>>>>>> master
     }
   }
 }
