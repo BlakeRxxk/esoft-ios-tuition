@@ -44,29 +44,29 @@ extension SpecialistsList: StatefullView {
       .map { $0.mapToSpecialistsSections() }
     
     let empty = state
-      .filter { $0.initialLoading == false && $0.specialists.isEmpty }
-      .map { _ in [
-        EmptyListViewModel(title: "Empty", message: Localized.search, image: UIImage.Stub.specialists)
-        ]}
-      .map { $0.mapToSpecialistsSections() }
+        .filter { $0.initialLoading == false && $0.specialists.isEmpty }
+        .map { _ in [
+            EmptyListViewModel(title: "Empty", message: Localized.search, image: UIImage.Stub.specialists)
+            ]}
+        .map { $0.mapToSpecialistsSections() }
     
-       let specialist = state
+    let specialist = state
         .filter { $0.initialLoading == false && !$0.specialists.isEmpty }
         .map { $0.specialists }
         .map { $0.map { $0.asViewModel() } }
         .map { $0.mapToSpecialistsSections() }
     
     guard let adapter = specializedView.adapter else {
-      return
+        return
     }
     
     Observable.of(
-//      skeleton,
-//      empty,
-      specialist
+        skeleton,
+        empty,
+        specialist
     )
-      .merge()
-      .bind(to: adapter.rx.objects(for: source))
-      .disposed(by: disposeBag)
-  }
+        .merge()
+        .bind(to: adapter.rx.objects(for: source))
+        .disposed(by: disposeBag)
+    }
 }
