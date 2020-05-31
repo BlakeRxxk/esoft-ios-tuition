@@ -16,18 +16,11 @@ import PINCache
 import YogaKit
 import BaseUI
 import IGListKit
+import NetworkTrainee
 
 final class DiscountViewController: ViewController<BaseListView> {
-  var data: [DiscountViewModel] = [
-    DiscountViewModel(id: 1,
-                      companyName: "Hoff",
-                      category: "Мебель, товары для дома",
-                      discountType: "Основная скидка",
-                      discountDescription: String(format: "15 000 руб. Скидка предоставляется в рамках программы \"Новое жилье с мебелью Hoff\". ",
-                      "Акция не распротстраняется, и еще тут много очень текста, который скроется"),
-                      whyYouCanUseDescription: "Вы совершили сделку с нашей компанией, теперь вам доступна скидка более высокого уровня, чем приветственная.",
-                      useDiscount: "Воспользоваться скидкой")
-  ]
+  var networkManager = NetworkManager()
+  var data: [DiscountViewModel] = []
 
   override var preferredStatusBarStyle: UIStatusBarStyle {
     .lightContent
@@ -35,18 +28,16 @@ final class DiscountViewController: ViewController<BaseListView> {
 
   init() {
     super.init(viewCreator: BaseListView.init)
-
-    configureUI()
   }
 
   override func viewWillAppear(_ animated: Bool) {
-      super.viewWillAppear(animated)
-      self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    super.viewWillAppear(animated)
+    self.navigationController?.setNavigationBarHidden(true, animated: animated)
   }
 
   override func viewWillDisappear(_ animated: Bool) {
-      super.viewWillDisappear(animated)
-      self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    super.viewWillDisappear(animated)
+    self.navigationController?.setNavigationBarHidden(false, animated: animated)
   }
 
   override func viewDidLoad() {
@@ -70,6 +61,39 @@ final class DiscountViewController: ViewController<BaseListView> {
     }
     view.yoga.applyLayout(preservingOrigin: true)
     configureUI()
+  }
+
+  override public func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+
+    networkManager.getLoyalty(page: 1) { [unowned self] (res, _) in
+      guard let loyalty = res else { return }
+      guard let loyaltyProgram = res?.programs[0] else { return }
+      let tmp = DiscountViewModel(id: loyalty.id,
+                                               additionalSaleParam: loyalty.additionalSaleParam,
+                                               address: loyalty.address,
+                                               categoryId: loyalty.categoryId,
+                                               cityId: loyalty.cityId,
+                                               aboutCompany: loyalty.aboutCompany,
+                                               partnerName: loyalty.partnerName,
+                                               coordinates: loyalty.coordinates,
+                                               dateCreated: loyalty.dateCreated,
+                                               dateUpdated: loyalty.dateUpdated,
+                                               isFavorite: loyalty.isFavorite,
+                                               level: loyalty.level,
+                                               logo: loyalty.logo,
+                                               order: loyalty.order,
+                                               firstPhone: loyalty.firstPhone,
+                                               secondPhone: loyalty.secondPhone,
+                                               site: loyalty.site,
+                                               visible: loyalty.visible,
+                                               discountUseSpace: loyaltyProgram.discountUseSpace,
+                                               programs: loyalty.programs)
+      self.data.append(tmp)
+      DispatchQueue.main.async {
+        self.specializedView.adapter?.performUpdates(animated: true)
+      }
+    }
   }
 
   @objc func pressBackOnNavbar(sender: UIButton!) {

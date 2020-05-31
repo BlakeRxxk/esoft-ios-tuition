@@ -88,7 +88,7 @@ extension DiscountCell {
       layout.marginTop = YGValue(8)
     }
 
-    static let whyYouCanUseDescription: YGLayoutConfigurationBlock = { layout in
+    static let discountUseSpace: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
       layout.marginTop = YGValue(8)
     }

@@ -8,12 +8,10 @@
 import Foundation
 
 public struct Coordinates {
-  var id: Int
   var lat: Float
   var lng: Float
 
-  init(id: Int, lat: Float, lng: Float) {
-    self.id = id
+  init(lat: Float, lng: Float) {
     self.lat = lat
     self.lng = lng
   }
@@ -25,14 +23,22 @@ public struct Coordinates {
   }
 }
 
-extension Coordinates: Codable {
+extension Coordinates: Codable, Hashable {
+  enum CodingKeys: String, CodingKey {
+    case lat
+    case lng
+  }
 
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+
+    lat = try container.decode(Float.self, forKey: .lat) ?? 0
+    lng = try container.decode(Float.self, forKey: .lng) ?? 0
+  }
 }
 
 extension Coordinates: Equatable {
-
-}
-
-extension Coordinates: Hashable {
-
+  public static func == (lhs: Coordinates, rhs: Coordinates) -> Bool {
+    lhs.lat == rhs.lat && lhs.lng == rhs.lng
+  }
 }

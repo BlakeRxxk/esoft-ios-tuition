@@ -7,30 +7,70 @@
 
 import Foundation
 import IGListKit
+import NetworkTrainee
 
 public final class DiscountViewModel {
-  let id: Int
-  let companyName: String
-  let category: String
-  let discountType: String
-  let discountDescription: String
-  let whyYouCanUseDescription: String
-  let useDiscount: String
+  public let id: Int
+  public let additionalSaleParam: String
+  public let address: String
+  public let categoryId: Int
+  public let cityId: Int
+  public let aboutCompany: String
+  public let partnerName: String
+  public let coordinates: Coordinates
+  public let dateCreated: String
+  public let dateUpdated: String
+  public let isFavorite: Bool
+  public let level: Int
+  public let logo: String
+  public let order: Int
+  public let firstPhone: String
+  public let secondPhone: String
+  public let site: String
+  public let visible: Bool
+  public let discountUseSpace: String
+  public let programs: [LoyaltyProgram]
 
   public init(id: Int,
-              companyName: String,
-              category: String,
-              discountType: String,
-              discountDescription: String,
-              whyYouCanUseDescription: String,
-              useDiscount: String) {
+              additionalSaleParam: String,
+              address: String,
+              categoryId: Int,
+              cityId: Int,
+              aboutCompany: String,
+              partnerName: String,
+              coordinates: Coordinates,
+              dateCreated: String,
+              dateUpdated: String,
+              isFavorite: Bool,
+              level: Int,
+              logo: String,
+              order: Int,
+              firstPhone: String,
+              secondPhone: String,
+              site: String,
+              visible: Bool,
+              discountUseSpace: String,
+              programs: [LoyaltyProgram]) {
     self.id = id
-    self.companyName = companyName
-    self.category = category
-    self.discountType = discountType
-    self.discountDescription = discountDescription
-    self.whyYouCanUseDescription = whyYouCanUseDescription
-    self.useDiscount = useDiscount
+    self.additionalSaleParam = additionalSaleParam
+    self.address = address
+    self.categoryId = categoryId
+    self.cityId = cityId
+    self.aboutCompany = aboutCompany
+    self.partnerName = partnerName
+    self.coordinates = coordinates
+    self.dateCreated = dateCreated
+    self.dateUpdated = dateUpdated
+    self.isFavorite = isFavorite
+    self.level = level
+    self.logo = logo
+    self.order = order
+    self.firstPhone = firstPhone
+    self.secondPhone = secondPhone
+    self.site = site
+    self.visible = visible
+    self.discountUseSpace = discountUseSpace
+    self.programs = programs
   }
 }
 

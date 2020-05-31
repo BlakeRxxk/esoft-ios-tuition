@@ -8,9 +8,8 @@
 import Foundation
 
 extension NetworkManager {
-  public func getLoyalty(page: Int, completion: @escaping (_ movie: [Loyalty]?, _ error: String?) -> Void) {
+  public func getLoyalty(page: Int, completion: @escaping (_ movie: Loyalty?, _ error: String?) -> Void) {
     loyaltyRouter.request(.loyaltyCompany) { data, response, error in
-
       if error != nil {
         completion(nil, "Please check your network connection.")
       }
@@ -25,9 +24,13 @@ extension NetworkManager {
           }
           do {
             let jsonData = try JSONSerialization.jsonObject(with: responseData, options: .mutableContainers)
-            let wrapper = try JSONDecoder().decode(Response<[Loyalty]>.self, from: responseData)
+//            let arr = [responseData]
+            print("jsonData", jsonData)
+            let wrapper = try JSONDecoder().decode(Response<Loyalty>.self, from: responseData)
+            print("wrapper", wrapper)
             completion(wrapper.data, nil)
           } catch {
+            print("error = \(error)")
             completion(nil, NetworkResponse.unableToDecode.rawValue)
           }
         case .failure(let networkFailureError):

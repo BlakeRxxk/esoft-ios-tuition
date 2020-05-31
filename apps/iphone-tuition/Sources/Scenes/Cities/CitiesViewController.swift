@@ -44,7 +44,7 @@ public final class CitiesViewController: ViewController<BaseListView> {
   override public func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
-    networkManager.getCilies(page: 1) { [unowned self] (res, _) in
+    networkManager.getCities(page: 1) { [unowned self] (res, _) in
       guard let cities = res else { return }
       
       let tmp = cities.map { CityViewModel(id: $0.id, name: $0.name) }

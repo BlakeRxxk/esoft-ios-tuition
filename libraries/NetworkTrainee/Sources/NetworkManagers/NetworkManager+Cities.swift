@@ -9,7 +9,7 @@ import Foundation
 
 extension NetworkManager {
 
-  public func getCilies(page: Int, completion: @escaping (_ movie: [City]?, _ error: String?) -> Void) {
+  public func getCities(page: Int, completion: @escaping (_ movie: [City]?, _ error: String?) -> Void) {
     citiesRouter.request(.cities) { data, response, error in
 
       if error != nil {

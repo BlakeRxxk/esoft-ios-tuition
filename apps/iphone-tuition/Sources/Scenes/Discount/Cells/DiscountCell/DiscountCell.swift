@@ -28,7 +28,7 @@ public final class DiscountCell: UICollectionViewCell {
   private(set) lazy var discountType: UILabel = UILabel()
   private(set) lazy var discountDescription: UILabel = UILabel()
   private(set) lazy var divider: UIView = UIView()
-  private(set) lazy var whyYouCanUseDescription: UILabel = UILabel()
+  private(set) lazy var discountUseSpace: UILabel = UILabel()
   private(set) lazy var button: UIButton = UIButton()
   public lazy var pressBackOnNavbar: (UIButton?) -> Void = {_ in }
 
@@ -62,7 +62,7 @@ public final class DiscountCell: UICollectionViewCell {
     bodyContainer.addSubview(discountType)
     bodyContainer.addSubview(discountDescription)
     bodyContainer.addSubview(divider)
-    bodyContainer.addSubview(whyYouCanUseDescription)
+    bodyContainer.addSubview(discountUseSpace)
     bodyContainer.addSubview(button)
   }
 
@@ -92,9 +92,9 @@ public final class DiscountCell: UICollectionViewCell {
     discountDescription.setStyles(UILabel.Styles.regular)
     discountDescription.numberOfLines = 3
 
-    whyYouCanUseDescription.setStyles(UILabel.Styles.tiny)
-    whyYouCanUseDescription.textColor = UIColor.TextColor.placeholder
-    whyYouCanUseDescription.numberOfLines = 0
+    discountUseSpace.setStyles(UILabel.Styles.tiny)
+    discountUseSpace.textColor = UIColor.TextColor.placeholder
+    discountUseSpace.numberOfLines = 0
 
     divider.backgroundColor = ThemeManager.current().colors.divider
 
@@ -125,21 +125,9 @@ public final class DiscountCell: UICollectionViewCell {
     discountType.configureLayout(block: Layout.discountType)
     discountDescription.configureLayout(block: Layout.discountDescription)
     divider.configureLayout(block: Layout.divider)
-    whyYouCanUseDescription.configureLayout(block: Layout.whyYouCanUseDescription)
+    discountUseSpace.configureLayout(block: Layout.discountUseSpace)
     button.configureLayout(block: Layout.button)
 
     contentView.yoga.applyLayout(preservingOrigin: true)
   }
 }
-
-//private extension DiscountCell {
-//  enum Localized {
-//    static let companyName = "Hoff"
-//    static let category = "Мебель, товары для дома"
-//    static let discountType = "Основная скидка"
-//    static let discountDescription = "15 000 руб. Скидка предоставляется в рамках программы \"Новое жилье с мебелью Hoff\"."
-//    + " Акция не распротстраняется, и еще тут много очень текста, который скроется"
-//    static let whyYouCanUseDescription = "Вы совершили сделку с нашей компанией, теперь вам доступна скидка более высокого уровня, чем приветственная."
-//    static let useDiscount = "Воспользоваться скидкой"
-//  }
-//}
