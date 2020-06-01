@@ -35,7 +35,7 @@ class SpecialistsComponent: Component<EmptyDependency>, SpecialistsBuilder {
   }
   
   var state: SpecialistsListState {
-    SpecialistsListState()
+    SpecialistsListState(useCase: self.useCase)
   }
   
   var viewController: UIViewController {

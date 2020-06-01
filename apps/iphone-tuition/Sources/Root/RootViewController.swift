@@ -30,7 +30,6 @@ public final class RootViewController: ViewController<BaseListView> {
   private var loggedOutBuilder: LoggedOutBuilder
   private var rxdemoBuilder: SpecialistsBuilder
   private var citiesBuilder: CitiesBuilder
-  private var rxdemoBuilder: SpecialistsBuilder
   
   init(objectsBuilder: ObjectsBuilder,
        sellerTicketBuilder: SellerTicketBuilder,
