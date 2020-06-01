@@ -5,17 +5,18 @@
 //  Created by Алексей Макаров on 29.05.2020.
 //
 
-
 import EsoftUIKit
 import RxSwift
+import RxCocoa
 import ListKit
 import ObjectsImplementation
 import StateKit
 import IGListDiffKit.IGListDiffable
+import RxExtensions
 
 extension ObjectsList: StatefullView {
   public func bind(store: ObjectsListState) {
-    let state = store.state.distinctUntilChanged().share()
+    let state = store.state.distinctUntilChanged().share().debug()
     
     let source = RxListAdapterDataSource<ObjectsSections>(sectionControllerProvider: { _, section in
       switch section {
@@ -31,9 +32,24 @@ extension ObjectsList: StatefullView {
         return ObjectsSectionController()
       }
     })
+
+    rx
+      .viewWillAppear
+      .map { _ in ObjectsListState.Action.fetchObjects }
+      .bind(to: store.action)
+      .disposed(by: disposeBag)
+    
+    specializedView
+      .refreshControl
+      .rx
+      .controlEvent(.valueChanged)
+      .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
+      .map { ObjectsListState.Action.refreshMyObjects }
+      .bind(to: store.action)
+      .disposed(by: disposeBag)
     
     let skeleton = state
-      .filter { $0.initialLoading == true}
+      .filter { $0.initialLoading == true }
       .map { _ in [
         ListHeaderSkeletonViewModel(id: 0),
         ListSkeletonViewModel(id: 1),
@@ -45,10 +61,10 @@ extension ObjectsList: StatefullView {
       .map { $0.mapToObjectsSections() }
     
     let empty = state
-      .filter { $0.initialLoading == false && $0.objects.isEmpty }
-      .map { _ in [
-        EmptyListViewModel(title: "Empty", message: Localized.search, image: UIImage.Stub.specialists)
-        ]}
+        .filter { $0.initialLoading == false && $0.objects.isEmpty }
+        .map { _ in [
+            EmptyListViewModel(title: "Empty", message: Localized.search, image: UIImage.Stub.specialists)
+            ]}
         .map { $0.mapToObjectsSections() }
     
     let objects = state
@@ -56,19 +72,18 @@ extension ObjectsList: StatefullView {
         .map { $0.objects }
         .map { $0.map { $0.asViewModel() } }
         .map { $0.mapToObjectsSections() }
-    
+
     guard let adapter = specializedView.adapter else {
         return
     }
     
     Observable.of(
-      skeleton,
-      empty,
-      objects
+        skeleton,
+        empty,
+        objects
     )
-      .merge()
-      .bind(to: adapter.rx.objects(for: source))
-      .disposed(by: disposeBag)
-  }
+        .merge()
+        .bind(to: adapter.rx.objects(for: source))
+        .disposed(by: disposeBag)
+    }
 }
-

@@ -7,14 +7,11 @@
 
 import Foundation
 import NeedleFoundation
-<<<<<<< HEAD
+import Network
+import NetworkTrainee
 import ObjectsCore
 import ObjectsImplementation
 import ObjectsUI
-=======
-import Network
-import NetworkTrainee
->>>>>>> feature-compleme-specialists
 import SpecialistsCore
 import SpecialistsImplementation
 import SpecialistsUI

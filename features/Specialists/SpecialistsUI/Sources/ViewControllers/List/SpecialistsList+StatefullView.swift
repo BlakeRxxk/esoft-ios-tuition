@@ -72,12 +72,6 @@ extension SpecialistsList: StatefullView {
         .map { $0.specialists }
         .map { $0.map { $0.asViewModel() } }
         .map { $0.mapToSpecialistsSections() }
-    
-    let specialists = state
-      .filter { $0.initialLoading == false && !$0.specialists.isEmpty }
-      .map { $0.specialists }
-      .map { $0.map { $0.asViewModel() } }
-      .map { $0.mapToSpecialistsSections() }
 
     guard let adapter = specializedView.adapter else {
         return

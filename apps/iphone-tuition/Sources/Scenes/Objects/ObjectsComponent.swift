@@ -50,7 +50,7 @@ class ObjectsComponent: Component<EmptyDependency>, ObjectsBuilder {
   }
   
   var state: ObjectsListState {
-    ObjectsListState()
+    ObjectsListState(objectsUseCase: useCase)
   }
   
   var viewController: UIViewController {
