@@ -16,10 +16,14 @@ public struct Request {
     return request.url?.absoluteString ?? ""
   }
   
-  public var absoluteURL: URL? {
+  public var absoluteURL: URL {
     let request = makeRequest()
+    
+    guard let url = request.url?.absoluteURL else {
+      fatalError("error constructing url \(request)")
+    }
 
-    return request.url?.absoluteURL
+    return url
   }
   
   public init(@RequestBuilder builder: () -> RequestParam) {

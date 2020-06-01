@@ -11,15 +11,16 @@ import EsoftUIKit
 import BaseUI
 import IGListKit
 import YogaKit
-import NetworkTrainee
 import ListKit
 
 public final class CitiesViewController: ViewController<BaseListView> {
-  var networkManager = NetworkManager()
-
+  let presenter: CitiesPresenter
+  
   var data: [CityViewModel] = []
-
-  init() {
+  
+  init(presenter: CitiesPresenter) {
+    self.presenter = presenter
+    
     super.init(viewCreator: BaseListView.init)
     
     configureUI()
@@ -44,23 +45,26 @@ public final class CitiesViewController: ViewController<BaseListView> {
   
   override public func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    
-    networkManager.getCilies(page: 1) { [unowned self] (res, _) in
-      guard let cities = res else { return }
-      
-      let tmp = cities.map { CityViewModel(id: $0.id, name: $0.name) }
-      self.data.append(contentsOf: tmp)
-      
-      DispatchQueue.main.async {
+    presenter.loadCities { [unowned self] viewModesl in
+      self.data.append(contentsOf: viewModesl)
+
+      DispatchQueue.main.async { [unowned self] in
         self.specializedView.adapter?.performUpdates(animated: true)
+        self.specializedView.refreshControl.endRefreshing()
       }
     }
   }
-
+  
   private func configureUI() {
     specializedView.adapter?.dataSource = self
     specializedView.adapter?.scrollViewDelegate = self
     view.backgroundColor = AppTheme.current().colors.container
+    specializedView.refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+  }
+  
+  @objc func refresh(_ sender: AnyObject) {
+    print("refresh")
+    presenter.showDetails()
   }
 }
 

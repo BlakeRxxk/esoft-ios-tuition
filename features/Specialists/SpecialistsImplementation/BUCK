@@ -8,6 +8,7 @@ static_library(
     ]),
     deps = [
         "//features/Specialists/SpecialistsCore:SpecialistsCore",
+        "//libraries/URLRequestKit:URLRequestKit",
         "//libraries/StateKit:StateKit",
         "//third-party/Pods:RxSwift",
         "//third-party/Pods:RxCocoa",
@@ -17,6 +18,11 @@ static_library(
         "$SDKROOT/System/Library/Frameworks/Foundation.framework",
         "$SDKROOT/System/Library/Frameworks/UIKit.framework",
     ],
-    test_deps = [],
+    test_deps = [
+        "//third-party/Pods:RxSwift",
+        "//third-party/Pods:RxCocoa",
+        "//third-party/Pods:RxRelay",
+        "//third-party/Pods:RxBlocking",
+    ],
     info_plist_substitutions = info_plist_substitutions("SpecialistsImplementationTests")
 )

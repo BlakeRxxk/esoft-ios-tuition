@@ -47,4 +47,5 @@ xcuserdata/
 
 ## Cocoapods
 third-party/Pods/*
+coverage/
 

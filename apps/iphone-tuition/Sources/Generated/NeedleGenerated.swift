@@ -7,12 +7,18 @@
 
 import Foundation
 import NeedleFoundation
+<<<<<<< HEAD
 import ObjectsCore
 import ObjectsImplementation
 import ObjectsUI
+=======
+import Network
+import NetworkTrainee
+>>>>>>> feature-compleme-specialists
 import SpecialistsCore
 import SpecialistsImplementation
 import SpecialistsUI
+import TuituionCore
 import UIKit
 
 // MARK: - Registration

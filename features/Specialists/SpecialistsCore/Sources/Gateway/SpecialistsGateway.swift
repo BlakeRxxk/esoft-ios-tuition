@@ -10,5 +10,5 @@ import RxSwift
 
 public protocol SpecialistsGateway {
   func getList(url: URL) -> Single<[Specialist]>
-  func getSingle(url: URL) -> Single<Specialist>
+  func getListCount(url: URL) -> Single<SpecialistsCount>
 }

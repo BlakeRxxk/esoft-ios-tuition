@@ -23,6 +23,9 @@ target 'ThirdPartyDependencies' do
   pod 'RxSwift', :binary => true
   pod 'RxCocoa', :binary => true
   pod 'RxRelay', :binary => true
+
+  # pod 'Realm', :binary => true
+  # pod 'RealmSwift', :binary => true
 end
 
 target 'ThirdPartyDependenciesDevelopment' do

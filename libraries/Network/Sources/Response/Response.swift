@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Response<T: Codable & Hashable> {
+public struct Response<T: Decodable> {
   public let success: Bool
   public let status: Int
   public let data: T?
@@ -21,7 +21,7 @@ public struct Response<T: Codable & Hashable> {
   }
 }
 
-extension Response: Codable, Hashable {
+extension Response: Decodable {
   enum CodingKeys: String, CodingKey {
     case success
     case status
