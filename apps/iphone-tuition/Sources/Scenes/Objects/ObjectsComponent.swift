@@ -25,6 +25,8 @@ import Foundation
 import ObjectsCore
 import ObjectsImplementation
 import ObjectsUI
+import Network
+import TuituionCore
 
 protocol ObjectsBuilder {
   var viewController: UIViewController { get }
@@ -33,19 +35,28 @@ protocol ObjectsBuilder {
 class ObjectsComponent: Component<EmptyDependency>, ObjectsBuilder {
   var useCase: ObjectsUseCase {
     shared {
-        ObjectsUseCaseImplementation(objectsRepository: repository)
+      ObjectsUseCaseImplementation(objectsRepository: repository)
     }
   }
   
   var repository: ObjectsRepository {
     shared {
-        ObjectsRepositoryImplementation(objectsGateway: gateway)
+      ObjectsRepositoryImplementation(objectsGateway: gateway)
     }
   }
   
+  var networkService: NetworkAPI {
+     let service = NetworkAPI(session: .init(.shared),
+                              decoder: RiesDecoder(),
+                              baseUrl: URL(string: "https://us-central1-esoft-tuition-cloud.cloudfunctions.net/objects")!)
+     service.requestInterceptors.append(RiesInterceptor())
+
+     return service
+   }
+  
   var gateway: ObjectsGateway {
     shared {
-        ObjectsGatewayImplementation(session: .init(.shared), baseUrl: URL(string: "https://us-central1-esoft-tuition-cloud.cloudfunctions.net/objects")!)
+      ObjectsGatewayImplementation(networkService: networkService)
     }
   }
   

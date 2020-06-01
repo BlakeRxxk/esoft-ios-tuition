@@ -9,8 +9,20 @@ import RxSwift
 import Network
 import ObjectsCore
 
-public final class ObjectsGatewayImplementation: NetworkAPI, ObjectsGateway {
-  public func getObjects(url: URL) -> Single<[Objects]> {
-    request(url: url)
+public final class ObjectsGatewayImplementation {
+  
+  let networkService: NetworkAPIProtocol
+  
+  public init(networkService: NetworkAPIProtocol) {
+    self.networkService = networkService
   }
+  
+}
+
+extension ObjectsGatewayImplementation: ObjectsGateway {
+ 
+  public func getObjects(url: URL) -> Single<[Objects]> {
+    networkService.request(url: url)
+  }
+  
 }

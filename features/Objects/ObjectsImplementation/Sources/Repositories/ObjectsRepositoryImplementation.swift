@@ -14,6 +14,7 @@ public final class ObjectsRepositoryImplementation {
   
   public init(objectsGateway: ObjectsGateway) {
     self.objectsGateway = objectsGateway
+    objectsGateway
   }
 }
 

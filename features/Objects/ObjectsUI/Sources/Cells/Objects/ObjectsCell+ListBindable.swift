@@ -12,7 +12,6 @@ import IGListKit.IGListBindable
 extension ObjectsCell: ListBindable {
   public func bindViewModel(_ viewModel: Any) {
     guard let viewModel = viewModel as? ObjectsViewModel else { return }
-    print("viewModel ", viewModel)
 //    specialistView.position = viewModel.position ?? ""
 //    specialistView.avatarURL = viewModel.photoUrl
 //    phoneNumber = viewModel.phone ?? ""

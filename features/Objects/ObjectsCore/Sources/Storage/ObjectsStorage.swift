@@ -9,5 +9,5 @@ import RxSwift
 
 protocol ObjectsStorage {
   func fetchObjects() -> Single<Objects>
-  func saveObjects(specialists: [Objects]) -> Completable
+  func saveObjects(objects: [Objects]) -> Completable
 }
