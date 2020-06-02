@@ -79,8 +79,8 @@ extension ObjectsList: StatefullView {
     
     Observable.of(
         skeleton,
-        empty,
-        objects
+        empty
+//        objects
     )
         .merge()
         .bind(to: adapter.rx.objects(for: source))

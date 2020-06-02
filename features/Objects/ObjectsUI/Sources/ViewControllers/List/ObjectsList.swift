@@ -44,9 +44,9 @@ public final class ObjectsList: ViewController<BaseListView> {
     super.viewDidAppear(animated)
 
     store?.action.onNext(.refreshMyObjects)
-    store?.action.onNext(.refreshMyObjects)
-    store?.action.onNext(.refreshMyObjects)
-    store?.action.onNext(.refreshMyObjects)
+//    store?.action.onNext(.refreshMyObjects)
+//    store?.action.onNext(.refreshMyObjects)
+//    store?.action.onNext(.refreshMyObjects)
   }
   
   private func configureUI() {

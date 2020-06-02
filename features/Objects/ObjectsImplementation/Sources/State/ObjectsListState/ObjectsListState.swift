@@ -47,7 +47,7 @@ extension ObjectsListState {
       
     case .fetchObjects:
       return Observable.merge([
-        .just(.setInitialLoading()),
+        .just(.setInitialLoading(true)),
         objectsUseCase
           .invoke(request: ObjectsRequest())
           .map { .appendObjects($0) }

@@ -20,6 +20,7 @@ public final class ObjectsCell: UICollectionViewCell {
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         
+      backgroundColor = .green
     }
     
     required init?(coder: NSCoder) {
