@@ -37,6 +37,7 @@ static_libraries = [
     "//libraries/URLRequestKit:URLRequestKit",
     "//libraries/RealmKit:RealmKit",
     "//libraries/StorageKit:StorageKit",
+    "//libraries/KeychainKit:KeychainKit",
     "//features/Specialists/SpecialistsCore:SpecialistsCore",
     "//features/Specialists/SpecialistsImplementation:SpecialistsImplementation",
     "//features/Specialists/SpecialistsUI:SpecialistsUI",
