@@ -49,3 +49,9 @@ xcuserdata/
 third-party/Pods/*
 coverage/
 
+# Carthage
+#
+# Add this line if you want to avoid checking in source code from Carthage dependencies.
+third-party/Carthage/Checkouts
+third-party/Carthage/Build
+

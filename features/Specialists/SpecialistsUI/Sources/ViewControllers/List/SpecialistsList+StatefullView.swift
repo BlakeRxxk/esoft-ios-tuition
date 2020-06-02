@@ -16,7 +16,7 @@ import RxExtensions
 
 extension SpecialistsList: StatefullView {
   public func bind(store: SpecialistsListState) {
-    let state = store.state.distinctUntilChanged().share().debug()
+    let state = store.state.distinctUntilChanged().share()
     
     let source = RxListAdapterDataSource<SpecialistsSections>(sectionControllerProvider: { _, section in
       switch section {
@@ -32,6 +32,12 @@ extension SpecialistsList: StatefullView {
         return SpecialistsSectionController()
       }
     })
+
+    state
+      .map { $0.isLoading }
+      .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
+      .bind(to: specializedView.refreshControl.rx.isRefreshing)
+      .disposed(by: disposeBag)
 
     rx
       .viewWillAppear
@@ -70,13 +76,13 @@ extension SpecialistsList: StatefullView {
     let specialists = state
       .filter { $0.initialLoading == false && !$0.specialists.isEmpty }
       .map { $0.specialists }
-      .map { $0.map { $0.asViewModel() } }
+      .map { [ListHeaderViewModel(count: 0, title: Localized.title, icon: UIImage())] + $0 }
       .map { $0.mapToSpecialistsSections() }
-
+    
     guard let adapter = specializedView.adapter else {
       return
     }
-    
+
     Observable.of(
       skeleton,
       empty,
@@ -85,5 +91,6 @@ extension SpecialistsList: StatefullView {
       .merge()
       .bind(to: adapter.rx.objects(for: source))
       .disposed(by: disposeBag)
+    
   }
 }

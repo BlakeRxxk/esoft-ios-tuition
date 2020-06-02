@@ -13,5 +13,3 @@ if [ ! -f "$PODS_ROOT" ]; then
 fi
 
 cd third-party && bundle exec pod install && cd ..
-echo "copying realm framework"
-rsync -av --ignore-existing ./tools/RealmDynamic/ ./third-party/Pods/_Prebuild/GeneratedFrameworks/

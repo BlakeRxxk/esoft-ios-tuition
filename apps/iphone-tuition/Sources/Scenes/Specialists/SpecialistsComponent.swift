@@ -12,6 +12,7 @@ import SpecialistsImplementation
 import SpecialistsUI
 import Network
 import TuituionCore
+import StorageKit
 
 protocol SpecialistsBuilder {
   var viewController: UIViewController { get }
@@ -24,9 +25,15 @@ class SpecialistsComponent: Component<EmptyDependency>, SpecialistsBuilder {
     }
   }
   
+  var specialistsStorage: SpecialistsStorage {
+    let configuration = StorageConfiguration(type: .persistent)
+    return SpecialistsStorageImplementation(inMemoryConfiguration: configuration)
+  }
+  
   var repository: SpecialistsRepository {
     shared {
-      SpecialistsRepositoryImplementation(specialistGateway: gateway)
+      SpecialistsRepositoryImplementation(specialistGateway: gateway,
+                                          specialistsStorage: specialistsStorage)
     }
   }
   
