@@ -7,10 +7,13 @@
 
 import Foundation
 import NeedleFoundation
+import Network
 import NetworkTrainee
 import SpecialistsCore
 import SpecialistsImplementation
 import SpecialistsUI
+import StorageKit
+import TuituionCore
 import UIKit
 
 // MARK: - Registration

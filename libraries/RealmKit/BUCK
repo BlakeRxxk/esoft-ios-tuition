@@ -8,8 +8,8 @@ static_library(
     ]),
     deps = [
         "//third-party/Pods:RxSwift",
-        "//third-party/Pods:Realm",
-        "//third-party/Pods:RealmSwift"
+        "//third-party/Carthage:Realm",
+        "//third-party/Carthage:RealmSwift",
     ],
     frameworks = [
         "$SDKROOT/System/Library/Frameworks/Foundation.framework",

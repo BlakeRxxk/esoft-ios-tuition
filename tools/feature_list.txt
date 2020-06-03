@@ -1,3 +1,4 @@
+../../features/TuituionCore/TuituionCore/Sources/
 ../../features/Specialists/SpecialistsCore/Sources/
 ../../features/Specialists/SpecialistsUI/Sources/
 ../../features/Specialists/SpecialistsImplementation/Sources/

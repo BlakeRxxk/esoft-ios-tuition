@@ -1,5 +1,5 @@
 //
-//  RxDemoComponent.swift
+//  SpecialistsComponent.swift
 //  AppLibrary
 //
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
@@ -10,6 +10,9 @@ import Foundation
 import SpecialistsCore
 import SpecialistsImplementation
 import SpecialistsUI
+import Network
+import TuituionCore
+import StorageKit
 
 protocol SpecialistsBuilder {
   var viewController: UIViewController { get }
@@ -22,20 +25,35 @@ class SpecialistsComponent: Component<EmptyDependency>, SpecialistsBuilder {
     }
   }
   
+  var specialistsStorage: SpecialistsStorage {
+    let configuration = StorageConfiguration(type: .persistent)
+    return SpecialistsStorageImplementation(inMemoryConfiguration: configuration)
+  }
+  
   var repository: SpecialistsRepository {
     shared {
-      SpecialistsRepositoryImplementation(specialistGateway: gateway)
+      SpecialistsRepositoryImplementation(specialistGateway: gateway,
+                                          specialistsStorage: specialistsStorage)
     }
+  }
+  
+  var networkService: NetworkAPI {
+    let service = NetworkAPI(session: .init(.shared),
+                             decoder: RiesDecoder(),
+                             baseUrl: URL(string: "https://developers.etagi.com/api/v2/catalogs")!)
+    service.requestInterceptors.append(RiesInterceptor())
+
+    return service
   }
   
   var gateway: SpecialistsGateway {
     shared {
-      SpecialistsGatewayImplementation(session: .init(.shared), baseUrl: URL(string: "https://developers.etagi.com/api/v2/catalogs")!)
+      SpecialistsGatewayImplementation(networkService: networkService)
     }
   }
   
   var state: SpecialistsListState {
-    SpecialistsListState()
+    SpecialistsListState(specialistsUseCase: useCase)
   }
   
   var viewController: UIViewController {

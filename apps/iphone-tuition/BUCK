@@ -37,9 +37,11 @@ static_libraries = [
     "//libraries/URLRequestKit:URLRequestKit",
     "//libraries/RealmKit:RealmKit",
     "//libraries/StorageKit:StorageKit",
+    "//libraries/KeychainKit:KeychainKit",
     "//features/Specialists/SpecialistsCore:SpecialistsCore",
     "//features/Specialists/SpecialistsImplementation:SpecialistsImplementation",
     "//features/Specialists/SpecialistsUI:SpecialistsUI",
+    "//features/TuituionCore/TuituionCore:TuituionCore",
     "//integrations/TuitionIntegrations:TuitionIntegrations",
     "//libraries/CDNImageLink:CDNImageLink",
 ]
@@ -52,7 +54,6 @@ prebuilt_test_frameworks = [
 prebuilt_frameworks = [
     "//third-party/Pods:Yoga",
     "//third-party/Pods:YogaKit",
-    "//third-party/Pods:DBDebugToolkit",
     "//third-party/Pods:PINCache",
     "//third-party/Pods:PINRemoteImage",
     "//third-party/Pods:FLAnimatedImage",
@@ -62,8 +63,8 @@ prebuilt_frameworks = [
     "//third-party/Pods:IGListKit",
     "//third-party/Pods:IGListDiffKit",
     "//third-party/Pods:NeedleFoundation",
-    "//third-party/Pods:Realm",
-    "//third-party/Pods:RealmSwift",
+    "//third-party/Carthage:Realm",
+    "//third-party/Carthage:RealmSwift",
 ] + prebuilt_test_frameworks
 
 resource_dependencies = [
@@ -161,6 +162,7 @@ apple_bundle(
     info_plist_substitutions = app_info_plist_substitutions(appTargetName),
     deps = [
         "//third-party/Pods:PodsProjectGeneratorHack",
+        "//third-party/Carthage:CarthageProjectGeneratorHack",
     ]
     + static_libraries
     + framework_bundle_dependencies(framework_dependencies)

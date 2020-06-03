@@ -20,6 +20,7 @@ public final class StorageConfiguration {
       .appendingPathComponent("client")
       .appendingPathExtension("realm")
     
+    print(configuration.fileURL)
     // Setup Realm Bundle from prepopulated file if exist
     // which located in $PROJECT_DIR/Resourses/Realm/
     

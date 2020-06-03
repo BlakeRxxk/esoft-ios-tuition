@@ -7,6 +7,7 @@
 
 import EsoftUIKit
 import RxSwift
+import RxCocoa
 import ListKit
 import SpecialistsImplementation
 import StateKit
@@ -31,12 +32,26 @@ extension SpecialistsList: StatefullView {
         return SpecialistsSectionController()
       }
     })
-    
+
+    state
+      .map { $0.isLoading }
+      .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
+      .bind(to: specializedView.refreshControl.rx.isRefreshing)
+      .disposed(by: disposeBag)
+
     rx
       .viewWillAppear
-      .map { _ in SpecialistsListState.Action.refreshMySpecialists }
-      .asDriver(onErrorJustReturn: .refreshMySpecialists)
-      .drive()
+      .map { _ in SpecialistsListState.Action.fetchSpecialists() }
+      .bind(to: store.action)
+      .disposed(by: disposeBag)
+    
+    specializedView
+      .refreshControl
+      .rx
+      .controlEvent(.valueChanged)
+      .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
+      .map { SpecialistsListState.Action.refreshMySpecialists }
+      .bind(to: store.action)
       .disposed(by: disposeBag)
     
     let skeleton = state
@@ -58,16 +73,24 @@ extension SpecialistsList: StatefullView {
         ]}
       .map { $0.mapToSpecialistsSections() }
     
+    let specialists = state
+      .filter { $0.initialLoading == false && !$0.specialists.isEmpty }
+      .map { $0.specialists }
+      .map { [ListHeaderViewModel(count: 0, title: Localized.title, icon: UIImage())] + $0 }
+      .map { $0.mapToSpecialistsSections() }
+    
     guard let adapter = specializedView.adapter else {
       return
     }
-    
+
     Observable.of(
       skeleton,
-      empty
+      empty,
+      specialists
     )
       .merge()
       .bind(to: adapter.rx.objects(for: source))
       .disposed(by: disposeBag)
+    
   }
 }

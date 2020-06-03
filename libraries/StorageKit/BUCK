@@ -10,8 +10,8 @@ static_library(
         "//third-party/Pods:RxSwift",
         "//third-party/Pods:RxCocoa",
         "//third-party/Pods:RxRelay",
-        "//third-party/Pods:Realm",
-        "//third-party/Pods:RealmSwift",
+        "//third-party/Carthage:Realm",
+        "//third-party/Carthage:RealmSwift",
         "//libraries/RealmKit:RealmKit",
     ],
     frameworks = [

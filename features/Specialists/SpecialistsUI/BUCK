@@ -15,6 +15,7 @@ static_library(
         "//libraries/EsoftUIKit:EsoftUIKit",
         "//libraries/ListKit:ListKit",
         "//libraries/CDNImageLink:CDNImageLink",
+        "//libraries/RxExtensions:RxExtensions",
         "//features/Specialists/SpecialistsCore:SpecialistsCore",
         "//features/Specialists/SpecialistsImplementation:SpecialistsImplementation"
     ],

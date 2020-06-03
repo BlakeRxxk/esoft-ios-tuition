@@ -9,12 +9,20 @@ import RxSwift
 import Network
 import SpecialistsCore
 
-public final class SpecialistsGatewayImplementation: NetworkAPI, SpecialistsGateway {
-  public func getList(url: URL) -> Single<[Specialist]> {
-    request(url: url)
+public final class SpecialistsGatewayImplementation {
+  let networkService: NetworkAPIProtocol
+  
+  public init(networkService: NetworkAPIProtocol) {
+    self.networkService = networkService
+  }
+}
+
+extension SpecialistsGatewayImplementation: SpecialistsGateway {
+  public func getListCount(url: URL) -> Single<SpecialistsCount> {
+    networkService.request(url: url)
   }
   
-  public func getSingle(url: URL) -> Single<Specialist> {
-    request(url: url)
+  public func getList(url: URL) -> Single<[Specialist]> {
+    networkService.request(url: url)
   }
 }
