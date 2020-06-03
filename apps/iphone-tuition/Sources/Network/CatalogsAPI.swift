@@ -17,9 +17,9 @@ final class CatalogsAPI: NetworkAPI {
   
 =======
 
-  func getCities(url: URL) -> Observable<Event<Response<[City]>>> {
-    request(url: url).asObservable().materialize()
-  }
+//  func getCities(url: URL) -> Observable<Event<Response<[City]>>> {
+//    request(url: url).asObservable().materialize()
+//  }
 
 >>>>>>> master
   func getSpecialists(url: URL) -> Observable<Event<Response<[Specialist]>>> {

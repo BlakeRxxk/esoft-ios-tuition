@@ -7,7 +7,8 @@
 
 import RxSwift
 
-protocol SpecialistsStorage {
+public protocol SpecialistsStorage {
+  func fetchSpecialist() -> Single<Int>
   func fetchSpecialist(specialistID: Int) -> Single<Specialist>
   func saveSpecialists(specialists: [Specialist]) -> Completable
 }

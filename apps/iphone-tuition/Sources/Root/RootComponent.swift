@@ -52,12 +52,4 @@ public final class RootComponent: BootstrapComponent {
   var citiesComponent: CitiesComponent {
     CitiesComponent(parent: self)
   }
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> master
-  var rxdemo: SpecialistsComponent {
-    SpecialistsComponent(parent: self)
-  }
 }

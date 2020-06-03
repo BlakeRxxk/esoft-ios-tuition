@@ -23,16 +23,12 @@ target 'ThirdPartyDependencies' do
   pod 'RxSwift', :binary => true
   pod 'RxCocoa', :binary => true
   pod 'RxRelay', :binary => true
-
-  # pod 'Realm', :binary => true
-  # pod 'RealmSwift', :binary => true
 end
 
 target 'ThirdPartyDependenciesDevelopment' do
   use_frameworks!
 
   pod 'SwiftLint'
-  pod 'DBDebugToolkit', :binary => true
   pod 'HeapInspector', :binary => true
 end
 

@@ -21,9 +21,9 @@ public class BaseListView: View {
                                                                 scrollDirection: .vertical,
                                                                 topContentInset: .zero,
                                                                 stretchToEdge: true)
-  public private(set) lazy var collectionView = UICollectionView(frame: .zero,
-                                                                 collectionViewLayout: flowLayout)
-
+  public private(set) lazy var collectionView = ListCollectionView(frame: .zero,
+                                                                   listCollectionViewLayout: flowLayout)
+  
   override public init() {
     super.init()
     
@@ -51,7 +51,7 @@ public class BaseListView: View {
     refreshControl.tintColor = ThemeManager.current().colors.primary500
     collectionView.refreshControl = refreshControl
     activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-
+    
     NSLayoutConstraint.activate([
       refreshControl.centerX.constraint(equalTo: activityIndicator.centerX),
       refreshControl.centerY.constraint(equalTo: activityIndicator.centerY)
@@ -65,7 +65,7 @@ public class BaseListView: View {
     yoga.applyLayout(preservingOrigin: true)
     super.traitCollectionDidChange(previousTraitCollection)
   }
-
+  
   override public func layoutSubviews() {
     super.layoutSubviews()
     
