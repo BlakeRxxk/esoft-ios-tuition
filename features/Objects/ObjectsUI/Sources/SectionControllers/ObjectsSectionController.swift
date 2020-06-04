@@ -9,9 +9,9 @@ import IGListKit
 import EsoftUIKit
 
 public protocol ObjectsSectionControllerOutput: class {
-//  func didTapSpecialist(in cell: SpecialistCellInput)
-//  func didTapPhone(in cell: SpecialistCellInput)
-//  func didTapChat(in cell: SpecialistCellInput)
+  //  func didTapSpecialist(in cell: SpecialistCellInput)
+  //  func didTapPhone(in cell: SpecialistCellInput)
+  //  func didTapChat(in cell: SpecialistCellInput)
 }
 
 public final class ObjectsSectionController: ListSectionController {
@@ -36,7 +36,22 @@ public final class ObjectsSectionController: ListSectionController {
     
     let width: CGFloat = context.containerSize.width
     
-    return CGSize(width: width, height: 327)
+    let addressFont = UIFont.systemFont(ofSize: 13)
+    let city = object!.city
+    let district = object!.district
+    let street = object!.street
+    let house = object!.house
+    let address = "\(city), \(district), \(street), \(house)"
+    
+    let addressHeight = CGFloat(address.height(width: width - 32, font: addressFont))
+    
+    var height: CGFloat = 0
+    if addressHeight > 30 {
+      height += 2
+    }
+    
+    let calculateheight = 327 + addressHeight + height
+    return CGSize(width: width, height: calculateheight)
   }
   
   override public func cellForItem(at index: Int) -> UICollectionViewCell {
@@ -57,5 +72,20 @@ public final class ObjectsSectionController: ListSectionController {
 }
 
 extension ObjectsSectionController: ObjectsCellOutput {
+  
+}
+
+extension String {
+  
+  // расчитываем высоту в зависимости от размера шрифта
+  func height(width: CGFloat, font: UIFont) -> CGFloat {
+    let textSize = CGSize(width: width, height: .greatestFiniteMagnitude)
+    
+    let size = self.boundingRect(with: textSize,
+                                 options: [.usesLineFragmentOrigin, .usesFontLeading],
+                                 attributes: [NSAttributedString.Key.font: font],
+                                 context: nil)
+    return ceil(size.height)
+  }
   
 }

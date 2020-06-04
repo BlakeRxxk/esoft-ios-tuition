@@ -148,7 +148,7 @@ public final class ObjectsCell: UICollectionViewCell {
   }
   
   private func configureUI() {
-//    contentView.setStyles(UIView.Styles.whiteBackground)
+    contentView.setStyles(UIView.Styles.whiteBackground)
 //    specialistView.setStyles(SpecialistView.Styles.withAction)
 //
 //    phoneRow.viewID = SpecialistCellRow.phone.rawValue

@@ -16,7 +16,7 @@ import RxExtensions
 
 extension ObjectsList: StatefullView {
   public func bind(store: ObjectsListState) {
-    let state = store.state.distinctUntilChanged().share().debug()
+    let state = store.state.distinctUntilChanged().share()
     
     let source = RxListAdapterDataSource<ObjectsSections>(sectionControllerProvider: { _, section in
       switch section {

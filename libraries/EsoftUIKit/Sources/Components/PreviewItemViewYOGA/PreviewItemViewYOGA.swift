@@ -224,19 +224,22 @@ public final class PreviewItemViewYOGA: View {
     phoneButton.setBackgroundImage(UIImage.Call.right, for: .normal)
     phoneButton.tintColor = ThemeManager.current().colors.primary500
     
-    collectionView.backgroundColor = .white
-    
     collectionView.delegate = self
     collectionView.dataSource = self
     collectionView.layer.cornerRadius = 8
     collectionView.clipsToBounds = true
+    collectionView.backgroundColor = ThemeManager.current().colors.screen
+    
+    let img = UIImage.Logo.base
+    collectionView.backgroundView = UIImageView.init(image: img)
+    collectionView.backgroundView?.contentMode = .center
+    collectionView.tintColor = ThemeManager.current().colors.container
     
     priceImage.image = UIImage.arrowDown
     priceImage.tintColor = ThemeManager.current().colors.primary500
     
     image.layer.cornerRadius = 8
     image.clipsToBounds = true
-    image.backgroundColor = .gray
     
     favoriteButton.setBackgroundImage(UIImage.favorit, for: .normal)
     favoriteButton.tintColor = ThemeManager.current().colors.container
