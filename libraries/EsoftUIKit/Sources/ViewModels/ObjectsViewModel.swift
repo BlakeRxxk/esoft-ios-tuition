@@ -25,6 +25,7 @@ public final class ObjectsViewModel {
   public let priceAr: String
   public let viewsCount: String
   public let isFavorite: String
+  public let photos: [String]
   
   public init(id: String,
               price: String,
@@ -40,7 +41,8 @@ public final class ObjectsViewModel {
               floorsCnt: String,
               priceAr: String,
               viewsCount: String,
-              isFavorite: String) {
+              isFavorite: String,
+              photos: [String]) {
     self.id = id
     self.price = price
     self.oldPrice = oldPrice
@@ -56,6 +58,7 @@ public final class ObjectsViewModel {
     self.priceAr = priceAr
     self.viewsCount = viewsCount
     self.isFavorite = isFavorite
+    self.photos = photos
   }
 }
 

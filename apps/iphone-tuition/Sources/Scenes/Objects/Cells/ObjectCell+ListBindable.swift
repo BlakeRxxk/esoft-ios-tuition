@@ -48,6 +48,8 @@ extension ObjectCell: ListBindable {
 //    let dataImg = viewModel.photos.map { $0.fileName }
 //    previewItemViewYOGA.photos = dataImg
     
+//  print("DATAIMG", dataImg)
+    
     previewItemViewYOGA.views = "\(viewModel.viewsCount)"
     previewItemViewYOGA.favorites = "\(viewModel.isFavorite)"
     previewItemViewYOGA.code = "\(viewModel.id)"

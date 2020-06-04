@@ -79,8 +79,8 @@ extension SpecialistsList: StatefullView {
     
     Observable.of(
         skeleton,
-        empty
-//        specialist
+        empty,
+        specialist
     )
         .merge()
         .bind(to: adapter.rx.objects(for: source))

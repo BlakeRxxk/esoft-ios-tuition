@@ -36,7 +36,7 @@ public final class ObjectsSectionController: ListSectionController {
     
     let width: CGFloat = context.containerSize.width
     
-    return CGSize(width: width, height: 50)
+    return CGSize(width: width, height: 327)
   }
   
   override public func cellForItem(at index: Int) -> UICollectionViewCell {

@@ -22,13 +22,13 @@ public struct Objects {
    public let floorsNum: String
    public let floorsCnt: String
    public let priceAr: String
-//   public let photos: [ObjectPhotos]
+   public let photosUrl: [ObjectPhotos]?
    public let viewsCount: String?
    public let isFavorite: String?
 }
 
-struct ObjectPhotos {
-    let fileName: String
+public struct ObjectPhotos {
+    public let fileName: String
 }
 
 extension Objects: Codable, Hashable {
@@ -47,7 +47,7 @@ extension Objects: Codable, Hashable {
     case floorsNum = "floors_num"
     case floorsCnt = "floors_cnt"
     case priceAr = "price_ar"
-//    case photos
+    case photosUrl = "photos"
     case viewsCount = "views_count"
     case isFavorite = "is_favorite"
   }

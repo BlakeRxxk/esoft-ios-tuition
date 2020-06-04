@@ -268,6 +268,8 @@ public final class PreviewItemViewYOGA: View {
     configureLayout { layout in
       layout.isEnabled = true
       layout.flexDirection = .column
+      layout.paddingLeft = 16
+      layout.paddingRight = 16
     }
     
     topView.configureLayout { layout in

@@ -40,15 +40,6 @@ public final class ObjectsList: ViewController<BaseListView> {
     view.yoga.applyLayout(preservingOrigin: true)
   }
   
-  override public func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-
-    store?.action.onNext(.refreshMyObjects)
-//    store?.action.onNext(.refreshMyObjects)
-//    store?.action.onNext(.refreshMyObjects)
-//    store?.action.onNext(.refreshMyObjects)
-  }
-  
   private func configureUI() {
     view.backgroundColor = ThemeManager.current().colors.container
     specializedView.collectionView.backgroundColor = ThemeManager.current().colors.screen

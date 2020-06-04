@@ -11,21 +11,23 @@ import ObjectsCore
 import CDNImageLink
 
 extension Objects {
-    public func asViewModel() -> ObjectsViewModel {
-        return ObjectsViewModel(id: id,
-                                price: price,
-                                oldPrice: oldPrice ?? "",
-                                city: city,
-                                district: district,
-                                street: street,
-                                house: house,
-                                type: type,
-                                roomsCount: roomsCount,
-                                areaFlat: areaFlat,
-                                floorsNum: floorsNum,
-                                floorsCnt: floorsCnt,
-                                priceAr: priceAr ?? "", 
-                                viewsCount: viewsCount ?? "",
-                                isFavorite: isFavorite ?? "")
-    }
+  public func asViewModel() -> ObjectsViewModel {
+    let dataImg = photosUrl!.map { $0.fileName }
+    return ObjectsViewModel(id: id,
+                            price: price,
+                            oldPrice: oldPrice ?? "",
+                            city: city,
+                            district: district,
+                            street: street,
+                            house: house,
+                            type: type,
+                            roomsCount: roomsCount,
+                            areaFlat: areaFlat,
+                            floorsNum: floorsNum,
+                            floorsCnt: floorsCnt,
+                            priceAr: priceAr ?? "",
+                            viewsCount: viewsCount ?? "",
+                            isFavorite: isFavorite ?? "",
+                            photos: dataImg )
+  }
 }
