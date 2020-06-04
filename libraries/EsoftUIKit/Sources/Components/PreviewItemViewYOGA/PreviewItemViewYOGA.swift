@@ -48,11 +48,20 @@ public final class PreviewItemViewYOGA: View {
     }
   }
   
+  var totalPhotosCount = 0
   public var photos: [String] {
     get {
       photos
     }
     set {
+      if !newValue.isEmpty {
+        totalPhotosCount = newValue.count
+        counterSlidesLabel.text = "1 / \(newValue.count)"
+        counterSlidesWrapper.isHidden = false
+        counterSlidesLabel.yoga.markDirty()
+      } else {
+        counterSlidesWrapper.isHidden = true
+      }
       photosItems = newValue
       collectionView.reloadData()
     }
@@ -119,7 +128,6 @@ public final class PreviewItemViewYOGA: View {
   // mainView
   private(set) lazy var mainView = UIView()
   private(set) lazy var image = UIImageView()
-  
   private(set) lazy var photosItems: [String] = []
   private(set) lazy var collectionView: UICollectionView = {
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -129,9 +137,9 @@ public final class PreviewItemViewYOGA: View {
     cv.register(PreviewImageCell.self, forCellWithReuseIdentifier: PreviewImageCell.reuseId)
     return cv
   }()
-  
   private(set) lazy var favoriteButton = UIButton()
-  
+  private(set) lazy var counterSlidesWrapper: UIView = UIView()
+  private(set) lazy var counterSlidesLabel: UILabel = UILabel()
   private(set) lazy var titleStack: UIView = UIView()
   private(set) lazy var mainTitle: UILabel = UILabel()
   private(set) lazy var phoneButton: UIButton = UIButton()
@@ -166,6 +174,8 @@ public final class PreviewItemViewYOGA: View {
     
     mainView.addSubview(collectionView)
     mainView.addSubview(favoriteButton)
+    mainView.addSubview(counterSlidesWrapper)
+    counterSlidesWrapper.addSubview(counterSlidesLabel)
     
     titleStack.addSubview(mainTitle)
     titleStack.addSubview(phoneButton)
@@ -198,6 +208,14 @@ public final class PreviewItemViewYOGA: View {
     viewsImage.tintColor = ThemeManager.current().textColors.secondary
     favoriteImage.image = UIImage.starSmall
     favoriteImage.tintColor = ThemeManager.current().textColors.secondary
+    
+    counterSlidesWrapper.backgroundColor = .black
+    counterSlidesWrapper.alpha = 0.4
+    counterSlidesWrapper.layer.cornerRadius = 8
+    counterSlidesWrapper.layer.masksToBounds = true
+    
+    counterSlidesLabel.font = UIFont.micro
+    counterSlidesLabel.textColor = .white
     
     viewsCount.setStyles(
       UILabel.Styles.micro,
@@ -339,6 +357,22 @@ public final class PreviewItemViewYOGA: View {
       layout.right = 12.5
     }
     
+    counterSlidesWrapper.configureLayout { layout in
+      layout.isEnabled = true
+      layout.paddingLeft = 8
+      layout.paddingRight = 8
+      layout.height = 16
+      layout.position = .absolute
+      layout.alignSelf = .center
+      layout.justifyContent = .center
+      layout.alignItems = .center
+      layout.bottom = 8
+    }
+    
+    counterSlidesLabel.configureLayout { layout in
+      layout.isEnabled = true
+    }
+    
     titleStack.configureLayout { layout in
       layout.isEnabled = true
       layout.flexDirection = .row
@@ -438,7 +472,7 @@ extension PreviewItemViewYOGA: UICollectionViewDelegateFlowLayout, UICollectionV
                              layout collectionViewLayout: UICollectionViewLayout,
                              sizeForItemAt indexPath: IndexPath) -> CGSize {
     let width = collectionView.frame.width
-
+    
     return CGSize(width: width, height: 207)
   }
   
@@ -446,6 +480,17 @@ extension PreviewItemViewYOGA: UICollectionViewDelegateFlowLayout, UICollectionV
                              layout collectionViewLayout: UICollectionViewLayout,
                              minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     CGFloat(0)
+  }
+  
+  public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    counterSlidesLabel.yoga.markDirty()
+ 
+    for cell in collectionView.visibleCells {
+      let indexPath = collectionView.indexPath(for: cell)
+      let currentSlide = indexPath!.row + 1
+      counterSlidesLabel.text = "\(currentSlide) / \(totalPhotosCount)"
+      yoga.applyLayout(preservingOrigin: true)
+    }
   }
   
 }
