@@ -93,7 +93,7 @@ public final class SellerTicketCell: UICollectionViewCell {
   override public func layoutSubviews() {
     super.layoutSubviews()
     
-    contentView.backgroundColor = AppTheme.current().colors.screen
+//    contentView.backgroundColor = AppTheme.current().colors.screen
     
     contentView.configureLayout { layout in
       layout.isEnabled = true

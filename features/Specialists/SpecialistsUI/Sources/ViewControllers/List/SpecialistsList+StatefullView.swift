@@ -12,13 +12,11 @@ import ListKit
 import SpecialistsImplementation
 import StateKit
 import IGListDiffKit.IGListDiffable
-
-
 import RxExtensions
 
 extension SpecialistsList: StatefullView {
   public func bind(store: SpecialistsListState) {
-    let state = store.state.distinctUntilChanged().share()
+    let state = store.state.distinctUntilChanged().share().debug()
     
     let source = RxListAdapterDataSource<SpecialistsSections>(sectionControllerProvider: { _, section in
       switch section {
@@ -35,15 +33,6 @@ extension SpecialistsList: StatefullView {
       }
     })
     
-    let skeleton = state
-      .filter { $0.initialLoading == true}
-
-    state
-      .map { $0.isLoading }
-      .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
-      .bind(to: specializedView.refreshControl.rx.isRefreshing)
-      .disposed(by: disposeBag)
-
     rx
       .viewWillAppear
       .map { _ in SpecialistsListState.Action.fetchSpecialists() }
@@ -58,7 +47,9 @@ extension SpecialistsList: StatefullView {
       .map { SpecialistsListState.Action.refreshMySpecialists }
       .bind(to: store.action)
       .disposed(by: disposeBag)
-
+    
+    let skeleton = state
+      .filter { $0.initialLoading == true }
       .map { _ in [
         ListHeaderSkeletonViewModel(id: 0),
         ListSkeletonViewModel(id: 1),
@@ -76,24 +67,23 @@ extension SpecialistsList: StatefullView {
         ]}
       .map { $0.mapToSpecialistsSections() }
     
-    let specialists = state
+    let specialist = state
       .filter { $0.initialLoading == false && !$0.specialists.isEmpty }
       .map { $0.specialists }
-      .map { [ListHeaderViewModel(count: 0, title: Localized.title, icon: UIImage())] + $0 }
+      .map { $0.map { $0.asViewModel() } }
       .map { $0.mapToSpecialistsSections() }
     
     guard let adapter = specializedView.adapter else {
       return
     }
-
+    
     Observable.of(
       skeleton,
       empty,
-      specialists
+      specialist
     )
       .merge()
       .bind(to: adapter.rx.objects(for: source))
       .disposed(by: disposeBag)
-    
   }
 }

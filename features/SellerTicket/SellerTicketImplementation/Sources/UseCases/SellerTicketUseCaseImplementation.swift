@@ -7,7 +7,7 @@
 
 import RxSwift
 import Network
-import SpecialistsCore
+import SellerTicketCore
 
 public final class SellerTicketUseCaseImplementation {
   private var sellerTicketRepository: SellerTicketRepository
@@ -24,7 +24,7 @@ extension SellerTicketUseCaseImplementation: SellerTicketUseCase {
       return sellerTicketRepository
         .getSingle(with: request.id)
         .catchError { _ -> PrimitiveSequence<SingleTrait, SellerTicket> in
-          .just(SellerTicket(id: "1", price: "1535"))
+          .just(SellerTicket(id: request.id, price: request.price))
       }.asObservable()
 
       //        .getList(page: request.page, cityID: request.cityID, searchQuery: request.query)
@@ -32,7 +32,7 @@ extension SellerTicketUseCaseImplementation: SellerTicketUseCase {
       //          .just([])
     //        }.asObservable()
     case .my:
-      return .just(SellerTicket(id: "1", price: "1500"))
+      return .just(SellerTicket(id: request.id, price: request.price))
     }
   }
 }

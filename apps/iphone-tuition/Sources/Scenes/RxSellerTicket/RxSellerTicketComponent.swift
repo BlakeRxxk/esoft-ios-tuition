@@ -7,12 +7,12 @@
 
 import NeedleFoundation
 import Foundation
-import SpecialistsCore
-import SpecialistsImplementation
-import SpecialistsUI
+import SellerTicketCore
+import SellerTicketImplementation
+import SellerTicketUI
 
 protocol RxSellerTicketBuilder {
-  var viewController: UIViewController { get }
+  var sellerTicketViewController: UIViewController { get }
 }
 
 class RxSellerTicketComponent: Component<EmptyDependency>, RxSellerTicketBuilder {
@@ -38,7 +38,7 @@ class RxSellerTicketComponent: Component<EmptyDependency>, RxSellerTicketBuilder
     SellerTicketListState()
   }
   
-  var viewController: UIViewController {
+  var sellerTicketViewController: UIViewController {
     let viewController = SellerTicketList()
     viewController.store = state
     

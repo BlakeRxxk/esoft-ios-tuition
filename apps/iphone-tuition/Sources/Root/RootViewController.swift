@@ -18,13 +18,15 @@ public final class RootViewController: ViewController<BaseListView> {
     RootViewItemViewModel(id: 3, name: "Task 3"),
     RootViewItemViewModel(id: 4, name: "Task 4"),
     RootViewItemViewModel(id: 5, name: "Task 5"),
-    RootViewItemViewModel(id: 6, name: "Task 6"),
-    RootViewItemViewModel(id: 7, name: "Cities"),
-    RootViewItemViewModel(id: 8, name: "Simple RxDemo")
+    RootViewItemViewModel(id: 6, name: "Task 5 Rx"),
+    RootViewItemViewModel(id: 7, name: "Task 6"),
+    RootViewItemViewModel(id: 8, name: "Cities"),
+    RootViewItemViewModel(id: 9, name: "Simple RxDemo")
   ]
   
   private var objectsBuilder: ObjectsBuilder
   private var sellerTicketBuilder: SellerTicketBuilder
+  private var rxSellerTicketBuilder: RxSellerTicketBuilder
   private var discountBuilder: DiscountBuilder
   private var mortgageBuilder: MortgageBuilder
   private var loggedOutBuilder: LoggedOutBuilder
@@ -33,6 +35,7 @@ public final class RootViewController: ViewController<BaseListView> {
   
   init(objectsBuilder: ObjectsBuilder,
        sellerTicketBuilder: SellerTicketBuilder,
+       rxSellerTicketBuilder: RxSellerTicketBuilder,
        discountBuilder: DiscountBuilder,
        mortgageBuilder: MortgageBuilder,
        loggedOutBuilder: LoggedOutBuilder,
@@ -40,6 +43,7 @@ public final class RootViewController: ViewController<BaseListView> {
        rxdemoBuilder: SpecialistsBuilder) {
     self.objectsBuilder = objectsBuilder
     self.sellerTicketBuilder = sellerTicketBuilder
+    self.rxSellerTicketBuilder = rxSellerTicketBuilder
     self.discountBuilder = discountBuilder
     self.mortgageBuilder = mortgageBuilder
     self.loggedOutBuilder = loggedOutBuilder
@@ -98,6 +102,8 @@ extension RootViewController: RootViewItemSectionOutput {
       show(mortgageBuilder.mortgageListViewController, sender: nil)
     case "Task 5":
       show(sellerTicketBuilder.sellerTicketViewController, sender: nil)
+    case "Task 5 Rx":
+      show(rxSellerTicketBuilder.sellerTicketViewController, sender: nil)
     case "Task 6":
       present(loggedOutBuilder.loggedOutViewController, animated: true)
     case "Cities":

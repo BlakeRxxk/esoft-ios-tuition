@@ -7,7 +7,7 @@
 
 import RxSwift
 import Network
-import SpecialistsCore
+import SellerTicketCore
 
 public final class SellerTicketGatewayImplementation: NetworkAPI, SellerTicketGateway {
   //  public func getList(url: URL) -> Single<[SellerTicket]> {

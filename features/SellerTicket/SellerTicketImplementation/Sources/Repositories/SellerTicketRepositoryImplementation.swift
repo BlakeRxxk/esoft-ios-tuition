@@ -7,7 +7,7 @@
 
 import RxSwift
 import Network
-import SpecialistsCore
+import SellerTicketCore
 
 public final class SellerTicketRepositoryImplementation {
   private var sellerTicketGateway: SellerTicketGateway

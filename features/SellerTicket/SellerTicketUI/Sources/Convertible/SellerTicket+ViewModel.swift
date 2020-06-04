@@ -7,14 +7,13 @@
 
 import Foundation
 import EsoftUIKit
-import SpecialistsCore
+import SellerTicketCore
 import CDNImageLink
 
 extension SellerTicket {
   public func asViewModel() -> SellerTicketViewModel {
     //    let profileImage = URL(string: photoUrl?.profile ?? "")
-    return SellerTicketViewModel(id: id,
+    return SellerTicketViewModel(id: "1", price: "1535")
     //    photoUrl: profileImage,
-      price: price)
   }
 }

@@ -198,7 +198,7 @@ public final class PhotoItemViewYoga: View {
   }
 }
 
-extension PhotoItemViewYoga: PhotoItemViewInput {}
+extension PhotoItemViewYoga: PhotoItemViewYogaInput {}
 
 extension PhotoItemViewYoga: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
   public func collectionView(_ collectionView: UICollectionView,

@@ -6,7 +6,7 @@
 //
 
 import StateKit
-import SpecialistsCore
+import SellerTicketCore
 
 public final class SellerTicketListState: Store {
   

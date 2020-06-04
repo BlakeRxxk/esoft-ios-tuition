@@ -8,7 +8,7 @@
 import EsoftUIKit
 import RxSwift
 import ListKit
-import SpecialistsImplementation
+import SellerTicketImplementation
 import StateKit
 import IGListDiffKit.IGListDiffable
 

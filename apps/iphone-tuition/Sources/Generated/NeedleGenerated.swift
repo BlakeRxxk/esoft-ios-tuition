@@ -8,6 +8,10 @@
 import Foundation
 import NeedleFoundation
 import Network
+import NetworkTrainee
+import SellerTicketCore
+import SellerTicketImplementation
+import SellerTicketUI
 import SpecialistsCore
 import SpecialistsImplementation
 import SpecialistsUI
@@ -28,6 +32,9 @@ public func registerProviderFactories() {
         return EmptyDependencyProvider(component: component)
     }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->SpecialistsComponent") { component in
+        return EmptyDependencyProvider(component: component)
+    }
+    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->RxSellerTicketComponent") { component in
         return EmptyDependencyProvider(component: component)
     }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->CitiesComponent") { component in

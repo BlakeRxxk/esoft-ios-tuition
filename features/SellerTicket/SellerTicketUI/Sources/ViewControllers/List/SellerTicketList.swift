@@ -41,15 +41,6 @@ public final class SellerTicketList: ViewController<BaseListView> {
     view.yoga.applyLayout(preservingOrigin: true)
   }
   
-  override public func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    
-    store?.action.onNext(.refreshMySellerTicket)
-    store?.action.onNext(.refreshMySellerTicket)
-    store?.action.onNext(.refreshMySellerTicket)
-    store?.action.onNext(.refreshMySellerTicket)
-  }
-  
   private func configureUI() {
     view.backgroundColor = ThemeManager.current().colors.container
     specializedView.collectionView.backgroundColor = ThemeManager.current().colors.screen
