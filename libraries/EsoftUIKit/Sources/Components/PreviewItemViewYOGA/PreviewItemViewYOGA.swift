@@ -48,7 +48,8 @@ public final class PreviewItemViewYOGA: View {
     }
   }
   
-  var totalPhotosCount = 0
+  private var totalPhotosCount = 0
+  private var currentSlide = 1
   public var photos: [String] {
     get {
       photos
@@ -56,7 +57,7 @@ public final class PreviewItemViewYOGA: View {
     set {
       if !newValue.isEmpty {
         totalPhotosCount = newValue.count
-        counterSlidesLabel.text = "1 / \(newValue.count)"
+        counterSlidesLabel.text = "\(currentSlide) / \(newValue.count)"
         counterSlidesWrapper.isHidden = false
         counterSlidesLabel.yoga.markDirty()
       } else {
@@ -487,7 +488,7 @@ extension PreviewItemViewYOGA: UICollectionViewDelegateFlowLayout, UICollectionV
  
     for cell in collectionView.visibleCells {
       let indexPath = collectionView.indexPath(for: cell)
-      let currentSlide = indexPath!.row + 1
+      currentSlide = indexPath!.row + 1
       counterSlidesLabel.text = "\(currentSlide) / \(totalPhotosCount)"
       yoga.applyLayout(preservingOrigin: true)
     }
