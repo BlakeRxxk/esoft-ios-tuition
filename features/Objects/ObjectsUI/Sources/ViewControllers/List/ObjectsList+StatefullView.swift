@@ -32,7 +32,7 @@ extension ObjectsList: StatefullView {
         return ObjectsSectionController()
       }
     })
-
+    
     rx
       .viewWillAppear
       .map { _ in ObjectsListState.Action.fetchObjects }
@@ -55,35 +55,34 @@ extension ObjectsList: StatefullView {
         ListSkeletonViewModel(id: 1),
         ListSkeletonViewModel(id: 2),
         ListSkeletonViewModel(id: 3),
-        ListSkeletonViewModel(id: 4),
-        ListSkeletonViewModel(id: 5)
+        ListSkeletonViewModel(id: 4)
         ]}
       .map { $0.mapToObjectsSections() }
     
     let empty = state
-        .filter { $0.initialLoading == false && $0.objects.isEmpty }
-        .map { _ in [
-            EmptyListViewModel(title: "Empty", message: Localized.search, image: UIImage.Stub.specialists)
-            ]}
-        .map { $0.mapToObjectsSections() }
+      .filter { $0.initialLoading == false && $0.objects.isEmpty }
+      .map { _ in [
+        EmptyListViewModel(title: "Empty", message: Localized.search, image: UIImage.Stub.specialists)
+        ]}
+      .map { $0.mapToObjectsSections() }
     
     let objects = state
-        .filter { $0.initialLoading == false && !$0.objects.isEmpty }
-        .map { $0.objects }
-        .map { $0.map { $0.asViewModel() } }
-        .map { $0.mapToObjectsSections() }
-
+      .filter { $0.initialLoading == false && !$0.objects.isEmpty }
+      .map { $0.objects }
+      .map { $0.map { $0.asViewModel() } }
+      .map { $0.mapToObjectsSections() }
+    
     guard let adapter = specializedView.adapter else {
-        return
+      return
     }
     
     Observable.of(
-        skeleton,
-        empty,
-        objects
+      skeleton,
+      empty,
+      objects
     )
-        .merge()
-        .bind(to: adapter.rx.objects(for: source))
-        .disposed(by: disposeBag)
-    }
+      .merge()
+      .bind(to: adapter.rx.objects(for: source))
+      .disposed(by: disposeBag)
+  }
 }

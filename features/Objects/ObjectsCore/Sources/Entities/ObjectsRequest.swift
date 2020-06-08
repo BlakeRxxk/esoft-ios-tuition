@@ -6,17 +6,13 @@
 //
 
 public enum ObjectsScope: String {
-  case my
   case all
 }
 
 public struct ObjectsRequest {
   public var scope: ObjectsScope
-  public var query: String?
 
-  public init(scope: ObjectsScope = .all,
-              query: String = "" ) {
+  public init(scope: ObjectsScope = .all) {
     self.scope = scope
-    self.query = query
   }
 }

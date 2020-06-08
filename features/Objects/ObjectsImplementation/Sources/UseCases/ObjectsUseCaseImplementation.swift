@@ -26,8 +26,6 @@ extension ObjectsUseCaseImplementation: ObjectsUseCase {
         .catchError { _ -> PrimitiveSequence<SingleTrait, [Objects]> in
           .just([])
         }.asObservable()
-    case .my:
-      return .just([])
     }
   }
 }
