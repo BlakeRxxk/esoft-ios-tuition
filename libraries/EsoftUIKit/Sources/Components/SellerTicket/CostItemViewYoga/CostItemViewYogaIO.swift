@@ -8,9 +8,9 @@
 import UIKit
 
 public protocol CostItemViewYogaInput {
-  var subheader: String { get set }
-  var firstTitle: String { get set }
-  var secondTitle: String { get set }
-  var icon: UIImage? { get set }
-  var thirdTitle: String { get set }
+  var costSubheader: String { get set }
+  var price: String { get set }
+  var notice: String { get set }
+  var costIcon: UIImage? { get set }
+  var costEdit: String { get set }
 }

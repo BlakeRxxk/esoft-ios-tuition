@@ -11,10 +11,11 @@ import ListKit
 import SellerTicketImplementation
 import StateKit
 import IGListDiffKit.IGListDiffable
+import RxExtensions
 
 extension SellerTicketList: StatefullView {
   public func bind(store: SellerTicketListState) {
-    let state = store.state.distinctUntilChanged().share()
+    let state = store.state.distinctUntilChanged().share().debug()
     
     let source = RxListAdapterDataSource<SellerTicketSections>(sectionControllerProvider: { _, section in
       switch section {
@@ -30,6 +31,12 @@ extension SellerTicketList: StatefullView {
         return SellerTicketSectionController()
       }
     })
+    
+    rx
+      .viewWillAppear
+      .map { _ in SellerTicketListState.Action.fetchSellerTicket }
+      .bind(to: store.action)
+      .disposed(by: disposeBag)
     
     let skeleton = state
       .filter { $0.initialLoading == true}
@@ -50,9 +57,14 @@ extension SellerTicketList: StatefullView {
         ]}
       .map { $0.mapToSellerTicketSections() }
     
-    guard let adapter = specializedView.adapter else {
-      return
-    }
+    let sellerTicket = state
+      .filter { $0.initialLoading == false && $0.sellerTicket != nil  }
+      .map { $0.sellerTicket }
+      .map { $0.map { $0.asViewModel() } }
+//      .map { $0.mapToSellerTicketSections() }
+    
+    
+    guard let adapter = specializedView.adapter else { return }
     
     Observable.of(
       skeleton,

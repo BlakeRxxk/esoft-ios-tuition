@@ -10,11 +10,7 @@ import Network
 import SellerTicketCore
 
 public final class SellerTicketGatewayImplementation: NetworkAPI, SellerTicketGateway {
-  //  public func getList(url: URL) -> Single<[SellerTicket]> {
-  //    request(url: url)
-  //  }
-  
-  public func getSingle(url: URL) -> Single<SellerTicket> {
+  public func getSellerTicket(url: URL) -> Single<SellerTicket> {
     request(url: url)
   }
 }

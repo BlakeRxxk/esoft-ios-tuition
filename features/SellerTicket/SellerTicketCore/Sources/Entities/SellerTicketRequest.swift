@@ -6,20 +6,23 @@
 //
 
 public enum SellerTicketScope: String {
-  case my
   case all
 }
 
 public struct SellerTicketRequest {
+  public var id: String
+  public var price: String
+  public var photos: [Photos]
   public var scope: SellerTicketScope
-  public let id: String
-  public let price: String
+
   
-  public init(scope: SellerTicketScope = .all,
-              id: String = "23",
-              price: String = "5400") {
-    self.scope = scope
+  public init(id: String = "1868764",
+              price: String = "5400",
+              photos: [Photos] = [],
+              scope: SellerTicketScope = .all) {
     self.id = id
     self.price = price
+    self.photos = photos
+    self.scope = scope
   }
 }

@@ -18,11 +18,7 @@ public final class SellerTicketRepositoryImplementation {
 }
 
 extension SellerTicketRepositoryImplementation: SellerTicketRepository {
-  //  public func getList(page: Int, cityID: Int, searchQuery: String?) -> Single<[SellerTicket]> {
-  //    sellerTicketGateway.getList(url: URL(string: "https://developers.etagi.com/api/v2/catalogs")!)
-  //  }
-  
-  public func getSingle(with ID: String) -> Single<SellerTicket> {
-    sellerTicketGateway.getSingle(url: URL(string: "https://us-central1-esoft-tuition-cloud.cloudfunctions.net/sellerTicket")!)
+  public func getSellerTicket() -> Single<SellerTicket> {
+    sellerTicketGateway.getSellerTicket(url: URL(string: "https://us-central1-esoft-tuition-cloud.cloudfunctions.net/sellerTicket")!)
   }
 }

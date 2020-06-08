@@ -13,14 +13,14 @@ extension SellerTicketCell: ListBindable {
   public func bindViewModel(_ viewModel: Any) {
     guard let viewModel = viewModel as? SellerTicketViewModel else { return }
     
-//    costItemViewYoga.subheader = "Стоимость объекта"
-//    costItemViewYoga.firstTitle = viewModel.price
-//    costItemViewYoga.secondTitle = "Выше рыночной на 90%"
-//    costItemViewYoga.thirdTitle = "Изменить"
-//    
-//    photoItemViewYoga.subheader = "Фотографии"
-//    photoItemViewYoga.firstTitle = "Показать все"
-//    photoItemViewYoga.secondTitle = "123"
+    costSubheader = "Стоимость объекта"
+    price = viewModel.price
+    notice = "Выше рыночной на 90%"
+    costEdit = "Изменить"
+    
+    photoSubheader = "Фотографии"
+    showAll = "Показать все"
+    showAllCount = "123"
     
 //    if isChatAvaliable {
 //      chatRow.setStyles(IconItemView.Styles.primary)

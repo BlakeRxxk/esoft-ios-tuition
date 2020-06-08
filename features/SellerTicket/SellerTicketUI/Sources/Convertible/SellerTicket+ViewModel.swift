@@ -12,8 +12,11 @@ import CDNImageLink
 
 extension SellerTicket {
   public func asViewModel() -> SellerTicketViewModel {
+    let dataImg = photos.map { $0.fileName }
     //    let profileImage = URL(string: photoUrl?.profile ?? "")
-    return SellerTicketViewModel(id: "1", price: "1535")
+    return SellerTicketViewModel(id: id,
+                                 price: price,
+                                 photos: dataImg)
     //    photoUrl: profileImage,
   }
 }

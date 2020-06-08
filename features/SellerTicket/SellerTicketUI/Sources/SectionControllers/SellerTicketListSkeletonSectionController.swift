@@ -28,7 +28,7 @@ public final class SellerTicketListSkeletonSectionController: ListSectionControl
     
     let width: CGFloat = context.containerSize.width
     
-    return CGSize(width: width, height: 176)
+    return CGSize(width: width, height: 330)
   }
   
   override public func cellForItem(at index: Int) -> UICollectionViewCell {

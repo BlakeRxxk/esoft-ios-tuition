@@ -22,17 +22,17 @@ extension SellerTicketUseCaseImplementation: SellerTicketUseCase {
     switch request.scope {
     case .all:
       return sellerTicketRepository
-        .getSingle(with: request.id)
+        .getSellerTicket()
         .catchError { _ -> PrimitiveSequence<SingleTrait, SellerTicket> in
-          .just(SellerTicket(id: request.id, price: request.price))
+//          .just(SellerTicket(id: request.id, price: request.price))
+//          .just(SellerTicket(id: "1", price: "1535", photos: []))
+          .just(SellerTicket(id: request.id, price: request.price, photos: request.photos))
       }.asObservable()
 
       //        .getList(page: request.page, cityID: request.cityID, searchQuery: request.query)
       //        .catchError { _ -> PrimitiveSequence<SingleTrait, [SellerTicket]> in
       //          .just([])
     //        }.asObservable()
-    case .my:
-      return .just(SellerTicket(id: request.id, price: request.price))
     }
   }
 }

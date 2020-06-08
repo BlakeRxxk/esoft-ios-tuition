@@ -1,46 +1,25 @@
 //
 //  SellerTicketViewModel.swift
-//  EsoftUIKit
+//  AppLibrary
 //
-//  Created by wtildestar on 23/05/2020.
+//  Created by wtildestar on 08/05/2020.
 //
 
 import Foundation
 import IGListKit
-import ListKit
+import NetworkTrainee
 
 public final class SellerTicketViewModel {
-  public let id: String
-  public let price: String
-  public let photos: [String]
+  let id: String
+  let price: String
+  let photos: [Photos]
   
-  public init(id: String,
-              price: String,
-              photos: [String]
-  ) {
+  public init(id: String, price: String, photos: [Photos]) {
     self.id = id
     self.price = price
     self.photos = photos
   }
-  
-//  public func isChatAvailable() -> Bool {
-//    guard let lkID = lkId else { return false }
-//
-//    return lkID > 0
-//  }
 }
-
-//public struct Photos {
-//  public let objectID: String
-//  public let fileName: String
-//}
-//
-//extension Photos: Codable, Hashable {
-//  enum CodingKeys: String, CodingKey {
-//    case objectID = "object_id"
-//    case fileName = "file_name"
-//  }
-//}
 
 extension SellerTicketViewModel: ListDiffable {
   public func diffIdentifier() -> NSObjectProtocol {
@@ -59,3 +38,5 @@ extension SellerTicketViewModel: Equatable {
     lhs.id == rhs.id
   }
 }
+
+

@@ -8,9 +8,9 @@
 import UIKit.UIImage
 
 public protocol PhotoItemViewYogaInput {
-  var subheader: String { get set }
+  var photoSubheader: String { get set }
   var dataSet: [String] { get set }
-  var firstTitle: String { get set }
-  var secondTitle: String { get set }
-  var icon: UIImage? { get set }
+  var showAll: String { get set }
+  var showAllCount: String { get set }
+  var showAllCountImage: UIImage? { get set }
 }

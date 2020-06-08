@@ -12,12 +12,12 @@ import ThemeManager
 import AutoLayoutKit
 
 public final class PhotoItemViewYoga: View {
-  public var subheader: String {
+  public var photoSubheader: String {
     get {
-      photoSubheader.styledText ?? ""
+      photoSubheaderTitle.styledText ?? ""
     }
     set {
-      photoSubheader.styledText = newValue
+      photoSubheaderTitle.styledText = newValue
     }
   }
   
@@ -31,7 +31,7 @@ public final class PhotoItemViewYoga: View {
     }
   }
   
-  public var firstTitle: String {
+  public var showAll: String {
     get {
       showAllLabel.styledText ?? ""
     }
@@ -40,7 +40,7 @@ public final class PhotoItemViewYoga: View {
     }
   }
   
-  public var secondTitle: String {
+  public var showAllCount: String {
     get {
       showAllQuantityLabel.styledText ?? ""
     }
@@ -49,7 +49,7 @@ public final class PhotoItemViewYoga: View {
     }
   }
   
-  public var icon: UIImage? {
+  public var showAllCountImage: UIImage? {
     get {
       arrowImage.image
     }
@@ -58,7 +58,7 @@ public final class PhotoItemViewYoga: View {
     }
   }
   
-  private(set) lazy var photoSubheader: UILabel = UILabel()
+  private(set) lazy var photoSubheaderTitle: UILabel = UILabel()
   private(set) lazy var photoContainer: UIView = UIView()
   private(set) lazy var showAllStackView: UIView = UIView()
   private(set) lazy var showAllLabel: UILabel = UILabel()
@@ -88,7 +88,7 @@ public final class PhotoItemViewYoga: View {
   private func createUI() {
     let subviews: [UIView] = [
       mainContainer,
-      photoSubheader,
+      photoSubheaderTitle,
       photoContainer,
       collectionView,
       showAllStackView,
@@ -102,7 +102,7 @@ public final class PhotoItemViewYoga: View {
       $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    mainContainer.addSubview(photoSubheader)
+    mainContainer.addSubview(photoSubheaderTitle)
     mainContainer.addSubview(photoContainer)
     
     photoContainer.addSubview(collectionView)
@@ -121,7 +121,7 @@ public final class PhotoItemViewYoga: View {
     collectionView.delegate = self
     collectionView.dataSource = self
     
-    photoSubheader.setStyles(
+    photoSubheaderTitle.setStyles(
       UILabel.Styles.small,
       UILabel.ColorStyle.secondary
     )
@@ -142,7 +142,7 @@ public final class PhotoItemViewYoga: View {
       layout.isEnabled = true
     }
     
-    photoSubheader.configureLayout { layout in
+    photoSubheaderTitle.configureLayout { layout in
       layout.isEnabled = true
       layout.marginTop = 20
       layout.marginLeft = 16

@@ -30,12 +30,12 @@ class RxSellerTicketComponent: Component<EmptyDependency>, RxSellerTicketBuilder
   
   var gateway: SellerTicketGateway {
     shared {
-      SellerTicketGatewayImplementation(session: .init(.shared), baseUrl: URL(string: "https://developers.etagi.com/api/v2/catalogs")!)
+      SellerTicketGatewayImplementation(session: .init(.shared), baseUrl: URL(string: "https://us-central1-esoft-tuition-cloud.cloudfunctions.net/sellerTicket")!)
     }
   }
   
   var state: SellerTicketListState {
-    SellerTicketListState()
+    SellerTicketListState(sellerTicketUseCase: useCase)
   }
   
   var sellerTicketViewController: UIViewController {

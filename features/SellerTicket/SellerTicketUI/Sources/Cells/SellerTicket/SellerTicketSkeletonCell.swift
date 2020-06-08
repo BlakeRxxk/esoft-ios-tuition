@@ -13,9 +13,8 @@ import EsoftUIKit
 public final class SellerTicketSkeletonCell: UICollectionViewCell {
   private static let reuseIdentifier: String = "SpecialistSkeletonCellID"
   
-  private(set) var specialistViewStub: SpecialistViewSkeleton = SpecialistViewSkeleton()
-  private(set) var phoneRowViewStub: IconItemViewSkeleton = IconItemViewSkeleton()
-  private(set) var chatRowViewStub: IconItemViewSkeleton = IconItemViewSkeleton()
+  private(set) var costItemViewStub: CostItemViewSkeleton = CostItemViewSkeleton()
+  private(set) var photoItemViewStub: PhotoItemViewSkeleton = PhotoItemViewSkeleton()
   
   override init(frame: CGRect = .zero) {
     super.init(frame: frame)
@@ -30,9 +29,8 @@ public final class SellerTicketSkeletonCell: UICollectionViewCell {
   
   private func createUI() {
     contentView.addSubview <^> [
-      specialistViewStub,
-      phoneRowViewStub,
-      chatRowViewStub
+      costItemViewStub,
+      photoItemViewStub
     ]
   }
   
@@ -52,22 +50,16 @@ public final class SellerTicketSkeletonCell: UICollectionViewCell {
       layout.alignItems = .flexStart
     }
     
-    specialistViewStub.configureLayout { layout in
+    costItemViewStub.configureLayout { layout in
       layout.isEnabled = true
       layout.width = YGValue(container.width)
-      layout.height = YGValue(80)
+      layout.height = YGValue(container.height)
     }
     
-    phoneRowViewStub.configureLayout { layout in
-      layout.isEnabled = true
-      layout.width = YGValue(container.width * 0.8)
-      layout.height = YGValue.large
-    }
-    
-    chatRowViewStub.configureLayout { layout in
+    photoItemViewStub.configureLayout { layout in
       layout.isEnabled = true
       layout.width = YGValue(container.width)
-      layout.height = YGValue.large
+      layout.height = YGValue(container.height)
     }
     
     contentView.yoga.applyLayout(preservingOrigin: true)

@@ -8,6 +8,5 @@
 import RxSwift
 
 public protocol SellerTicketRepository {
-  //  func getList(cityID: Int, price: String) -> Single<[SellerTicket]>
-  func getSingle(with ID: String) -> Single<SellerTicket>
+  func getSellerTicket() -> Single<SellerTicket>
 }

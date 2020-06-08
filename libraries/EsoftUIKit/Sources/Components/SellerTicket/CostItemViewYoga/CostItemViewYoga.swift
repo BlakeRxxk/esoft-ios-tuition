@@ -12,16 +12,16 @@ import ThemeManager
 import YogaKit
 
 public final class CostItemViewYoga: View {
-  public var subheader: String {
+  public var costSubheader: String {
     get {
-      costSubheader.styledText ?? ""
+      costSubheaderTitle.styledText ?? ""
     }
     set {
-      costSubheader.styledText = newValue
+      costSubheaderTitle.styledText = newValue
     }
   }
   
-  public var firstTitle: String {
+  public var price: String {
     get {
       costLabel.styledText ?? ""
     }
@@ -30,7 +30,7 @@ public final class CostItemViewYoga: View {
     }
   }
   
-  public var secondTitle: String {
+  public var notice: String {
     get {
       noticeLabel.styledText ?? ""
     }
@@ -39,7 +39,7 @@ public final class CostItemViewYoga: View {
     }
   }
   
-  public var icon: UIImage? {
+  public var costIcon: UIImage? {
     get {
       editIcon.image
     }
@@ -48,7 +48,7 @@ public final class CostItemViewYoga: View {
     }
   }
   
-  public var thirdTitle: String {
+  public var costEdit: String {
     get {
       editLabel.styledText ?? ""
     }
@@ -58,7 +58,7 @@ public final class CostItemViewYoga: View {
   }
   
   private(set) lazy var mainContainer: UIView = UIView()
-  private(set) lazy var costSubheader: UILabel = UILabel()
+  private(set) lazy var costSubheaderTitle: UILabel = UILabel()
   private(set) lazy var costContainer: UIView = UIView()
   private(set) lazy var costStackView: UIView = UIView()
   private(set) lazy var costLabel: UILabel = UILabel()
@@ -76,7 +76,7 @@ public final class CostItemViewYoga: View {
   }
   
   private func createUI() {
-    mainContainer.addSubview(costSubheader)
+    mainContainer.addSubview(costSubheaderTitle)
     mainContainer.addSubview(costContainer)
     
     costContainer.addSubview(costStackView)
@@ -95,7 +95,7 @@ public final class CostItemViewYoga: View {
   }
   
   private func configureUI() {
-    costSubheader.setStyles(
+    costSubheaderTitle.setStyles(
       UILabel.Styles.small,
       UILabel.ColorStyle.secondary
     )
@@ -120,7 +120,7 @@ public final class CostItemViewYoga: View {
       layout.isEnabled = true
     }
     
-    costSubheader.configureLayout { layout in
+    costSubheaderTitle.configureLayout { layout in
       layout.isEnabled = true
       layout.marginLeft = 16
     }
