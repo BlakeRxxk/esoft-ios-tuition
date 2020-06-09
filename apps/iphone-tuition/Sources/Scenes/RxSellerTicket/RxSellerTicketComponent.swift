@@ -10,6 +10,8 @@ import Foundation
 import SellerTicketCore
 import SellerTicketImplementation
 import SellerTicketUI
+import Network
+import TuituionCore
 
 protocol RxSellerTicketBuilder {
   var sellerTicketViewController: UIViewController { get }
@@ -28,9 +30,18 @@ class RxSellerTicketComponent: Component<EmptyDependency>, RxSellerTicketBuilder
     }
   }
   
+  var networkService: NetworkAPI {
+    let service = NetworkAPI(session: .init(.shared),
+                             decoder: RiesDecoder(),
+                             baseUrl: URL(string: "https://us-central1-esoft-tuition-cloud.cloudfunctions.net/sellerTicket")!)
+    service.requestInterceptors.append(RiesInterceptor())
+    
+    return service
+  }
+  
   var gateway: SellerTicketGateway {
     shared {
-      SellerTicketGatewayImplementation(session: .init(.shared), baseUrl: URL(string: "https://us-central1-esoft-tuition-cloud.cloudfunctions.net/sellerTicket")!)
+      SellerTicketGatewayImplementation(networkService: networkService)
     }
   }
   

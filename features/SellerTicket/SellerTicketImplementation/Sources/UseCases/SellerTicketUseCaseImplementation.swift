@@ -26,7 +26,7 @@ extension SellerTicketUseCaseImplementation: SellerTicketUseCase {
         .catchError { _ -> PrimitiveSequence<SingleTrait, SellerTicket> in
 //          .just(SellerTicket(id: request.id, price: request.price))
 //          .just(SellerTicket(id: "1", price: "1535", photos: []))
-          .just(SellerTicket(id: request.id, price: request.price, photos: request.photos))
+          .just(SellerTicket(id: "", price: "", photos: []))
       }.asObservable()
 
       //        .getList(page: request.page, cityID: request.cityID, searchQuery: request.query)

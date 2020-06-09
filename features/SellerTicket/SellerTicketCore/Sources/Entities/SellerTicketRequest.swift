@@ -10,19 +10,9 @@ public enum SellerTicketScope: String {
 }
 
 public struct SellerTicketRequest {
-  public var id: String
-  public var price: String
-  public var photos: [Photos]
   public var scope: SellerTicketScope
 
-  
-  public init(id: String = "1868764",
-              price: String = "5400",
-              photos: [Photos] = [],
-              scope: SellerTicketScope = .all) {
-    self.id = id
-    self.price = price
-    self.photos = photos
+  public init(scope: SellerTicketScope = .all) {
     self.scope = scope
   }
 }

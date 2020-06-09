@@ -39,7 +39,7 @@ extension SellerTicketList: StatefullView {
       .disposed(by: disposeBag)
     
     let skeleton = state
-      .filter { $0.initialLoading == true}
+      .filter { $0.initialLoading == true }
       .map { _ in [
         ListHeaderSkeletonViewModel(id: 0),
         ListSkeletonViewModel(id: 1),
@@ -51,18 +51,17 @@ extension SellerTicketList: StatefullView {
       .map { $0.mapToSellerTicketSections() }
     
     let empty = state
-//      .filter { $0.initialLoading == false && $0.specialists.isEmpty }
+      .filter { $0.initialLoading == false && $0.sellerTicket == nil }
       .map { _ in [
         EmptyListViewModel(title: "Empty", message: Localized.search, image: UIImage.Stub.specialists)
         ]}
       .map { $0.mapToSellerTicketSections() }
     
     let sellerTicket = state
-      .filter { $0.initialLoading == false && $0.sellerTicket != nil  }
+      .filter { $0.initialLoading == false && $0.sellerTicket != nil }
       .map { $0.sellerTicket }
       .map { $0.map { $0.asViewModel() } }
 //      .map { $0.mapToSellerTicketSections() }
-    
     
     guard let adapter = specializedView.adapter else { return }
     

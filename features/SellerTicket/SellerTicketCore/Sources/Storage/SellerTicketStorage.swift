@@ -8,6 +8,6 @@
 import RxSwift
 
 protocol SellerTicketStorage {
-  func fetchSellerTicket(cityID: String) -> Single<SellerTicket>
+  func fetchSellerTicket() -> Single<SellerTicket>
   func saveSellerTicket(sellerTicket: SellerTicket) -> Completable
 }

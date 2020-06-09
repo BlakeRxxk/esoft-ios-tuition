@@ -9,8 +9,16 @@ import RxSwift
 import Network
 import SellerTicketCore
 
-public final class SellerTicketGatewayImplementation: NetworkAPI, SellerTicketGateway {
+public final class SellerTicketGatewayImplementation {
+  let networkService: NetworkAPIProtocol
+  
+  public init(networkService: NetworkAPIProtocol) {
+    self.networkService = networkService
+  }
+}
+
+extension SellerTicketGatewayImplementation: SellerTicketGateway {
   public func getSellerTicket(url: URL) -> Single<SellerTicket> {
-    request(url: url)
+    networkService.request(url: url)
   }
 }
