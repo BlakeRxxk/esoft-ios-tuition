@@ -13,8 +13,10 @@ extension NetworkAPIProtocol {
     baseUrl.appendingPathComponent(endpoint)
   }
   
-  func rxDataRequest(_ request: URLRequest) -> Single<Data> {
-    session.fetch(request, interceptors: requestInterceptors)
+  func rxDataRequest(_ request: URLRequest, qos: DispatchQoS) -> Single<Data> {
+    session
+      .fetch(request, interceptors: requestInterceptors)
+      .observeOn(ConcurrentDispatchQueueScheduler(qos: qos))
       .flatMap { request, response, data -> Observable<Data>  in
         if let cache = self.cache,
           let urlCache = self.session.base.configuration.urlCache,
@@ -42,8 +44,8 @@ extension NetworkAPIProtocol {
     }
   }
   
-  func rxDataRequest<D: Decodable>(_ request: URLRequest) -> Single<D> {
-    rxDataRequest(request).flatMap { data in
+  func rxDataRequest<D: Decodable>(_ request: URLRequest, qos: DispatchQoS) -> Single<D> {
+    rxDataRequest(request, qos: qos).flatMap { data in
       do {
         let decoded = try self.decoder.decode(D.self, from: data)
         return Single.just(decoded)
@@ -57,8 +59,8 @@ extension NetworkAPIProtocol {
     }
   }
   
-  func rxDataRequestDiscardingPayload(_ request: URLRequest) -> Single<Void> {
-    rxDataRequest(request).map { _ in () }
+  func rxDataRequestDiscardingPayload(_ request: URLRequest, qos: DispatchQoS) -> Single<Void> {
+    rxDataRequest(request, qos: qos).map { _ in () }
   }
 }
 
@@ -68,7 +70,8 @@ public extension NetworkAPIProtocol {
                              url: URL,
                              headers: [String: Any?]? = nil,
                              queryParams: [String: Any?]? = nil,
-                             bodyParams: [String: Any?]? = nil) -> Single<D> {
+                             bodyParams: [String: Any?]? = nil,
+                             qos: DispatchQoS = .userInitiated) -> Single<D> {
     do {
       let request = try URLRequest.createForJSON(with: url,
                                                  method: method,
@@ -76,7 +79,7 @@ public extension NetworkAPIProtocol {
                                                  queryParams: queryParams,
                                                  bodyParams: bodyParams,
                                                  queryStringTypeConverter: queryStringTypeConverter)
-      return rxDataRequest(request)
+      return rxDataRequest(request, qos: qos)
     } catch {
       return Single.error(error)
     }
@@ -87,7 +90,8 @@ public extension NetworkAPIProtocol {
                                            url: URL,
                                            headers: [String: Any?]? = nil,
                                            queryParams: [String: Any?]? = nil,
-                                           body: E? = nil) -> Single<D> {
+                                           body: E? = nil,
+                                           qos: DispatchQoS = .userInitiated) -> Single<D> {
     do {
       let request = try URLRequest.createForJSON(with: url,
                                                  method: method,
@@ -96,7 +100,7 @@ public extension NetworkAPIProtocol {
                                                  body: body,
                                                  encoder: encoder,
                                                  queryStringTypeConverter: queryStringTypeConverter)
-      return rxDataRequest(request)
+      return rxDataRequest(request, qos: qos)
     } catch {
       return Single.error(error)
     }
@@ -107,7 +111,8 @@ public extension NetworkAPIProtocol {
                url: URL,
                headers: [String: Any?]? = nil,
                queryParams: [String: Any?]? = nil,
-               bodyParams: [String: Any?]? = nil) -> Single<Void> {
+               bodyParams: [String: Any?]? = nil,
+               qos: DispatchQoS = .userInitiated) -> Single<Void> {
     do {
       let request = try URLRequest.createForJSON(with: url,
                                                  method: method,
@@ -115,7 +120,7 @@ public extension NetworkAPIProtocol {
                                                  queryParams: queryParams,
                                                  bodyParams: bodyParams,
                                                  queryStringTypeConverter: queryStringTypeConverter)
-      return rxDataRequestDiscardingPayload(request)
+      return rxDataRequestDiscardingPayload(request, qos: qos)
     } catch {
       return Single.error(error)
     }
@@ -126,7 +131,8 @@ public extension NetworkAPIProtocol {
                              url: URL,
                              headers: [String: Any?]? = nil,
                              queryParams: [String: Any?]? = nil,
-                             body: E? = nil) -> Single<Void> {
+                             body: E? = nil,
+                             qos: DispatchQoS = .userInitiated) -> Single<Void> {
     do {
       let request = try URLRequest.createForJSON(with: url,
                                                  method: method,
@@ -135,7 +141,7 @@ public extension NetworkAPIProtocol {
                                                  body: body,
                                                  encoder: encoder,
                                                  queryStringTypeConverter: queryStringTypeConverter)
-      return rxDataRequestDiscardingPayload(request)
+      return rxDataRequestDiscardingPayload(request, qos: qos)
     } catch {
       return Single.error(error)
     }

@@ -18,7 +18,9 @@ public final class RootViewController: ViewController<BaseListView> {
     RootViewItemViewModel(id: 3, name: "Task 3"),
     RootViewItemViewModel(id: 4, name: "Task 4"),
     RootViewItemViewModel(id: 5, name: "Task 5"),
-    RootViewItemViewModel(id: 6, name: "Task 6")
+    RootViewItemViewModel(id: 6, name: "Task 6"),
+    RootViewItemViewModel(id: 7, name: "Cities"),
+    RootViewItemViewModel(id: 8, name: "Simple RxDemo")
   ]
   
   private var objectsBuilder: ObjectsBuilder
@@ -26,23 +28,28 @@ public final class RootViewController: ViewController<BaseListView> {
   private var discountBuilder: DiscountBuilder
   private var mortgageBuilder: MortgageBuilder
   private var loggedOutBuilder: LoggedOutBuilder
-
+  private var rxdemoBuilder: SpecialistsBuilder
+  private var citiesBuilder: CitiesBuilder
+  
   init(objectsBuilder: ObjectsBuilder,
        sellerTicketBuilder: SellerTicketBuilder,
        discountBuilder: DiscountBuilder,
        mortgageBuilder: MortgageBuilder,
-       loggedOutBuilder: LoggedOutBuilder) {
+       loggedOutBuilder: LoggedOutBuilder,
+       citiesBuilder: CitiesBuilder,
+       rxdemoBuilder: SpecialistsBuilder) {
     self.objectsBuilder = objectsBuilder
     self.sellerTicketBuilder = sellerTicketBuilder
     self.discountBuilder = discountBuilder
     self.mortgageBuilder = mortgageBuilder
     self.loggedOutBuilder = loggedOutBuilder
-
+    self.rxdemoBuilder = rxdemoBuilder
+    self.citiesBuilder = citiesBuilder
     super.init(viewCreator: BaseListView.init)
-
+    
     configureUI()
   }
-
+  
   override public func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     let container = view.bounds.size
@@ -59,7 +66,7 @@ public final class RootViewController: ViewController<BaseListView> {
     }
     view.yoga.applyLayout(preservingOrigin: true)
   }
-
+  
   private func configureUI() {
     specializedView.adapter?.dataSource = self
     view.backgroundColor = AppTheme.current().colors.container
@@ -93,6 +100,11 @@ extension RootViewController: RootViewItemSectionOutput {
       show(sellerTicketBuilder.sellerTicketViewController, sender: nil)
     case "Task 6":
       present(loggedOutBuilder.loggedOutViewController, animated: true)
+    case "Cities":
+      let scene = ViperModule.buildModule()
+      show(scene, sender: nil)
+    case "Simple RxDemo":
+      show(rxdemoBuilder.viewController, sender: nil)
     default:
       return
     }

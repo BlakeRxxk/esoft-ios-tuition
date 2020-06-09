@@ -1,0 +1,21 @@
+load("//config:buck_rule_macros.bzl", "static_library")
+load("//config:configs.bzl", "info_plist_substitutions")
+
+static_library(
+    name = "libphonenumber",
+    srcs = glob([
+        "Sources/*.m",
+    ]),
+    headers = glob([
+	    "Sources/*.h",
+    ]),
+    exported_headers = glob([
+        "PublicHeaders/**/*.h",
+    ]),
+    deps = [
+    ],
+    frameworks = [
+        "$SDKROOT/System/Library/Frameworks/Foundation.framework",
+    ],
+    info_plist_substitutions = info_plist_substitutions("libphonenumberTests")
+)

@@ -29,7 +29,6 @@ target 'ThirdPartyDependenciesDevelopment' do
   use_frameworks!
 
   pod 'SwiftLint'
-  pod 'DBDebugToolkit', :binary => true
   pod 'HeapInspector', :binary => true
 end
 

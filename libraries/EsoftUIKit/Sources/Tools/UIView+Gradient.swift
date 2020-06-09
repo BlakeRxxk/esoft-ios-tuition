@@ -13,7 +13,7 @@ extension UIView {
     case vertically
     case under45degreesLeftToRight
     case under45degreesRightToLeft
-
+    
     var startPoint: CGPoint {
       switch self {
       case .horizontally, .vertically, .under45degreesLeftToRight:
@@ -22,7 +22,7 @@ extension UIView {
         return CGPoint(x: 1.0, y: 0.0)
       }
     }
-
+    
     var endPoint: CGPoint {
       switch self {
       case .horizontally:

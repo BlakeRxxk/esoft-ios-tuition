@@ -34,7 +34,7 @@ build_debug: check_env
 	//apps/$(APP_PATH):$(APP_NAME)#dwarf-and-dsym \
 	${BUCK_OPTIONS} ${BUCK_DEBUG_OPTIONS} ${BUCK_THREADS_OPTIONS} ${BUCK_CACHE_OPTIONS}
 
-tests:
+tests: kill_xcode
 	@rm -f $(buck_out)/tmp/*.profraw
 	@rm -f $(buck_out)/gen/*.profdata
 	$(BUCK) test //apps/$(APP_PATH):$(APP_NAME)CITests \

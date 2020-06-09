@@ -7,6 +7,13 @@
 
 import Foundation
 import NeedleFoundation
+import Network
+import NetworkTrainee
+import SpecialistsCore
+import SpecialistsImplementation
+import SpecialistsUI
+import StorageKit
+import TuituionCore
 import UIKit
 
 // MARK: - Registration
@@ -19,6 +26,12 @@ public func registerProviderFactories() {
         return EmptyDependencyProvider(component: component)
     }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->DiscountComponent") { component in
+        return EmptyDependencyProvider(component: component)
+    }
+    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->SpecialistsComponent") { component in
+        return EmptyDependencyProvider(component: component)
+    }
+    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->CitiesComponent") { component in
         return EmptyDependencyProvider(component: component)
     }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->MortgageComponent") { component in
