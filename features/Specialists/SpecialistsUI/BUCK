@@ -14,6 +14,7 @@ static_library(
         "//libraries/Localized:Localized",
         "//libraries/EsoftUIKit:EsoftUIKit",
         "//libraries/ListKit:ListKit",
+        "//libraries/StateKit:StateKit",
         "//libraries/CDNImageLink:CDNImageLink",
         "//libraries/RxExtensions:RxExtensions",
         "//features/Specialists/SpecialistsCore:SpecialistsCore",
@@ -23,6 +24,8 @@ static_library(
         "$SDKROOT/System/Library/Frameworks/Foundation.framework",
         "$SDKROOT/System/Library/Frameworks/UIKit.framework",
     ],
-    test_deps = [],
+    test_deps = [
+      "//third-party/Pods:RxBlocking",
+    ],
     info_plist_substitutions = info_plist_substitutions("SpecialistsTests")
 )

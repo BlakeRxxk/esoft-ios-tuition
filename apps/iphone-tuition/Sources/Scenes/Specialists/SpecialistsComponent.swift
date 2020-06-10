@@ -14,11 +14,16 @@ import Network
 import TuituionCore
 import StorageKit
 
+protocol SpecialistsDependency: Dependency {
+  var rootNavigator: UINavigationController { get }
+  var networkService: NetworkAPIProtocol { get }
+}
+
 protocol SpecialistsBuilder {
   var viewController: UIViewController { get }
 }
 
-class SpecialistsComponent: Component<EmptyDependency>, SpecialistsBuilder {
+class SpecialistsComponent: Component<SpecialistsDependency>, SpecialistsBuilder {
   var useCase: SpecialistsUseCase {
     shared {
       SpecialistsUseCaseImplementation(specialistRepository: repository)
@@ -26,7 +31,7 @@ class SpecialistsComponent: Component<EmptyDependency>, SpecialistsBuilder {
   }
   
   var specialistsStorage: SpecialistsStorage {
-    let configuration = StorageConfiguration(type: .persistent)
+    let configuration = StorageConfiguration(type: .inmemory)
     return SpecialistsStorageImplementation(inMemoryConfiguration: configuration)
   }
   
@@ -37,29 +42,50 @@ class SpecialistsComponent: Component<EmptyDependency>, SpecialistsBuilder {
     }
   }
   
-  var networkService: NetworkAPI {
-    let service = NetworkAPI(session: .init(.shared),
-                             decoder: RiesDecoder(),
-                             baseUrl: URL(string: "https://developers.etagi.com/api/v2/catalogs")!)
-    service.requestInterceptors.append(RiesInterceptor())
-
-    return service
-  }
-  
   var gateway: SpecialistsGateway {
     shared {
-      SpecialistsGatewayImplementation(networkService: networkService)
+      SpecialistsGatewayImplementation(networkService: dependency.networkService)
+    }
+  }
+
+  var router: SpecialistsRouter {
+    shared {
+      let router = SpecialistsRouterImplementation(detailsBuilder: details)
+      router.setViewController(dependency.rootNavigator)
+      return router
     }
   }
   
-  var state: SpecialistsListState {
-    SpecialistsListState(specialistsUseCase: useCase)
+  var viewController: UIViewController {
+    
+    list.viewController
   }
   
-  var viewController: UIViewController {
-    let viewController = SpecialistsList()
-    viewController.store = state
-    
-    return viewController
+  var list: SpecialistsListComponent {
+    SpecialistsListComponent(parent: self)
+  }
+  
+  var details: SpecialistDetailsComponent {
+    SpecialistDetailsComponent(parent: self)
+  }
+}
+
+public final class SpecialistsRouterImplementation: SpecialistsRouter {
+  private weak var viewController: UIViewController?
+  
+  private var detailsBuilder: SpecialistDetailsBuilder
+  
+  init(detailsBuilder: SpecialistDetailsBuilder) {
+    self.detailsBuilder = detailsBuilder
+  }
+  public func setViewController(_ viewController: UIViewController?) {
+    self.viewController = viewController
+  }
+  
+  // MARK: - SpecialistDetails
+  public func routeToSpecialistsDetails(specialistID: Int) {
+    guard let source = viewController else { return }
+    let destination = detailsBuilder.viewController
+    source.show(destination, sender: nil)
   }
 }

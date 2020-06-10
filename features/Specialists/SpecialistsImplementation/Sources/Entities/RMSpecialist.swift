@@ -2,7 +2,7 @@
 //  RMSpecialist.swift
 //  SpecialistsImplementation
 //
-//  Created by Blake Rxxk on 01.06.2020.
+//  Copyright © 2020 E-SOFT, OOO. All rights reserved.
 //
 
 import Foundation

@@ -33,7 +33,7 @@ public final class StorageConfiguration {
       configuration.inMemoryIdentifier = "EsoftClientInMemoryStorage"
     }
     
-    configuration.schemaVersion = 12
+    configuration.schemaVersion = 1
     
     // TotalBytes refers to the size of the file on disk in bytes (data + free space)
     // UsedBytes refers to the number of bytes used by data in the file
