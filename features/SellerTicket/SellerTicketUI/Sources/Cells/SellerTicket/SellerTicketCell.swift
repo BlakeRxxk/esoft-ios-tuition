@@ -14,20 +14,9 @@ import EsoftUIKit
 public final class SellerTicketCell: UICollectionViewCell {
   private static let reuseIdentifier: String = "SellerTicketCellID"
   
-  private(set) lazy var container: UIView = UIView()
   public weak var output: SellerTicketCellOutput?
   
-  
   // MARK: - CostItem
-  public var costSubheader: String {
-    get {
-      costItemView.costSubheader
-    }
-    set {
-      costItemView.costSubheader = newValue
-    }
-  }
-  
   public var price: String {
     get {
       costItemView.price
@@ -37,76 +26,13 @@ public final class SellerTicketCell: UICollectionViewCell {
     }
   }
   
-  public var notice: String {
-    get {
-      costItemView.notice
-    }
-    set {
-      costItemView.notice = newValue
-    }
-  }
-  
-  public var costIcon: UIImage? {
-    get {
-      costItemView.costIcon
-    }
-    set {
-      costItemView.costIcon = newValue ?? UIImage()
-    }
-  }
-  
-  public var costEdit: String {
-    get {
-      costItemView.costEdit
-    }
-    set {
-      costItemView.costEdit = newValue
-    }
-  }
-  
   // MARK: - PhotoItem
-  public var photoSubheader: String {
-    get {
-      photoItemView.photoSubheader
-    }
-    set {
-      photoItemView.photoSubheader = newValue
-    }
-  }
-  
   public var dataSet: [String] {
     get {
       photoItemView.dataSet
     }
     set {
       photoItemView.dataSet = newValue
-    }
-  }
-  
-  public var showAll: String {
-    get {
-      photoItemView.showAll
-    }
-    set {
-      photoItemView.showAll = newValue
-    }
-  }
-  
-  public var showAllCount: String {
-    get {
-      photoItemView.showAllCount
-    }
-    set {
-      photoItemView.showAllCount = newValue
-    }
-  }
-  
-  public var showAllCountImage: UIImage? {
-    get {
-      photoItemView.showAllCountImage
-    }
-    set {
-      photoItemView.showAllCountImage = newValue ?? UIImage()
     }
   }
   
@@ -131,24 +57,7 @@ public final class SellerTicketCell: UICollectionViewCell {
     yoga.applyLayout(preservingOrigin: true)
     super.traitCollectionDidChange(previousTraitCollection)
   }
-  
-  override public func prepareForReuse() {
-    super.prepareForReuse()
-    
-    // costItemViewYoga
-    costItemView.costSubheader = ""
-    costItemView.price = ""
-    costItemView.notice = ""
-    costItemView.costEdit = ""
-    costItemView.costIcon = UIImage()
-    
-    // photoItemViewYoga
-    photoItemView.photoSubheader = ""
-    photoItemView.showAll = ""
-    photoItemView.showAllCount = ""
-    photoItemView.showAllCountImage = UIImage()
-  }
-  
+
   override public func layoutSubviews() {
     super.layoutSubviews()
     
@@ -183,7 +92,7 @@ public final class SellerTicketCell: UICollectionViewCell {
   }
   
   private func configureUI() {
-    contentView.setStyles(UIView.Styles.whiteBackground)
+//    contentView.setStyles(UIView.Styles.whiteBackground)
   }
 }
 

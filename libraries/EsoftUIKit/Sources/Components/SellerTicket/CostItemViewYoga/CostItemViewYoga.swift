@@ -12,48 +12,12 @@ import ThemeManager
 import YogaKit
 
 public final class CostItemViewYoga: View {
-  public var costSubheader: String {
-    get {
-      costSubheaderTitle.styledText ?? ""
-    }
-    set {
-      costSubheaderTitle.styledText = newValue
-    }
-  }
-  
   public var price: String {
     get {
       costLabel.styledText ?? ""
     }
     set {
       costLabel.styledText = newValue
-    }
-  }
-  
-  public var notice: String {
-    get {
-      noticeLabel.styledText ?? ""
-    }
-    set {
-      noticeLabel.styledText = newValue
-    }
-  }
-  
-  public var costIcon: UIImage? {
-    get {
-      editIcon.image
-    }
-    set {
-      editIcon.image = newValue ?? UIImage()
-    }
-  }
-  
-  public var costEdit: String {
-    get {
-      editLabel.styledText ?? ""
-    }
-    set {
-      editLabel.styledText = newValue
     }
   }
   
@@ -73,6 +37,7 @@ public final class CostItemViewYoga: View {
     
     createUI()
     configureUI()
+    layout()
   }
   
   private func createUI() {
@@ -100,22 +65,25 @@ public final class CostItemViewYoga: View {
       UILabel.ColorStyle.secondary
     )
     
+    costSubheaderTitle.text = "Стоимость объекта"
+    
     costContainer.backgroundColor = ThemeManager.current().colors.container
 
     divider.backgroundColor = ThemeManager.current().colors.screen
     
     costLabel.setStyles(UILabel.Styles.regular, UILabel.ColorStyle.primary)
     
+    noticeLabel.text = "Выше рыночной на 90%"
     noticeLabel.setStyles(UILabel.Styles.microNormal, UILabel.ColorStyle.error)
     
     editIcon.image = UIImage.Screen5.edit
     editIcon.tintColor = ThemeManager.current().colors.primary500
     
+    editLabel.text = "Изменить"
     editLabel.setStyles(UILabel.Styles.headline, UILabel.ColorStyle.primary500)
   }
   
-  override public func layoutSubviews() {
-    super.layoutSubviews()
+  private func layout() {
     mainContainer.configureLayout { layout in
       layout.isEnabled = true
     }
@@ -123,6 +91,8 @@ public final class CostItemViewYoga: View {
     costSubheaderTitle.configureLayout { layout in
       layout.isEnabled = true
       layout.marginLeft = 16
+      layout.marginRight = 16
+      layout.marginTop = 20
     }
     
     costContainer.configureLayout { layout in

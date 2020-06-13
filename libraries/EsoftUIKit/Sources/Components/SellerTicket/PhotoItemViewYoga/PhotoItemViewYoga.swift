@@ -121,6 +121,7 @@ public final class PhotoItemViewYoga: View {
     collectionView.delegate = self
     collectionView.dataSource = self
     
+    photoSubheaderTitle.text = "Фотографии"
     photoSubheaderTitle.setStyles(
       UILabel.Styles.small,
       UILabel.ColorStyle.secondary
@@ -130,8 +131,10 @@ public final class PhotoItemViewYoga: View {
     
     collectionView.backgroundColor = .clear
     
+    showAllLabel.text = "Показать все"
     showAllLabel.setStyles(UILabel.Styles.regular, UILabel.ColorStyle.primary)
     
+    showAllQuantityLabel.text = "123"
     showAllQuantityLabel.setStyles(UILabel.Styles.regular, UILabel.ColorStyle.primary)
     
     arrowImage.image = UIImage.Screen5.go
@@ -216,7 +219,7 @@ extension PhotoItemViewYoga: UICollectionViewDelegateFlowLayout, UICollectionVie
                              cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCellYoga.reuseId,
                                                   for: indexPath) as! PhotoCollectionViewCellYoga
-//    cell.set(photoName: data[indexPath.row])
+    cell.set(photoName: data[indexPath.row])
     return cell
   }
   

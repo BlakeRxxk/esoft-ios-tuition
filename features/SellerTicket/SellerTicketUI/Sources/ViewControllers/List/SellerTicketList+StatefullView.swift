@@ -56,18 +56,19 @@ extension SellerTicketList: StatefullView {
         EmptyListViewModel(title: "Empty", message: Localized.search, image: UIImage.Stub.specialists)
         ]}
       .map { $0.mapToSellerTicketSections() }
-    
+      
     let sellerTicket = state
       .filter { $0.initialLoading == false && $0.sellerTicket != nil }
       .map { $0.sellerTicket }
       .map { $0.map { $0.asViewModel() } }
-//      .map { $0.mapToSellerTicketSections() }
+      .map { $0.mapToSellerTicketSections() }
     
     guard let adapter = specializedView.adapter else { return }
     
     Observable.of(
       skeleton,
-      empty
+      empty,
+      sellerTicket
     )
       .merge()
       .bind(to: adapter.rx.objects(for: source))

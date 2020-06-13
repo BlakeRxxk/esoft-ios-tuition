@@ -29,11 +29,11 @@ public final class SellerTicketCell: UICollectionViewCell {
     super.prepareForReuse()
     
     // costItemViewYoga
-    costItemViewYoga.costSubheader = ""
+//    costItemViewYoga.costSubheader = ""
     costItemViewYoga.price = ""
-    costItemViewYoga.notice = ""
-    costItemViewYoga.costEdit = ""
-    costItemViewYoga.costIcon = UIImage()
+//    costItemViewYoga.notice = ""
+//    costItemViewYoga.costEdit = ""
+//    costItemViewYoga.costIcon = UIImage()
     
     // photoItemViewYoga
     photoItemViewYoga.photoSubheader = ""

@@ -8,5 +8,5 @@
 import RxSwift
 
 public protocol SellerTicketUseCase {
-  func invoke(request: SellerTicketRequest) -> Observable<SellerTicket>
+  func invoke(request: SellerTicketRequest) -> Observable<[SellerTicket]>
 }

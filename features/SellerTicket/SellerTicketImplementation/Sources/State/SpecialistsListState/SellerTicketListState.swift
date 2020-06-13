@@ -25,7 +25,7 @@ extension SellerTicketListState {
     public var initialLoading: Bool = false
     public var isLoading: Bool = false
     public var error: Bool = false
-    public var sellerTicket: SellerTicket?
+    public var sellerTicket: [SellerTicket] = []
     public var scope: SellerTicketScope = .all
   }
   
@@ -35,7 +35,7 @@ extension SellerTicketListState {
   
   public enum Mutation {
     case setInitialLoading(_ condition: Bool = false)
-    case appendSellerTicket(SellerTicket)
+    case appendSellerTicket([SellerTicket] = [])
   }
   
   public func mutate(action: Action) -> Observable<Mutation> {

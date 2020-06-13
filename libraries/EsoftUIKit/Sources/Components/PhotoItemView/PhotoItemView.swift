@@ -200,7 +200,7 @@ extension PhotoItemView: UICollectionViewDelegateFlowLayout, UICollectionViewDat
                              cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCellYoga.reuseId,
                                                   for: indexPath) as! PhotoCollectionViewCellYoga
-    cell.set(index: data[indexPath.row])
+    cell.set(photoName: data[indexPath.row])
     return cell
   }
   

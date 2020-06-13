@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import NetworkTrainee
 
 final class PhotoCollectionViewCellYoga: UICollectionViewCell {
   
   static let reuseId = "PhotoCollectionViewCell"
+  private var networkManager = NetworkManager()
   
   fileprivate let bg: UIImageView = {
     let iv = UIImageView()
@@ -30,8 +32,15 @@ final class PhotoCollectionViewCellYoga: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func set(index: String) {
-    bg.image = UIImage(named: index)
+  func set(photoName: String) {
+    let image = networkManager.fetchImage(withPhotoName: photoName) { [weak self] image in
+      guard let self = self else { return }
+      DispatchQueue.main.async {
+        self.bg.image = image
+      }
+    }
+    //https://cdn.esoft.digital/640480/media/photos/b0/d8/0ada5f9ed8dbbce07b9ad3cb6ec1bda5b5f55e17.jpg
+    bg.image = UIImage(named: photoName)
   }
   
   private func setupUI() {
