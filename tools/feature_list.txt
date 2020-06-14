@@ -2,5 +2,6 @@
 ../../features/Specialists/SpecialistsCore/Sources/
 ../../features/Specialists/SpecialistsUI/Sources/
 ../../features/Specialists/SpecialistsImplementation/Sources/
+../../features/Authorization/AuthCore/Sources/
 ../../features/Authorization/AuthUI/Sources/
 ../../integrations/TuitionIntegrations/Sources/
