@@ -5,7 +5,7 @@
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
 //
 
-import Authorization
+import AuthUI
 import Foundation
 import NeedleFoundation
 import Network

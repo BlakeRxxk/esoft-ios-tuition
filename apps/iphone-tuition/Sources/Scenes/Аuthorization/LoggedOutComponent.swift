@@ -8,7 +8,7 @@
 import UIKit
 import NeedleFoundation
 import Foundation
-import Authorization
+import AuthUI
 
 protocol LoggedOutBuilder {
   var loggedOutViewController: UIViewController { get }

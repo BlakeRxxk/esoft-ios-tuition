@@ -8,7 +8,7 @@
 import UIKit
 import NeedleFoundation
 import Foundation
-import Authorization
+import AuthUI
 
 protocol PasswordBuilder {
   var passwordViewController: UIViewController { get }
