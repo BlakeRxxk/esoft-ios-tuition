@@ -83,16 +83,17 @@ extension CitiesViewController: StatefullView {
     let countries: Observable<[CitiesSections]> = state
       .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
       .map { state in
-        state.countries.map { country -> (Country, [City]) in
-          (country, state.cities
-            .filter { myFilter($0.name, state.filter) } // можно отфильтровать единожды, а не каждый раз, но не хочу переписывать такую красоту
-            .filter { country.id == $0.country })
+        state.countries.mapValues { cities in
+          cities.filter { myFilter($0.name, state.filter) }
         }
-        .filter { !$0.1.isEmpty }
-        .reduce([], { arr, country in
-          arr + [ListHeaderViewModel(count: country.0.id, title: country.0.name)] + country.1.map { $0.asViewModel() }
-        })
-          .mapToCitiesSections()
+        .filter { !$1.isEmpty }
+        .sorted(by: { $0.key.id < $1.key.id })
+        .reduce([]) { arr, tuple in
+          let country = tuple.key
+          let cities = tuple.value
+          return arr + [ListHeaderViewModel(count: country.id, title: country.name)] + cities.map { $0.asViewModel() }
+        }
+        .mapToCitiesSections()
     }
     
     var message: Observable<[CitiesSections]> = state

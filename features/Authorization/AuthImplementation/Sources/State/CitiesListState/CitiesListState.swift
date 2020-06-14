@@ -28,8 +28,7 @@ extension CitiesListState {
     public var isSearching: Bool = false
     public var filter: String?
     public var myCity: MyCity?
-    public var countries: [Country] = []
-    public var cities: [City] = []
+    public var countries: [Country : [City]] = [:]
     public var selectedCityId: Int?
   }
   
@@ -44,7 +43,7 @@ extension CitiesListState {
   public enum Mutation {
     case setSearching(Bool)
     case setFilter(String?)
-    case setData([Country], [City])
+    case setData([Country : [City]])
     case setSelectedCity(Int)
   }
   
@@ -59,7 +58,12 @@ extension CitiesListState {
     case .fetchData:
       let countries = countriesUseCase.invoke(request: CountriesRequest())
       let cities = citiesUseCase.invoke(request: CitiesRequest())
-      return Observable.combineLatest(countries, cities) { .setData($0, $1) }
+      return Observable.combineLatest(countries, cities) { countries, cities in
+        var dict = [Country : [City]]()
+        for country in countries {
+          dict[country] = cities.filter { country.id == $0.country }
+        }
+        return .setData(dict) }
     case let .selectCity(selectedCityId):
       return . just(.setSelectedCity(selectedCityId))
     }
@@ -72,9 +76,8 @@ extension CitiesListState {
       newState.isSearching = isSearching
     case let .setFilter(filter):
       newState.filter = filter
-    case let .setData(countries, cities):
+    case let .setData(countries):
       newState.countries = countries
-      newState.cities = cities
     case let .setSelectedCity(selectedCityId):
       newState.selectedCityId = selectedCityId
     }
