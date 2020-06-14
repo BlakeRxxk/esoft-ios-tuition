@@ -54,8 +54,7 @@ public class RxListAdapterDataSource<E: SectionModelType>: NSObject, RxListAdapt
     switch observedEvent {
     case .next(let e):
       objects = e
-      adapter.performUpdates(animated: true) { _ in
-      }
+      adapter.performUpdates(animated: true)
     default:
       print(observedEvent)
     }

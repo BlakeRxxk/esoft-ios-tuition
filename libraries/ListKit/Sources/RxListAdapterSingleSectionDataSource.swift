@@ -40,8 +40,7 @@ RxListAdapterSingleSectionDataSource<Collection.Element, Cell>, RxListAdapterDat
     switch observedEvent {
     case .next(let e):
       objects = Array(e)
-      adapter.performUpdates(animated: true) { _ in
-      }
+      adapter.performUpdates(animated: true)
     default:
       print(observedEvent)
     }

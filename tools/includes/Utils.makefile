@@ -9,6 +9,15 @@ install_pods:
 clean_pods:
 	sh tools/scripts/clean_pods.sh
 
+install_carthage:
+	sh tools/scripts/install_carthage.sh
+
+clean_carthage:
+	sh tools/scripts/clean_carthage.sh
+
+install_third_party: install_pods install_carthage
+clean_third_party: clean_pods clean_carthage
+
 check_env:
 ifndef BUCK
 	$(error BUCK is not set)
@@ -17,6 +26,7 @@ endif
 
 kill_xcode:
 	killall Xcode || true
+	killall Simulator || true
 
 audit:
 	$(BUCK) audit rules apps/$(APP_PATH)/BUCK > config/gen/$(APP_PATH)-BUCK.py \

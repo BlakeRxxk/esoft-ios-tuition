@@ -9,5 +9,5 @@ import RxSwift
 
 public protocol SpecialistsRepository {
   func getList(page: Int, cityID: Int, searchQuery: String?) -> Single<[Specialist]>
-  func getSingle(with ID: Int) -> Single<Specialist>
+  func getListCount(cityID: Int, searchQuery: String?) -> Single<SpecialistsCount>
 }
