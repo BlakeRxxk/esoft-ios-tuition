@@ -14,8 +14,8 @@ extension Array {
       switch obj {
       case is ListHeaderViewModel:
         return .header(obj as! ListHeaderViewModel)
-      case is LocationViewModel:
-        return .location(obj as! LocationViewModel)
+      case is MyCityViewModel:
+        return .myCity(obj as! MyCityViewModel)
       case is CityViewModel:
         return .city(obj as! CityViewModel)
       case is MessageViewModel:

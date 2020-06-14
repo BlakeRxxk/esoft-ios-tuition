@@ -1,5 +1,5 @@
 //
-//  LocationCell+ListBindable.swift
+//  MyCityCell+ListBindable.swift
 //  AppLibrary
 //
 //  Created by nedstar on 26.05.2020.
@@ -8,11 +8,11 @@
 import EsoftUIKit
 import IGListKit.IGListBindable
 
-extension LocationCell: ListBindable {
+extension MyCityCell: ListBindable {
   public func bindViewModel(_ viewModel: Any) {
-    guard let viewModel = viewModel as? LocationViewModel else { return }
+    guard let viewModel = viewModel as? MyCityViewModel else { return }
     
-//    location = viewModel.name
+    myCity = viewModel.name
 
     layoutSubviews()
   }

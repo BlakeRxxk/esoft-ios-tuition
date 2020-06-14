@@ -11,9 +11,11 @@ import RxExtensions
 import ListKit
 import StateKit
 import IGListDiffKit.IGListDiffable
+import AuthCore
+import AuthImplementation
 
 extension CitiesViewController: StatefullView {
-  public func bind(store: CitiesViewControllerState) {
+  public func bind(store: CitiesListState) {
     // MARK: - KeyboardHeight
     RxKeyboard
       .instance
@@ -56,8 +58,8 @@ extension CitiesViewController: StatefullView {
         return ListHeaderSectionController()
       case .city:
         return CitiesSectionController()
-      case .location:
-        return LocationSectionController()
+      case .myCity:
+        return MyCitySectionController()
       case .message:
         return MessageSectionController()
       }
@@ -65,22 +67,37 @@ extension CitiesViewController: StatefullView {
     
     guard let adapter = specializedView.adapter else { return }
     
+    rx
+      .viewWillAppear
+      .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
+      .map { _ in CitiesListState.Action.fetchData }
+      .bind(to: store.action)
+      .disposed(by: disposeBag)
+    
     let header: Observable<[CitiesSections]> = Observable.just([
       ListHeaderViewModel(count: -1, title: Localized.location),
-      LocationViewModel(id: 0, name: "123")
+      MyCityViewModel(id: 0, name: "123", distance: 123)
     ])
       .map { $0.mapToCitiesSections() }
     
     let countries: Observable<[CitiesSections]> = state
-      .map { state in state.countries.reduce([], { arr, country in
-        arr + [ListHeaderViewModel(count: country.id, title: country.name)] + country.cities.map { $0.asViewModel()
+      .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
+      .map { state in
+        state.countries.map { country -> (Country, [City]) in
+          (country, state.cities
+            .filter { myFilter($0.name, state.filter) } // можно отфильтровать единожды, а не каждый раз, но не хочу переписывать такую красоту
+            .filter { country.id == $0.country })
         }
-      }) }
-      .map { $0.mapToCitiesSections() }
+        .filter { !$0.1.isEmpty }
+        .reduce([], { arr, country in
+          arr + [ListHeaderViewModel(count: country.0.id, title: country.0.name)] + country.1.map { $0.asViewModel() }
+        })
+          .mapToCitiesSections()
+    }
     
     var message: Observable<[CitiesSections]> = state
       .map { state -> [MessageViewModel] in
-        if !state.isSearching && (state.filter == nil || state.filter == "") {
+        if !state.isSearching && (state.filter == nil || state.filter == "") { // скобки для наглядности
           return []
         }
         return [MessageViewModel(id: 0, message: Localized.message)]
@@ -91,4 +108,13 @@ extension CitiesViewController: StatefullView {
       .bind(to: adapter.rx.objects(for: source))
       .disposed(by: disposeBag)
   }
+}
+
+// Переименовать и переместить в Esoft
+func myFilter(_ text: String, _ filter: String?) ->  Bool
+{
+  guard let filter = filter, filter != "" else {
+    return true
+  }
+  return text.uppercased().contains(filter.uppercased())
 }

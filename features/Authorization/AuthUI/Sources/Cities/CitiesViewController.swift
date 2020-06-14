@@ -57,23 +57,6 @@ final public class CitiesViewController: ViewController<BaseListView> {
     view.yoga.applyLayout(preservingOrigin: true)
   }
   
-  override public func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    
-    let countries = [
-      Country(id: 0, name: "Россия", cities: [
-        City(id: 0, name: "Москва", regions: ["Химки"]),
-        City(id: 1, name: "Тюмень")
-      ]),
-      Country(id: 1, name: "Германия", cities: [
-        City(id: 2, name: "Берлин", regions: ["Мюнхен", "Гамбург", "Кёльн", "Штуртгарт", "Лейпциг", "Бремен", "Ганновер"]),
-        City(id: 3, name: "Дюссельдорф", regions: [], isComingSoon: true)
-      ])
-    ]
-    
-    store?.action.onNext(.setCountries(countries))
-  }
-  
   private func configureUI() {
     view.setStyles(UIView.Styles.whiteBackground)
     

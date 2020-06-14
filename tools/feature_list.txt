@@ -4,4 +4,5 @@
 ../../features/Specialists/SpecialistsImplementation/Sources/
 ../../features/Authorization/AuthCore/Sources/
 ../../features/Authorization/AuthUI/Sources/
+../../features/Authorization/AuthImplementation/Sources/
 ../../integrations/TuitionIntegrations/Sources/

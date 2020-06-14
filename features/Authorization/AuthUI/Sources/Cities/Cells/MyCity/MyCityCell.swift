@@ -1,5 +1,5 @@
 //
-//  LocationCell.swift
+//  MyCityCell.swift
 //  AppLibrary
 //
 //  Created by nedstar on 26.05.2020.
@@ -10,24 +10,21 @@ import YogaKit
 import EsoftUIKit
 import ThemeManager
 
-public final class LocationCell: UICollectionViewCell {
-  private static let reuseIdentifier: String = "LocationCellID"
+public final class MyCityCell: UICollectionViewCell {
+  private static let reuseIdentifier: String = "MyCityCellID"
   
-  public var location: String? {
+  public var myCity: String? {
       get {
-        locationLabel.text
+        myCityLabel.text
       }
       set {
-        locationLabel.styledText = newValue ?? Localized.locating
-        // После этого обновлять
+        myCityLabel.styledText = newValue ?? Localized.locating
       }
     }
   
-  private(set) lazy var locationContainer: UIView = UIView()
+  private(set) lazy var myCityContainer: UIView = UIView()
   private(set) lazy var iconImageView: UIImageView = UIImageView()
-  private(set) lazy var locationLabel: UILabel = UILabel()
-  
-  public weak var output: LocationCellOutput?
+  private(set) lazy var myCityLabel: UILabel = UILabel()
   
   override init(frame: CGRect = .zero) {
     super.init(frame: frame)
@@ -62,7 +59,7 @@ public final class LocationCell: UICollectionViewCell {
       layout.height = YGValue(container.height)
     }
     
-    locationContainer.configureLayout(block: { layout in
+    myCityContainer.configureLayout(block: { layout in
       layout.isEnabled = true
       layout.marginHorizontal = 16
       layout.marginVertical = 13
@@ -76,7 +73,7 @@ public final class LocationCell: UICollectionViewCell {
       layout.alignSelf = .center
     })
     
-    locationLabel.configureLayout(block: { layout in
+    myCityLabel.configureLayout(block: { layout in
       layout.isEnabled = true
       layout.width = 1
       layout.marginLeft = 34
@@ -89,11 +86,11 @@ public final class LocationCell: UICollectionViewCell {
   private func createUI() {
     [
       iconImageView,
-      locationLabel
-      ].forEach { locationContainer.addSubview($0) }
+      myCityLabel
+      ].forEach { myCityContainer.addSubview($0) }
     
     [
-      locationContainer
+      myCityContainer
       ].forEach { contentView.addSubview($0) }
   }
   
@@ -104,25 +101,19 @@ public final class LocationCell: UICollectionViewCell {
     iconImageView.image = UIImage.Spinners.base
     iconImageView.tintColor = ThemeManager.current().colors.primary500
     
-    locationLabel.setStyles(
+    myCityLabel.setStyles(
       UILabel.Styles.headline,
       UILabel.ColorStyle.primary500,
       UILabel.Styles.singleLine
     )
     
-    locationLabel.styledText = Localized.locating
-    
-    self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapAction)))
-  }
-  
-  @objc private func handleTapAction() {
-    output?.didTap(in: self)
+    myCityLabel.styledText = Localized.locating
   }
 }
 
-extension LocationCell: LocationCellInput {}
+extension MyCityCell: MyCityCellInput {}
 
-extension LocationCell {
+extension MyCityCell {
   enum Localized {
     static let locating = "Определяем местоположение"
   }

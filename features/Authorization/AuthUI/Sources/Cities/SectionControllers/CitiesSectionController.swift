@@ -42,9 +42,9 @@ public final class CitiesSectionController: ListSectionController {
     if !self.isLastSection {
       height += 1
     }
-    if !object.isComingSoon, let text = object.regionsToString() {
-      height += text.styledLabelHeight(with: width - 32, UILabel.Styles.tiny, UILabel.Styles.doubleLine)
-    }
+//    if !object.isComingSoon, let text = object.regionsToString() {
+//      height += text.styledLabelHeight(with: width - 32, UILabel.Styles.tiny, UILabel.Styles.doubleLine)
+//    }
     
     return CGSize(width: width, height: CGFloat(height))
   }

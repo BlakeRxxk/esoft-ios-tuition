@@ -1,8 +1,8 @@
 //
 //  MessageViewModel.swift
-//  Authorization#iphonesimulator-x86_64
+//  EsoftUIKit
 //
-//  Created by nedstar on 27.05.2020.
+//  Created by nedstar on 14.06.2020.
 //
 
 import IGListKit
@@ -25,7 +25,7 @@ extension MessageViewModel: ListDiffable {
   
   public func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
     guard self !== object else { return true }
-    guard let object = object as? LocationViewModel else { return false }
+    guard let object = object as? MessageViewModel else { return false }
     return self == object
   }
 }

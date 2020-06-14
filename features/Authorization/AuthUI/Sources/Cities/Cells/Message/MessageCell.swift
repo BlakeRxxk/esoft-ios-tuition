@@ -23,8 +23,6 @@ public final class MessageCell: UICollectionViewCell {
   
   private(set) lazy var messageLabel: UILabel = UILabel()
   
-  public weak var output: LocationCellOutput?
-  
   override init(frame: CGRect = .zero) {
     super.init(frame: frame)
     

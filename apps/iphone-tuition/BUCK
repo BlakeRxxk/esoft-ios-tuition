@@ -38,6 +38,7 @@ static_libraries = [
     "//libraries/libphonenumber:libphonenumber",
     "//libraries/PhoneNumberFormat:PhoneNumberFormat",
     "//features/Authorization/AuthCore:AuthCore",
+    "//features/Authorization/AuthImplementation:AuthImplementation",
     "//features/Authorization/AuthUI:AuthUI",
     "//libraries/RealmKit:RealmKit",
     "//libraries/StorageKit:StorageKit",

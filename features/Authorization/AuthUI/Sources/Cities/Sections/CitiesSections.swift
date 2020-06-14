@@ -12,7 +12,7 @@ import IGListDiffKit.IGListDiffable
 
 public enum CitiesSections {
   case header(ListHeaderViewModel)
-  case location(LocationViewModel)
+  case myCity(MyCityViewModel)
   case city(CityViewModel)
   case message(MessageViewModel)
 }
@@ -24,8 +24,8 @@ extension CitiesSections: SectionModelType {
     switch self {
     case let .header(headerViewModel):
       return headerViewModel
-    case let .location(locationViewModel):
-      return locationViewModel
+    case let .myCity(myCityViewModel):
+      return myCityViewModel
     case let .city(cityViewModel):
       return cityViewModel
     case let .message(messageViewModel):

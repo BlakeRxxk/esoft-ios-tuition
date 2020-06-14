@@ -1,8 +1,8 @@
 //
 //  CityViewModel.swift
-//  Authorization#iphonesimulator-x86_64
+//  EsoftUIKit
 //
-//  Created by nedstar on 26.05.2020.
+//  Created by nedstar on 14.06.2020.
 //
 
 import IGListKit
@@ -10,21 +10,30 @@ import IGListKit
 public final class CityViewModel: NSObject {
   public let id: Int
   public let name: String
-  public let regions: [String]?
-  public let isComingSoon: Bool
+  public let coords: String
+  public let clockWrap: String?
+  public let country: Int
+  public let eOfficeId: Int?
+  public let created: Date
+  public let updated: Date
   
   public init(id: Int,
               name: String,
-              regions: [String]? = nil,
-              isComingSoon: Bool = false) {
+              coords: String,
+              clockWrap: String?,
+              country: Int,
+              eOfficeId: Int?,
+              created: Date,
+              updated: Date
+  ) {
     self.id = id
     self.name = name
-    self.regions = regions
-    self.isComingSoon = isComingSoon
-  }
-  
-  public func regionsToString() -> String? {
-    regions?.joined(separator: ", ")
+    self.coords = coords // Спарсить?
+    self.clockWrap = clockWrap
+    self.country = country
+    self.eOfficeId = eOfficeId
+    self.created = created
+    self.updated = created
   }
 }
 

@@ -1,0 +1,29 @@
+load("//config:buck_rule_macros.bzl", "static_library")
+load("//config:configs.bzl", "info_plist_substitutions")
+
+static_library(
+    name = "AuthImplementation",
+    srcs = glob([
+        "Sources/**/*.swift",
+    ]),
+    deps = [
+        "//features/Authorization/AuthCore:AuthCore",
+        "//libraries/URLRequestKit:URLRequestKit",
+        "//libraries/EsoftUIKit:EsoftUIKit",
+        "//libraries/StateKit:StateKit",
+        "//libraries/StorageKit:StorageKit",
+        "//third-party/Pods:RxSwift",
+        "//third-party/Pods:RxCocoa",
+        "//third-party/Pods:RxRelay",
+        "//third-party/Carthage:Realm",
+        "//third-party/Carthage:RealmSwift",
+    ],
+    frameworks = [
+        "$SDKROOT/System/Library/Frameworks/Foundation.framework",
+        "$SDKROOT/System/Library/Frameworks/UIKit.framework",
+    ],
+    test_deps = [
+        "//third-party/Pods:RxBlocking",
+    ],
+    info_plist_substitutions = info_plist_substitutions("AuthImplementationTests")
+)

@@ -8,16 +8,16 @@
 import IGListKit
 import EsoftUIKit
 
-public protocol LocationSectionControllerOutput: AnyObject {
-  func didTap(in cell: LocationCellInput)
+public protocol MyCitySectionControllerOutput: AnyObject {
+  func didTap(in cell: MyCityCellInput)
 }
 
-public final class LocationSectionController: ListSectionController {
-  private var object: LocationViewModel?
+public final class MyCitySectionController: ListSectionController {
+  private var object: MyCityViewModel?
   
-  weak var output: LocationSectionControllerOutput?
+  weak var output: MyCitySectionControllerOutput?
   
-  public convenience init(output: LocationSectionControllerOutput?, inset: UIEdgeInsets? = nil) {
+  public convenience init(output: MyCitySectionControllerOutput?, inset: UIEdgeInsets? = nil) {
     self.init()
     self.output = output
     if let inset = inset {
@@ -40,23 +40,23 @@ public final class LocationSectionController: ListSectionController {
   
   override public func cellForItem(at index: Int) -> UICollectionViewCell {
     guard  let object = object,
-      let cell = collectionContext?.dequeueReusableCell(of: LocationCell.self,
+      let cell = collectionContext?.dequeueReusableCell(of: MyCityCell.self,
                                                         for: self,
-                                                        at: index) as? LocationCell else {
+                                                        at: index) as? MyCityCell else {
                                                           return UICollectionViewCell()
     }
-    cell.output = self
+//    cell.output = self
     cell.bindViewModel(object)
     return cell
   }
   
   override public func didUpdate(to object: Any) {
-    self.object = object as? LocationViewModel
+    self.object = object as? MyCityViewModel
   }
 }
 
-extension LocationSectionController: LocationCellOutput {
-  public func didTap(in cell: LocationCellInput) {
-    output?.didTap(in: cell)
-  }
-}
+//extension MyCitySectionController: MyCityCellOutput {
+//  public func didTap(in cell: MyCityCellInput) {
+//    output?.didTap(in: cell)
+//  }
+//}

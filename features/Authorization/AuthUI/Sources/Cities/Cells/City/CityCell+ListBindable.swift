@@ -17,8 +17,8 @@ extension CityCell: ListBindable {
     
     // заменить на self?
     cityView.title = viewModel.name
-    cityView.secondaryText = viewModel.regionsToString()
-    if viewModel.isComingSoon {
+//    cityView.secondaryText = viewModel.regionsToString()
+    if viewModel.eOfficeId == nil {
       cityView.lockSignText = Localized.soon
     } else {
       cityView.lockSignText = nil

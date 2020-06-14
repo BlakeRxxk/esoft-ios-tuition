@@ -1,0 +1,83 @@
+//
+//  CitiesListState.swift
+//  AuthImplementation#iphonesimulator-x86_64
+//
+//  Created by nedstar on 14.06.2020.
+//
+
+import StateKit
+import AuthCore
+import EsoftUIKit
+
+public final class CitiesListState: Store {
+  public let initialState: CitiesListState.State
+  private let citiesUseCase: CitiesUseCase
+  private let countriesUseCase: CountriesUseCase
+  
+  public init(citiesUseCase: CitiesUseCase,
+              countriesUseCase: CountriesUseCase) {
+    self.citiesUseCase = citiesUseCase
+    self.countriesUseCase = countriesUseCase
+    
+    initialState = State()
+  }
+}
+
+extension CitiesListState {
+  public struct State: Equatable {
+    public var isSearching: Bool = false
+    public var filter: String?
+    public var myCity: MyCity?
+    public var countries: [Country] = []
+    public var cities: [City] = []
+    public var selectedCityId: Int?
+  }
+  
+  public enum Action {
+    case startSearching
+    case stopSearching
+    case changeFilter(String?)
+    case fetchData
+    case selectCity(Int)
+  }
+  
+  public enum Mutation {
+    case setSearching(Bool)
+    case setFilter(String?)
+    case setData([Country], [City])
+    case setSelectedCity(Int)
+  }
+  
+  public func mutate(action: Action) -> Observable<Mutation> {
+    switch action {
+    case .startSearching:
+      return .just(.setSearching(true))
+    case .stopSearching:
+      return .just(.setSearching(false))
+    case let .changeFilter(filter):
+      return .just(.setFilter(filter))
+    case .fetchData:
+      let countries = countriesUseCase.invoke(request: CountriesRequest())
+      let cities = citiesUseCase.invoke(request: CitiesRequest())
+      return Observable.combineLatest(countries, cities) { .setData($0, $1) }
+    case let .selectCity(selectedCityId):
+      return . just(.setSelectedCity(selectedCityId))
+    }
+  }
+  
+  public func reduce(state: State, mutation: Mutation) -> State {
+    var newState = state
+    switch mutation {
+    case let .setSearching(isSearching):
+      newState.isSearching = isSearching
+    case let .setFilter(filter):
+      newState.filter = filter
+    case let .setData(countries, cities):
+      newState.countries = countries
+      newState.cities = cities
+    case let .setSelectedCity(selectedCityId):
+      newState.selectedCityId = selectedCityId
+    }
+    return newState
+  }
+}
