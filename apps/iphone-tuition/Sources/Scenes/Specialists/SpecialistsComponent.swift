@@ -85,7 +85,10 @@ public final class SpecialistsRouterImplementation: SpecialistsRouter {
   // MARK: - SpecialistDetails
   public func routeToSpecialistsDetails(specialistID: Int) {
     guard let source = viewController else { return }
-    let destination = detailsBuilder.viewController
-    source.show(destination, sender: nil)
+    let destination = detailsBuilder.viewController as? SpecialistDetails
+    
+    destination?.store?.action.onNext(.fetchSpecialist(id: specialistID))
+    
+    source.show(destination!, sender: nil)
   }
 }
