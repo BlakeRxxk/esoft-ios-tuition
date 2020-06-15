@@ -139,6 +139,12 @@ extension UIImage {
     }
   }
   
+  public enum Check {
+    public static var base: UIImage {
+      named("check")
+    }
+  }
+  
   public static var arrowDown: UIImage {
     named("arrow.down").withRenderingMode(.alwaysTemplate)
   }

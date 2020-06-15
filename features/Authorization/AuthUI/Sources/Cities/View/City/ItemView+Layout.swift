@@ -39,5 +39,12 @@ extension ItemView {
       layout.height = 24
       layout.alignSelf = .center
     }
+    
+    let chekMarkImageView: YGLayoutConfigurationBlock = { layout in
+      layout.isEnabled = true
+      layout.width = 16
+      layout.height = 16
+      layout.alignSelf = .center
+    }
   }
 }

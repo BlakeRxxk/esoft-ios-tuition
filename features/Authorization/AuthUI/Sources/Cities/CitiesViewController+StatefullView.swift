@@ -49,7 +49,7 @@ extension CitiesViewController: StatefullView {
       .bind(to: store.action)
       .disposed(by: disposeBag)
     
-    // MARK: - Data
+    // MARK: - State
     let state = store.state.distinctUntilChanged().share()
     
     let source = RxListAdapterDataSource<CitiesSections>(sectionControllerProvider: { _, section in
@@ -57,9 +57,9 @@ extension CitiesViewController: StatefullView {
       case .header:
         return ListHeaderSectionController()
       case .city:
-        return CitiesSectionController()
+        return CitiesSectionController(output: self)
       case .myCity:
-        return MyCitySectionController()
+        return MyCitySectionController(output: self)
       case .message:
         return MessageSectionController()
       }
@@ -74,14 +74,24 @@ extension CitiesViewController: StatefullView {
       .bind(to: store.action)
       .disposed(by: disposeBag)
     
-    let header: Observable<[CitiesSections]> = Observable.just([
-      ListHeaderViewModel(count: -1, title: Localized.location),
-      MyCityViewModel(id: 0, name: "123", distance: 123)
-    ])
-      .map { $0.mapToCitiesSections() }
+    state
+      .map { $0.selectedCityId }
+      .bind(onNext: { print($0) })
+      .disposed(by: disposeBag)
+    
+    let header: Observable<[CitiesSections]> = state.map { state in
+      if state.isSearching {
+        return []
+      }
+      return [
+        ListHeaderViewModel(count: -1, title: Localized.location),
+        MyCityViewModel(id: 0, name: "123", distance: 123)]
+//        .filter { !state.isSearching }
+        .mapToCitiesSections()
+    }
     
     let countries: Observable<[CitiesSections]> = state
-      .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
+//      .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
       .map { state in
         state.countries.mapValues { cities in
           cities.filter { myFilter($0.name, state.filter) }
@@ -103,7 +113,7 @@ extension CitiesViewController: StatefullView {
         }
         return [MessageViewModel(id: 0, message: Localized.message)]
     }
-    .map { $0.mapToCitiesSections() }
+      .map { $0.mapToCitiesSections() }
     
     Observable.combineLatest(header, countries, message) { $0 + $1 + $2 }
       .bind(to: adapter.rx.objects(for: source))

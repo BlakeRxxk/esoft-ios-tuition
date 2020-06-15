@@ -7,6 +7,6 @@
 
 import Foundation
 
-public protocol MyCityCellInput {
+protocol MyCityCellInput {
   var myCity: String? { get set }
 }

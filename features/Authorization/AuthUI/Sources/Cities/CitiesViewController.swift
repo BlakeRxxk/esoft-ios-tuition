@@ -76,6 +76,18 @@ final public class CitiesViewController: ViewController<BaseListView> {
   }
 }
 
+extension CitiesViewController: MyCitySectionControllerOutput {
+  public func myCitySectionDidTap() {
+    print("myCity")
+  }
+}
+
+extension CitiesViewController: CitiesSectionControllerOutput {
+  public func didTap(in cell: CityCellInput) {
+      store?.action.onNext(.selectCity(cell.cityId))
+  }
+}
+
 extension CitiesViewController {
   enum Localized {
     public static let city = "Город"

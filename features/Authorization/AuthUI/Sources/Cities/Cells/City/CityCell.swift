@@ -21,11 +21,35 @@ public final class CityCell: UICollectionViewCell {
       updateControlElements()
     }
   }
+  public var title: String {
+    get {
+      cityView.title
+    }
+    set {
+      cityView.title = newValue
+    }
+  }
+  public var secondaryText: String? {
+    get {
+      cityView.secondaryText
+    }
+    set {
+      cityView.secondaryText = newValue
+    }
+  }
+  public var lockSignText: String? {
+    get {
+      cityView.lockSignText
+    }
+    set {
+      cityView.lockSignText = newValue
+    }
+  }
   
   private(set) lazy var cityContainer: UIView = UIView()
   private(set) lazy var cityView: ItemView = ItemView()
   private(set) lazy var divider: UIView = UIView()
-
+  
   internal lazy var layoutController: LayoutController = LayoutController()
   internal lazy var layout: Layout = Layout()
   
@@ -42,13 +66,13 @@ public final class CityCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-//  override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-//    subviews.forEach {
-//      $0.yoga.markDirty()
-//    }
-//    yoga.applyLayout(preservingOrigin: true)
-//    super.traitCollectionDidChange(previousTraitCollection)
-//  }
+  //  override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+  //    subviews.forEach {
+  //      $0.yoga.markDirty()
+  //    }
+  //    yoga.applyLayout(preservingOrigin: true)
+  //    super.traitCollectionDidChange(previousTraitCollection)
+  //  }
   
   override public func prepareForReuse() {
     super.prepareForReuse()
@@ -65,7 +89,6 @@ public final class CityCell: UICollectionViewCell {
       layout.height = YGValue(container.height)
       layout.flexDirection = .column
     }
-//    contentView.configureLayout(block: layout.container)
     
     cityContainer.configureLayout(block: layout.cityContainer)
     
@@ -101,7 +124,9 @@ public final class CityCell: UICollectionViewCell {
   }
   
   @objc private func handleTapAction() {
-    output?.didTap(in: self)
+    if lockSignText == nil {
+      output?.didTap(in: self)
+    }
   }
 }
 

@@ -15,13 +15,18 @@ extension CityCell: ListBindable {
     
     cityId = viewModel.id
     
-    // заменить на self?
-    cityView.title = viewModel.name
-//    cityView.secondaryText = viewModel.regionsToString()
+    title = viewModel.name // заменить на self? (self.cityTitle -> cityView.title)
+    // cityView.secondaryText = viewModel.regionsToString()
+    if cityId == 23 {
+      cityView.isSelected = true
+    }
+    else {
+      cityView.isSelected = false
+    }
     if viewModel.eOfficeId == nil {
-      cityView.lockSignText = Localized.soon
+      lockSignText = Localized.soon
     } else {
-      cityView.lockSignText = nil
+      lockSignText = nil
     }
 
     layoutSubviews()

@@ -9,7 +9,7 @@ import IGListKit
 import EsoftUIKit
 
 public protocol MyCitySectionControllerOutput: AnyObject {
-  func didTap(in cell: MyCityCellInput)
+  func myCitySectionDidTap()
 }
 
 public final class MyCitySectionController: ListSectionController {
@@ -45,18 +45,15 @@ public final class MyCitySectionController: ListSectionController {
                                                         at: index) as? MyCityCell else {
                                                           return UICollectionViewCell()
     }
-//    cell.output = self
     cell.bindViewModel(object)
     return cell
+  }
+  
+  override public func didSelectItem(at index: Int) {
+    output?.myCitySectionDidTap()
   }
   
   override public func didUpdate(to object: Any) {
     self.object = object as? MyCityViewModel
   }
 }
-
-//extension MyCitySectionController: MyCityCellOutput {
-//  public func didTap(in cell: MyCityCellInput) {
-//    output?.didTap(in: cell)
-//  }
-//}

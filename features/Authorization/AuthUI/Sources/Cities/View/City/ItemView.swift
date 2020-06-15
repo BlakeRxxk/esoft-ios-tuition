@@ -37,11 +37,17 @@ public final class ItemView: View {
       updateControlElements() // не оч
     }
   }
+  public var isSelected: Bool = true {
+    didSet {
+      updateSelectedSign()
+    }
+  }
   
   private(set) lazy var leftContentView: UIView = UIView()
   private(set) lazy var titleLabel: UILabel = UILabel()
   private(set) lazy var secondaryLabel: UILabel = UILabel()
-  private(set) lazy var lockSignLabel: UILabel = UILabel() // поменять на кнопку и сделать out
+  private(set) lazy var lockSignLabel: UILabel = UILabel()
+  private(set) lazy var chekMarkImageView: UIImageView = UIImageView()
   
   internal lazy var layoutController: LayoutController = LayoutController()
   internal lazy var layout: Layout = Layout()
@@ -61,6 +67,7 @@ public final class ItemView: View {
     titleLabel.configureLayout(block: layout.titleLabel)
     secondaryLabel.configureLayout(block: layout.secondaryLabel)
     lockSignLabel.configureLayout(block: layout.lockSignLabel)
+    chekMarkImageView.configureLayout(block: layout.chekMarkImageView)
     
     yoga.applyLayout(preservingOrigin: true, dimensionFlexibility: .flexibleHeight)
   }
@@ -73,7 +80,8 @@ public final class ItemView: View {
     
     [
       leftContentView,
-      lockSignLabel
+      lockSignLabel,
+      chekMarkImageView
       ].forEach { self.addSubview($0) }
   }
   
@@ -101,6 +109,9 @@ public final class ItemView: View {
     lockSignLabel.layer.cornerRadius = 12
     lockSignLabel.layer.masksToBounds = true
     lockSignLabel.backgroundColor = UIColor.Color.sienna500
+    
+    // Скрыть?
+    chekMarkImageView.image = UIImage.Check.base
   }
   
   private func updateControlElements() {

@@ -12,6 +12,9 @@ extension ItemView {
     if lockSignText != nil {
       titleLabel.setStyles(UILabel.ColorStyle.placeholders)
     }
+    else {
+      titleLabel.setStyles(UILabel.ColorStyle.primary)
+    }
   }
 }
 
@@ -52,5 +55,26 @@ extension ItemView {
   
   func hideLockSignLabel() {
     layoutController.hide(lockSignLabel)
+  }
+}
+
+extension ItemView {
+  func updateSelectedSign() {
+    if isSelected {
+      showSelectedSign()
+    }
+    else {
+      hideSelectedSign()
+    }
+  }
+  
+  func showSelectedSign() {
+    layoutController.show(chekMarkImageView,
+                          in: self,
+                          with: layout.chekMarkImageView)
+  }
+  
+  func hideSelectedSign() {
+    layoutController.hide(chekMarkImageView)
   }
 }

@@ -8,7 +8,6 @@
 import IGListKit
 import EsoftUIKit
 
-
 public final class MessageSectionController: ListSectionController {
   private var object: MessageViewModel?
   

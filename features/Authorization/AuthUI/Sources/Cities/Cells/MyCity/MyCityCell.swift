@@ -21,7 +21,7 @@ public final class MyCityCell: UICollectionViewCell {
         myCityLabel.styledText = newValue ?? Localized.locating
       }
     }
-  
+
   private(set) lazy var myCityContainer: UIView = UIView()
   private(set) lazy var iconImageView: UIImageView = UIImageView()
   private(set) lazy var myCityLabel: UILabel = UILabel()
