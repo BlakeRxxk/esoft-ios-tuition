@@ -26,6 +26,27 @@ public final class ObjectsViewModel {
   public let viewsCount: String
   public let isFavorite: String
   public let photos: [String]
+  public let rating: String
+  
+  public var address: String {
+    return "\(city), \(district), \(street), \(house)"
+  }
+  
+  public var objectsDescription: String {
+    return "\(typeFlat(type)), \(roomsCount)-комн, \(Int(Float(areaFlat)!)) м², этаж \(floorsNum)/\(floorsCnt), \(priceAr.dropLast(3)) руб./м²"
+  }
+  
+  // определение типа
+  private func typeFlat(_ type: String) -> String {
+    switch type {
+    case "flat":
+      return "Квартира"
+    case "pansion":
+      return "Пансионат"
+    default:
+      return ""
+    }
+  }
   
   public init(id: String,
               price: String,
@@ -42,7 +63,8 @@ public final class ObjectsViewModel {
               priceAr: String,
               viewsCount: String,
               isFavorite: String,
-              photos: [String]) {
+              photos: [String],
+              rating: String) {
     self.id = id
     self.price = price
     self.oldPrice = oldPrice
@@ -59,6 +81,7 @@ public final class ObjectsViewModel {
     self.viewsCount = viewsCount
     self.isFavorite = isFavorite
     self.photos = photos
+    self.rating = rating
   }
 }
 

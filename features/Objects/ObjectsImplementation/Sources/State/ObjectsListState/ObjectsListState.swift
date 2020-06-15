@@ -25,7 +25,7 @@ extension ObjectsListState {
     public var initialLoading: Bool = false
     public var isLoading: Bool = false
     public var error: Bool = false
-    public var objects: [Objects] = []
+    public var objects: [Object] = []
 //    public var page: Int = 1
 //    public var pages: Int = 1
     public var scope: ObjectsScope = .all
@@ -38,8 +38,8 @@ extension ObjectsListState {
   
   public enum Mutation {
     case setInitialLoading(_ condition: Bool = false)
-    case setObjects([Objects] = [])
-    case appendObjects([Objects] = [])
+    case setObjects([Object] = [])
+    case appendObjects([Object] = [])
   }
   
   public func mutate(action: Action) -> Observable<Mutation> {

@@ -8,6 +8,6 @@
 import RxSwift
 
 protocol ObjectsStorage {
-  func fetchObjects() -> Single<Objects>
-  func saveObjects(objects: [Objects]) -> Completable
+  func fetchObjects() -> Single<Object>
+  func saveObjects(objects: [Object]) -> Completable
 }

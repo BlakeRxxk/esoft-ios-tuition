@@ -5,21 +5,6 @@
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
 //
 
-//import NeedleFoundation
-//import Foundation
-//
-//protocol ObjectsBuilder {
-//  var objectsViewController: UIViewController { get }
-//}
-//
-//class ObjectsComponent: Component<EmptyDependency>, ObjectsBuilder {
-//
-//  var objectsViewController: UIViewController {
-//    ObjectsViewController()
-//  }
-//}
-
-
 import NeedleFoundation
 import Foundation
 import ObjectsCore
@@ -65,7 +50,7 @@ class ObjectsComponent: Component<EmptyDependency>, ObjectsBuilder {
   }
   
   var viewController: UIViewController {
-    let viewController = ObjectsList ()
+    let viewController = ObjectsList()
     viewController.store = state
     
     return viewController

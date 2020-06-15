@@ -7,6 +7,10 @@
 
 import Foundation
 
-public protocol ObjectsCellInput {}
+public protocol ObjectsCellInput {
+  
+}
 
-public protocol ObjectsCellOutput: class {}
+public protocol ObjectsCellOutput: class {
+
+}

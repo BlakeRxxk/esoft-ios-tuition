@@ -16,6 +16,6 @@ public protocol PreviewItemViewInputYOGA {
   var objectsDescription: String { get set }
   
   var views: String { get set }
-  var favorites: String { get set }
+  var favoritesCount: String { get set }
   var code: String { get set }
 }

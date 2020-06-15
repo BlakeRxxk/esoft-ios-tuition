@@ -9,9 +9,7 @@ import IGListKit
 import EsoftUIKit
 
 public protocol ObjectsSectionControllerOutput: class {
-  //  func didTapSpecialist(in cell: SpecialistCellInput)
-  //  func didTapPhone(in cell: SpecialistCellInput)
-  //  func didTapChat(in cell: SpecialistCellInput)
+
 }
 
 public final class ObjectsSectionController: ListSectionController {
@@ -32,17 +30,12 @@ public final class ObjectsSectionController: ListSectionController {
   }
   
   override public func sizeForItem(at index: Int) -> CGSize {
-    guard let context = collectionContext else { return CGSize() }
+    guard let context = collectionContext,
+    let object = object else { return CGSize() }
     
     let width: CGFloat = context.containerSize.width
-    
     let addressFont = UIFont.systemFont(ofSize: 13)
-    let city = object!.city
-    let district = object!.district
-    let street = object!.street
-    let house = object!.house
-    let address = "\(city), \(district), \(street), \(house)"
-    
+    let address = object.address
     let addressHeight = CGFloat(address.height(width: width - 32, font: addressFont))
     
     var height: CGFloat = 0
@@ -72,7 +65,13 @@ public final class ObjectsSectionController: ListSectionController {
 }
 
 extension ObjectsSectionController: ObjectsCellOutput {
+  public func didTapFavorite(in cell: ObjectsCellInput) {
+    
+  }
   
+  public func didTapPhone(in cell: ObjectsCellInput) {
+    
+  }
 }
 
 extension String {

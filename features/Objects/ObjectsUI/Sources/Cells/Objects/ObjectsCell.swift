@@ -74,12 +74,12 @@ public final class ObjectsCell: UICollectionViewCell {
     }
   }
   
-  public var favorites: String {
+  public var favoritesCount: String {
     get {
-      previewItemView.favorites
+      previewItemView.favoritesCount
     }
     set {
-      previewItemView.favorites = newValue
+      previewItemView.favoritesCount = newValue
     }
   }
   
@@ -121,6 +121,16 @@ public final class ObjectsCell: UICollectionViewCell {
   override public func prepareForReuse() {
     super.prepareForReuse()
     
+    previewItemView.collectionViewDefaultPosition = true
+    previewItemView.address = ""
+    previewItemView.currentPrice = ""
+    previewItemView.oldPrice = ""
+    previewItemView.photos = []
+    previewItemView.objectsDescription = ""
+    previewItemView.views = ""
+    previewItemView.favoritesCount = ""
+    previewItemView.code = ""
+    
   }
   
   override public func layoutSubviews() {
@@ -148,18 +158,7 @@ public final class ObjectsCell: UICollectionViewCell {
   }
   
   private func configureUI() {
-    contentView.setStyles(UIView.Styles.whiteBackground)
-//    specialistView.setStyles(SpecialistView.Styles.withAction)
-//
-//    phoneRow.viewID = SpecialistCellRow.phone.rawValue
-//    phoneRow.leftIcon = UIImage.Call.right
-//    phoneRow.setStyles(IconItemView.Styles.primary)
-//
-//    chatRow.title = "Чат со специалистом"
-//    chatRow.viewID = SpecialistCellRow.chat.rawValue
-//    chatRow.leftIcon = UIImage.Consultant.base
-//    chatRow.setStyles(IconItemView.Styles.inactive)
-    
+    contentView.setStyles(UIView.Styles.whiteBackground)    
   }
   
 }

@@ -21,7 +21,7 @@ public final class ObjectsGatewayImplementation {
 
 extension ObjectsGatewayImplementation: ObjectsGateway {
  
-  public func getObjects(url: URL) -> Single<[Objects]> {
+  public func getObjects(url: URL) -> Single<[Object]> {
     networkService.request(url: url)
   }
   

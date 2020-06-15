@@ -8,5 +8,5 @@
 import RxSwift
 
 public protocol ObjectsRepository {
-  func getObjects() -> Single<[Objects]>
+  func getObjects() -> Single<[Object]>
 }

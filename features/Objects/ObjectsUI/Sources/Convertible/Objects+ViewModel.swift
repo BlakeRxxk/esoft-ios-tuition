@@ -10,7 +10,7 @@ import EsoftUIKit
 import ObjectsCore
 import CDNImageLink
 
-extension Objects {
+extension Object {
   public func asViewModel() -> ObjectsViewModel {
     let dataImg = photosUrl!.map { $0.fileName }
     return ObjectsViewModel(id: id,
@@ -28,6 +28,7 @@ extension Objects {
                             priceAr: priceAr ?? "",
                             viewsCount: viewsCount ?? "",
                             isFavorite: isFavorite ?? "",
-                            photos: dataImg )
+                            photos: dataImg,
+                            rating: rating)
   }
 }

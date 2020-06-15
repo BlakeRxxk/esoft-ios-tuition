@@ -9,5 +9,5 @@ import Foundation
 import RxSwift
 
 public protocol ObjectsGateway {
-  func getObjects(url: URL) -> Single<[Objects]>
+  func getObjects(url: URL) -> Single<[Object]>
 }

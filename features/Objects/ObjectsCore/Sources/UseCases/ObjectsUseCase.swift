@@ -8,5 +8,5 @@
 import RxSwift
 
 public protocol ObjectsUseCase {
-  func invoke(request: ObjectsRequest) -> Observable<[Objects]>
+  func invoke(request: ObjectsRequest) -> Observable<[Object]>
 }

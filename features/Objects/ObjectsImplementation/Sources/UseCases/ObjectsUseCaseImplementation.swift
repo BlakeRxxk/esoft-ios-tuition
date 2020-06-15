@@ -6,7 +6,7 @@
 //
 
 import RxSwift
-import Network
+//import Network
 import ObjectsCore
 
 public final class ObjectsUseCaseImplementation {
@@ -18,12 +18,12 @@ public final class ObjectsUseCaseImplementation {
 }
 
 extension ObjectsUseCaseImplementation: ObjectsUseCase {
-  public func invoke(request: ObjectsRequest) -> Observable<[Objects]> {
+  public func invoke(request: ObjectsRequest) -> Observable<[Object]> {
     switch request.scope {
     case .all:
       return objectsRepository
         .getObjects()
-        .catchError { _ -> PrimitiveSequence<SingleTrait, [Objects]> in
+        .catchError { _ -> PrimitiveSequence<SingleTrait, [Object]> in
           .just([])
         }.asObservable()
     }

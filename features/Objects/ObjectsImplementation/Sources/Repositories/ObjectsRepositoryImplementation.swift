@@ -14,13 +14,12 @@ public final class ObjectsRepositoryImplementation {
   
   public init(objectsGateway: ObjectsGateway) {
     self.objectsGateway = objectsGateway
-    objectsGateway
   }
 }
 
 extension ObjectsRepositoryImplementation: ObjectsRepository {
     
-    public func getObjects() -> Single<[Objects]> {
+    public func getObjects() -> Single<[Object]> {
         objectsGateway.getObjects(url: URL(string: "https://us-central1-esoft-tuition-cloud.cloudfunctions.net/objects")!)
     }
   

@@ -92,12 +92,12 @@ public final class PreviewItemViewYOGA: View {
     }
   }
   
-  public var favorites: String {
+  public var favoritesCount: String {
     get {
       favoriteCount.styledText ?? ""
     }
     set {
-      if newValue.isEmpty {
+      if newValue == "0" {
         favoriteView.isHidden = true
       } else {
         favoriteView.isHidden = false
@@ -117,6 +117,19 @@ public final class PreviewItemViewYOGA: View {
     }
   }
   
+  // установка в начальную позицию
+  public var collectionViewDefaultPosition: Bool {
+    get {
+      return false
+    }
+    set {
+      if newValue {
+        collectionView.contentOffset = .zero
+        currentSlide = 1
+      }
+    }
+  }
+  
   // topView
   private(set) lazy var topView = UIView()
   private(set) lazy var topViewStack = UIView()
@@ -130,7 +143,7 @@ public final class PreviewItemViewYOGA: View {
   private(set) lazy var mainView = UIView()
   private(set) lazy var image = UIImageView()
   private(set) lazy var photosItems: [String] = []
-  private(set) lazy var collectionView: UICollectionView = {
+  public lazy var collectionView: UICollectionView = {
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     let cv: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     layout.scrollDirection = .horizontal
@@ -143,7 +156,7 @@ public final class PreviewItemViewYOGA: View {
   private(set) lazy var counterSlidesLabel: UILabel = UILabel()
   private(set) lazy var titleStack: UIView = UIView()
   private(set) lazy var mainTitle: UILabel = UILabel()
-  private(set) lazy var phoneButton: UIButton = UIButton()
+  public lazy var phoneButton: UIButton = UIButton()
   
   // INFO STACK
   private(set) lazy var infoStack: UIView = UIView()
@@ -484,12 +497,12 @@ extension PreviewItemViewYOGA: UICollectionViewDelegateFlowLayout, UICollectionV
   }
   
   public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    counterSlidesLabel.yoga.markDirty()
- 
+    
     for cell in collectionView.visibleCells {
       let indexPath = collectionView.indexPath(for: cell)
       currentSlide = indexPath!.row + 1
       counterSlidesLabel.text = "\(currentSlide) / \(totalPhotosCount)"
+      counterSlidesLabel.yoga.markDirty()
       yoga.applyLayout(preservingOrigin: true)
     }
   }
