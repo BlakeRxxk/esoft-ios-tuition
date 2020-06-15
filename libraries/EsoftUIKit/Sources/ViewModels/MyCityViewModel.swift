@@ -9,11 +9,11 @@ import IGListKit
 
 public final class MyCityViewModel: NSObject {
   public let id: Int
-  public let name: String
+  public let name: String?
   public let distance: Int
   
   public init(id: Int,
-              name: String,
+              name: String?,
               distance: Int
   ) {
     self.id = id

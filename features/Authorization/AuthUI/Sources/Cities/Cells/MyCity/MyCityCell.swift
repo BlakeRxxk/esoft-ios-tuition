@@ -18,7 +18,7 @@ public final class MyCityCell: UICollectionViewCell {
         myCityLabel.text
       }
       set {
-        myCityLabel.styledText = newValue ?? Localized.locating
+        myCityLabel.styledText = newValue ?? Localized.determineLocation
       }
     }
 
@@ -98,7 +98,7 @@ public final class MyCityCell: UICollectionViewCell {
     contentView.setStyles(UIView.Styles.whiteBackground)
     
     // Сделать стиль для UIImageView
-    iconImageView.image = UIImage.Spinners.base
+    iconImageView.image = UIImage.Geo.base
     iconImageView.tintColor = ThemeManager.current().colors.primary500
     
     myCityLabel.setStyles(
@@ -106,8 +106,6 @@ public final class MyCityCell: UICollectionViewCell {
       UILabel.ColorStyle.primary500,
       UILabel.Styles.singleLine
     )
-    
-    myCityLabel.styledText = Localized.locating
   }
 }
 
@@ -115,6 +113,7 @@ extension MyCityCell: MyCityCellInput {}
 
 extension MyCityCell {
   enum Localized {
+    static let determineLocation = "Определить местоположение"
     static let locating = "Определяем местоположение"
   }
 }

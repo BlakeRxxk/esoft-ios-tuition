@@ -116,7 +116,7 @@ public final class CityCell: UICollectionViewCell {
     let action = UITapGestureRecognizer(target: self, action: #selector(handleTapAction) )
     cityContainer.addGestureRecognizer(action)
     
-    divider.backgroundColor = ThemeManager.current().colors.screen
+    divider.setStyles(UIView.Styles.defaultBackground)
   }
   
   private func updateControlElements() {

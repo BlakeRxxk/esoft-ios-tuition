@@ -85,7 +85,7 @@ extension CitiesViewController: StatefullView {
       }
       return [
         ListHeaderViewModel(count: -1, title: Localized.location),
-        MyCityViewModel(id: 0, name: "123", distance: 123)]
+        MyCityViewModel(id: 0, name: nil, distance: 123)]
 //        .filter { !state.isSearching }
         .mapToCitiesSections()
     }

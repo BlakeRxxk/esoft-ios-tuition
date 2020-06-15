@@ -127,6 +127,12 @@ extension UIImage {
     }
   }
   
+  public enum Geo {
+    public static var base: UIImage {
+      named("geo.base").withRenderingMode(.alwaysTemplate)
+    }
+  }
+  
   public enum Spinners {
     public static var base: UIImage {
       named("spinner").withRenderingMode(.alwaysTemplate)
