@@ -24,7 +24,7 @@ protocol ViperInteractor: AnyObject {
 
 extension ViperInteractorImplementation: ViperInteractor {
   func fetchCities(completion: @escaping FetchCitiesHandler) {
-    serviceAPI.getCilies(page: 1) { (res, _) in
+    serviceAPI.getCities(page: 1) { (res, _) in
       guard let cities = res else {
         completion([])
         return

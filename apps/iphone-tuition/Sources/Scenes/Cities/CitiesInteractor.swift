@@ -24,7 +24,7 @@ protocol CitiesInteractor {
 
 extension CitiesInteractorImplementation: CitiesInteractor {
   func fetchCities(completion: @escaping FetchCitiesCompletionHandler) {
-    networkManager.getCilies(page: 1) { (response, _) in
+    networkManager.getCities(page: 1) { (response, _) in
       guard let cities = response else {
         completion([])
         return
