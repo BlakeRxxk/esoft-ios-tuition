@@ -72,11 +72,16 @@ final public class CitiesViewController: ViewController<BaseListView> {
   }
   
   @objc private func handleAlert(sender: UIButton) {
-    let alert = UIAlertView(title: nil, message: Localized.info, delegate: nil, cancelButtonTitle: "OK")
+    // Сделать MakeAlert()?
+    let alert = UIAlertController(title: "", message: Localized.info, preferredStyle: .alert)
+    let action = UIAlertAction(title: "OK", style: .default) { [unowned self] _ in
+      self.setNeedsStatusBarAppearanceUpdate()
+    }
+    alert.setStyles(UIAlertController.Styles.default)
     
-    // set styles
+    alert.addAction(action)
     
-    alert.show()
+    present(alert, animated: true)
   }
 }
 
