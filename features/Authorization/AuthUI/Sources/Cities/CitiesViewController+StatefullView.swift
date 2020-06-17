@@ -120,7 +120,7 @@ extension CitiesViewController: StatefullView {
     
     let message: Observable<[CitiesSections]> = state
       .map { state -> [ListDiffable] in
-        guard state.isSearching || state.filter.isEmpty else {
+        guard state.isSearching else {
           return []
         }
         return [MessageViewModel(id: 0, message: Localized.message)]
