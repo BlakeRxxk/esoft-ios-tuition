@@ -14,7 +14,11 @@ import YogaKit
 public final class PreviewItemViewYOGA: View {
   
   public weak var output: PreviewItemViewOutputYOGA?
-  var phoneToCall = ""
+  
+  private var phoneToCall = ""
+  private var currentCode = ""
+  
+  let defaults = UserDefaults.standard
   
   public var phone: String {
     get {
@@ -131,8 +135,26 @@ public final class PreviewItemViewYOGA: View {
       codeObject.styledText ?? ""
     }
     set {
+      currentCode = newValue
       codeObject.styledText = "Код объекта: \(newValue)"
       codeObject.yoga.markDirty()
+      
+      // favorit
+      var savedArray = defaults.object(forKey: "favorit") as? [String] ?? [String]()
+      if savedArray.contains(newValue) {
+        favoriteButton.setBackgroundImage(UIImage.favoritFill, for: .normal)
+      } else {
+        favoriteButton.setBackgroundImage(UIImage.favorit, for: .normal)
+      }
+    }
+  }
+  
+  public var isFavorit: Bool {
+    get {
+      return false
+    }
+    set {
+      
     }
   }
   
@@ -171,7 +193,6 @@ public final class PreviewItemViewYOGA: View {
   }
   
   private(set) lazy var container: UIView = UIView()
-  // topView
   private(set) lazy var topView = UIView()
   private(set) lazy var topViewStack = UIView()
   private(set) lazy var currentPriceLabel = UILabel()
@@ -201,7 +222,7 @@ public final class PreviewItemViewYOGA: View {
   private(set) lazy var mainTitle: UILabel = UILabel()
   private(set) lazy var phoneButton: UIButton = UIButton()
   
-  // INFO STACK
+  // info stack
   private(set) lazy var infoStack: UIView = UIView()
   private(set) lazy var viewsView: UIView = UIView()
   private(set) lazy var countsWrapped: UIView = UIView()
@@ -218,6 +239,17 @@ public final class PreviewItemViewYOGA: View {
     createUI()
     configureUI()
     layout()
+  }
+  
+  public override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    var savedArray = defaults.object(forKey: "favorit") as? [String] ?? [String]()
+    if savedArray.contains(currentCode) {
+      favoriteButton.setBackgroundImage(UIImage.favoritFill, for: .normal)
+    } else {
+      favoriteButton.setBackgroundImage(UIImage.favorit, for: .normal)
+    }
   }
   
   private func createUI() {
@@ -354,16 +386,23 @@ public final class PreviewItemViewYOGA: View {
       UILabel.Styles.secondary
     )
     
-    let action = UITapGestureRecognizer(target: self, action: #selector(phoneButtonTap))
-    phoneButton.addGestureRecognizer(action)
+    let phoneAction = UITapGestureRecognizer(target: self, action: #selector(phoneButtonTap))
+    phoneButton.addGestureRecognizer(phoneAction)
+    
+    let favoritAction = UITapGestureRecognizer(target: self, action: #selector(favoritButtonTap))
+    favoriteButton.addGestureRecognizer(favoritAction)
     
   }
   
   @objc func phoneButtonTap() {
-    didPressActionButton()
+    didTapPhone()
   }
   
-  public func didPressActionButton() {
+  @objc func favoritButtonTap() {
+    didTapFavorit()
+  }
+  
+  public func didTapPhone() {
     if !phoneToCall.isEmpty {
       guard let url = URL(string: "tel://\(phoneToCall)") else { return }
       guard UIApplication.shared.canOpenURL(url) else { return }
@@ -371,6 +410,24 @@ public final class PreviewItemViewYOGA: View {
       UIApplication.shared.open(url)
     }
   }
+  
+  public func didTapFavorit() {
+    var savedArray = defaults.object(forKey: "favorit") as? [String] ?? [String]()
+    
+    if savedArray.contains(currentCode) {
+      print("этот элемент есть, удаляю из фаворит")
+      favoriteButton.setBackgroundImage(UIImage.favorit, for: .normal)
+      savedArray = savedArray.filter { $0 != currentCode }
+    } else {
+      print("этого элемента нет, добавляю в фаворит")
+      favoriteButton.setBackgroundImage(UIImage.favoritFill, for: .normal)
+      savedArray.append(currentCode)
+    }
+    print("ПОСЛЕ - ", savedArray)
+    defaults.set(savedArray, forKey: "favorit")
+  }
+  
+  
   
   private func layout() {
     
@@ -561,6 +618,7 @@ public final class PreviewItemViewYOGA: View {
 }
 
 extension PreviewItemViewYOGA: PreviewItemViewInputYOGA {}
+extension PreviewItemViewYOGA: PreviewItemViewOutputYOGA {}
 
 extension PreviewItemViewYOGA: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
   

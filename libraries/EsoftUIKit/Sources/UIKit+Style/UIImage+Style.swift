@@ -147,4 +147,9 @@ extension UIImage {
   public static var favorit: UIImage {
     named("favorit").withRenderingMode(.alwaysTemplate)
   }
+  
+  public static var favoritFill: UIImage {
+    named("ic_star_fill").withRenderingMode(.alwaysOriginal)
+  }
+  
 }

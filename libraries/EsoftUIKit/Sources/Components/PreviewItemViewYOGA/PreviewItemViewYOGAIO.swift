@@ -21,4 +21,6 @@ public protocol PreviewItemViewInputYOGA {
 }
 
 public protocol PreviewItemViewOutputYOGA: class {
+  func didTapPhone()
+  func didTapFavorit()
 }
