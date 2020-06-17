@@ -74,7 +74,7 @@ public final class ObjectsCell: UICollectionViewCell {
     }
   }
   
-  public var favoritesCount: String {
+  public var ratingCount: String {
     get {
       previewItemView.favoritesCount
     }
@@ -92,8 +92,25 @@ public final class ObjectsCell: UICollectionViewCell {
     }
   }
   
-  private(set) lazy var previewItemView: PreviewItemViewYOGA = PreviewItemViewYOGA()
+  public var isViewed: Bool {
+    get {
+      previewItemView.isViewed
+    }
+    set {
+      previewItemView.isViewed = newValue
+    }
+  }
   
+  public var phone: String {
+    get {
+      phone
+    }
+    set {
+      previewItemView.phone = newValue
+    }
+  }
+  
+  private(set) lazy var previewItemView: PreviewItemViewYOGA = PreviewItemViewYOGA()
   
   // MARK: - Init
   
@@ -130,7 +147,7 @@ public final class ObjectsCell: UICollectionViewCell {
     previewItemView.views = ""
     previewItemView.favoritesCount = ""
     previewItemView.code = ""
-    
+    previewItemView.isViewed = false
   }
   
   override public func layoutSubviews() {
@@ -158,10 +175,9 @@ public final class ObjectsCell: UICollectionViewCell {
   }
   
   private func configureUI() {
-    contentView.setStyles(UIView.Styles.whiteBackground)    
+    contentView.setStyles(UIView.Styles.whiteBackground)
   }
   
 }
 
 extension ObjectsCell: ObjectsCellInput {}
-

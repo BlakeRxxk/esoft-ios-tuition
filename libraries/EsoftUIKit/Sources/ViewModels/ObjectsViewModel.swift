@@ -8,8 +8,10 @@
 import Foundation
 import IGListKit
 import ListKit
+import SpecialistsCore
 
 public final class ObjectsViewModel {
+  
   public let id: String
   public let price: String
   public let oldPrice: String
@@ -27,6 +29,8 @@ public final class ObjectsViewModel {
   public let isFavorite: String
   public let photos: [String]
   public let rating: String
+  public let isViewed: Bool
+  public let phone: String
   
   public var address: String {
     return "\(city), \(district), \(street), \(house)"
@@ -64,7 +68,9 @@ public final class ObjectsViewModel {
               viewsCount: String,
               isFavorite: String,
               photos: [String],
-              rating: String) {
+              rating: String,
+              isViewed: Bool,
+              phone: String) {
     self.id = id
     self.price = price
     self.oldPrice = oldPrice
@@ -82,11 +88,9 @@ public final class ObjectsViewModel {
     self.isFavorite = isFavorite
     self.photos = photos
     self.rating = rating
+    self.isViewed = isViewed
+    self.phone = phone
   }
-}
-
-public struct ObjectPhotos {
-  public let fileName: String
 }
 
 extension ObjectsViewModel: ListDiffable {

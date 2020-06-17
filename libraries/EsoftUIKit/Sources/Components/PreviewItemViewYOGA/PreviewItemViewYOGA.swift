@@ -13,6 +13,25 @@ import YogaKit
 
 public final class PreviewItemViewYOGA: View {
   
+  public weak var output: PreviewItemViewOutputYOGA?
+  var phoneToCall = ""
+  
+  public var phone: String {
+    get {
+      phoneToCall
+    }
+    set {
+      if newValue.isEmpty {
+        phoneButton.tintColor = .gray
+        phoneButton.alpha = 0.5
+      } else {
+        phoneButton.tintColor = ThemeManager.current().colors.primary500
+        phoneButton.alpha = 1
+      }
+      phoneToCall = newValue
+    }
+  }
+  
   public var currentPrice: String {
     get {
       currentPriceLabel.styledText ?? ""
@@ -130,6 +149,28 @@ public final class PreviewItemViewYOGA: View {
     }
   }
   
+  public var isViewed: Bool {
+    get {
+      return false
+    }
+    set {
+      if newValue {
+        isViewedWrap.isHidden = false
+        topView.alpha = 0.6
+        collectionView.alpha = 0.6
+        mainTitle.alpha = 0.6
+        infoStack.alpha = 0.6
+      } else {
+        isViewedWrap.isHidden = true
+        topView.alpha = 1
+        collectionView.alpha = 1
+        mainTitle.alpha = 1
+        infoStack.alpha = 1
+      }
+    }
+  }
+  
+  private(set) lazy var container: UIView = UIView()
   // topView
   private(set) lazy var topView = UIView()
   private(set) lazy var topViewStack = UIView()
@@ -151,12 +192,14 @@ public final class PreviewItemViewYOGA: View {
     cv.register(PreviewImageCell.self, forCellWithReuseIdentifier: PreviewImageCell.reuseId)
     return cv
   }()
-  private(set) lazy var favoriteButton = UIButton()
+  private(set) lazy var isViewedWrap: UIView = UIView()
+  private(set) lazy var isViewedTag: UILabel = UILabel()
+  private(set) lazy var favoriteButton: UIButton = UIButton()
   private(set) lazy var counterSlidesWrapper: UIView = UIView()
   private(set) lazy var counterSlidesLabel: UILabel = UILabel()
   private(set) lazy var titleStack: UIView = UIView()
   private(set) lazy var mainTitle: UILabel = UILabel()
-  public lazy var phoneButton: UIButton = UIButton()
+  private(set) lazy var phoneButton: UIButton = UIButton()
   
   // INFO STACK
   private(set) lazy var infoStack: UIView = UIView()
@@ -188,6 +231,10 @@ public final class PreviewItemViewYOGA: View {
     
     mainView.addSubview(collectionView)
     mainView.addSubview(favoriteButton)
+    
+    mainView.addSubview(isViewedWrap)
+    isViewedWrap.addSubview(isViewedTag)
+    
     mainView.addSubview(counterSlidesWrapper)
     counterSlidesWrapper.addSubview(counterSlidesLabel)
     
@@ -208,12 +255,14 @@ public final class PreviewItemViewYOGA: View {
     favoriteView.addSubview(favoriteImage)
     favoriteView.addSubview(favoriteCount)
     
-    addSubview <^> [
+    container.addSubview <^> [
       topView,
       mainView,
       titleStack,
       infoStack
     ]
+    
+    addSubview(container)
   }
   
   private func configureUI() {
@@ -273,6 +322,14 @@ public final class PreviewItemViewYOGA: View {
     image.layer.cornerRadius = 8
     image.clipsToBounds = true
     
+    isViewedWrap.backgroundColor = .black
+    isViewedWrap.alpha = 0.4
+    isViewedWrap.layer.cornerRadius = 4
+    isViewedWrap.layer.masksToBounds = true
+    isViewedTag.text = "Просмотрено"
+    isViewedTag.font = UIFont.micro
+    isViewedTag.textColor = .white
+    
     favoriteButton.setBackgroundImage(UIImage.favorit, for: .normal)
     favoriteButton.tintColor = ThemeManager.current().colors.container
     
@@ -296,11 +353,32 @@ public final class PreviewItemViewYOGA: View {
       UILabel.Styles.tiny,
       UILabel.Styles.secondary
     )
+    
+    let action = UITapGestureRecognizer(target: self, action: #selector(phoneButtonTap))
+    phoneButton.addGestureRecognizer(action)
+    
+  }
+  
+  @objc func phoneButtonTap() {
+    didPressActionButton()
+  }
+  
+  public func didPressActionButton() {
+    if !phoneToCall.isEmpty {
+      guard let url = URL(string: "tel://\(phoneToCall)") else { return }
+      guard UIApplication.shared.canOpenURL(url) else { return }
+      
+      UIApplication.shared.open(url)
+    }
   }
   
   private func layout() {
     
     configureLayout { layout in
+      layout.isEnabled = true
+    }
+    
+    container.configureLayout { layout in
       layout.isEnabled = true
       layout.flexDirection = .column
       layout.paddingLeft = 16
@@ -360,6 +438,21 @@ public final class PreviewItemViewYOGA: View {
       layout.isEnabled = true
       layout.height = 207
       layout.width = 100%
+    }
+    
+    isViewedWrap.configureLayout { layout in
+      layout.isEnabled = true
+      layout.position = .absolute
+      layout.top = 8
+      layout.left = 8
+      layout.paddingTop = 4
+      layout.paddingLeft = 8
+      layout.paddingRight = 8
+      layout.paddingBottom = 4
+    }
+    
+    isViewedTag.configureLayout { layout in
+      layout.isEnabled = true
     }
     
     favoriteButton.configureLayout { layout in

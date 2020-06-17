@@ -15,6 +15,7 @@ import IGListDiffKit.IGListDiffable
 import RxExtensions
 
 extension ObjectsList: StatefullView {
+  
   public func bind(store: ObjectsListState) {
     let state = store.state.distinctUntilChanged().share()
     
@@ -70,6 +71,7 @@ extension ObjectsList: StatefullView {
       .filter { $0.initialLoading == false && !$0.objects.isEmpty }
       .map { $0.objects }
       .map { $0.map { $0.asViewModel() } }
+      .map { [ListHeaderViewModel(count: 0, title: "Найдено \($0.count) объектов", icon: UIImage.ic_sort)] + $0 }
       .map { $0.mapToObjectsSections() }
     
     guard let adapter = specializedView.adapter else {
@@ -86,3 +88,4 @@ extension ObjectsList: StatefullView {
       .disposed(by: disposeBag)
   }
 }
+

@@ -65,13 +65,7 @@ public final class ObjectsSectionController: ListSectionController {
 }
 
 extension ObjectsSectionController: ObjectsCellOutput {
-  public func didTapFavorite(in cell: ObjectsCellInput) {
-    
-  }
   
-  public func didTapPhone(in cell: ObjectsCellInput) {
-    
-  }
 }
 
 extension String {

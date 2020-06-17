@@ -13,6 +13,8 @@ import CDNImageLink
 extension Object {
   public func asViewModel() -> ObjectsViewModel {
     let dataImg = photosUrl!.map { $0.fileName }
+    let phone = specialist?.phoneForMobile ?? ""
+    
     return ObjectsViewModel(id: id,
                             price: price,
                             oldPrice: oldPrice ?? "",
@@ -29,6 +31,8 @@ extension Object {
                             viewsCount: viewsCount ?? "",
                             isFavorite: isFavorite ?? "",
                             photos: dataImg,
-                            rating: rating)
+                            rating: rating,
+                            isViewed: isViewed ?? false,
+                            phone: phone)
   }
 }

@@ -36,4 +36,5 @@ extension ObjectsSections: SectionModelType {
       return objectsViewModel
     }
   }
+  
 }

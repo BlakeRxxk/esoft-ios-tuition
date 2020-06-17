@@ -26,7 +26,8 @@ public struct Object {
   public let viewsCount: String?
   public let isFavorite: String?
   public let rating: String
-  // добавить рейтинг rating
+  public let isViewed: Bool?
+  public let specialist: SpecialistPhone?
 }
 
 extension Object: Codable, Hashable {
@@ -49,5 +50,7 @@ extension Object: Codable, Hashable {
     case viewsCount = "views_count"
     case isFavorite = "is_favorite"
     case rating
+    case isViewed = "is_viewed"
+    case specialist
   }
 }

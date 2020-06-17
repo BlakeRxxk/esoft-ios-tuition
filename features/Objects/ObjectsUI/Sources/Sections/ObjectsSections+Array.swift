@@ -28,3 +28,17 @@ extension Array {
     }
   }
 }
+
+//lazy var cardDescription: ObjectCardDescription = {
+//    $0.output = self
+//    return $0
+//  }(ObjectCardDescription())
+//
+//extension FavoriteCell: ObjectCardDescriptionOutput {
+//  public func didPressActionButton(in descriptionView: ObjectCardDescriptionInput) {
+//    guard let url = URL(string: "tel://\(phoneToCall)") else { return }
+//    guard UIApplication.shared.canOpenURL(url) else { return }
+//
+//    UIApplication.shared.open(url)
+//  }
+//}

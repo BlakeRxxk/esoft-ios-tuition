@@ -19,3 +19,6 @@ public protocol PreviewItemViewInputYOGA {
   var favoritesCount: String { get set }
   var code: String { get set }
 }
+
+public protocol PreviewItemViewOutputYOGA: class {
+}

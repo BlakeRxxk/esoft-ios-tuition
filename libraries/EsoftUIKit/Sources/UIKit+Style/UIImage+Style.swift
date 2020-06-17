@@ -132,6 +132,10 @@ extension UIImage {
     named("arrow.down").withRenderingMode(.alwaysTemplate)
   }
   
+  public static var ic_sort: UIImage {
+    named("ic_sort").withRenderingMode(.alwaysTemplate)
+  }
+  
   public static var eye: UIImage {
     named("eye").withRenderingMode(.alwaysTemplate)
   }
