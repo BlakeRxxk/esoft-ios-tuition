@@ -38,9 +38,9 @@ public final class CitiesSectionController: ListSectionController {
     
     let width: CGFloat = context.containerSize.width
     
-    var height: CGFloat = 48
-    if !self.isLastSection {
-      height += 1
+    var height: CGFloat = 49
+    if isLastSection {
+      height -= 1
     }
 //    if !object.isComingSoon, let text = object.regionsToString() {
 //      height += text.styledLabelHeight(with: width - 32, UILabel.Styles.tiny, UILabel.Styles.doubleLine)
@@ -57,7 +57,7 @@ public final class CitiesSectionController: ListSectionController {
                                                           return UICollectionViewCell()
     }
     cell.output = self
-    cell.lastCell = self.isLastSection
+    cell.lastCell = isLastSection
     cell.bindViewModel(object)
     return cell
   }

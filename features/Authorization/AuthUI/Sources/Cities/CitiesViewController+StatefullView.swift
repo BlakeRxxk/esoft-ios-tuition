@@ -56,10 +56,10 @@ extension CitiesViewController: StatefullView {
       switch section {
       case .header:
         return ListHeaderSectionController()
-      case .city:
-        return CitiesSectionController(output: self)
       case .myCity:
         return MyCitySectionController(output: self)
+      case .city:
+        return CitiesSectionController(output: self)
       case .message:
         return MessageSectionController()
       }
@@ -67,6 +67,7 @@ extension CitiesViewController: StatefullView {
     
     guard let adapter = specializedView.adapter else { return }
     
+    // MARK: - Init
     rx
       .viewWillAppear
       .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
@@ -74,45 +75,56 @@ extension CitiesViewController: StatefullView {
       .bind(to: store.action)
       .disposed(by: disposeBag)
     
-    state
-      .map { $0.selectedCityId }
-      .bind(onNext: { print($0) })
+    // MARK: - Refresh
+    specializedView
+      .refreshControl
+      .rx
+      .controlEvent(.valueChanged)
+      .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
+      .map { CitiesListState.Action.refreshData }
+      .bind(to: store.action)
       .disposed(by: disposeBag)
     
-    let header: Observable<[CitiesSections]> = state.map { state in
-      if state.isSearching {
-        return []
+    state
+      .map { $0.isLoading }
+      .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
+      .bind(to: specializedView.refreshControl.rx.isRefreshing)
+      .disposed(by: disposeBag)
+    
+    // MARK: - List
+    let header: Observable<[CitiesSections]> = state
+      .map { state in
+        [
+          ListHeaderViewModel(count: -1, title: Localized.location),
+          MyCityViewModel(id: state.myCity?.id ?? "0", name: state.myCity?.name, distance: state.myCity?.distance, isLocating: state.isLocating)]
+          .filter { _ in !state.isSearching }
       }
-      return [
-        ListHeaderViewModel(count: -1, title: Localized.location),
-        MyCityViewModel(id: 0, name: nil, distance: 123)]
-//        .filter { !state.isSearching }
-        .mapToCitiesSections()
-    }
+      .map { $0.mapToCitiesSections() }
     
     let countries: Observable<[CitiesSections]> = state
-//      .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
       .map { state in
-        state.countries.mapValues { cities in
-          cities.filter { myFilter($0.name, state.filter) }
-        }
+        state.countries.mapValues { $0.filter { myFilter($0.name, state.filter) } }
         .filter { !$1.isEmpty }
-        .sorted(by: { $0.key.id < $1.key.id })
+        .sorted(by: { $0.key.id < $1.key.id || $0.value.contains(where: { String($0.id) == state.myCity?.id ?? "" })})
         .reduce([]) { arr, tuple in
           let country = tuple.key
           let cities = tuple.value
-          return arr + [ListHeaderViewModel(count: country.id, title: country.name)] + cities.map { $0.asViewModel() }
+          return arr +
+            [ListHeaderViewModel(count: country.id, title: country.name)] +
+            cities.map { $0.asViewModel(isSelected: $0.id == state.selectedCityId ?? -1) }.sorted(by: { lhs, rhs in
+              lhs.id < rhs.id || String(lhs.id) == state.myCity?.id ?? ""
+            })
         }
         .mapToCitiesSections()
-    }
+      }
     
-    var message: Observable<[CitiesSections]> = state
-      .map { state -> [MessageViewModel] in
-        if !state.isSearching && (state.filter == nil || state.filter == "") { // скобки для наглядности
+    let message: Observable<[CitiesSections]> = state
+      .map { state -> [ListDiffable] in
+        guard state.isSearching || state.filter.isEmpty else {
           return []
         }
         return [MessageViewModel(id: 0, message: Localized.message)]
-    }
+      }
       .map { $0.mapToCitiesSections() }
     
     Observable.combineLatest(header, countries, message) { $0 + $1 + $2 }
@@ -122,9 +134,8 @@ extension CitiesViewController: StatefullView {
 }
 
 // Переименовать и переместить в Esoft
-func myFilter(_ text: String, _ filter: String?) ->  Bool
-{
-  guard let filter = filter, filter != "" else {
+func myFilter(_ text: String, _ filter: String?) -> Bool {
+  guard let filter = filter, !filter.isEmpty else {
     return true
   }
   return text.uppercased().contains(filter.uppercased())

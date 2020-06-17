@@ -11,8 +11,7 @@ extension ItemView {
   func updateTitleLabel() {
     if lockSignText != nil {
       titleLabel.setStyles(UILabel.ColorStyle.placeholders)
-    }
-    else {
+    } else {
       titleLabel.setStyles(UILabel.ColorStyle.primary)
     }
   }
@@ -62,8 +61,7 @@ extension ItemView {
   func updateSelectedSign() {
     if isSelected {
       showSelectedSign()
-    }
-    else {
+    } else {
       hideSelectedSign()
     }
   }

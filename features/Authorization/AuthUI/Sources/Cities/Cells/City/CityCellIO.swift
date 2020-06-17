@@ -10,11 +10,11 @@ import Foundation
 public protocol CityCellInput {
   var cityId: Int { get set }
   var lastCell: Bool { get set }
-  var title: String {get set}
-  var secondaryText: String? {get set}
-  var lockSignText: String? {get set}
+  var title: String { get set }
+  var secondaryText: String? { get set }
+  var lockSignText: String? { get set }
 }
 
-public protocol CityCellOutput: class {
+public protocol CityCellOutput: AnyObject {
   func didTap(in cell: CityCellInput)
 }

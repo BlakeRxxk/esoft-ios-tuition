@@ -133,7 +133,7 @@ extension UIImage {
     }
   }
   
-  public enum Spinners {
+  public enum Spinner {
     public static var base: UIImage {
       named("spinner").withRenderingMode(.alwaysTemplate)
     }

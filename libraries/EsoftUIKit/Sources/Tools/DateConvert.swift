@@ -13,7 +13,6 @@ public func stringToDate(from: String, with format: String = "yyyy-MM-dd HH:mm:s
   return dateFormatter.date(from: from)
 }
 
-
 public func dateToString(from: Date) -> String {
   DateFormatter().string(from: from)
 }

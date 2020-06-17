@@ -76,7 +76,11 @@ public final class CityCell: UICollectionViewCell {
   
   override public func prepareForReuse() {
     super.prepareForReuse()
-    cityId = 0
+//    cityId = 0
+//    lastCell = false
+//    title = ""
+//    secondaryText = nil
+//    lockSignText = nil
   }
   
   override public func layoutSubviews() {
@@ -124,9 +128,7 @@ public final class CityCell: UICollectionViewCell {
   }
   
   @objc private func handleTapAction() {
-    if lockSignText == nil {
       output?.didTap(in: self)
-    }
   }
 }
 

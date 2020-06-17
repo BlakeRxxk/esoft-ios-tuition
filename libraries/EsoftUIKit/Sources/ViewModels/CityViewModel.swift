@@ -16,6 +16,7 @@ public final class CityViewModel: NSObject {
   public let eOfficeId: Int?
   public let created: Date
   public let updated: Date
+  public let isSelected: Bool
   
   public init(id: Int,
               name: String,
@@ -24,16 +25,18 @@ public final class CityViewModel: NSObject {
               country: Int,
               eOfficeId: Int?,
               created: Date,
-              updated: Date
+              updated: Date,
+              isSelected: Bool = false
   ) {
     self.id = id
     self.name = name
-    self.coords = coords // Спарсить?
+    self.coords = coords
     self.clockWrap = clockWrap
     self.country = country
     self.eOfficeId = eOfficeId
     self.created = created
     self.updated = created
+    self.isSelected = isSelected
   }
 }
 

@@ -9,4 +9,5 @@ import Foundation
 
 protocol MessageCellInput {
   var message: String { get set }
+  var isFirst: Bool { get set }
 }

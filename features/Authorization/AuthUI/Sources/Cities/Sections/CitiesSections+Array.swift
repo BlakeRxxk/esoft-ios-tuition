@@ -21,7 +21,7 @@ extension Array {
       case is MessageViewModel:
         return .message(obj as! MessageViewModel)
       default:
-        return .city(obj as! CityViewModel) // заменить
+        fatalError("Неожиданный тип")
       }
     }
   }

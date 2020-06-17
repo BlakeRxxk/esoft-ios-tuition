@@ -13,14 +13,25 @@ import ThemeManager
 public final class MyCityCell: UICollectionViewCell {
   private static let reuseIdentifier: String = "MyCityCellID"
   
-  public var myCity: String? {
+  public var myCityName: String? {
       get {
         myCityLabel.text
       }
       set {
-        myCityLabel.styledText = newValue ?? Localized.determineLocation
+        myCityLabel.styledText = newValue
+        myCityLabel.yoga.markDirty()
       }
     }
+  public var isLocating: Bool = false {
+    didSet {
+      if isLocating {
+        iconImageView.image = UIImage.Spinner.base
+      } else {
+        iconImageView.image = UIImage.Geo.base
+      }
+      iconImageView.yoga.markDirty()
+    }
+  }
 
   private(set) lazy var myCityContainer: UIView = UIView()
   private(set) lazy var iconImageView: UIImageView = UIImageView()
@@ -47,6 +58,7 @@ public final class MyCityCell: UICollectionViewCell {
   
   override public func prepareForReuse() {
     super.prepareForReuse()
+//    myCityName = ""
   }
   
   override public func layoutSubviews() {
@@ -110,10 +122,3 @@ public final class MyCityCell: UICollectionViewCell {
 }
 
 extension MyCityCell: MyCityCellInput {}
-
-extension MyCityCell {
-  enum Localized {
-    static let determineLocation = "Определить местоположение"
-    static let locating = "Определяем местоположение"
-  }
-}

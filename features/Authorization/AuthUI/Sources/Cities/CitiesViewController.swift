@@ -12,9 +12,11 @@ import YogaKit
 import RxSwift
 import RxCocoa
 import RxExtensions
+import CoreLocation
 
 final public class CitiesViewController: ViewController<BaseListView> {
   public var disposeBag: DisposeBag = DisposeBag()
+  public let locationManager = CLLocationManager()
   
   let searchController = UISearchController(searchResultsController: nil)
   
@@ -58,6 +60,8 @@ final public class CitiesViewController: ViewController<BaseListView> {
   }
   
   private func configureUI() {
+    locationManager.delegate = self
+    
     view.setStyles(UIView.Styles.whiteBackground)
     
     specializedView.setStyles(UIView.Styles.defaultBackground)
@@ -76,15 +80,44 @@ final public class CitiesViewController: ViewController<BaseListView> {
   }
 }
 
-extension CitiesViewController: MyCitySectionControllerOutput {
-  public func myCitySectionDidTap() {
-    print("myCity")
+extension CitiesViewController: CitiesSectionControllerOutput {
+  public func didTap(in cell: CityCellInput) {
+    store?.action.onNext(.selectCity(cell.cityId))
   }
 }
 
-extension CitiesViewController: CitiesSectionControllerOutput {
-  public func didTap(in cell: CityCellInput) {
-      store?.action.onNext(.selectCity(cell.cityId))
+extension CitiesViewController: MyCitySectionControllerOutput {
+  public func myCitySectionDidTap() {
+    if let myCity = store?.currentState.myCity {
+      store?.action.onNext(.selectCity(Int(myCity.id)!))
+    } else {
+      var status = CLLocationManager.authorizationStatus()
+      if status == .denied || status == .restricted || !CLLocationManager.locationServicesEnabled() {
+        return
+      }
+      
+      if status == .notDetermined {
+        locationManager.requestWhenInUseAuthorization()
+        status = CLLocationManager.authorizationStatus()
+      }
+      
+      store?.action.onNext(.startLocating)
+      locationManager.requestLocation()
+    }
+  }
+}
+
+extension CitiesViewController: CLLocationManagerDelegate {
+  public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    guard let location = locations.first else { return }
+    
+    store?.action.onNext(.changeMyCity(location.coordinate.latitude,
+                                       location.coordinate.longitude))
+  }
+  
+  public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    print(error)
+    store?.action.onNext(.stopLocating)
   }
 }
 

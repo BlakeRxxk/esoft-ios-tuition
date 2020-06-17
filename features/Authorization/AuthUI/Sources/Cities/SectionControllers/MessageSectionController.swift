@@ -18,16 +18,20 @@ public final class MessageSectionController: ListSectionController {
   
   override public func sizeForItem(at index: Int) -> CGSize {
     guard let context = collectionContext else { return CGSize() }
-    
     guard let text = object?.message else { return CGSize() }
     
     let width: CGFloat = context.containerSize.width
     
-    let height = text.styledLabelHeight(with: width - 32,
-                                        UILabel.Styles.tiny,
-                                        UILabel.ColorStyle.placeholders,
-                                        UILabel.Styles.alignCenter,
-                                        UILabel.Styles.multiline)
+    var height: CGFloat = 0
+    if isFirstSection {
+      height = 38 + text.styledLabelHeight(with: width - 32,
+                                           UILabel.Styles.small,
+                                           UILabel.Styles.multiline)
+    } else {
+      height = text.styledLabelHeight(with: width - 32,
+                                      UILabel.Styles.tiny,
+                                      UILabel.Styles.multiline)
+    }
     
     return CGSize(width: width, height: height)
   }
@@ -40,6 +44,7 @@ public final class MessageSectionController: ListSectionController {
                                                           return UICollectionViewCell()
     }
     cell.bindViewModel(object)
+    cell.isFirst = isFirstSection
     return cell
   }
   

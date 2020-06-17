@@ -8,5 +8,6 @@
 import Foundation
 
 protocol MyCityCellInput {
-  var myCity: String? { get set }
+  var myCityName: String? { get set }
+  var isLocating: Bool { get set }
 }

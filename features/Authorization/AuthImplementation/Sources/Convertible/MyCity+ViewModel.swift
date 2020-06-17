@@ -11,8 +11,8 @@ import AuthCore
 
 extension MyCity {
   public func asViewModel() -> MyCityViewModel {
-    return MyCityViewModel(id: id,
-                           name: name,
-                           distance: distance)
+    MyCityViewModel(id: id,
+                    name: name,
+                    distance: distance)
   }
 }

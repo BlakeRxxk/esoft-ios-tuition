@@ -16,8 +16,8 @@ public struct Country {
   public init(id: Int,
               name: String,
               currency: Int,
-              countryCode: String?)
-  {
+              countryCode: String?
+  ) {
     self.id = id
     self.name = name
     self.currency = currency

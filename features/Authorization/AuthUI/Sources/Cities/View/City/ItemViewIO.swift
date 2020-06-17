@@ -8,8 +8,8 @@
 import Foundation
 
 public protocol ItemViewInput {
-  var title: String {get set}
-  var secondaryText: String? {get set}
-  var lockSignText: String? {get set}
+  var title: String { get set }
+  var secondaryText: String? { get set }
+  var lockSignText: String? { get set }
   var isSelected: Bool { get set }
 }

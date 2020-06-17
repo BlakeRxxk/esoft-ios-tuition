@@ -40,6 +40,12 @@ class AuthCitiesComponent: Component<EmptyDependency>, AuthCitiesBuilder {
     }
   }
   
+  var myCityGateway: MyCityGateway {
+    shared {
+      MyCityGatewayImplementation(networkService: networkService)
+    }
+  }
+  
   var citiesStorage: CitiesStorage {
     let configuration = StorageConfiguration(type: .persistent)
     return CitiesStorageImplementation(inMemoryConfiguration: configuration)
@@ -48,6 +54,11 @@ class AuthCitiesComponent: Component<EmptyDependency>, AuthCitiesBuilder {
   var countriesStorage: CountriesStorage {
     let configuration = StorageConfiguration(type: .persistent)
     return CountriesStorageImplementation(inMemoryConfiguration: configuration)
+  }
+  
+  var myCityStorage: MyCityStorage {
+    let configuration = StorageConfiguration(type: .inmemory)
+    return MyCityStorageImplementation(inMemoryConfiguration: configuration)
   }
   
   var citiesRepository: CitiesRepository {
@@ -64,20 +75,35 @@ class AuthCitiesComponent: Component<EmptyDependency>, AuthCitiesBuilder {
     }
   }
   
+  var myCityRepository: MyCityRepository {
+    shared {
+      MyCityRepositoryImplementation(myCityGateway: myCityGateway,
+                                     myCityStorage: myCityStorage)
+    }
+  }
+  
   var citiesUseCase: CitiesUseCase {
     shared {
       CitiesUseCaseImplementation(citiesRepository: citiesRepository)
     }
   }
+  
   var countriesUseCase: CountriesUseCase {
     shared {
       CountriesUseCaseImplementation(countryRepository: countriesRepository)
     }
   }
   
+  var myCityUseCase: MyCityUseCase {
+    shared {
+      MyCityUseCaseImplementation(myCityRepository: myCityRepository)
+    }
+  }
+  
   var state: CitiesListState {
     CitiesListState(citiesUseCase: citiesUseCase,
-                    countriesUseCase: countriesUseCase)
+                    countriesUseCase: countriesUseCase,
+                    myCityUseCase: myCityUseCase)
   }
   
   var authCitiesViewController: UIViewController {

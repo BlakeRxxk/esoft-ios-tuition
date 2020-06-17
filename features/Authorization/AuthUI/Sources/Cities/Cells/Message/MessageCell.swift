@@ -13,13 +13,28 @@ public final class MessageCell: UICollectionViewCell {
   private static let reuseIdentifier: String = "MessageCellID"
   
   public var message: String {
-      get {
-        messageLabel.text ?? ""
-      }
-      set {
-        messageLabel.styledText = newValue
-      }
+    get {
+      messageLabel.text ?? ""
     }
+    set {
+      messageLabel.styledText = newValue
+      messageLabel.yoga.markDirty()
+    }
+  }
+  public var isFirst: Bool = false {
+    didSet {
+      if isFirst {
+        messageLabel.setStyles(
+          UILabel.Styles.small
+        )
+      } else {
+        messageLabel.setStyles(
+          UILabel.Styles.tiny
+        )
+      }
+      messageLabel.yoga.markDirty()
+    }
+  }
   
   private(set) lazy var messageLabel: UILabel = UILabel()
   
@@ -34,13 +49,19 @@ public final class MessageCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-//  override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-//    subviews.forEach {
-//      $0.yoga.markDirty()
-//    }
-//    yoga.applyLayout(preservingOrigin: true)
-//    super.traitCollectionDidChange(previousTraitCollection)
-//  }
+  //  override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+  //    subviews.forEach {
+  //      $0.yoga.markDirty()
+  //    }
+  //    yoga.applyLayout(preservingOrigin: true)
+  //    super.traitCollectionDidChange(previousTraitCollection)
+  //  }
+  
+  override public func prepareForReuse() {
+    super.prepareForReuse()
+//    message = ""
+//    isFirst = false
+  }
   
   override public func layoutSubviews() {
     super.layoutSubviews()
@@ -50,13 +71,13 @@ public final class MessageCell: UICollectionViewCell {
       layout.isEnabled = true
       layout.width = YGValue(container.width)
       layout.height = YGValue(container.height)
+      layout.flexDirection = .columnReverse
     }
     
     messageLabel.configureLayout(block: { layout in
       layout.isEnabled = true
       layout.width = YGValue(container.width - 32)
       layout.alignSelf = .center
-      layout.flexGrow = 1
     })
     
     contentView.yoga.applyLayout(preservingOrigin: true, dimensionFlexibility: .flexibleHeight)

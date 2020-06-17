@@ -14,15 +14,9 @@ extension CityCell: ListBindable {
     guard let viewModel = viewModel as? CityViewModel else { return }
     
     cityId = viewModel.id
-    
-    title = viewModel.name // заменить на self? (self.cityTitle -> cityView.title)
+    title = viewModel.name
     // cityView.secondaryText = viewModel.regionsToString()
-    if cityId == 23 {
-      cityView.isSelected = true
-    }
-    else {
-      cityView.isSelected = false
-    }
+    cityView.isSelected = viewModel.isSelected
     if viewModel.eOfficeId == nil {
       lockSignText = Localized.soon
     } else {

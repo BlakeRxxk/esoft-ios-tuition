@@ -1,8 +1,8 @@
 //
-//  Specialist+ViewModel.swift
-//  SpecialistsUI
+//  City+ViewModel.swift
+//  AuthImplementation#iphonesimulator-x86_64
 //
-//  Copyright © 2019 E-SOFT. All rights reserved.
+//  Created by nedstar on 14.06.2020.
 //
 
 import Foundation
@@ -10,14 +10,16 @@ import EsoftUIKit
 import AuthCore
 
 extension City {
-  public func asViewModel() -> CityViewModel {
-    return CityViewModel(id: id,
-                         name: name,
-                         coords: coords,
-                         clockWrap: clockWrap,
-                         country: country,
-                         eOfficeId: eOfficeId,
-                         created: stringToDate(from: created)!,
-                         updated: stringToDate(from: updated)!)
+  public func asViewModel(isSelected: Bool = false) -> CityViewModel {
+    CityViewModel(id: id,
+                  name: name,
+                  coords: coords,
+                  clockWrap: clockWrap,
+                  country: country,
+                  eOfficeId: eOfficeId,
+                  created: stringToDate(from: created)!,
+                  updated: stringToDate(from: updated)!,
+                  isSelected: isSelected
+    )
   }
 }

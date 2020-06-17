@@ -8,11 +8,11 @@
 import Foundation
 
 public struct MyCity {
-  public let id: Int
+  public let id: String
   public let name: String
   public let distance: Int
   
-  public init(id: Int,
+  public init(id: String,
               name: String,
               distance: Int
   ) {

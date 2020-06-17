@@ -1,8 +1,8 @@
 //
-//  SpecialistsUseCase.swift
-//  SpecialistsCore
+//  CitiesUseCase.swift
+//  AuthCore#iphonesimulator-x86_64
 //
-//  Copyright © 2020 E-SOFT, OOO. All rights reserved.
+//  Created by nedstar on 13.06.2020.
 //
 
 import RxSwift

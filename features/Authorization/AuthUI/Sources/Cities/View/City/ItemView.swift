@@ -17,8 +17,8 @@ public final class ItemView: View {
     }
     set {
       titleLabel.styledText = newValue
+      titleLabel.yoga.markDirty()
     }
-    
   }
   public var secondaryText: String? {
     get {
@@ -26,6 +26,7 @@ public final class ItemView: View {
     }
     set {
       secondaryLabel.styledText = newValue
+      secondaryLabel.yoga.markDirty()
     }
   }
   public var lockSignText: String? {
@@ -34,7 +35,7 @@ public final class ItemView: View {
     }
     set {
       lockSignLabel.styledText = newValue
-      updateControlElements() // не оч
+      updateControlElements()
     }
   }
   public var isSelected: Bool = true {

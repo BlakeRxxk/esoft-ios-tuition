@@ -8,17 +8,20 @@
 import IGListKit
 
 public final class MyCityViewModel: NSObject {
-  public let id: Int
+  public let id: String
   public let name: String?
-  public let distance: Int
+  public let distance: Int?
+  public let isLocating: Bool
   
-  public init(id: Int,
+  public init(id: String,
               name: String?,
-              distance: Int
+              distance: Int?,
+              isLocating: Bool = false
   ) {
     self.id = id
     self.name = name
     self.distance = distance
+    self.isLocating = isLocating
   }
 }
 
