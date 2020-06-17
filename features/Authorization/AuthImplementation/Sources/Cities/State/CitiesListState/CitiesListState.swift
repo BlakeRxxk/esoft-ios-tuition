@@ -81,11 +81,7 @@ extension CitiesListState {
       let countries = countriesUseCase.invoke(request: CountriesRequest())
       let cities = citiesUseCase.invoke(request: CitiesRequest())
       return Observable.combineLatest(countries, cities) { countries, cities in
-        var dict = [Country: [City]]()
-        for country in countries {
-          dict[country] = cities.filter { country.id == $0.country }
-        }
-        return .setData(dict)
+        .setData(myMerge(countries, cities, { $0.id == $1.country }))
       }
     case let .selectCity(selectedCityId):
       if currentState.countries.contains(where: { $0.value.contains(where: { $0.id == selectedCityId && $0.eOfficeId != nil }) }) {
@@ -116,4 +112,13 @@ extension CitiesListState {
     }
     return newState
   }
+}
+
+// Переименовать, сделать на последовательностях, перместить в Esoft
+func myMerge<U, V>(_ arr1: [U], _ arr2: [V], _ pred: (_ key: U, _ arr2: V) -> Bool) -> [U: [V]] {
+  var dict = [U: [V]]()
+  for key in arr1 {
+    dict[key] = arr2.filter {  pred(key, $0) }
+  }
+  return dict
 }
