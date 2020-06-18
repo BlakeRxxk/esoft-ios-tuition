@@ -29,19 +29,29 @@ extension SpecialistsList: StatefullView {
       case .skeleton:
         return SpecialistsListSkeletonSectionController()
       case .specialists:
-        return SpecialistsSectionController()
+        return SpecialistsSectionController(output: self)
       }
     })
 
-    state
-      .map { $0.isLoading }
-      .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
-      .bind(to: specializedView.refreshControl.rx.isRefreshing)
-      .disposed(by: disposeBag)
+//    state
+//      .map { $0.isLoading }
+//      .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
+//      .bind(to: specializedView.refreshControl.rx.isRefreshing)
+//      .disposed(by: disposeBag)
 
     rx
       .viewWillAppear
-      .map { _ in SpecialistsListState.Action.fetchSpecialists() }
+      .map { [weak self] _ in
+        guard let `self` = self else { return .empty }
+
+        if self.store?.currentState.specialists == self.store?.initialState.specialists,
+          self.store?.currentState.page == self.store?.initialState.page,
+          self.store?.currentState.pages == self.store?.initialState.pages {
+          return SpecialistsListState.Action.fetchSpecialists()
+        }
+        return .empty
+      }
+//      .map { _ in SpecialistsListState.Action.fetchSpecialists() }
       .bind(to: store.action)
       .disposed(by: disposeBag)
     

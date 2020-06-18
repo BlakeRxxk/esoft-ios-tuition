@@ -1,6 +1,6 @@
 //
 //  SpecialistsListSkeletonSectionController.swift
-//  ESUIKit
+//  SpecialistsUI
 //
 //  Copyright © 2019 E-SOFT. All rights reserved.
 //

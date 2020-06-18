@@ -2,7 +2,7 @@
 //  UIAlertController+Style.swift
 //  EsoftUIKit
 //
-//  Copyright © 2020 E-SOFT, OOO. All rights reserved.
+//  Copyright © 2020 E-SOFT. All rights reserved.
 //
 
 import UIKit
@@ -11,7 +11,7 @@ import ThemeManager
 
 extension UIAlertController {
   public enum Styles {
-    public static let `default` = Atlas.Style(name: "client.uialert.default") { (view: UIAlertController) in
+    public static let `default` = Atlas.Style(name: "esoft.uialert.default") { (view: UIAlertController) in
       let titleFont = [NSAttributedString.Key.font: ThemeManager.current().fonts.regularSemibold]
       let messageFont = [NSAttributedString.Key.font: ThemeManager.current().fonts.tiny]
 
