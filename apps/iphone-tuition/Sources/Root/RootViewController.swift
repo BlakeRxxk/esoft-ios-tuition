@@ -102,8 +102,8 @@ extension RootViewController: RootViewItemSectionOutput {
     case "Task 5":
       show(sellerTicketBuilder.sellerTicketViewController, sender: nil)
     case "Task 6":
-      present(authCitiesBuilder.authCitiesViewController, animated: true)
-      // present(loggedOutBuilder.loggedOutViewController, animated: true)
+      // present(authCitiesBuilder.authCitiesViewController, animated: true)
+      present(loggedOutBuilder.loggedOutViewController, animated: true)
     case "Cities RxDemo":
       show(citiesBuilder.citiesViewController, sender: nil)
     case "Cities":
