@@ -106,6 +106,11 @@ public final class ErrorTextField: View {
   
   @objc func didTapShowTextButton() {
     textField.isSecureTextEntry = !textField.isSecureTextEntry
+    if textField.isSecureTextEntry {
+      showTextButton.setImage(UIImage.eyeSolid, for: .normal)
+    } else {
+      showTextButton.setImage(UIImage.eye, for: .normal)
+    }
   }
 }
 
