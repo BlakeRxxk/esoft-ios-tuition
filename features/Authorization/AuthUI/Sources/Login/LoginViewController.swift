@@ -104,6 +104,4 @@ extension LoginViewController: LoginSectionControllerOutput {
   public func phoneDidChange(newVal: String) {
     print(newVal)
   }
-  
-  
 }
