@@ -28,6 +28,7 @@ public final class RootViewController: ViewController<BaseListView> {
   private var discountBuilder: DiscountBuilder
   private var mortgageBuilder: MortgageBuilder
   private var loggedOutBuilder: LoggedOutBuilder
+  private var authCitiesBuilder: AuthCitiesBuilder
   private var rxdemoBuilder: SpecialistsBuilder
   private var citiesBuilder: CitiesBuilder
   
@@ -36,6 +37,7 @@ public final class RootViewController: ViewController<BaseListView> {
        discountBuilder: DiscountBuilder,
        mortgageBuilder: MortgageBuilder,
        loggedOutBuilder: LoggedOutBuilder,
+       authCitiesBuilder: AuthCitiesBuilder,
        citiesBuilder: CitiesBuilder,
        rxdemoBuilder: SpecialistsBuilder) {
     self.objectsBuilder = objectsBuilder
@@ -43,6 +45,7 @@ public final class RootViewController: ViewController<BaseListView> {
     self.discountBuilder = discountBuilder
     self.mortgageBuilder = mortgageBuilder
     self.loggedOutBuilder = loggedOutBuilder
+    self.authCitiesBuilder = authCitiesBuilder
     self.rxdemoBuilder = rxdemoBuilder
     self.citiesBuilder = citiesBuilder
     super.init(viewCreator: BaseListView.init)
@@ -99,7 +102,10 @@ extension RootViewController: RootViewItemSectionOutput {
     case "Task 5":
       show(sellerTicketBuilder.sellerTicketViewController, sender: nil)
     case "Task 6":
+      // present(authCitiesBuilder.authCitiesViewController, animated: true)
       present(loggedOutBuilder.loggedOutViewController, animated: true)
+    case "Cities RxDemo":
+      show(citiesBuilder.citiesViewController, sender: nil)
     case "Cities":
       let scene = ViperModule.buildModule()
       show(scene, sender: nil)

@@ -36,6 +36,10 @@ extension UIFont {
     UIFont.makeFont(size: 15, face: "Semibold")
   }
   
+  public static var betweenSmallTiny: UIFont {
+    UIFont.makeFont(size: 14, face: "Regular")
+  }
+  
   public static var tiny: UIFont {
     UIFont.makeFont(size: 13, face: "Regular")
   }

@@ -5,4 +5,4 @@ if ! [ -x "$(command -v carthage)" ]; then
   exit 1
 fi
 
-cd third-party && carthage update --cache-builds --platform iOS && cd ..
+cd third-party && carthage update --cache-builds --no-use-binaries --platform iOS && cd ..

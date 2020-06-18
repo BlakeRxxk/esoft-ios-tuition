@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     registerProviderFactories()
 
     AppTheme.apply(theme: .client)
-
+    
     window = UIWindow()
     let rootComponent = RootComponent()
 

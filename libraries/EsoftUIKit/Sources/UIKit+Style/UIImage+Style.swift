@@ -4,7 +4,6 @@
 //
 //  Copyright © 2020 E-SOFT. All rights reserved.
 //
-
 import UIKit
 
 extension UIImage {
@@ -128,12 +127,40 @@ extension UIImage {
     }
   }
   
+  public enum Geo {
+    public static var base: UIImage {
+      named("geo.base").withRenderingMode(.alwaysTemplate)
+    }
+  }
+  
+  public enum Spinner {
+    public static var base: UIImage {
+      named("spinner").withRenderingMode(.alwaysTemplate)
+    }
+  }
+
+  public enum Info {
+    public static var base: UIImage {
+      named("info").withRenderingMode(.alwaysTemplate)
+    }
+  }
+  
+  public enum Check {
+    public static var base: UIImage {
+      named("check")
+    }
+  }
+  
   public static var arrowDown: UIImage {
     named("arrow.down").withRenderingMode(.alwaysTemplate)
   }
   
   public static var eye: UIImage {
-    named("eye").withRenderingMode(.alwaysTemplate)
+    named("eye.regular").withRenderingMode(.alwaysTemplate)
+  }
+  
+  public static var eyeSolid: UIImage {
+    named("eye.solid").withRenderingMode(.alwaysTemplate)
   }
   
   public static var starSmall: UIImage {
