@@ -58,6 +58,8 @@ final public class LoginViewController: ViewController<BaseListView> {
   
   private func configureUI() {
     specializedView.collectionView.setStyles(UIView.Styles.whiteBackground)
+    specializedView.collectionView.refreshControl = nil
+    specializedView.collectionView.bounces = false
   }
   
   public func bind() {

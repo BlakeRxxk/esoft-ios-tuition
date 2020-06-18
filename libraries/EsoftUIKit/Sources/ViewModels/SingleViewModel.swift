@@ -7,18 +7,28 @@
 
 import IGListKit
 
-public class SingleViewModel: ListDiffable {
+public final class SingleViewModel: NSObject {
   public let id: Int
   
   public init(id: Int = 0) {
     self.id = id
   }
-  
+}
+
+extension SingleViewModel: ListDiffable {
   public func diffIdentifier() -> NSObjectProtocol {
-    id as NSObjectProtocol
+    self
   }
   
   public func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-    true
+    guard self !== object else { return true }
+    guard let object = object as? SingleViewModel else { return false }
+    return self == object
+  }
+}
+
+extension SingleViewModel {
+  public static func == (lhs: SingleViewModel, rhs: SingleViewModel) -> Bool {
+    lhs.id == rhs.id
   }
 }
