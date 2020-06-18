@@ -17,7 +17,6 @@ import SpecialistsImplementation
 import SpecialistsUI
 import StorageKit
 import TuituionCore
-import UIKit
 
 // MARK: - Registration
 
@@ -25,7 +24,10 @@ public func registerProviderFactories() {
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->SellerTicketComponent") { component in
         return EmptyDependencyProvider(component: component)
     }
-    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->AuthCitiesComponent") { component in
+    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->LoggedOutComponent->PasswordComponent->AuthCitiesComponent") { component in
+        return EmptyDependencyProvider(component: component)
+    }
+    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->LoggedOutComponent->PasswordComponent") { component in
         return EmptyDependencyProvider(component: component)
     }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->LoggedOutComponent") { component in

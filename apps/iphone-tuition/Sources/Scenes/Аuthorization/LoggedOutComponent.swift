@@ -5,7 +5,6 @@
 //  Created by nedstar on 26.05.2020.
 //
 
-import UIKit
 import NeedleFoundation
 import Foundation
 import AuthUI
@@ -16,6 +15,10 @@ protocol LoggedOutBuilder {
 
 class LoggedOutComponent: Component<EmptyDependency>, LoggedOutBuilder {
   var loggedOutViewController: UIViewController {
-    UINavigationController(rootViewController: LoginViewController())
+    UINavigationController(rootViewController: LoginViewController(passwordBuilder: passwordComponent))
+  }
+  
+  var passwordComponent: PasswordComponent {
+    PasswordComponent(parent: self)
   }
 }

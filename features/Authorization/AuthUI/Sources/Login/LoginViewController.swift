@@ -15,10 +15,17 @@ import RxExtensions
 import ListKit
 import IGListDiffKit.IGListDiffable
 
+public protocol PasswordBuilder {
+  var passwordViewController: UIViewController { get }
+}
+
 final public class LoginViewController: ViewController<BaseListView> {
   public var disposeBag: DisposeBag = DisposeBag()
+  private var passwordBuilder: PasswordBuilder
   
-  public init() {
+  public init(passwordBuilder: PasswordBuilder) {
+    self.passwordBuilder = passwordBuilder
+    
     super.init(viewCreator: BaseListView.init)
     
     configureUI()
@@ -100,7 +107,9 @@ extension LoginViewController: LoginSectionControllerOutput {
   }
   
   public func didTapContinueButton() {
-    print("next")
+    let passwordViewController = passwordBuilder.passwordViewController
+    passwordViewController.view.setStyles(UIView.Styles.whiteBackground)
+    show(passwordViewController, sender: nil)
   }
   
   public func phoneDidChange(newVal: String) {

@@ -29,9 +29,23 @@ public final class ErrorTextField: View {
       messageLabel.yoga.markDirty()
     }
   }
+  public var isSecureTextEntry: Bool {
+    get {
+      textField.isSecureTextEntry
+    }
+    set {
+      textField.isSecureTextEntry = !textField.isSecureTextEntry
+      if textField.isSecureTextEntry {
+        showTextButton.setImage(UIImage.eyeSolid, for: .normal)
+      } else {
+        showTextButton.setImage(UIImage.eye, for: .normal)
+      }
+    }
+  }
   public var showButton: Bool = true {
     didSet {
       updateShowButton()
+      isSecureTextEntry = showButton
       self.setNeedsLayout()
     }
   }
@@ -105,12 +119,7 @@ public final class ErrorTextField: View {
   }
   
   @objc func didTapShowTextButton() {
-    textField.isSecureTextEntry = !textField.isSecureTextEntry
-    if textField.isSecureTextEntry {
-      showTextButton.setImage(UIImage.eyeSolid, for: .normal)
-    } else {
-      showTextButton.setImage(UIImage.eye, for: .normal)
-    }
+    isSecureTextEntry = !isSecureTextEntry
   }
 }
 

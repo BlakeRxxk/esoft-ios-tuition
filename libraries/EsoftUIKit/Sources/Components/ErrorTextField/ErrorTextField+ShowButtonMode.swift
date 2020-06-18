@@ -8,7 +8,7 @@
 extension ErrorTextField {
   func updateShowButton() {
     if showButton {
-      hideShowButton()
+      showShowButton()
     } else {
       hideShowButton()
     }

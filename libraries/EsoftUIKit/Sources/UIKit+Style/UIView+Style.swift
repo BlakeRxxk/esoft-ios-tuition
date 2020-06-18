@@ -47,6 +47,10 @@ extension UIView {
       view.backgroundColor = ThemeManager.current().colors.error
     }
     
+    public static let brandBackground = Style(name: "brandBackground") { (view: UIView) in
+      view.backgroundColor = ThemeManager.current().colors.brand
+    }
+    
     public static let messageBubblePrimary = Style(name: "chat.bubble.primary") { (view: UIView) in
       view.backgroundColor = ThemeManager.current().colors.primary500
     }

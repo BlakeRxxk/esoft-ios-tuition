@@ -14,11 +14,8 @@ import Network
 import TuituionCore
 import StorageKit
 
-protocol AuthCitiesBuilder {
-  var authCitiesViewController: UIViewController { get }
-}
 
-class AuthCitiesComponent: Component<EmptyDependency>, AuthCitiesBuilder {
+class AuthCitiesComponent: Component<EmptyDependency>, AuthUI.CitiesBuilder {
   var networkService: NetworkAPI {
     let service = NetworkAPI(session: .init(.shared),
                              decoder: RiesDecoder(),
@@ -106,7 +103,7 @@ class AuthCitiesComponent: Component<EmptyDependency>, AuthCitiesBuilder {
                     myCityUseCase: myCityUseCase)
   }
   
-  var authCitiesViewController: UIViewController {
+  var citiesViewController: UIViewController {
     let viewController = AuthUI.CitiesViewController()
     viewController.store = state
     
