@@ -1,8 +1,14 @@
 //
 //  SpecialistsStorageImplementation.swift
+<<<<<<< HEAD
 //  SpecialistsImplementation
 //
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
+=======
+//  SpecialistsImplementation#iphonesimulator-x86_64
+//
+//  Created by Blake Rxxk on 01.06.2020.
+>>>>>>> master
 //
 
 import Foundation
@@ -20,6 +26,13 @@ public final class SpecialistsStorageImplementation {
 }
 
 extension SpecialistsStorageImplementation: SpecialistsStorage {
+<<<<<<< HEAD
+=======
+  public func fetchSpecialist() -> Single<Int> {
+    inMemoryStorage.query().map { $0.count }.asSingle()
+  }
+
+>>>>>>> master
   public func fetchSpecialist(specialistID: Int) -> Single<Specialist> {
     let predicate = NSPredicate(format: "id == %d", specialistID)
     return inMemoryStorage

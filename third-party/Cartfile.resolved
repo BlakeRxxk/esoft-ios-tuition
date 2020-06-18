@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 github "realm/realm-cocoa" "v5.0.2"
+=======
+github "realm/realm-cocoa" "v5.0.1"
+>>>>>>> master
