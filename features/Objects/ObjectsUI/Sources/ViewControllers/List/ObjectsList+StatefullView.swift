@@ -88,4 +88,3 @@ extension ObjectsList: StatefullView {
       .disposed(by: disposeBag)
   }
 }
-

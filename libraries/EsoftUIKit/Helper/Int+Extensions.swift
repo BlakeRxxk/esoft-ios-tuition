@@ -7,8 +7,8 @@
 
 import Foundation
 
-extension Int{
+extension Int {
     var formattedWithSeparator: String {
-        return Formatter.withSeparator.string(for: self) ?? ""
+        Formatter.withSeparator.string(for: self) ?? ""
     }
 } 

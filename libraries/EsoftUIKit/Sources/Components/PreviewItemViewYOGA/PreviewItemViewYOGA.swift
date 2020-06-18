@@ -41,7 +41,8 @@ public final class PreviewItemViewYOGA: View {
       currentPriceLabel.styledText ?? ""
     }
     set {
-      currentPriceLabel.styledText = newValue
+      guard let number = zeroPadding(newValue) else { return }
+      currentPriceLabel.styledText = "\(number) руб."
       currentPriceLabel.yoga.markDirty()
     }
   }
@@ -54,8 +55,9 @@ public final class PreviewItemViewYOGA: View {
       if newValue.isEmpty {
         priceStack.isHidden = true
       } else {
+        guard  let number = zeroPadding(newValue) else { return }
         priceStack.isHidden = false
-        priceLabel.styledText = "\(newValue) руб."
+        priceLabel.styledText = "\(number) руб."
       }
       priceLabel.yoga.markDirty()
     }
@@ -123,8 +125,9 @@ public final class PreviewItemViewYOGA: View {
       if newValue == "0" {
         favoriteView.isHidden = true
       } else {
+        guard let rounded = roundToPlaces(newValue) else { return }
         favoriteView.isHidden = false
-        favoriteCount.styledText = newValue
+        favoriteCount.styledText = rounded
       }
       favoriteCount.yoga.markDirty()
     }
@@ -149,19 +152,10 @@ public final class PreviewItemViewYOGA: View {
     }
   }
   
-  public var isFavorit: Bool {
-    get {
-      return false
-    }
-    set {
-      
-    }
-  }
-  
   // установка в начальную позицию
   public var collectionViewDefaultPosition: Bool {
     get {
-      return false
+      false
     }
     set {
       if newValue {
@@ -173,7 +167,7 @@ public final class PreviewItemViewYOGA: View {
   
   public var isViewed: Bool {
     get {
-      return false
+      false
     }
     set {
       if newValue {
@@ -250,6 +244,24 @@ public final class PreviewItemViewYOGA: View {
     } else {
       favoriteButton.setBackgroundImage(UIImage.favorit, for: .normal)
     }
+  }
+  
+  func zeroPadding(_ toString: String) -> String? {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    formatter.groupingSeparator = " "
+    guard let number = formatter.number(from: toString) else {
+      return nil
+    }
+    return formatter.string(from: number)
+  }
+  
+  func roundToPlaces(_ places: String) -> String? {
+    guard let num = Float(places) else {
+      return nil
+    }
+    let aStr = String(format: "%.1f", num)
+    return aStr
   }
   
   private func createUI() {
@@ -415,19 +427,14 @@ public final class PreviewItemViewYOGA: View {
     var savedArray = defaults.object(forKey: "favorit") as? [String] ?? [String]()
     
     if savedArray.contains(currentCode) {
-      print("этот элемент есть, удаляю из фаворит")
       favoriteButton.setBackgroundImage(UIImage.favorit, for: .normal)
       savedArray = savedArray.filter { $0 != currentCode }
     } else {
-      print("этого элемента нет, добавляю в фаворит")
       favoriteButton.setBackgroundImage(UIImage.favoritFill, for: .normal)
       savedArray.append(currentCode)
     }
-    print("ПОСЛЕ - ", savedArray)
     defaults.set(savedArray, forKey: "favorit")
   }
-  
-  
   
   private func layout() {
     

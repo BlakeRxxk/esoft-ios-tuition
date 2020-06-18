@@ -13,7 +13,7 @@ extension ObjectsCell: ListBindable {
   public func bindViewModel(_ viewModel: Any) {
     guard let viewModel = viewModel as? ObjectsViewModel else { return }
     
-    currentPrice = viewModel.price + " руб."
+    currentPrice = viewModel.price
     oldPrice = viewModel.oldPrice
     address = viewModel.address
     objectsDescription = viewModel.objectsDescription

@@ -33,11 +33,11 @@ public final class ObjectsViewModel {
   public let phone: String
   
   public var address: String {
-    return "\(city), \(district), \(street), \(house)"
+    "\(city), \(district), \(street), \(house)"
   }
   
   public var objectsDescription: String {
-    return "\(typeFlat(type)), \(roomsCount)-комн, \(Int(Float(areaFlat)!)) м², этаж \(floorsNum)/\(floorsCnt), \(priceAr.dropLast(3)) руб./м²"
+    "\(typeFlat(type)), \(roomsCount)-комн, \(Int(Float(areaFlat)!)) м², этаж \(floorsNum)/\(floorsCnt), \(zeroPadding(priceAr)!) руб./м²"
   }
   
   // определение типа
@@ -50,6 +50,18 @@ public final class ObjectsViewModel {
     default:
       return ""
     }
+  }
+  
+  private func zeroPadding(_ toString: String) -> String? {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    formatter.groupingSeparator = " "
+    guard let float = Float(toString) else { return nil }
+    let aStr = String(format: "%.0f", float)
+    guard let number = formatter.number(from: aStr) else {
+      return nil
+    }
+    return formatter.string(from: number)
   }
   
   public init(id: String,

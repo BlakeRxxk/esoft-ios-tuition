@@ -60,10 +60,10 @@ public final class ObjectsList: ViewController<BaseListView> {
     switchControl.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
     
     let textColor = [NSAttributedString.Key.foregroundColor: UIColor.white]
-    switchControl.setTitleTextAttributes(textColor, for:.normal)
+    switchControl.setTitleTextAttributes(textColor, for: .normal)
     
     let textColorSelected = [NSAttributedString.Key.foregroundColor: ThemeManager.current().colors.primary500]
-    switchControl.setTitleTextAttributes(textColorSelected, for:.selected)
+    switchControl.setTitleTextAttributes(textColorSelected, for: .selected)
     
     navigationItem.titleView = switchControl
     navigationItem.rightBarButtonItem = .init(image: UIImage(named: "ic_subscriptions"), style: .plain, target: self, action: nil)
@@ -81,4 +81,3 @@ extension ObjectsList {
     public static let search = "search".localize()
   }
 }
-
