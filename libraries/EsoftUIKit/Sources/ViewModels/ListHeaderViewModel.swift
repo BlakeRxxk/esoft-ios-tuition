@@ -10,9 +10,9 @@ import IGListKit
 import ListKit
 
 public final class ListHeaderViewModel {
-  let count: Int
-  let title: String
-  let icon: UIImage?
+  public let count: Int
+  public let title: String
+  public let icon: UIImage?
   
   public init(count: Int,
               title: String,

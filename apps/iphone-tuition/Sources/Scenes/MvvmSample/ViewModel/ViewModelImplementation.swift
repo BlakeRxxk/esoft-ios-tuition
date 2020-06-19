@@ -46,7 +46,6 @@ final class ViewModelImplementation: ViewModel {
 
     refresh
       .flatMapLatest { refreshRequest }
-      .debug()
       .elements()
       .compactMap { $0.data }
       .map { $0.map { $0.asViewModel() } }

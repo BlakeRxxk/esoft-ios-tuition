@@ -14,7 +14,6 @@ import Network
 import TuituionCore
 import StorageKit
 
-
 class AuthCitiesComponent: Component<EmptyDependency>, AuthUI.CitiesBuilder {
   var networkService: NetworkAPI {
     let service = NetworkAPI(session: .init(.shared),
@@ -30,13 +29,11 @@ class AuthCitiesComponent: Component<EmptyDependency>, AuthUI.CitiesBuilder {
       CitiesGatewayImplementation(networkService: networkService)
     }
   }
-  
   var countriesGateway: CountriesGateway {
     shared {
       CountriesGatewayImplementation(networkService: networkService)
     }
   }
-  
   var myCityGateway: MyCityGateway {
     shared {
       MyCityGatewayImplementation(networkService: networkService)
@@ -47,12 +44,10 @@ class AuthCitiesComponent: Component<EmptyDependency>, AuthUI.CitiesBuilder {
     let configuration = StorageConfiguration(type: .persistent)
     return CitiesStorageImplementation(inMemoryConfiguration: configuration)
   }
-  
   var countriesStorage: CountriesStorage {
     let configuration = StorageConfiguration(type: .persistent)
     return CountriesStorageImplementation(inMemoryConfiguration: configuration)
   }
-  
   var myCityStorage: MyCityStorage {
     let configuration = StorageConfiguration(type: .inmemory)
     return MyCityStorageImplementation(inMemoryConfiguration: configuration)
@@ -64,14 +59,12 @@ class AuthCitiesComponent: Component<EmptyDependency>, AuthUI.CitiesBuilder {
                                      citiesStorage: citiesStorage)
     }
   }
-  
   var countriesRepository: CountriesRepository {
     shared {
       CountriesRepositoryImplementation(countryGateway: countriesGateway,
                                         countriesStorage: countriesStorage)
     }
   }
-  
   var myCityRepository: MyCityRepository {
     shared {
       MyCityRepositoryImplementation(myCityGateway: myCityGateway,
@@ -84,13 +77,11 @@ class AuthCitiesComponent: Component<EmptyDependency>, AuthUI.CitiesBuilder {
       CitiesUseCaseImplementation(citiesRepository: citiesRepository)
     }
   }
-  
   var countriesUseCase: CountriesUseCase {
     shared {
       CountriesUseCaseImplementation(countryRepository: countriesRepository)
     }
   }
-  
   var myCityUseCase: MyCityUseCase {
     shared {
       MyCityUseCaseImplementation(myCityRepository: myCityRepository)

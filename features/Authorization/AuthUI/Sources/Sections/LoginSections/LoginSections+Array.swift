@@ -1,0 +1,28 @@
+//
+//  LoginSections+Array.swift
+//  AuthUI#iphonesimulator-x86_64
+//
+//  Created by nedstar on 18.06.2020.
+//
+
+import EsoftUIKit
+import IGListDiffKit.IGListDiffable
+
+extension Array {
+  public func mapToLoginSections() -> [LoginSections] {
+    map { obj -> LoginSections in
+      switch obj {
+      case is LabelViewModel:
+        return .label(obj as! LabelViewModel)
+      case is AuthInputViewModel:
+        return .input(obj as! AuthInputViewModel)
+      case is AuthButtonViewModel:
+        return .button(obj as! AuthButtonViewModel)
+      case is SocialsViewModel:
+        return .socials(obj as! SocialsViewModel)
+      default:
+        fatalError("Неожиданный тип")
+      }
+    }
+  }
+}

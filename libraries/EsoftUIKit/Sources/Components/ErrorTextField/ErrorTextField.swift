@@ -34,7 +34,7 @@ public final class ErrorTextField: View {
       textField.isSecureTextEntry
     }
     set {
-      textField.isSecureTextEntry = !textField.isSecureTextEntry
+      textField.isSecureTextEntry = newValue
       if textField.isSecureTextEntry {
         showTextButton.setImage(UIImage.eyeSolid, for: .normal)
       } else {
@@ -80,7 +80,8 @@ public final class ErrorTextField: View {
   }
   
   private func configureUI() {
-    // Сделать стиль
+    textField.tintColor = ThemeManager.current().colors.brand
+    
     showTextButton.setImage(UIImage.eye, for: .normal)
     showTextButton.imageView?.tintColor = ThemeManager.current().textColors.secondary
     showTextButton.addTarget(self, action: #selector(didTapShowTextButton), for: .touchUpInside)
@@ -106,7 +107,7 @@ public final class ErrorTextField: View {
     
     textFieldContainer.configureLayout(block: { layout in
       layout.isEnabled = true
-      layout.height = YGValue(containerSize.height - 23)
+      layout.height = 20
       layout.flexDirection = .row
     })
     

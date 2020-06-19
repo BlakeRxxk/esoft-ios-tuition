@@ -7,7 +7,6 @@ static_library(
         "Sources/**/*.swift",
     ]),
     deps = [
-        "//features/Authorization/AuthCore:AuthCore",
         "//libraries/URLRequestKit:URLRequestKit",
         "//libraries/EsoftUIKit:EsoftUIKit",
         "//libraries/StateKit:StateKit",
@@ -17,6 +16,7 @@ static_library(
         "//third-party/Pods:RxRelay",
         "//third-party/Carthage:Realm",
         "//third-party/Carthage:RealmSwift",
+        "//features/Authorization/AuthCore:AuthCore",
     ],
     frameworks = [
         "$SDKROOT/System/Library/Frameworks/Foundation.framework",

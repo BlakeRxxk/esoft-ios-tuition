@@ -12,6 +12,7 @@ extension ErrorTextField {
     let textField: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
       layout.width = 1
+      layout.height = 20
       layout.flexGrow = 1
     }
     
@@ -26,6 +27,7 @@ extension ErrorTextField {
     let divider: YGLayoutConfigurationBlock = { layout in
       layout.isEnabled = true
       layout.height = 1
+      layout.marginTop = 22
     }
     
     let messageLabel: YGLayoutConfigurationBlock = { layout in

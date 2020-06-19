@@ -14,7 +14,8 @@ static_library(
         "//libraries/Localized:Localized",
         "//libraries/EsoftUIKit:EsoftUIKit",
         "//libraries/ListKit:ListKit",
-        "//libraries/CDNImageLink:CDNImageLink"
+        "//libraries/CDNImageLink:CDNImageLink",
+        "//features/Authorization/AuthCore:AuthCore",
     ],
     frameworks = [
         "$SDKROOT/System/Library/Frameworks/Foundation.framework",

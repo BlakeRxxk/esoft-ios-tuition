@@ -29,7 +29,6 @@ extension UIButton {
         layout.height = YGValue.large
         layout.paddingHorizontal = YGValue.base
       }
-      
     }
     
     public static let accent = primaryTextColors + Style(name: "accent") { (button: UIButton) in
@@ -243,6 +242,17 @@ extension UIButton {
       }
       
       button.titleLabel?.lineBreakMode = .byTruncatingTail
+    }
+    
+    public static let brand = Style(name: "brand") { (button: UIButton) in
+      let tintColor: UIColor = ThemeManager.current().textColors.white
+      
+      button.setTitleColor(tintColor, for: .normal)
+      button.tintColor = tintColor
+      
+      button.titleLabel?.font = UIFont.regularSemibold
+      
+      button.setBackgroundImage(roundedBackground(color: ThemeManager.current().colors.brand, cornerRadius: 20), for: .normal)
     }
     
     /**

@@ -9,10 +9,9 @@ import UIKit
 import Atlas
 
 extension String {
-  public func styledLabelHeight(with width: CGFloat, _ styles: Atlas.Style...) -> CGFloat {
+  public func styledLabelHeight(with width: CGFloat, _ builder: (UILabel) -> Void) -> CGFloat {
     let label: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
-//    label.lineBreakMode = NSLineBreakMode.byWordWrapping
-    label.setStyles(styles)
+    builder(label)
     label.styledText = self
     label.sizeToFit()
     return round(label.frame.height)
