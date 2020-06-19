@@ -11,18 +11,27 @@ import SpecialistsCore
 
 public final class SpecialistsRepositoryImplementation {
   private var specialistGateway: SpecialistsGateway
-  
-  public init(specialistGateway: SpecialistsGateway) {
+  private var specialistsStorage: SpecialistsStorage
+
+  public init(specialistGateway: SpecialistsGateway, specialistsStorage: SpecialistsStorage) {
     self.specialistGateway = specialistGateway
-    specialistGateway
+    self.specialistsStorage = specialistsStorage
   }
 }
 
 extension SpecialistsRepositoryImplementation: SpecialistsRepository {
   public func getList(page: Int, cityID: Int, searchQuery: String?) -> Single<[Specialist]> {
     let request = SpecialistsQuery(cityID: cityID, page: page, count: false, search: searchQuery)
-    
-    return specialistGateway.getList(url: request.url)
+
+    return specialistGateway
+      .getList(url: request.url)
+      .flatMap { [weak self] specialists -> Single<[Specialist]> in
+        guard let self = self else { return .error(NSError(domain: "unknown", code: 102, userInfo: nil)) }
+        
+        return self.specialistsStorage
+          .saveSpecialists(specialists: specialists)
+          .andThen(Single.just(specialists))
+    }
   }
   
   public func getListCount(cityID: Int, searchQuery: String?) -> Single<SpecialistsCount> {

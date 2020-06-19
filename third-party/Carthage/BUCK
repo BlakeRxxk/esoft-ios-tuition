@@ -1,0 +1,25 @@
+load("//config:buck_rule_macros.bzl",
+    "apple_lib"
+)
+
+# Every BUCK file needs at least one library with source.
+apple_lib(
+    name = "CarthageProjectGeneratorHack",
+    srcs = glob([
+        "BuckSupport/Empty.swift",
+    ]),
+)
+
+prebuilt_apple_framework(
+    name = "Realm",
+    framework = "Build/iOS/Realm.framework",
+    preferred_linkage = "shared",
+    visibility = ["PUBLIC"],
+)
+
+prebuilt_apple_framework(
+    name = "RealmSwift",
+    framework = "Build/iOS/RealmSwift.framework",
+    preferred_linkage = "shared",
+    visibility = ["PUBLIC"],
+)

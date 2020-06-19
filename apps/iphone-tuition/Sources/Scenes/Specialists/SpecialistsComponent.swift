@@ -12,21 +12,33 @@ import SpecialistsImplementation
 import SpecialistsUI
 import Network
 import TuituionCore
+import StorageKit
+
+protocol SpecialistsDependency: Dependency {
+  var rootNavigator: UINavigationController { get }
+  var networkService: NetworkAPIProtocol { get }
+}
 
 protocol SpecialistsBuilder {
   var viewController: UIViewController { get }
 }
 
-class SpecialistsComponent: Component<EmptyDependency>, SpecialistsBuilder {
+class SpecialistsComponent: Component<SpecialistsDependency>, SpecialistsBuilder {
   var useCase: SpecialistsUseCase {
     shared {
       SpecialistsUseCaseImplementation(specialistRepository: repository)
     }
   }
   
+  var specialistsStorage: SpecialistsStorage {
+    let configuration = StorageConfiguration(type: .inmemory)
+    return SpecialistsStorageImplementation(inMemoryConfiguration: configuration)
+  }
+  
   var repository: SpecialistsRepository {
     shared {
-      SpecialistsRepositoryImplementation(specialistGateway: gateway)
+      SpecialistsRepositoryImplementation(specialistGateway: gateway,
+                                          specialistsStorage: specialistsStorage)
     }
   }
   
@@ -41,18 +53,33 @@ class SpecialistsComponent: Component<EmptyDependency>, SpecialistsBuilder {
   
   var gateway: SpecialistsGateway {
     shared {
-      SpecialistsGatewayImplementation(networkService: networkService)
+      SpecialistsGatewayImplementation(networkService: dependency.networkService)
     }
   }
   
   var state: SpecialistsListState {
     SpecialistsListState(specialistsUseCase: useCase)
+    }
+  }
+
+  var router: SpecialistsRouter {
+    shared {
+      let router = SpecialistsRouterImplementation(detailsBuilder: details)
+      router.setViewController(dependency.rootNavigator)
+      return router
+    }
   }
   
   var viewController: UIViewController {
-    let viewController = SpecialistsList()
-    viewController.store = state
     
-    return viewController
+    list.viewController
+  }
+  
+  var list: SpecialistsListComponent {
+    SpecialistsListComponent(parent: self)
+  }
+  
+  var details: SpecialistDetailsComponent {
+    SpecialistDetailsComponent(parent: self)
   }
 }

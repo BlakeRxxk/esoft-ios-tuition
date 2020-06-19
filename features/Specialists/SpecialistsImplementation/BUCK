@@ -10,9 +10,12 @@ static_library(
         "//features/Specialists/SpecialistsCore:SpecialistsCore",
         "//libraries/URLRequestKit:URLRequestKit",
         "//libraries/StateKit:StateKit",
+        "//libraries/StorageKit:StorageKit",
         "//third-party/Pods:RxSwift",
         "//third-party/Pods:RxCocoa",
         "//third-party/Pods:RxRelay",
+        "//third-party/Carthage:Realm",
+        "//third-party/Carthage:RealmSwift",
     ],
     frameworks = [
         "$SDKROOT/System/Library/Frameworks/Foundation.framework",

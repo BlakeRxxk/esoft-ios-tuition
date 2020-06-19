@@ -10,6 +10,7 @@ import EsoftUIKit
 import BaseUI
 import IGListKit
 import YogaKit
+import TuitionIntegrations
 
 public final class RootViewController: ViewController<BaseListView> {
   internal var data: [ListDiffable] = [
@@ -100,9 +101,6 @@ extension RootViewController: RootViewItemSectionOutput {
       show(sellerTicketBuilder.sellerTicketViewController, sender: nil)
     case "Task 6":
       present(loggedOutBuilder.loggedOutViewController, animated: true)
-    case "Cities":
-      let scene = ViperModule.buildModule()
-      show(scene, sender: nil)
     case "Simple RxDemo":
       show(rxdemoBuilder.viewController, sender: nil)
     default:

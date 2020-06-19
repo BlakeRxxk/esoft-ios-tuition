@@ -29,13 +29,28 @@ extension SpecialistsList: StatefullView {
       case .skeleton:
         return SpecialistsListSkeletonSectionController()
       case .specialists:
-        return SpecialistsSectionController()
+        return SpecialistsSectionController(output: self)
       }
     })
 
+//    state
+//      .map { $0.isLoading }
+//      .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
+//      .bind(to: specializedView.refreshControl.rx.isRefreshing)
+//      .disposed(by: disposeBag)
+
     rx
       .viewWillAppear
-      .map { _ in SpecialistsListState.Action.fetchSpecialists() }
+      .map { [weak self] _ in
+        guard let `self` = self else { return .empty }
+
+        if self.store?.currentState.specialists == self.store?.initialState.specialists,
+          self.store?.currentState.page == self.store?.initialState.page,
+          self.store?.currentState.pages == self.store?.initialState.pages {
+          return SpecialistsListState.Action.fetchSpecialists()
+        }
+        return .empty
+      }
       .bind(to: store.action)
       .disposed(by: disposeBag)
     
@@ -66,24 +81,25 @@ extension SpecialistsList: StatefullView {
             EmptyListViewModel(title: "Empty", message: Localized.search, image: UIImage.Stub.specialists)
             ]}
         .map { $0.mapToSpecialistsSections() }
-    
-    let specialist = state
-        .filter { $0.initialLoading == false && !$0.specialists.isEmpty }
-        .map { $0.specialists }
-        .map { $0.map { $0.asViewModel() } }
-        .map { $0.mapToSpecialistsSections() }
 
+    let specialists = state
+      .filter { $0.initialLoading == false && !$0.specialists.isEmpty }
+      .map { $0.specialists }
+      .map { [ListHeaderViewModel(count: 0, title: Localized.title, icon: UIImage())] + $0 }
+      .map { $0.mapToSpecialistsSections() }
+    
     guard let adapter = specializedView.adapter else {
         return
     }
-    
+
     Observable.of(
-        skeleton,
-        empty,
-        specialist
+      skeleton,
+      empty,
+      specialists
     )
-        .merge()
-        .bind(to: adapter.rx.objects(for: source))
-        .disposed(by: disposeBag)
-    }
+      .merge()
+      .bind(to: adapter.rx.objects(for: source))
+      .disposed(by: disposeBag)
+    
+  }
 }
