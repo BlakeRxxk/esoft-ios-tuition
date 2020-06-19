@@ -8,7 +8,7 @@
 import Foundation
 import IGListKit
 import ListKit
-import SpecialistsCore
+//import SpecialistsCore
 
 public final class ObjectsViewModel {
   

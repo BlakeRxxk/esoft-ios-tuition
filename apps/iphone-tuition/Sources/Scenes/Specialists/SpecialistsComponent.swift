@@ -58,8 +58,8 @@ class SpecialistsComponent: Component<SpecialistsDependency>, SpecialistsBuilder
   }
   
   var state: SpecialistsListState {
-    SpecialistsListState(specialistsUseCase: useCase)
-    }
+    
+    return SpecialistsListState(specialistsUseCase: useCase)
   }
 
   var router: SpecialistsRouter {

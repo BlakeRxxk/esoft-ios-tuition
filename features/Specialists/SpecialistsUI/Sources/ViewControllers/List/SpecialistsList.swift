@@ -80,22 +80,3 @@ extension SpecialistsList: UIScrollViewDelegate {
     }
   }
 }
-
-extension SpecialistsList: UIScrollViewDelegate {
-  public func scrollViewWillEndDragging(_ scrollView: UIScrollView,
-                                        withVelocity velocity: CGPoint,
-                                        targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-    let distance = scrollView.contentSize.height - (targetContentOffset.pointee.y + scrollView.bounds.height)
-    
-    guard let currentState = store?.currentState else {
-      return
-    }
-    
-    let page = currentState.page
-    let pages = currentState.pages
-    
-    if distance < 700, page < pages {
-      store?.action.onNext(.fetchSpecialists(page: page + 1))
-    }
-  }
-}
