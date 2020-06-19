@@ -21,6 +21,8 @@ public final class CostItemViewYoga: View {
     }
   }
   
+  public weak var output: CostItemViewYogaOutput?
+  
   private(set) lazy var mainContainer: UIView = UIView()
   private(set) lazy var costSubheaderTitle: UILabel = UILabel()
   private(set) lazy var costContainer: UIView = UIView()
@@ -30,7 +32,7 @@ public final class CostItemViewYoga: View {
   private(set) lazy var divider: UIView = UIView()
   private(set) lazy var editStackView: UIView = UIView()
   private(set) lazy var editIcon: UIImageView = UIImageView()
-  private(set) lazy var editLabel: UILabel = UILabel()
+  public lazy var editLabel: UIButton = UIButton()
 
   override public init() {
     super.init()
@@ -79,9 +81,23 @@ public final class CostItemViewYoga: View {
     editIcon.image = UIImage.Screen5.edit
     editIcon.tintColor = ThemeManager.current().colors.primary500
     
-    editLabel.text = "Изменить"
-    editLabel.setStyles(UILabel.Styles.headline, UILabel.ColorStyle.primary500)
+    editLabel.setTitle("Изменить", for: .normal)
+    editLabel.setTitleColor(ThemeManager.current().colors.primary500, for: .normal)
+    editLabel.titleLabel?.font = .boldSystemFont(ofSize: 17)
+    editLabel.contentHorizontalAlignment = .left
+//    editLabel.setStyles(UIButton.Styles.outlineTextColors)
+//    
+//    let actionForEditStackView = UITapGestureRecognizer(target: self, action: #selector(handleTapAction))
+//    editStackView.addGestureRecognizer(actionForEditStackView)
+//    let actionForButton = UITapGestureRecognizer(target: self, action: #selector(handleTapAction))
+//    editLabel.addGestureRecognizer(actionForButton)
   }
+//
+//  @objc private func handleTapAction() {
+//    output?.didTapAction(in: self)
+//    print("didTapAction in CostItemViewYoga: ")
+//  }
+
   
   private func layout() {
     mainContainer.configureLayout { layout in
@@ -145,6 +161,7 @@ public final class CostItemViewYoga: View {
     
     editLabel.configureLayout { layout in
       layout.isEnabled = true
+      layout.width = 100%
     }
   }
 }

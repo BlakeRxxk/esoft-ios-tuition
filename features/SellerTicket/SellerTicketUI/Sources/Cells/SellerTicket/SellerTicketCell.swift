@@ -13,8 +13,7 @@ import EsoftUIKit
 
 public final class SellerTicketCell: UICollectionViewCell {
   private static let reuseIdentifier: String = "SellerTicketCellID"
-  
-  public weak var output: SellerTicketCellOutput?
+  public var sellerTicketID: Int = 0
   
   // MARK: - CostItem
   public var price: String {
@@ -38,6 +37,8 @@ public final class SellerTicketCell: UICollectionViewCell {
   
   private(set) lazy var costItemView: CostItemViewYoga = CostItemViewYoga()
   private(set) lazy var photoItemView: PhotoItemViewYoga = PhotoItemViewYoga()
+  
+  public weak var output: SellerTicketCellOutput?
   
   override init(frame: CGRect = .zero) {
     super.init(frame: frame)
@@ -93,6 +94,21 @@ public final class SellerTicketCell: UICollectionViewCell {
   
   private func configureUI() {
 //    contentView.setStyles(UIView.Styles.whiteBackground)
+    let action = UITapGestureRecognizer(target: self, action: #selector(handleTapAction) )
+    costItemView.editLabel.addGestureRecognizer(action)
+  }
+  
+  @objc private func handleTapAction() {
+    output?.didTapEditSellerPrice(in: self)
+    print("didTapEditSellerPrice in SellerTicketCell")
+  }
+}
+
+extension SellerTicketCell: CostItemViewYogaOutput {
+  public func didTapAction(in view: CostItemViewYogaInput) {
+//    output?.didTapEditSellerPrice(in: self)
+    output?.didTapEditSellerPrice(in: self)
+//    print("DIDTAPACTION in SellerTicketCell: ")
   }
 }
 

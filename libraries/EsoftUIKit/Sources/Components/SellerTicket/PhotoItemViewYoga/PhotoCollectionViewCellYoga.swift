@@ -39,7 +39,6 @@ final class PhotoCollectionViewCellYoga: UICollectionViewCell {
         self.bg.image = image
       }
     }
-    //https://cdn.esoft.digital/640480/media/photos/b0/d8/0ada5f9ed8dbbce07b9ad3cb6ec1bda5b5f55e17.jpg
     bg.image = UIImage(named: photoName)
   }
   

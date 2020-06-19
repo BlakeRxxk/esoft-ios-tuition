@@ -1,8 +1,8 @@
 //
-//  SellerTicketList.swift
-//  AppLibrary
+//  EditSellerPriceList.swift
+//  SellerTicketUI#iphonesimulator-x86_64
 //
-//  Created by wtildestar on 24/05/2020.
+//  Created by wtildestar on 17/06/2020.
 //
 
 import Foundation
@@ -15,9 +15,8 @@ import ListKit
 import Localized
 
 
-public final class SellerTicketList: ViewController<BaseListView> {
+public final class EditSellerPriceList: ViewController<BaseListView> {
   public var disposeBag: DisposeBag = DisposeBag()
-  public weak var router: SellerTicketRouter?
   
   public init() {
     super.init(viewCreator: BaseListView.init)
@@ -48,7 +47,7 @@ public final class SellerTicketList: ViewController<BaseListView> {
   }
 }
 
-extension SellerTicketList {
+extension EditSellerPriceList {
   enum Localized {
     public static let search = "search".localize()
   }

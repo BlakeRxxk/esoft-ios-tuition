@@ -7,6 +7,10 @@
 
 import Foundation
 
-public protocol SellerTicketCellInput {}
+public protocol SellerTicketCellInput {
+  var sellerTicketID: Int { get set }
+}
 
-public protocol SellerTicketCellOutput: class {}
+public protocol SellerTicketCellOutput: class {
+  func didTapEditSellerPrice(in cell: SellerTicketCellInput)
+}

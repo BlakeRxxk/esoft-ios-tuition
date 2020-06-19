@@ -22,9 +22,6 @@ import UIKit
 // MARK: - Registration
 
 public func registerProviderFactories() {
-    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->SellerTicketComponent") { component in
-        return EmptyDependencyProvider(component: component)
-    }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->ObjectsComponent") { component in
         return EmptyDependencyProvider(component: component)
     }
@@ -32,6 +29,9 @@ public func registerProviderFactories() {
         return EmptyDependencyProvider(component: component)
     }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->SpecialistsComponent") { component in
+        return EmptyDependencyProvider(component: component)
+    }
+    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->RxSellerTicketComponent->EditSellerPriceComponent") { component in
         return EmptyDependencyProvider(component: component)
     }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->RxSellerTicketComponent") { component in

@@ -13,11 +13,16 @@ import SellerTicketUI
 import Network
 import TuituionCore
 
-protocol RxSellerTicketBuilder {
-  var sellerTicketViewController: UIViewController { get }
+protocol RxSellerTicketDependency: Dependency {
+  var rootNavigator: UINavigationController { get }
+  var networkService: NetworkAPIProtocol { get }
 }
 
-class RxSellerTicketComponent: Component<EmptyDependency>, RxSellerTicketBuilder {
+protocol RxSellerTicketBuilder {
+  var viewController: UIViewController { get }
+}
+
+class RxSellerTicketComponent: Component<RxSellerTicketDependency>, RxSellerTicketBuilder {
   var useCase: SellerTicketUseCase {
     shared {
       SellerTicketUseCaseImplementation(sellerTicketRepository: repository)
@@ -30,18 +35,26 @@ class RxSellerTicketComponent: Component<EmptyDependency>, RxSellerTicketBuilder
     }
   }
   
-  var networkService: NetworkAPI {
-    let service = NetworkAPI(session: .init(.shared),
-                             decoder: RiesDecoder(),
-                             baseUrl: URL(string: "https://us-central1-esoft-tuition-cloud.cloudfunctions.net/sellerTicket")!)
-    service.requestInterceptors.append(RiesInterceptor())
-    
-    return service
-  }
+//  var networkService: NetworkAPI {
+//    let service = NetworkAPI(session: .init(.shared),
+//                             decoder: RiesDecoder(),
+//                             baseUrl: URL(string: "https://us-central1-esoft-tuition-cloud.cloudfunctions.net/sellerTicket")!)
+//    service.requestInterceptors.append(RiesInterceptor())
+//    
+//    return service
+//  }
   
   var gateway: SellerTicketGateway {
     shared {
-      SellerTicketGatewayImplementation(networkService: networkService)
+      SellerTicketGatewayImplementation(networkService: dependency.networkService)
+    }
+  }
+  
+  var router: SellerTicketRouter {
+    shared {
+      let router = SellerTicketRouterImplementation(detailsBuilder: editSellerPrice)
+      router.setViewController(dependency.rootNavigator)
+      return router
     }
   }
   
@@ -49,11 +62,20 @@ class RxSellerTicketComponent: Component<EmptyDependency>, RxSellerTicketBuilder
     SellerTicketListState(sellerTicketUseCase: useCase)
   }
   
-  var sellerTicketViewController: UIViewController {
-    let viewController = SellerTicketList()
-    viewController.store = state
-    
-    return viewController
+  var viewController: UIViewController {
+    //    let viewController = SellerTicketList()
+    //    viewController.store = state
+    //
+    //    return viewController
+    list.viewController
+  }
+  
+  var list: SellerTicketListComponent {
+    SellerTicketListComponent(parent: self)
+  }
+  
+  var editSellerPrice: EditSellerPriceComponent {
+    EditSellerPriceComponent(parent: self)
   }
 }
 

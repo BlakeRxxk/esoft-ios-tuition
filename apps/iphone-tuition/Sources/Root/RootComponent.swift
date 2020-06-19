@@ -12,7 +12,6 @@ public final class RootComponent: BootstrapComponent {
   
   var rootViewController: UIViewController {
     let rootViewController = RootViewController(objectsBuilder: objectsComponent,
-                                                sellerTicketBuilder: sellerTicketComponent,
                                                 rxSellerTicketBuilder: rxSellerTicketComponent,
                                                 discountBuilder: discountComponent,
                                                 mortgageBuilder: mortgageComponent,
@@ -28,10 +27,6 @@ public final class RootComponent: BootstrapComponent {
   
   var objectsComponent: ObjectsComponent {
       ObjectsComponent(parent: self)
-  }
-  
-  var sellerTicketComponent: SellerTicketComponent {
-    SellerTicketComponent(parent: self)
   }
   
   var rxSellerTicketComponent: RxSellerTicketComponent {
