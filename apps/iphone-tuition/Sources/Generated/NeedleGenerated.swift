@@ -25,10 +25,10 @@ public func registerProviderFactories() {
         return EmptyDependencyProvider(component: component)
     }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->LoggedOutComponent->PasswordComponent->AuthCitiesComponent") { component in
-        return EmptyDependencyProvider(component: component)
+        return networkServiceDependencyf7009334ba99a847f4b0Provider(component: component)
     }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->LoggedOutComponent->PasswordComponent") { component in
-        return EmptyDependencyProvider(component: component)
+        return networkServiceDependency7f4b9667802a4ca3962eProvider(component: component)
     }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->RootComponent->LoggedOutComponent") { component in
         return EmptyDependencyProvider(component: component)
@@ -56,3 +56,23 @@ public func registerProviderFactories() {
 
 // MARK: - Providers
 
+/// ^->RootComponent->LoggedOutComponent->PasswordComponent->AuthCitiesComponent
+private class networkServiceDependencyf7009334ba99a847f4b0Provider: networkServiceDependency {
+    var networkService: NetworkAPI {
+        return loggedOutComponent.networkService
+    }
+    private let loggedOutComponent: LoggedOutComponent
+    init(component: NeedleFoundation.Scope) {
+        loggedOutComponent = component.parent.parent as! LoggedOutComponent
+    }
+}
+/// ^->RootComponent->LoggedOutComponent->PasswordComponent
+private class networkServiceDependency7f4b9667802a4ca3962eProvider: networkServiceDependency {
+    var networkService: NetworkAPI {
+        return loggedOutComponent.networkService
+    }
+    private let loggedOutComponent: LoggedOutComponent
+    init(component: NeedleFoundation.Scope) {
+        loggedOutComponent = component.parent as! LoggedOutComponent
+    }
+}

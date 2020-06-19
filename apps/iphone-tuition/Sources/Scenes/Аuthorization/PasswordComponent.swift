@@ -14,19 +14,14 @@ import Network
 import TuituionCore
 import StorageKit
 
-class PasswordComponent: Component<EmptyDependency>, PasswordBuilder {
-  var networkService: NetworkAPI {
-    let service = NetworkAPI(session: .init(.shared),
-                             decoder: RiesDecoder(),
-                             baseUrl: URL(string: "https://us-central1-esoft-tuition-cloud.cloudfunctions.net/")!)
-    service.requestInterceptors.append(RiesInterceptor())
+protocol networkServiceDependency: Dependency {
+  var networkService: NetworkAPI { get }
+}
 
-    return service
-  }
-  
+class PasswordComponent: Component<networkServiceDependency>, PasswordBuilder {
   var passwordGateway: PasswordGateway {
     shared {
-      PasswordGatewayImplementation(networkService: networkService)
+      PasswordGatewayImplementation(networkService: dependency.networkService)
     }
   }
   

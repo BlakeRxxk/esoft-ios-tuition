@@ -7,14 +7,29 @@
 
 import NeedleFoundation
 import Foundation
-import AuthUI
+import AuthCore
 import AuthImplementation
+import AuthUI
+import Network
+import TuituionCore
+import StorageKit
 
 protocol LoggedOutBuilder {
   var loggedOutViewController: UIViewController { get }
 }
 
 class LoggedOutComponent: Component<EmptyDependency>, LoggedOutBuilder {
+  var networkService: NetworkAPI {
+    shared {
+      let service = NetworkAPI(session: .init(.shared),
+                               decoder: RiesDecoder(),
+                               baseUrl: URL(string: "https://us-central1-esoft-tuition-cloud.cloudfunctions.net/")!)
+      service.requestInterceptors.append(RiesInterceptor())
+
+      return service
+    }
+  }
+  
   var state: LoginState {
     LoginState()
   }

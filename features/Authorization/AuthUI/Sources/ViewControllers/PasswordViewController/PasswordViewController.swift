@@ -78,7 +78,7 @@ final public class PasswordViewController: ViewController<BaseListView> {
   }
   
   func openCities() {
-    show(citiesBuilder.citiesViewController, sender: nil)
+    present(citiesBuilder.citiesViewController, animated: true)
   }
 }
 

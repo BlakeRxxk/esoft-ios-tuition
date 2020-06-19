@@ -88,7 +88,7 @@ extension LoginViewController: AuthInputSectionControllerOutput {
 extension LoginViewController: AuthButtonSectionControllerOutput {
   public func didTapeButton() {
     print("didTap: continueButton")
-    show(passwordBuilder.passwordViewController, sender: nil)
+    present(passwordBuilder.passwordViewController, animated: true)
   }
 }
 

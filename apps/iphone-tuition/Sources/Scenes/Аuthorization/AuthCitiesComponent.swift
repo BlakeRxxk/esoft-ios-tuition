@@ -14,29 +14,20 @@ import Network
 import TuituionCore
 import StorageKit
 
-class AuthCitiesComponent: Component<EmptyDependency>, AuthUI.CitiesBuilder {
-  var networkService: NetworkAPI {
-    let service = NetworkAPI(session: .init(.shared),
-                             decoder: RiesDecoder(),
-                             baseUrl: URL(string: "https://us-central1-esoft-tuition-cloud.cloudfunctions.net/")!)
-    service.requestInterceptors.append(RiesInterceptor())
-
-    return service
-  }
-  
+class AuthCitiesComponent: Component<networkServiceDependency>, AuthUI.CitiesBuilder {
   var citiesGateway: CitiesGateway {
     shared {
-      CitiesGatewayImplementation(networkService: networkService)
+      CitiesGatewayImplementation(networkService: dependency.networkService)
     }
   }
   var countriesGateway: CountriesGateway {
     shared {
-      CountriesGatewayImplementation(networkService: networkService)
+      CountriesGatewayImplementation(networkService: dependency.networkService)
     }
   }
   var myCityGateway: MyCityGateway {
     shared {
-      MyCityGatewayImplementation(networkService: networkService)
+      MyCityGatewayImplementation(networkService: dependency.networkService)
     }
   }
   

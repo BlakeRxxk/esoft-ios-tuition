@@ -61,7 +61,8 @@ final public class CitiesViewController: ViewController<BaseListView> {
   }
   
   @objc private func handleDismiss(sender: UIButton) {
-    dismiss(animated: true, completion: nil)
+//    dismiss(animated: true, completion: nil)
+    self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
   }
   
   @objc private func handleAlert(sender: UIButton) {
