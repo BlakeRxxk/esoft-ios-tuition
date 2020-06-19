@@ -42,10 +42,24 @@ class SpecialistsComponent: Component<SpecialistsDependency>, SpecialistsBuilder
     }
   }
   
+  var networkService: NetworkAPI {
+    let service = NetworkAPI(session: .init(.shared),
+                             decoder: RiesDecoder(),
+                             baseUrl: URL(string: "https://developers.etagi.com/api/v2/catalogs")!)
+    service.requestInterceptors.append(RiesInterceptor())
+
+    return service
+  }
+  
   var gateway: SpecialistsGateway {
     shared {
       SpecialistsGatewayImplementation(networkService: dependency.networkService)
     }
+  }
+  
+  var state: SpecialistsListState {
+    
+    SpecialistsListState(specialistsUseCase: useCase)
   }
 
   var router: SpecialistsRouter {

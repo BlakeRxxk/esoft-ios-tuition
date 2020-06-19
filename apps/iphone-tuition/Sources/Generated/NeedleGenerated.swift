@@ -9,6 +9,9 @@ import Foundation
 import NeedleFoundation
 import Network
 import NetworkTrainee
+import ObjectsCore
+import ObjectsImplementation
+import ObjectsUI
 import SpecialistsCore
 import SpecialistsImplementation
 import SpecialistsUI

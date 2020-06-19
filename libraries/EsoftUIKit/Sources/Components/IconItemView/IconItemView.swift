@@ -118,6 +118,7 @@ public final class IconItemView: View {
   }
   
   @objc private func handleTapAction() {
+    print("Компонент")
     output?.didTapAction(in: self)
   }
 }

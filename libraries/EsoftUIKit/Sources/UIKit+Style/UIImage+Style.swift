@@ -132,6 +132,10 @@ extension UIImage {
     named("arrow.down").withRenderingMode(.alwaysTemplate)
   }
   
+  public static var ic_sort: UIImage {
+    named("ic_sort").withRenderingMode(.alwaysTemplate)
+  }
+  
   public static var eye: UIImage {
     named("eye").withRenderingMode(.alwaysTemplate)
   }
@@ -142,6 +146,10 @@ extension UIImage {
   
   public static var favorit: UIImage {
     named("favorit").withRenderingMode(.alwaysTemplate)
+  }
+
+  public static var favoritFill: UIImage {
+    named("ic_star_fill").withRenderingMode(.alwaysOriginal)
   }
 
   public static var letter: UIImage {

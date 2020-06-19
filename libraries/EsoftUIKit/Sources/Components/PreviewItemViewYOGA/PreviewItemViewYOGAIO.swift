@@ -9,7 +9,18 @@ import UIKit
 
 public protocol PreviewItemViewInputYOGA {
   var currentPrice: String { get set }
-  var price: String { get set }
+  var oldPrice: String { get set }
+  var photos: [String] { get set }
   var address: String { get set }
-  var photo: UIImage? { get set }
+  
+  var objectsDescription: String { get set }
+  
+  var views: String { get set }
+  var favoritesCount: String { get set }
+  var code: String { get set }
+}
+
+public protocol PreviewItemViewOutputYOGA: class {
+  func didTapPhone()
+  func didTapFavorit()
 }

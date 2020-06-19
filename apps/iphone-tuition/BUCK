@@ -30,6 +30,11 @@ static_libraries = [
     "//libraries/Network:Network",
     "//libraries/NetworkTrainee:NetworkTrainee",
     "//libraries/StateKit:StateKit",
+
+    "//features/Objects/ObjectsCore:ObjectsCore",
+    "//features/Objects/ObjectsImplementation:ObjectsImplementation",
+    "//features/Objects/ObjectsUI:ObjectsUI",
+
     "//libraries/Currency:Currency",
     "//libraries/Localized:Localized",
     "//libraries/ListKit:ListKit",
@@ -44,6 +49,7 @@ static_libraries = [
     "//features/TuituionCore/TuituionCore:TuituionCore",
     "//integrations/TuitionIntegrations:TuitionIntegrations",
     "//libraries/CDNImageLink:CDNImageLink",
+
 ]
 
 prebuilt_test_frameworks = [

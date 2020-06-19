@@ -26,28 +26,7 @@ final class SellerTicketViewController: UIViewController {
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-
-    let yogaContainer = view.bounds.size
-    view.configureLayout { layout in
-      layout.isEnabled = true
-      layout.flexDirection = .column
-      layout.width = YGValue(yogaContainer.width)
-      layout.height = YGValue(yogaContainer.height)
-    }
-
-    costItemViewYoga.configureLayout { layout in
-      layout.isEnabled = true
-      layout.width = 100%
-      layout.height = YGValueAuto
-    }
-    
-    photoItemViewYoga.configureLayout { layout in
-      layout.isEnabled = true
-      layout.width = 100%
-      layout.height = YGValueAuto
-    }
-    
-    view.yoga.applyLayout(preservingOrigin: true, dimensionFlexibility: .flexibleHeight)
+    layout()
   }
   
   // MARK: - Methods
@@ -72,6 +51,27 @@ final class SellerTicketViewController: UIViewController {
     photoItemViewYoga.firstTitle = Localized.showAllLabel
     photoItemViewYoga.secondTitle = Localized.showAllQuantityLabel
   }
+    
+    private func layout() {
+        view.configureLayout { layout in
+            layout.isEnabled = true
+            layout.flexDirection = .column
+            layout.width = 100%
+            layout.height = 100%
+        }
+        
+        costItemViewYoga.configureLayout { layout in
+            layout.isEnabled = true
+            layout.width = 100%
+        }
+        
+        photoItemViewYoga.configureLayout { layout in
+            layout.isEnabled = true
+            layout.width = 100%
+        }
+        
+        view.yoga.applyLayout(preservingOrigin: true)
+    }
 }
 
 private extension SellerTicketViewController {

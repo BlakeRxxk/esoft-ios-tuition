@@ -94,7 +94,7 @@ extension RootViewController: RootViewItemSectionOutput {
     case "Task 2":
       show(discountBuilder.discountViewController, sender: nil)
     case "Task 3":
-      show(objectsBuilder.objectsViewController, sender: nil)
+        show(objectsBuilder.viewController, sender: nil)
     case "Task 4":
       show(mortgageBuilder.mortgageListViewController, sender: nil)
     case "Task 5":

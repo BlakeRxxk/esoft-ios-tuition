@@ -62,6 +62,7 @@ extension SpecialistsSectionController: SpecialistCellOutput {
   }
   
   public func didTapPhone(in cell: SpecialistCellInput) {
+    print("Секция")
     output?.didTapPhone(in: cell)
   }
   
