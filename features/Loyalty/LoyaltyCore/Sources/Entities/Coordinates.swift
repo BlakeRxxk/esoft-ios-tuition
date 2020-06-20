@@ -8,18 +8,27 @@
 import Foundation
 
 public struct Coordinates {
-  var lat: Float
-  var lng: Float
+  // Tyumen
+  var lat: Float = 57.1486
+  var lng: Float = 65.5333
 
-  init(lat: Float, lng: Float) {
+  public init() {}
+
+  public init(lat: Float, lng: Float) {
     self.lat = lat
     self.lng = lng
   }
 
-  init(coordinates: String) {
-    let coords = coordinates.split(separator: ",", omittingEmptySubsequences: true)
+  public init(coordinates: String?) {
+    guard coordinates != nil else { return }
+    let coordsWithoutSpaces = coordinates!.replacingOccurrences(of: " ", with: "", options: NSString.CompareOptions.literal, range: nil)
+    let coords = coordsWithoutSpaces.split(separator: ",", omittingEmptySubsequences: true)
     self.lat = Float(coords[0].trimmingCharacters(in: .whitespaces)) ?? 0.0
     self.lng = Float(coords[1].trimmingCharacters(in: .whitespaces)) ?? 0.0
+  }
+
+  public func asString() -> String {
+    "\(lat),\(lng)"
   }
 }
 

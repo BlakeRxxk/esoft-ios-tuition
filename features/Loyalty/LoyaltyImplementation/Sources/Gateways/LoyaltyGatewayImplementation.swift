@@ -1,13 +1,13 @@
 //
 //  LoyaltyGatewayImplementation.swift
-//  SpecialistsImplementation
+//  LoyaltyImplementation
 //
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
 //
 
 import RxSwift
 import Network
-import SpecialistsCore
+import LoyaltyCore
 
 public final class LoyaltyGatewayImplementation {
   let networkService: NetworkAPIProtocol
@@ -18,11 +18,7 @@ public final class LoyaltyGatewayImplementation {
 }
 
 extension LoyaltyGatewayImplementation: LoyaltyGateway {
-  public func getListCount(url: URL) -> Single<SpecialistsCount> {
-    networkService.request(url: url)
-  }
-  
-  public func getList(url: URL) -> Single<[Specialist]> {
+  public func getLoyalty(url: URL) -> Single<Loyalty> {
     networkService.request(url: url)
   }
 }

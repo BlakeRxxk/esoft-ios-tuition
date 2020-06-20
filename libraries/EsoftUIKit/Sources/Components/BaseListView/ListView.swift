@@ -23,10 +23,22 @@ public class BaseListView: View {
                                                                 stretchToEdge: true)
   public private(set) lazy var collectionView = ListCollectionView(frame: .zero,
                                                                    listCollectionViewLayout: flowLayout)
+  private lazy var deleteRefreshControl: Bool = false
   
   override public init() {
     super.init()
     
+    self.adapter = ListAdapter(updater: ListAdapterUpdater(),
+                               viewController: parentViewController,
+                               workingRangeSize: 15)
+    createUI()
+    configureUI()
+  }
+
+  public init(deleteRefreshControl: Bool) {
+    super.init()
+
+    self.deleteRefreshControl = deleteRefreshControl
     self.adapter = ListAdapter(updater: ListAdapterUpdater(),
                                viewController: parentViewController,
                                workingRangeSize: 15)
@@ -49,7 +61,9 @@ public class BaseListView: View {
     activityIndicator.activity.startAnimating()
     
     refreshControl.tintColor = ThemeManager.current().colors.primary500
-    collectionView.refreshControl = refreshControl
+    if !deleteRefreshControl {
+      collectionView.refreshControl = refreshControl
+    }
     activityIndicator.translatesAutoresizingMaskIntoConstraints = false
     
     NSLayoutConstraint.activate([

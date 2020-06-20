@@ -100,7 +100,6 @@ extension String {
   }
 
   func getBoolValue() -> Bool {
-    print("getBoolValue", self)
     if self.lowercased() == "no"
       || self.lowercased() == "нет"
       || self == "0"

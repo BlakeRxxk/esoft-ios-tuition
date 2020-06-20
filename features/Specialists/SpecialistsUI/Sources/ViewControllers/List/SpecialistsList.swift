@@ -18,13 +18,13 @@ import IGListKit
 public final class SpecialistsList: ViewController<BaseListView> {
   public var disposeBag: DisposeBag = DisposeBag()
   public weak var detailsTransitioningDelegate: InteractiveModalTransitioningDelegate?
-  
+
   public init() {
     super.init(viewCreator: BaseListView.init)
-    
+
     configureUI()
   }
-  
+
   override public func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     let container = view.bounds.size
@@ -41,7 +41,7 @@ public final class SpecialistsList: ViewController<BaseListView> {
     }
     view.yoga.applyLayout(preservingOrigin: true)
   }
-  
+
   private func configureUI() {
     view.backgroundColor = ThemeManager.current().colors.container
     specializedView.adapter?.scrollViewDelegate = self

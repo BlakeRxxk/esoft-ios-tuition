@@ -7,10 +7,12 @@ static_library(
         "Sources/**/*.swift",
     ]),
     deps = [
+        "//third-party/Pods:IGListKit",
         "//third-party/Pods:RxSwift",
         "//third-party/Pods:RxCocoa",
         "//third-party/Pods:RxRelay",
         "//libraries/Network:Network",
+        "//libraries/ListKit:ListKit",
     ],
     frameworks = [
         "$SDKROOT/System/Library/Frameworks/Foundation.framework",

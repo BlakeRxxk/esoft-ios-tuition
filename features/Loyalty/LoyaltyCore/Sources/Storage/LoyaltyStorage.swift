@@ -9,4 +9,5 @@ import RxSwift
 
 public protocol LoyaltyStorage {
   func fetchLoyalty() -> Single<Int>
+  func saveLoyalty(loyalty: [Loyalty]) -> Completable
 }

@@ -30,7 +30,8 @@ public final class DiscountCell: UICollectionViewCell {
   private(set) lazy var divider: UIView = UIView()
   private(set) lazy var discountUseSpace: UILabel = UILabel()
   private(set) lazy var button: UIButton = UIButton()
-  public lazy var pressBackOnNavbar: (UIButton?) -> Void = {_ in }
+
+  public weak var output: DiscountCellOutput?
 
   override init(frame: CGRect = .zero) {
     super.init(frame: frame)
@@ -47,7 +48,7 @@ public final class DiscountCell: UICollectionViewCell {
   }
 
   @objc func buttonAction(_ sender: UIButton!) {
-    pressBackOnNavbar(sender)
+    output?.pressBackOnNavbar(in: self)
   }
 
   private func createUI() {
@@ -131,3 +132,5 @@ public final class DiscountCell: UICollectionViewCell {
     contentView.yoga.applyLayout(preservingOrigin: true)
   }
 }
+
+extension DiscountCell: DiscountCellInput {}

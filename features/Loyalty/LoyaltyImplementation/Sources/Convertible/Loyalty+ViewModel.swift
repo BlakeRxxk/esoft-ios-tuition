@@ -11,9 +11,9 @@ import LoyaltyCore
 import CDNImageLink
 
 extension Loyalty {
-  public func asViewModel() -> LoyaltyViewModel {
-    guard let discount = self?.programs[0] else { return }
-    return LoyaltyViewModel(id: id,
+  public func asViewModel() -> DiscountViewModel {
+//    guard let discount = self.programs[0] else { return }
+    return DiscountViewModel(id: id,
                             additionalSaleParam: additionalSaleParam,
                             address: address,
                             categoryId: categoryId,
@@ -31,7 +31,7 @@ extension Loyalty {
                             secondPhone: secondPhone,
                             site: site,
                             visible: visible,
-                            discountUseSpace: discount.discountUseSpace,
+                            discountUseSpace: programs[0].discountUseSpace,
                             programs: programs)
   }
 }

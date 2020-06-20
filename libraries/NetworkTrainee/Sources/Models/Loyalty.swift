@@ -107,7 +107,7 @@ extension Loyalty: Codable, Hashable {
     address = try container.decode(String.self, forKey: .address)
     aboutCompany = try container.decode(String.self, forKey: .aboutCompany)
     partnerName = try container.decode(String.self, forKey: .partnerName)
-    coordinates = Coordinates(coordinates: try container.decode(String.self, forKey: .coordinates) ?? "57.1486, 65.5333")
+    coordinates = Coordinates(coordinates: try container.decode(String.self, forKey: .coordinates))
     dateCreated = try container.decode(String.self, forKey: .dateCreated)
     dateUpdated = try container.decode(String.self, forKey: .dateUpdated)
     logo = try container.decode(String.self, forKey: .logo)

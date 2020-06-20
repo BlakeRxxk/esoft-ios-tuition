@@ -9,5 +9,5 @@ import Foundation
 import RxSwift
 
 public protocol LoyaltyGateway {
-  func getLoyalty(url: URL) -> Single<[Loyalty]>
+  func getLoyalty(url: URL) -> Single<Loyalty>
 }

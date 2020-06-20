@@ -1,6 +1,6 @@
 //
 //  TestViewController.swift
-//  SpecialistsImplementationTests
+//  LoyaltyImplementationTests
 //
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
 //
@@ -8,7 +8,7 @@
 import UIKit
 import Foundation
 import StateKit
-import SpecialistsImplementation
+import LoyaltyImplementation
 
 final class TestViewController: UIViewController, StatefullView {
   var disposeBag = DisposeBag()
@@ -17,15 +17,15 @@ final class TestViewController: UIViewController, StatefullView {
   
   override func loadView() {
     self.view = UIView()
-    self.isLoadViewInvoked = true
+    // self.isLoadViewInvoked = true
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    store?.action.onNext(.fetchSpecialists(page: 1))
+    // store?.action.onNext(.fetchLoyalty(page: 1))
   }
   
-  func bind(store: SpecialistsListState) {
-    self.bindInvokeCount += 1
-  }
+  // func bind(store: LoyaltyListState) {
+  //   self.bindInvokeCount += 1
+  // }
 }

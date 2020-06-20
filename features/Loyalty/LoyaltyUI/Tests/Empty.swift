@@ -1,13 +1,13 @@
 //
 //  Empty.swift
-//  SpecialistsUITests
+//  LoyaltyUITests
 //
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
 //
 
 import XCTest
 
-final class SpecialistsUITests: XCTestCase {
+final class LoyaltyUITests: XCTestCase {
   
   func testExample() {
     // This is an example of a functional test case.

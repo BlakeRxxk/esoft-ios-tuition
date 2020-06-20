@@ -8,5 +8,5 @@
 import RxSwift
 
 public protocol LoyaltyRepository {
-  func getLoyalty(cityID: Int, searchQuery: String?) -> Single<[Specialist]>
+  func getLoyalty() -> Single<[Loyalty]>
 }

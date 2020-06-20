@@ -1,6 +1,6 @@
 //
 //  InteractiveModalTransitioningDelegate.swift
-//  SpecialistsUI
+//  LoyaltyUI
 //
 //  Copyright © 2019 E-SOFT. All rights reserved.
 //

@@ -12,17 +12,8 @@ public enum LoyaltyScope: String {
 
 public struct LoyaltyRequest {
   public var scope: LoyaltyScope
-  public var cityID: Int
-  public var query: String?
-  public var page: Int
   
-  public init(scope: LoyaltyScope = .all,
-              cityID: Int = 23,
-              query: String = "",
-              page: Int) {
+  public init(scope: LoyaltyScope = .all) {
     self.scope = scope
-    self.cityID = cityID
-    self.query = query
-    self.page = page
   }
 }

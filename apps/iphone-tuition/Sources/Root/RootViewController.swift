@@ -91,7 +91,7 @@ extension RootViewController: RootViewItemSectionOutput {
   public func didTapAction(in cell: RootViewItemInput) {
     switch cell.name {
     case "Task 2":
-      show(discountBuilder.discountViewController, sender: nil)
+      show(discountBuilder.viewController, sender: nil)
     case "Task 3":
       show(objectsBuilder.objectsViewController, sender: nil)
     case "Task 4":

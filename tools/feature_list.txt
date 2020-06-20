@@ -1,4 +1,7 @@
 ../../features/TuituionCore/TuituionCore/Sources/
+../../features/Loyalty/LoyaltyImplementation/Sources/
+../../features/Loyalty/LoyaltyUI/Sources/
+../../features/Loyalty/LoyaltyCore/Sources/
 ../../features/Specialists/SpecialistsCore/Sources/
 ../../features/Specialists/SpecialistsUI/Sources/
 ../../features/Specialists/SpecialistsImplementation/Sources/

@@ -1,13 +1,12 @@
 //
 //  DiscountViewModel.swift
-//  AppLibrary
+//  LoyaltyCore
 //
 //  Copyright © 2020 E-SOFT, OOO. All rights reserved.
 //
 
 import Foundation
 import IGListKit
-import NetworkTrainee
 
 public final class DiscountViewModel {
   public let id: Int
@@ -81,7 +80,7 @@ extension DiscountViewModel: ListDiffable {
 
   public func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
     guard self !== object else { return true }
-    guard let object = object as? CityViewModel else { return false }
+    guard let object = object as? DiscountViewModel else { return false }
     return id == object.id
   }
 }
