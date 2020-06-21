@@ -16,6 +16,7 @@ extension AuthInputCell: ListBindable {
     showButton = viewModel.showButton
     formatter = viewModel.formatter
     keyboardType = viewModel.keyboardType
+    errorMessage = viewModel.errorMessage
 
     layoutSubviews()
   }

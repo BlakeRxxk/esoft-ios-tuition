@@ -31,35 +31,44 @@ extension PasswordViewController: StatefullView {
     
     guard let adapter = specializedView.adapter else { return }
     
-    state
-      .map { state in [
-        LabelViewModel(id: 0, text: Localized.enterLabel, padding: (50, 0, 0, 0)) { label in
-          label.setStyles(UILabel.Styles.alignCenter,
-                          UILabel.ColorStyle.primary)
-        },
-        AuthInputViewModel(id: 0,
-                           placeholder: Localized.passwordPlaceholder,
-                           showButton: true,
-                           errorMessage: state.errorMessage),
-        AuthButtonViewModel(id: 0, text: Localized.continueButton, isWaiting: state.isWaiting),
-        LabelViewModel(id: 1, text: Localized.forgotten, padding: (29, 0, 0, 0)) { label in
-          label.setStyles(UILabel.Styles.singleLine,
-                          UILabel.Styles.alignCenter,
-                          UILabel.Styles.headline,
-                          UILabel.ColorStyle.system)
-          }
-        ]
+    let header = Observable.just([
+      LabelViewModel(id: 0, text: Localized.enterLabel, padding: (50, 0, 0, 0)) { label in
+        label.setStyles(UILabel.Styles.alignCenter,
+                        UILabel.ColorStyle.primary)
       }
-    .map { $0.mapToPasswordSections() }
-    .bind(to: adapter.rx.objects(for: source))
-    .disposed(by: disposeBag)
+    ])
+    
+    let input = state // Еще можно передавать введенные данные после ошибки, но пока не буду реализовывать
+      .distinctUntilChanged { $0.errorMessage == $1.errorMessage }
+      .map { [AuthInputViewModel(id: 0,
+                                 placeholder: Localized.passwordPlaceholder,
+                                 showButton: true,
+                                 errorMessage: $0.errorMessage)] }
+    let button = state
+      .map { $0.isWaiting }
+      .distinctUntilChanged()
+      .map { [AuthButtonViewModel(id: 0, text: Localized.continueButton, isWaiting: $0)] }
+    
+    let footer = Observable.just([
+      LabelViewModel(id: 1, text: Localized.forgotten, padding: (29, 0, 0, 0)) { label in
+        label.setStyles(UILabel.Styles.singleLine,
+                        UILabel.Styles.alignCenter,
+                        UILabel.Styles.headline,
+                        UILabel.ColorStyle.system)
+      }
+    ])
+    
+    Observable.combineLatest(header, input, button, footer) { $0 + $1 + $2 + $3 }
+      .map { $0.mapToPasswordSections() }
+      .bind(to: adapter.rx.objects(for: source))
+      .disposed(by: disposeBag)
     
     state
       .map { $0.isAvailable }
       .asDriver(onErrorJustReturn: false)
       .asObservable()
-      .bind(onNext: { [unowned self] isAvailabel in
-        if isAvailabel {
+      .bind(onNext: { [unowned self] isAvailable in
+        if isAvailable {
           self.openCities()
         }
       })

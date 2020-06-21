@@ -12,7 +12,11 @@ import EsoftUIKit
 public final class LoginState: Store {
   public let initialState: LoginState.State
   
-  public init() {
+  private let loginUseCase: LoginUseCase
+  
+  public init(loginUseCase: LoginUseCase) {
+    self.loginUseCase = loginUseCase
+    
     initialState = State()
   }
 }
@@ -33,6 +37,7 @@ extension LoginState {
   public func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case let .changeLogin(login):
+      loginUseCase.saveLogin(Login(login: login)) // Как синхронить не постоянно?
       return .just(.setLogin(login))
     }
   }

@@ -16,6 +16,7 @@ import StorageKit
 
 protocol networkServiceDependency: Dependency {
   var networkService: NetworkAPI { get }
+  var loginUseCase: LoginUseCase { get }
 }
 
 class PasswordComponent: Component<networkServiceDependency>, PasswordBuilder {
@@ -38,7 +39,8 @@ class PasswordComponent: Component<networkServiceDependency>, PasswordBuilder {
   }
   
   var state: PasswordState {
-    PasswordState(passwordUseCase: passwordUseCase)
+    PasswordState(loginUseCase: dependency.loginUseCase,
+                  passwordUseCase: passwordUseCase)
   }
   
   var authCitiesComponent: AuthCitiesComponent {

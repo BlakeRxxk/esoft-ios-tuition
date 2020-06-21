@@ -5,4 +5,9 @@
 //  Created by nedstar on 19.06.2020.
 //
 
-import Foundation
+import RxSwift
+
+public protocol LoginRepository {
+  func getLogin() -> Single<Login>
+  func saveLogin(_ login: Login)
+}

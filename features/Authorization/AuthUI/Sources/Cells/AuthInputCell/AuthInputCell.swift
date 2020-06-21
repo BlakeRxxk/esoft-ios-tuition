@@ -41,25 +41,6 @@ public final class AuthInputCell: UICollectionViewCell {
       errorTextField.showButton = newValue
     }
   }
-  public var formatter: MyFormatter? {
-    willSet {
-      // вроде не оч код
-      errorTextField.textField.rx
-        .text
-        .map { [unowned self] text -> String in
-          let text = text ?? ""
-          guard let formatter = self.formatter else {
-            return text
-          }
-          return formatter(text)
-        }
-        .do(onNext: { [unowned self] text in
-          self.output?.textDidChange(newVal: text)
-        })
-        .bind(to: errorTextField.textField.rx.text)
-        .disposed(by: disposeBag)
-    }
-  }
   public var errorMessage: String? {
     get {
       errorTextField.errorMessage
@@ -68,6 +49,7 @@ public final class AuthInputCell: UICollectionViewCell {
       errorTextField.errorMessage = newValue
     }
   }
+  public var formatter: MyFormatter?
   
   private(set) lazy var textFieldContainer: UIView = UIView()
   private(set) lazy var errorTextField: ErrorTextField = ErrorTextField()
@@ -78,6 +60,7 @@ public final class AuthInputCell: UICollectionViewCell {
     super.init(frame: frame)
     
     createUI()
+    bind()
   }
   
   required init?(coder: NSCoder) {
@@ -88,6 +71,23 @@ public final class AuthInputCell: UICollectionViewCell {
     textFieldContainer.addSubview(errorTextField)
     
     contentView.addSubview(textFieldContainer)
+  }
+  
+  private func bind() {
+    errorTextField.textField.rx
+      .text
+      .map { [unowned self] text -> String in
+        let text = text ?? ""
+        guard let formatter = self.formatter else {
+          return text
+        }
+        return formatter(text)
+      }
+      .do(onNext: { [unowned self] text in
+        self.output?.textDidChange(newVal: text)
+      })
+      .bind(to: errorTextField.textField.rx.text)
+      .disposed(by: disposeBag)
   }
   
   override public func layoutSubviews() {

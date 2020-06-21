@@ -61,6 +61,9 @@ private class networkServiceDependencyf7009334ba99a847f4b0Provider: networkServi
     var networkService: NetworkAPI {
         return loggedOutComponent.networkService
     }
+    var loginUseCase: LoginUseCase {
+        return loggedOutComponent.loginUseCase
+    }
     private let loggedOutComponent: LoggedOutComponent
     init(component: NeedleFoundation.Scope) {
         loggedOutComponent = component.parent.parent as! LoggedOutComponent
@@ -70,6 +73,9 @@ private class networkServiceDependencyf7009334ba99a847f4b0Provider: networkServi
 private class networkServiceDependency7f4b9667802a4ca3962eProvider: networkServiceDependency {
     var networkService: NetworkAPI {
         return loggedOutComponent.networkService
+    }
+    var loginUseCase: LoginUseCase {
+        return loggedOutComponent.loginUseCase
     }
     private let loggedOutComponent: LoggedOutComponent
     init(component: NeedleFoundation.Scope) {

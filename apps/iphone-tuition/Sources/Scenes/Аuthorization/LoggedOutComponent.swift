@@ -30,8 +30,27 @@ class LoggedOutComponent: Component<EmptyDependency>, LoggedOutBuilder {
     }
   }
   
+  var loginStorage: LoginStorage {
+    shared {
+      let configuration = StorageConfiguration(type: .persistent)
+      return LoginStorageImplementation(inMemoryConfiguration: configuration)
+    }
+  }
+  
+  var loginRepository: LoginRepository {
+    shared {
+      LoginRepositoryImplementation(loginStorage: loginStorage)
+    }
+  }
+  
+  var loginUseCase: LoginUseCase {
+    shared {
+      LoginUseCaseImplementation(loginRepository: loginRepository)
+    }
+  }
+  
   var state: LoginState {
-    LoginState()
+    LoginState(loginUseCase: loginUseCase)
   }
   
   var loggedOutViewController: UIViewController {

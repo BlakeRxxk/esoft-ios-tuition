@@ -11,9 +11,13 @@ import EsoftUIKit
 
 public final class PasswordState: Store {
   public let initialState: PasswordState.State
+  
+  private let loginUseCase: LoginUseCase
   private let passwordUseCase: PasswordUseCase
   
-  public init(passwordUseCase: PasswordUseCase) {
+  public init(loginUseCase: LoginUseCase,
+              passwordUseCase: PasswordUseCase) {
+    self.loginUseCase = loginUseCase
     self.passwordUseCase = passwordUseCase
     
     initialState = State()
@@ -45,6 +49,7 @@ extension PasswordState {
     case let .changePassword(password):
       return .just(.setPasswrod(password))
     case let .signIn:
+      //      loginUseCase.getLogin().do(onNext: { print($0) })
       return Observable.merge([
         .just(.setWaiting(true)),
         passwordUseCase.invoke(request: PasswordRequest(currentState.password))
