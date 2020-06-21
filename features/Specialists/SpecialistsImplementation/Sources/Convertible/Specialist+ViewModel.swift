@@ -8,7 +8,8 @@
 import Foundation
 import SpecialistsCore
 import CDNImageLink
-import EsoftUIKi
+import EsoftUIKit
+
 
 extension Specialist {
   public func asViewModel() -> SpecialistViewModel {

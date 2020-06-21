@@ -40,7 +40,7 @@ class RxSellerTicketComponent: Component<RxSellerTicketDependency>, RxSellerTick
 //                             decoder: RiesDecoder(),
 //                             baseUrl: URL(string: "https://us-central1-esoft-tuition-cloud.cloudfunctions.net/sellerTicket")!)
 //    service.requestInterceptors.append(RiesInterceptor())
-//    
+//
 //    return service
 //  }
   
