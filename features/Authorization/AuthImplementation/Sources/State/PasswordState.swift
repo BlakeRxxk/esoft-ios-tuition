@@ -52,8 +52,24 @@ extension PasswordState {
       //      loginUseCase.getLogin().do(onNext: { print($0) })
       return Observable.merge([
         .just(.setWaiting(true)),
-        passwordUseCase.invoke(request: PasswordRequest(currentState.password))
-          .map { .setAvailable($0) }
+        passwordUseCase
+          .invoke(request: PasswordRequest(currentState.password))
+          .materialize()
+          .flatMap { e -> Observable<Mutation> in
+            if let error = e.error as? NSError {
+              return .just(.setError(error.domain))
+            }
+            switch e.event {
+            case let .next(loginAvailable):
+              
+              if loginAvailable.result {
+                return .just(.setAvailable(loginAvailable))
+              }
+              return .just(.setError("Введен неверный пароль")) // куда это переместить? или оставить здесь?
+            default:
+              return .just(.setWaiting(false))
+            }
+          }
       ])
     }
   }
@@ -71,6 +87,7 @@ extension PasswordState {
       newState.isWaiting = false
     case let .setError(errorMessage):
       newState.errorMessage = errorMessage
+      newState.isWaiting = false
     }
     return newState
   }

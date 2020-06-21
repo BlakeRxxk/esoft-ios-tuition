@@ -20,7 +20,8 @@ public final class PasswordRepositoryImplementation {
 extension PasswordRepositoryImplementation: PasswordRepository {
   public func getAvalible(searchQuery: String?) -> Single<LoginAvailable> {
     let request = PasswordQuery()
-
-    return passwordGateway.getAvalible(url: request.url)
+    
+//    return .error(NSError(domain: "Отсутствует интернет соединение", code: 102, userInfo: nil))
+    return passwordGateway.getAvalible(url: request.url).debug()
   }
 }
