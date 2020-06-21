@@ -8,9 +8,11 @@
 import Foundation
 
 public struct Login {
+  public let id: Int
   public let login: String
   
   public init(login: String) {
+    self.id = 0
     self.login = login
   }
 }

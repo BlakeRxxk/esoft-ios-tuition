@@ -54,6 +54,7 @@ extension PasswordState {
         .just(.setWaiting(true)),
         passwordUseCase
           .invoke(request: PasswordRequest(currentState.password))
+//          .delay(.seconds(5), scheduler: MainScheduler.instance)
           .materialize()
           .flatMap { e -> Observable<Mutation> in
             if let error = e.error as? NSError {

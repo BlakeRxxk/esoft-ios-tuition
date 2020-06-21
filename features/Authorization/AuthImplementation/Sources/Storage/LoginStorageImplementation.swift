@@ -34,6 +34,6 @@ extension LoginStorageImplementation: LoginStorage {
   }
   
   public func saveLogin(login: Login) -> Completable {
-    inMemoryStorage.save(entity: login)
+    inMemoryStorage.save(entity: login, updateAllow: true)
   }
 }

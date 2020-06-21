@@ -11,10 +11,11 @@ import AuthCore
 import StorageKit
 
 @objcMembers public final class RMLogin: Object {
+  dynamic var id: Int = 0
   dynamic var login: String = ""
   
   override public static func primaryKey() -> String? {
-    "login"
+    "id"
   }
 }
 

@@ -32,7 +32,6 @@ public final class MyCityCell: UICollectionViewCell {
         }.chain {
           $0.transform(CGAffineTransform(rotationAngle: CGFloat(Double.pi)))
         }
-        
       } else {
         iconImageView.image = UIImage.Geo.base
       }

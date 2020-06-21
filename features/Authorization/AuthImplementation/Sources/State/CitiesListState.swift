@@ -74,6 +74,7 @@ extension CitiesListState {
     case let .changeMyCity(lat, lon):
       return myCityUseCase
         .invoke(request: MyCityRequest(coords: (lat, lon)))
+//        .delay(.seconds(5), scheduler: MainScheduler.asyncInstance)
         .map { .setMyCity($0) }
     case .refreshData:
       return Observable.merge([.just(.setLoading(true)), .just(.setLoading(false))])

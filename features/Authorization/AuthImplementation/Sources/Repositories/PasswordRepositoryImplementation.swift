@@ -22,6 +22,6 @@ extension PasswordRepositoryImplementation: PasswordRepository {
     let request = PasswordQuery()
     
 //    return .error(NSError(domain: "Отсутствует интернет соединение", code: 102, userInfo: nil))
-    return passwordGateway.getAvalible(url: request.url).debug()
+    return passwordGateway.getAvalible(url: request.url)
   }
 }
