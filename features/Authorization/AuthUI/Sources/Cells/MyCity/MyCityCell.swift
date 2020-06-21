@@ -9,6 +9,7 @@ import UIKit
 import YogaKit
 import EsoftUIKit
 import ThemeManager
+import AnimateUI
 
 public final class MyCityCell: UICollectionViewCell {
   private static let reuseIdentifier: String = "MyCityCellID"
@@ -26,6 +27,12 @@ public final class MyCityCell: UICollectionViewCell {
     didSet {
       if isLocating {
         iconImageView.image = UIImage.Spinner.base
+        AnimateUI.animate(iconImageView, duration: 1, options: [.repeat(.infinity)]) {
+          $0.transform(CGAffineTransform(rotationAngle: CGFloat(Double.pi)))
+        }.chain {
+          $0.transform(CGAffineTransform(rotationAngle: CGFloat(Double.pi)))
+        }
+        
       } else {
         iconImageView.image = UIImage.Geo.base
       }

@@ -69,7 +69,7 @@ extension CitiesViewController: StatefullView {
     // MARK: - Init
     rx
       .viewWillAppear
-      .debounce(.milliseconds(300), scheduler: MainScheduler.instance)
+      .debounce(.milliseconds(100), scheduler: MainScheduler.instance)
       .map { _ in CitiesListState.Action.fetchData }
       .bind(to: store.action)
       .disposed(by: disposeBag)
@@ -92,6 +92,7 @@ extension CitiesViewController: StatefullView {
     
     // MARK: - List
     let header: Observable<[CitiesSections]> = state
+      .distinctUntilChanged { $0.isSearching == $1.isSearching && $0.isLocating == $1.isLocating && $0.myCity == $1.myCity }
       .map { state in
         [
           ListHeaderViewModel(count: -1, title: Localized.location),
@@ -101,25 +102,29 @@ extension CitiesViewController: StatefullView {
       .map { $0.mapToCitiesSections() }
     
     let countries: Observable<[CitiesSections]> = state
+      .distinctUntilChanged { $0.filter == $1.filter && $0.selectedCityId == $1.selectedCityId && $0.myCity == $1.myCity }
       .map { state in
         state.countries.mapValues { $0.filter { myFilter($0.name, state.filter) } }
-        .filter { !$1.isEmpty }
-        .sorted(by: { $0.key.id < $1.key.id || $0.value.contains(where: { String($0.id) == state.myCity?.id ?? "" })})
-        .reduce([]) { arr, tuple in
-          let country = tuple.key
-          let cities = tuple.value
-          return arr +
-            [ListHeaderViewModel(count: country.id, title: country.name)] +
-            cities.map { $0.asViewModel(isSelected: $0.id == state.selectedCityId ?? -1) }.sorted(by: { lhs, rhs in
-              lhs.id < rhs.id || String(lhs.id) == state.myCity?.id ?? ""
-            })
-        }
-        .mapToCitiesSections()
+          .filter { !$1.isEmpty }
+          // $0.value.contains(where: { $0.name == state.myCity?.name ?? "" }) ||
+          // $0.value.contains(where: { $0.id == Int(state.myCity?.id ?? "") }) ||
+          .sorted(by: { $0.key.id < $1.key.id })
+          .reduce([]) { arr, tuple in
+            let country = tuple.key
+            let cities = tuple.value
+            return arr +
+              [ListHeaderViewModel(count: country.id, title: country.name)] +
+              cities.map { $0.asViewModel(isSelected: $0.id == state.selectedCityId ?? -1) }
+                .sorted(by: { $0.id < $1.id }) // String($0.id) == state.myCity?.id ?? "" ||
+          }
       }
+      .map { $0.mapToCitiesSections() }
     
     let message: Observable<[CitiesSections]> = state
-      .map { state -> [ListDiffable] in
-        guard state.isSearching else {
+      .distinctUntilChanged()
+      .map { $0.isSearching }
+      .map { isSearching -> [ListDiffable] in
+        guard isSearching else {
           return []
         }
         return [MessageViewModel(id: 0, message: Localized.message)]

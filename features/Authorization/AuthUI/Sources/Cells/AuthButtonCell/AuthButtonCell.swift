@@ -16,6 +16,7 @@ import RxSwift
 import RxCocoa
 import RxExtensions
 import PhoneNumberFormat
+import AnimateUI
 
 public final class AuthButtonCell: UICollectionViewCell {
   private static let reuseIdentifier: String = "AuthButtonCellID"
@@ -34,6 +35,11 @@ public final class AuthButtonCell: UICollectionViewCell {
       if isWaiting {
         button.setStyledTitle(nil, for: .normal)
         button.setImage(UIImage.Spinner.base, for: .normal)
+        AnimateUI.animate(button.imageView!, duration: 1, options: [.repeat(.infinity)]) {
+          $0.transform(CGAffineTransform(rotationAngle: CGFloat(Double.pi)))
+        }.chain {
+          $0.transform(CGAffineTransform(rotationAngle: CGFloat(Double.pi)))
+        }
       } else {
         button.setStyledTitle(text, for: .normal)
         button.setImage(nil, for: .normal)

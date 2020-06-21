@@ -76,7 +76,7 @@ public final class CityCell: UICollectionViewCell {
   
   override public func prepareForReuse() {
     super.prepareForReuse()
-//    cityId = 0
+    cityId = 0
 //    lastCell = false
 //    title = ""
 //    secondaryText = nil
