@@ -2,7 +2,7 @@
 //  SpecialistsSections.swift
 //  SpecialistsUI
 //
-//  Copyright © 2019 E-SOFT. All rights reserved.
+//  Copyright © 2020 E-SOFT. All rights reserved.
 //
 
 import Foundation

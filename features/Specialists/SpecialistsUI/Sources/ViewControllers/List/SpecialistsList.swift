@@ -18,7 +18,8 @@ import IGListKit
 public final class SpecialistsList: ViewController<BaseListView> {
   public var disposeBag: DisposeBag = DisposeBag()
   public weak var detailsTransitioningDelegate: InteractiveModalTransitioningDelegate?
-  
+  public weak var router: SpecialistsRouter?
+   
   public init() {
     super.init(viewCreator: BaseListView.init)
     
@@ -41,7 +42,7 @@ public final class SpecialistsList: ViewController<BaseListView> {
     }
     view.yoga.applyLayout(preservingOrigin: true)
   }
-  
+
   private func configureUI() {
     view.backgroundColor = ThemeManager.current().colors.container
     specializedView.adapter?.scrollViewDelegate = self

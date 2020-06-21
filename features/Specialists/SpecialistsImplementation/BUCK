@@ -9,7 +9,6 @@ static_library(
     deps = [
         "//features/Specialists/SpecialistsCore:SpecialistsCore",
         "//libraries/URLRequestKit:URLRequestKit",
-        "//libraries/StateKit:StateKit",
         "//libraries/StorageKit:StorageKit",
         "//third-party/Pods:RxSwift",
         "//third-party/Pods:RxCocoa",

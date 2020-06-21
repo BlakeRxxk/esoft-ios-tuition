@@ -19,8 +19,7 @@ public final class StorageConfiguration {
       .deletingLastPathComponent()
       .appendingPathComponent("client")
       .appendingPathExtension("realm")
-    
-    print(configuration.fileURL)
+
     // Setup Realm Bundle from prepopulated file if exist
     // which located in $PROJECT_DIR/Resourses/Realm/
     
@@ -33,7 +32,7 @@ public final class StorageConfiguration {
       configuration.inMemoryIdentifier = "EsoftClientInMemoryStorage"
     }
     
-    configuration.schemaVersion = 12
+    configuration.schemaVersion = 1
     
     // TotalBytes refers to the size of the file on disk in bytes (data + free space)
     // UsedBytes refers to the number of bytes used by data in the file

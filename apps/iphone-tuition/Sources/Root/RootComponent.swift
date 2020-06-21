@@ -7,8 +7,44 @@
 
 import NeedleFoundation
 import Foundation
+import TuituionCore
+import Network
+import TuitionIntegrations
 
 public final class RootComponent: BootstrapComponent {
+  
+  var rootNavigator: UINavigationController {
+    shared {
+      let root = UINavigationController()
+      
+      root.navigationBar.setStyles(UINavigationBar.Styles.default)
+      return root
+    }
+  }
+  
+  var decoder: NetworkAPIDecoder {
+    shared {
+      RiesDecoder()
+    } 
+  }
+  
+  var apiKeyInterceptor: NetworkAPIRequestInterceptor {
+    shared {
+      RiesInterceptor()
+    }
+  }
+  
+  var networkService: NetworkAPIProtocol {
+    shared {
+      let service = NetworkAPI(session: .init(.shared),
+                               decoder: decoder,
+                               baseUrl: Configuration.Ries.baseURL)
+      
+      service.requestInterceptors.append(apiKeyInterceptor)
+      
+      return service
+    }
+  }
   
   var rootViewController: UIViewController {
     let rootViewController = RootViewController(objectsBuilder: objectsComponent,
@@ -18,15 +54,14 @@ public final class RootComponent: BootstrapComponent {
                                                 loggedOutBuilder: loggedOutComponent,
                                                 citiesBuilder: citiesComponent,
                                                 rxdemoBuilder: rxdemo)
-
-    let root = UINavigationController(rootViewController: rootViewController)
-      
-    root.navigationBar.setStyles(UINavigationBar.Styles.default)
-    return root
+    
+    rootNavigator.pushViewController(rootViewController, animated: true)
+    
+    return rootNavigator
   }
   
   var objectsComponent: ObjectsComponent {
-      ObjectsComponent(parent: self)
+    ObjectsComponent(parent: self)
   }
   
   var rxSellerTicketComponent: RxSellerTicketComponent {
@@ -46,9 +81,11 @@ public final class RootComponent: BootstrapComponent {
   }
   
   var rxdemo: SpecialistsComponent {
-    SpecialistsComponent(parent: self)
+    shared {
+      SpecialistsComponent(parent: self)
+    }
   }
-
+  
   var citiesComponent: CitiesComponent {
     CitiesComponent(parent: self)
   }

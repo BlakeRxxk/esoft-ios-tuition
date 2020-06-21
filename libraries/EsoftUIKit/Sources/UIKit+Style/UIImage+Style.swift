@@ -143,4 +143,12 @@ extension UIImage {
   public static var favorit: UIImage {
     named("favorit").withRenderingMode(.alwaysTemplate)
   }
+
+  public static var letter: UIImage {
+    named("letter").withRenderingMode(.alwaysTemplate)
+  }
+  
+  public static var autonew: UIImage {
+    named("autonew").withRenderingMode(.alwaysTemplate)
+  }
 }

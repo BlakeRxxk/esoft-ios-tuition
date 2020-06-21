@@ -67,9 +67,10 @@ public final class IconItemView: View {
   
   public weak var output: IconItemViewOutput?
   
+  public private(set) lazy var leftIconView: IconView = IconView()
+  public private(set) lazy var rightIconView: IconView = IconView()
+  
   private(set) lazy var topDivider: UIView = UIView()
-  private(set) lazy var leftIconView: IconView = IconView()
-  private(set) lazy var rightIconView: IconView = IconView()
   private(set) lazy var titleLabel: UILabel = UILabel()
   private(set) lazy var bottomDivider: UIView = UIView()
   
