@@ -24,7 +24,6 @@ extension LoginStorageImplementation: LoginStorage {
     inMemoryStorage
       .query()
       .flatMapLatest { result -> Observable<Login> in
-        print(result)
         guard let login = result.first else {
           return .error(NSError(domain: "not found", code: 101, userInfo: nil))
         }
@@ -34,6 +33,6 @@ extension LoginStorageImplementation: LoginStorage {
   }
   
   public func saveLogin(login: Login) -> Completable {
-    inMemoryStorage.save(entity: login, updateAllow: true)
+    inMemoryStorage.save(entity: login, updateAllow: true) // Не сохраняет
   }
 }

@@ -12,6 +12,7 @@ extension AuthInputCell: ListBindable {
   public func bindViewModel(_ viewModel: Any) {
     guard let viewModel = viewModel as? AuthInputViewModel else { return }
   
+    text = viewModel.text
     placeholder = viewModel.placeholder
     showButton = viewModel.showButton
     formatter = viewModel.formatter

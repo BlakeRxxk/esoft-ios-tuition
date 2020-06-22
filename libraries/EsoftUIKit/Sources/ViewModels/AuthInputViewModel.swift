@@ -12,6 +12,7 @@ public final class AuthInputViewModel: NSObject {
   public typealias Formatter = (String) -> String
   
   public let id: Int
+  public let text: String?
   public let placeholder: String?
   public let showButton: Bool
   public let formatter: Formatter?
@@ -21,10 +22,12 @@ public final class AuthInputViewModel: NSObject {
   public init(id: Int,
               placeholder: String?,
               showButton: Bool,
+              text: String? = nil,
               formatter: Formatter? = nil,
               keyboardType: UIKeyboardType = .default,
               errorMessage: String? = nil) {
     self.id = id
+    self.text = text
     self.placeholder = placeholder
     self.showButton = showButton
     self.formatter = formatter

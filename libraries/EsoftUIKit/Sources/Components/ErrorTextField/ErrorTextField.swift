@@ -35,7 +35,7 @@ public final class ErrorTextField: View {
     }
     set {
       textField.isSecureTextEntry = newValue
-      if textField.isSecureTextEntry {
+      if newValue {
         showTextButton.setImage(UIImage.eyeSolid, for: .normal)
       } else {
         showTextButton.setImage(UIImage.eye, for: .normal)

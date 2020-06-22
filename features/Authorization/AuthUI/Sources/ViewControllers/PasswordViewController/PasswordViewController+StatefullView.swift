@@ -38,12 +38,13 @@ extension PasswordViewController: StatefullView {
       }
     ])
     
-    let input = state // Еще можно передавать введенные данные после ошибки, но пока не буду реализовывать
+    let input = state // Еще можно передавать введенные до этого текст после ошибки
       .distinctUntilChanged { $0.errorMessage == $1.errorMessage }
       .map { [AuthInputViewModel(id: 0,
                                  placeholder: Localized.passwordPlaceholder,
                                  showButton: true,
                                  errorMessage: $0.errorMessage)] }
+    
     let button = state
       .map { $0.isWaiting }
       .distinctUntilChanged()

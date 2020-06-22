@@ -11,7 +11,7 @@ import AuthCore
 import StorageKit
 
 @objcMembers public final class RMLogin: Object {
-  dynamic var id: Int = 0
+  dynamic var id: String = ""
   dynamic var login: String = ""
   
   override public static func primaryKey() -> String? {
@@ -27,11 +27,12 @@ extension RMLogin: EntityConvertibleType {
 
 extension Login: RealmRepresentable {
   public var uuid: String {
-    ""
+    Login.id
   }
   
   public func asRealm() -> RMLogin {
     RMLogin.build { object in
+      object.id = Login.id
       object.login = login
     }
   }

@@ -10,6 +10,7 @@ import UIKit
 public protocol AuthInputCellInput {
   typealias MyFormatter = (String) -> String
   
+  var text: String? { get set }
   var placeholder: String? { get set }
   var showButton: Bool { get set }
   var formatter: MyFormatter? { get set }

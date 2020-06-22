@@ -37,7 +37,7 @@ extension LoginState {
   public func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case let .changeLogin(login):
-      loginUseCase.saveLogin(Login(login: login)) // Как синхронить не постоянно?
+      loginUseCase.saveLogin(Login(login: login)) // Правильно ли сохранять при каждом изменении?
       return .just(.setLogin(login))
     }
   }

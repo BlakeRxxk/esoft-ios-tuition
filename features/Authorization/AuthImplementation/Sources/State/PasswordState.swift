@@ -47,9 +47,11 @@ extension PasswordState {
   public func mutate(action: Action) -> Observable<Mutation> {
     switch action {
     case let .changePassword(password):
+//      loginUseCase.getLogin().do(onNext: { login in
+//        print(login.login)
+//        }).debug()
       return .just(.setPasswrod(password))
     case let .signIn:
-      //      loginUseCase.getLogin().do(onNext: { print($0) })
       return Observable.merge([
         .just(.setWaiting(true)),
         passwordUseCase
@@ -88,6 +90,7 @@ extension PasswordState {
       newState.isWaiting = false
     case let .setError(errorMessage):
       newState.errorMessage = errorMessage
+      newState.password = ""
       newState.isWaiting = false
     }
     return newState

@@ -17,6 +17,14 @@ public final class AuthInputCell: UICollectionViewCell {
   
   var disposeBag = DisposeBag()
   
+  public var text: String? {
+    get {
+      errorTextField.textField.text
+    }
+    set {
+      errorTextField.textField.text = newValue
+    }
+  }
   public var placeholder: String? {
     get {
       errorTextField.textField.placeholder
