@@ -104,12 +104,13 @@ public final class SellerTicketCell: UICollectionViewCell {
   }
 }
 
-extension SellerTicketCell: CostItemViewYogaOutput {
-  public func didTapAction(in view: CostItemViewYogaInput) {
+//extension SellerTicketCell: CostItemViewYogaOutput {
+//  public func didTapAction(in view: CostItemViewYogaInput) {
 //    output?.didTapEditSellerPrice(in: self)
-    output?.didTapEditSellerPrice(in: self)
+//    output?.didTapEditSellerPrice()
+//    print("didTapEditSellerPrice in SellerTicketCell")
 //    print("DIDTAPACTION in SellerTicketCell: ")
-  }
-}
+//  }
+//}
 
 extension SellerTicketCell: SellerTicketCellInput {}

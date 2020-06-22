@@ -44,6 +44,7 @@ public final class EditSellerPriceList: ViewController<BaseListView> {
   private func configureUI() {
     view.backgroundColor = ThemeManager.current().colors.container
     specializedView.collectionView.backgroundColor = ThemeManager.current().colors.screen
+    specializedView.collectionView.refreshControl = nil
   }
 }
 

@@ -14,7 +14,6 @@ import ThemeManager
 import ListKit
 import Localized
 
-
 public final class SellerTicketList: ViewController<BaseListView> {
   public var disposeBag: DisposeBag = DisposeBag()
   public weak var router: SellerTicketRouter?
@@ -45,6 +44,7 @@ public final class SellerTicketList: ViewController<BaseListView> {
   private func configureUI() {
     view.backgroundColor = ThemeManager.current().colors.container
     specializedView.collectionView.backgroundColor = ThemeManager.current().colors.screen
+    specializedView.collectionView.refreshControl = nil
   }
 }
 

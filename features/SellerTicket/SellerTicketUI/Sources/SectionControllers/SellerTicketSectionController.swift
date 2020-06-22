@@ -5,13 +5,10 @@
 //  Created by wtildestar on 23/05/2020.
 //
 
-import UIKit
 import IGListKit
 import EsoftUIKit
 
-public protocol SellerTicketSectionControllerOutput: class {
-  func didTapEditSellerPrice(in cell: SellerTicketCellInput)
-}
+public protocol SellerTicketSectionControllerOutput: SellerTicketCellOutput {}
 
 public final class SellerTicketSectionController: ListSectionController {
   private var object: SellerTicketViewModel?

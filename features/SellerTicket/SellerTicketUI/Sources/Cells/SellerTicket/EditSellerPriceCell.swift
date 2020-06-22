@@ -16,28 +16,28 @@ public final class EditSellerPriceCell: UICollectionViewCell {
   
   public weak var output: EditSellerPriceCellOutput?
   
-//   MARK: - CostItem
-//  public var price: String {
-//    get {
-//      costItemView.price
-//    }
-//    set {
-//      costItemView.price = newValue
-//    }
-//  }
-//
-//  // MARK: - PhotoItem
-//  public var dataSet: [String] {
-//    get {
-//      photoItemView.dataSet
-//    }
-//    set {
-//      photoItemView.dataSet = newValue
-//    }
-//  }
+  //   MARK: - CostItem
+  //  public var price: String {
+  //    get {
+  //      costItemView.price
+  //    }
+  //    set {
+  //      costItemView.price = newValue
+  //    }
+  //  }
+  //
+  //  // MARK: - PhotoItem
+  //  public var dataSet: [String] {
+  //    get {
+  //      photoItemView.dataSet
+  //    }
+  //    set {
+  //      photoItemView.dataSet = newValue
+  //    }
+  //  }
   
-//  private(set) lazy var costItemView: CostItemViewYoga = CostItemViewYoga()
-//  private(set) lazy var photoItemView: PhotoItemViewYoga = PhotoItemViewYoga()
+  private(set) lazy var editSellerPriceItemView: EditSellerPriceItemView = EditSellerPriceItemView()
+  private(set) lazy var view1: UIView = UIView()
   
   override init(frame: CGRect = .zero) {
     super.init(frame: frame)
@@ -69,30 +69,44 @@ public final class EditSellerPriceCell: UICollectionViewCell {
       layout.height = 100%
     }
     
-//    costItemView.configureLayout { layout in
-//      layout.isEnabled = true
-//      layout.width = 100%
-//      layout.height = 100%
-//    }
-//
-//    photoItemView.configureLayout { layout in
-//      layout.isEnabled = true
-//      layout.width = 100%
-//      layout.height = 100%
-//    }
+    editSellerPriceItemView.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = 100%
+      layout.height = 100%
+    }
+    
+    view1.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = 100%
+      layout.height = 100%
+    }
+    //    costItemView.configureLayout { layout in
+    //      layout.isEnabled = true
+    //      layout.width = 100%
+    //      layout.height = 100%
+    //    }
+    //
+    //    photoItemView.configureLayout { layout in
+    //      layout.isEnabled = true
+    //      layout.width = 100%
+    //      layout.height = 100%
+    //    }
     
     contentView.yoga.applyLayout(preservingOrigin: true)
   }
   
   private func createUI() {
     contentView.addSubview <^> [
-//      costItemView,
-//      photoItemView
+      editSellerPriceItemView,
+      view1
+      //      costItemView,
+      //      photoItemView
     ]
   }
   
   private func configureUI() {
     //    contentView.setStyles(UIView.Styles.whiteBackground)
+    view1.backgroundColor = .red
   }
 }
 

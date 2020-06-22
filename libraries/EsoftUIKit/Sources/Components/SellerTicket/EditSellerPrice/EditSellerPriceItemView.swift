@@ -22,6 +22,7 @@ public final class EditSellerPriceItemView: View {
   }
   
   private(set) lazy var mainContainer: UIView = UIView()
+  private(set) lazy var underscoredTextField: UnderscoredTextField = UnderscoredTextField()
   private(set) lazy var currentPrice: UITextField = UITextField()
   private(set) lazy var recomendedPrice: UITextField = UITextField()
   private(set) lazy var newPrice: UITextField = UITextField()
@@ -34,7 +35,9 @@ public final class EditSellerPriceItemView: View {
   }
   
   private func createUI() {
-    
+    mainContainer.addSubview(underscoredTextField)
+//    mainContainer.addSubview(recomendedPrice)
+//    mainContainer.addSubview(newPrice)
     
     addSubview <^> [
       mainContainer
@@ -46,6 +49,12 @@ public final class EditSellerPriceItemView: View {
   }
   
   private func layout() {
+    mainContainer.configureLayout { layout in
+      layout.isEnabled = true
+    }
     
+    underscoredTextField.configureLayout { layout in
+      layout.isEnabled = true
+    }
   }
 }

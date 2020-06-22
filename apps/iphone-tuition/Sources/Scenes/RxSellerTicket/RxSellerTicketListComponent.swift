@@ -21,7 +21,6 @@ protocol SellerTicketListBuilder {
 }
 
 class SellerTicketListComponent: Component<SellerTicketListDependency>, SellerTicketListBuilder {
-
   var state: SellerTicketListState {
     SellerTicketListState(sellerTicketUseCase: dependency.useCase)
   }

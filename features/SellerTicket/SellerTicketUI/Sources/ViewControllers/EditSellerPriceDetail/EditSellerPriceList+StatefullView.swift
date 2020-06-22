@@ -42,11 +42,7 @@ extension EditSellerPriceList: StatefullView {
       .filter { $0.initialLoading == true }
       .map { _ in [
         ListHeaderSkeletonViewModel(id: 0),
-        ListSkeletonViewModel(id: 1),
-        ListSkeletonViewModel(id: 2),
-        ListSkeletonViewModel(id: 3),
-        ListSkeletonViewModel(id: 4),
-        ListSkeletonViewModel(id: 5)
+        ListSkeletonViewModel(id: 1)
         ]}
       .map { $0.mapToEditSellerPriceSections() }
     

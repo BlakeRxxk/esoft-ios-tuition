@@ -11,6 +11,6 @@ public protocol SellerTicketCellInput {
   var sellerTicketID: Int { get set }
 }
 
-public protocol SellerTicketCellOutput: class {
-  func didTapEditSellerPrice(in cell: SellerTicketCellInput)
+public protocol SellerTicketCellOutput: AnyObject {
+    func didTapEditSellerPrice(in cell: SellerTicketCellInput)
 }
