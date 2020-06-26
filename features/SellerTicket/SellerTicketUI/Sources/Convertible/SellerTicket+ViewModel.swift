@@ -15,8 +15,9 @@ extension SellerTicket {
     let dataImg = photos.map { $0.fileName }
     //    let profileImage = URL(string: photoUrl?.profile ?? "")
     return SellerTicketViewModel(id: id,
-                                 price: price,
-                                 photos: dataImg)
+                                 price: price + "000",
+                                 photos: dataImg,
+                                 desc: desc)
     //    photoUrl: profileImage,
   }
 }

@@ -10,4 +10,6 @@ import RxSwift
 
 public protocol SellerTicketGateway {
   func getSellerTicket(url: URL) -> Single<SellerTicket>
+  func getRecomendedPrice(url: URL) -> Single<RecomendedPrice>
+  func getDesc(url: URL) -> Single<Desc>
 }

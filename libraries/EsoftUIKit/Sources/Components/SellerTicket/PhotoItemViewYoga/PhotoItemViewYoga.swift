@@ -12,15 +12,6 @@ import ThemeManager
 import AutoLayoutKit
 
 public final class PhotoItemViewYoga: View {
-  public var photoSubheader: String {
-    get {
-      photoSubheaderTitle.styledText ?? ""
-    }
-    set {
-      photoSubheaderTitle.styledText = newValue
-    }
-  }
-  
   public var dataSet: [String] {
     get {
       dataSet
@@ -28,33 +19,6 @@ public final class PhotoItemViewYoga: View {
     set {
       data = newValue
       collectionView.reloadData()
-    }
-  }
-  
-  public var showAll: String {
-    get {
-      showAllLabel.styledText ?? ""
-    }
-    set {
-      showAllLabel.styledText = newValue
-    }
-  }
-  
-  public var showAllCount: String {
-    get {
-      showAllQuantityLabel.styledText ?? ""
-    }
-    set {
-      showAllQuantityLabel.styledText = newValue
-    }
-  }
-  
-  public var showAllCountImage: UIImage? {
-    get {
-      arrowImage.image
-    }
-    set {
-      arrowImage.image = newValue ?? UIImage()
     }
   }
   
@@ -121,7 +85,7 @@ public final class PhotoItemViewYoga: View {
     collectionView.delegate = self
     collectionView.dataSource = self
     
-    photoSubheaderTitle.text = "Фотографии"
+    photoSubheaderTitle.text = Localized.photoSubheaderTitle
     photoSubheaderTitle.setStyles(
       UILabel.Styles.small,
       UILabel.ColorStyle.secondary
@@ -131,10 +95,10 @@ public final class PhotoItemViewYoga: View {
     
     collectionView.backgroundColor = .clear
     
-    showAllLabel.text = "Показать все"
+    showAllLabel.text = Localized.showAllLabel
     showAllLabel.setStyles(UILabel.Styles.regular, UILabel.ColorStyle.primary)
     
-    showAllQuantityLabel.text = "123"
+    showAllQuantityLabel.text = Localized.showAllQuantityLabel
     showAllQuantityLabel.setStyles(UILabel.Styles.regular, UILabel.ColorStyle.primary)
     
     arrowImage.image = UIImage.Screen5.go
@@ -148,8 +112,7 @@ public final class PhotoItemViewYoga: View {
     photoSubheaderTitle.configureLayout { layout in
       layout.isEnabled = true
       layout.marginTop = 20
-      layout.marginLeft = 16
-      layout.marginRight = 16
+      layout.marginHorizontal = 16
     }
     
     photoContainer.configureLayout { layout in
@@ -166,16 +129,14 @@ public final class PhotoItemViewYoga: View {
     
     showAllStackView.configureLayout { layout in
       layout.isEnabled = true
-      layout.marginLeft = 16
-      layout.marginRight = 16
+      layout.marginHorizontal = 16
       layout.flexDirection = .row
       layout.justifyContent = .spaceBetween
     }
     
     showAllLabel.configureLayout { layout in
       layout.isEnabled = true
-      layout.marginTop = 13
-      layout.marginBottom = 13
+      layout.marginVertical = 13
     }
     
     showAllQuantityStackView.configureLayout { layout in
@@ -186,22 +147,27 @@ public final class PhotoItemViewYoga: View {
     
     showAllQuantityLabel.configureLayout { layout in
       layout.isEnabled = true
-      layout.marginTop = 13
-      layout.marginBottom = 13
+      layout.marginVertical = 13
       layout.marginRight = 16
     }
     
     arrowImage.configureLayout { layout in
       layout.isEnabled = true
       layout.width = 24
-      layout.width = 24
-      layout.marginTop = 12
-      layout.marginBottom = 12
+      layout.marginVertical = 12
     }
   }
 }
 
 extension PhotoItemViewYoga: PhotoItemViewYogaInput {}
+
+extension PhotoItemViewYoga {
+  enum Localized {
+    public static let photoSubheaderTitle = "Фотографии"
+    public static let showAllLabel = "Показать все"
+    public static let showAllQuantityLabel = "123"
+  }
+}
 
 extension PhotoItemViewYoga: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
   public func collectionView(_ collectionView: UICollectionView,

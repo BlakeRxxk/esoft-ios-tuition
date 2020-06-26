@@ -16,28 +16,8 @@ public final class EditSellerPriceCell: UICollectionViewCell {
   
   public weak var output: EditSellerPriceCellOutput?
   
-  //   MARK: - CostItem
-  //  public var price: String {
-  //    get {
-  //      costItemView.price
-  //    }
-  //    set {
-  //      costItemView.price = newValue
-  //    }
-  //  }
-  //
-  //  // MARK: - PhotoItem
-  //  public var dataSet: [String] {
-  //    get {
-  //      photoItemView.dataSet
-  //    }
-  //    set {
-  //      photoItemView.dataSet = newValue
-  //    }
-  //  }
-  
   private(set) lazy var editSellerPriceItemView: EditSellerPriceItemView = EditSellerPriceItemView()
-  private(set) lazy var view1: UIView = UIView()
+  private(set) lazy var sendButton: UIButton = UIButton()
   
   override init(frame: CGRect = .zero) {
     super.init(frame: frame)
@@ -61,53 +41,64 @@ public final class EditSellerPriceCell: UICollectionViewCell {
   override public func layoutSubviews() {
     super.layoutSubviews()
     
-    //    contentView.backgroundColor = AppTheme.current().colors.screen
-    
     contentView.configureLayout { layout in
       layout.isEnabled = true
       layout.width = 100%
-      layout.height = 100%
+      layout.height = 100% //YGValue(UIScreen.main.bounds.size.height)
     }
     
     editSellerPriceItemView.configureLayout { layout in
       layout.isEnabled = true
       layout.width = 100%
       layout.height = 100%
+      layout.position = .relative
     }
     
-    view1.configureLayout { layout in
+    sendButton.configureLayout { layout in
       layout.isEnabled = true
-      layout.width = 100%
-      layout.height = 100%
+      layout.marginHorizontal = 16
+      layout.position = .relative
+      layout.maxWidth = Int(91.47)%
+      layout.marginTop = Int(70)%
     }
-    //    costItemView.configureLayout { layout in
-    //      layout.isEnabled = true
-    //      layout.width = 100%
-    //      layout.height = 100%
-    //    }
-    //
-    //    photoItemView.configureLayout { layout in
-    //      layout.isEnabled = true
-    //      layout.width = 100%
-    //      layout.height = 100%
-    //    }
     
-    contentView.yoga.applyLayout(preservingOrigin: true)
+    contentView.yoga.applyLayout(preservingOrigin: true, dimensionFlexibility: .flexibleHeight)
   }
   
   private func createUI() {
     contentView.addSubview <^> [
       editSellerPriceItemView,
-      view1
-      //      costItemView,
-      //      photoItemView
+      sendButton
     ]
+    
   }
   
   private func configureUI() {
-    //    contentView.setStyles(UIView.Styles.whiteBackground)
-    view1.backgroundColor = .red
+    sendButton.setStyledTitle(Localized.sendButtonTitle, for: .normal)
+    sendButton.setStyles(UIButton.Styles.primary)
+    
+    
+    let action = UITapGestureRecognizer(target: self, action: #selector(handleTapAction) )
+    editSellerPriceItemView.recomendedPriceInfoIcon.addGestureRecognizer(action)
+  }
+  
+  @objc private func handleTapAction() {
+    print("handleTapAction in EditSellerPriceCell")
+//    output?.didTapInfoButton(in: self)
   }
 }
 
 extension EditSellerPriceCell: EditSellerPriceCellInput {}
+
+extension EditSellerPriceCell: EditSellerPriceItemViewOutput {
+  public func didTapAction(in view: EditSellerPriceItemViewInput) {
+    print("didTapAction in EditSellerPriceCell")
+    output?.didTapInfoButton(in: self)
+  }
+}
+
+extension EditSellerPriceCell {
+  enum Localized {
+    public static let sendButtonTitle = "Отправить"
+  }
+}

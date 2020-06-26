@@ -10,10 +10,10 @@ import SellerTicketCore
 
 public final class EditSellerPriceListState: Store {
   public let initialState: EditSellerPriceListState.State
-  private let editSellerPriceUseCase: EditSellerPriceUseCase
+  private let sellerTicketUseCase: SellerTicketUseCase
   
-  public init(editSellerPriceUseCase: EditSellerPriceUseCase) {
-    self.editSellerPriceUseCase = editSellerPriceUseCase
+  public init(sellerTicketUseCase: SellerTicketUseCase) {
+    self.sellerTicketUseCase = sellerTicketUseCase
     
     initialState = State()
   }
@@ -44,7 +44,7 @@ extension EditSellerPriceListState {
     case .fetchRecomendedPrice:
       return Observable.merge([
         .just(.setInitialLoading(true)),
-        editSellerPriceUseCase
+        sellerTicketUseCase
           .invoke(request: EditSellerPriceRequest())
           .map { .appendRecomendedPrice($0) }
       ])

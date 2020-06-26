@@ -12,13 +12,17 @@ import SellerTicketImplementation
 import SellerTicketUI
 
 public final class SellerTicketRouterImplementation: SellerTicketRouter {
+  
   private weak var viewController: UIViewController?
   
   private var detailsBuilder: EditSellerPriceBuilder
+  private var editDescriptionBuilder: EditDescriptionBuilder
   
-  init(detailsBuilder: EditSellerPriceBuilder) {
+  init(detailsBuilder: EditSellerPriceBuilder, editDescriptionBuilder: EditDescriptionBuilder) {
     self.detailsBuilder = detailsBuilder
+    self.editDescriptionBuilder = editDescriptionBuilder
   }
+  
   public func setViewController(_ viewController: UIViewController?) {
     self.viewController = viewController
   }
@@ -26,10 +30,17 @@ public final class SellerTicketRouterImplementation: SellerTicketRouter {
   // MARK: - SpecialistDetails
   public func routeToEditSellerPrice(sellerTicketID: Int) {
     guard let source = viewController else { return }
-    let destination = detailsBuilder.viewController as? EditSellerPriceList
+    let destination = detailsBuilder.viewController as? EditSellerPriceController
     
     destination?.store?.action.onNext(.fetchSellerTicket(id: sellerTicketID))
+    source.present(UINavigationController(rootViewController: destination!), animated: true)
+  }
+  
+  public func routeToEditDescription(sellerTicketID: Int) {
+    guard let source = viewController else { return }
+    let destination = editDescriptionBuilder.viewController as? EditDescriptionController
     
-    source.show(destination!, sender: nil)
+    destination?.store?.action.onNext(.fetchSellerTicket(id: sellerTicketID))
+    source.present(UINavigationController(rootViewController: destination!), animated: true)
   }
 }

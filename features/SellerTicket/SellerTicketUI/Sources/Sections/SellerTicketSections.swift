@@ -14,8 +14,6 @@ public enum SellerTicketSections {
   case header(ListHeaderViewModel)
   case empty(EmptyListViewModel)
   
-  case listHeaderSkeleton(ListHeaderSkeletonViewModel)
-  case skeleton(ListSkeletonViewModel)
   case sellerTicket(SellerTicketViewModel)
 }
 
@@ -28,10 +26,6 @@ extension SellerTicketSections: SectionModelType {
       return headerViewModel
     case let .empty(emptyListViewModel):
       return emptyListViewModel
-    case let .listHeaderSkeleton(listHeaderSkeleton):
-      return listHeaderSkeleton
-    case let .skeleton(listSkeleton):
-      return listSkeleton
     case let .sellerTicket(sellerTicketViewModel):
       return sellerTicketViewModel
     }

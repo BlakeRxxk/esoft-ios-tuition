@@ -18,6 +18,14 @@ public final class SellerTicketGatewayImplementation {
 }
 
 extension SellerTicketGatewayImplementation: SellerTicketGateway {
+  public func getDesc(url: URL) -> Single<Desc> {
+    networkService.request(url: url)
+  }
+  
+  public func getRecomendedPrice(url: URL) -> Single<RecomendedPrice> {
+    networkService.request(url: url)
+  }
+  
   public func getSellerTicket(url: URL) -> Single<SellerTicket> {
     networkService.request(url: url)
   }

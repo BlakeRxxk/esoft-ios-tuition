@@ -52,7 +52,7 @@ class RxSellerTicketComponent: Component<RxSellerTicketDependency>, RxSellerTick
   
   var router: SellerTicketRouter {
     shared {
-      let router = SellerTicketRouterImplementation(detailsBuilder: editSellerPrice)
+      let router = SellerTicketRouterImplementation(detailsBuilder: editSellerPrice, editDescriptionBuilder: editDescription)
       router.setViewController(dependency.rootNavigator)
       return router
     }
@@ -76,6 +76,10 @@ class RxSellerTicketComponent: Component<RxSellerTicketDependency>, RxSellerTick
   
   var editSellerPrice: EditSellerPriceComponent {
     EditSellerPriceComponent(parent: self)
+  }
+  
+  var editDescription: EditDescriptionComponent {
+    EditDescriptionComponent(parent: self)
   }
 }
 

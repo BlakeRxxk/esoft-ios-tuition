@@ -14,8 +14,6 @@ public enum EditSellerPriceSections {
   case header(ListHeaderViewModel)
   case empty(EmptyListViewModel)
   
-  case listHeaderSkeleton(ListHeaderSkeletonViewModel)
-  case skeleton(ListSkeletonViewModel)
   case editSellerPrice(EditSellerPriceViewModel)
 }
 
@@ -28,10 +26,6 @@ extension EditSellerPriceSections: SectionModelType {
       return headerViewModel
     case let .empty(emptyListViewModel):
       return emptyListViewModel
-    case let .listHeaderSkeleton(listHeaderSkeleton):
-      return listHeaderSkeleton
-    case let .skeleton(listSkeleton):
-      return listSkeleton
     case let .editSellerPrice(editSellerPriceViewModel):
       return editSellerPriceViewModel
     }

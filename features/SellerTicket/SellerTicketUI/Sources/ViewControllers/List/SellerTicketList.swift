@@ -24,6 +24,12 @@ public final class SellerTicketList: ViewController<BaseListView> {
     configureUI()
   }
   
+  public override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    navigationItem.title = Localized.editObject
+  }
+  
   override public func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     let container = view.bounds.size
@@ -51,5 +57,6 @@ public final class SellerTicketList: ViewController<BaseListView> {
 extension SellerTicketList {
   enum Localized {
     public static let search = "search".localize()
+    public static let editObject = "Редактировать объект"
   }
 }

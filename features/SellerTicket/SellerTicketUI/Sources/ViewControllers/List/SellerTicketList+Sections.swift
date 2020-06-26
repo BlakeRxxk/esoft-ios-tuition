@@ -8,8 +8,14 @@
 import Foundation
 
 extension SellerTicketList: SellerTicketSectionControllerOutput {
-    public func didTapEditSellerPrice(in cell: SellerTicketCellInput) {
+  public func didTapEditDescription(in cell: SellerTicketCellInput) {
+    print("didTapEditDescription in SellerTicketList")
+    router?.routeToEditDescription(sellerTicketID: cell.sellerTicketID)
+  }
+  
+  public func didTapEditSellerPrice(in cell: SellerTicketCellInput) {
     print("didTapEditSellerPrice in SellerTicketList")
     router?.routeToEditSellerPrice(sellerTicketID: cell.sellerTicketID)
   }
+  
 }

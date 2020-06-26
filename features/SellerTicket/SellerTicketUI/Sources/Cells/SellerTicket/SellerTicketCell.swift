@@ -11,6 +11,8 @@ import Atlas
 import BaseFRP
 import EsoftUIKit
 
+
+
 public final class SellerTicketCell: UICollectionViewCell {
   private static let reuseIdentifier: String = "SellerTicketCellID"
   public var sellerTicketID: Int = 0
@@ -37,6 +39,7 @@ public final class SellerTicketCell: UICollectionViewCell {
   
   private(set) lazy var costItemView: CostItemViewYoga = CostItemViewYoga()
   private(set) lazy var photoItemView: PhotoItemViewYoga = PhotoItemViewYoga()
+  private(set) lazy var descEditingObjectItemView: DescEditingObjectItemView = DescEditingObjectItemView()
   
   public weak var output: SellerTicketCellOutput?
   
@@ -58,11 +61,9 @@ public final class SellerTicketCell: UICollectionViewCell {
     yoga.applyLayout(preservingOrigin: true)
     super.traitCollectionDidChange(previousTraitCollection)
   }
-
+  
   override public func layoutSubviews() {
     super.layoutSubviews()
-    
-//    contentView.backgroundColor = AppTheme.current().colors.screen
     
     contentView.configureLayout { layout in
       layout.isEnabled = true
@@ -76,41 +77,53 @@ public final class SellerTicketCell: UICollectionViewCell {
       layout.height = 100%
     }
     
+    descEditingObjectItemView.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = 100%
+      layout.height = 100%
+    }
+    
     photoItemView.configureLayout { layout in
       layout.isEnabled = true
       layout.width = 100%
       layout.height = 100%
     }
     
-    contentView.yoga.applyLayout(preservingOrigin: true)
+    contentView.yoga.applyLayout(preservingOrigin: true, dimensionFlexibility: .flexibleHeight)
   }
   
   private func createUI() {
     contentView.addSubview <^> [
       costItemView,
+      descEditingObjectItemView,
       photoItemView
     ]
   }
   
   private func configureUI() {
-//    contentView.setStyles(UIView.Styles.whiteBackground)
-    let action = UITapGestureRecognizer(target: self, action: #selector(handleTapAction) )
-    costItemView.editLabel.addGestureRecognizer(action)
+    let actionForEditPrice = UITapGestureRecognizer(target: self, action: #selector(handleTapActionForEditPrice) )
+    costItemView.editLabel.addGestureRecognizer(actionForEditPrice)
+    
+    let actionForEditDescription = UITapGestureRecognizer(target: self, action: #selector(handleTapActionForEditDescription) )
+    descEditingObjectItemView.editDescRow.addGestureRecognizer(actionForEditDescription)
   }
   
-  @objc private func handleTapAction() {
+  @objc private func handleTapActionForEditPrice() {
+    print("handleTapActionForEditPrice in SellerTicketCell")
     output?.didTapEditSellerPrice(in: self)
-    print("didTapEditSellerPrice in SellerTicketCell")
+  }
+  
+  @objc private func handleTapActionForEditDescription() {
+    print("handleTapActionForEditDescription in SellerTicketCell")
+    output?.didTapEditDescription(in: self)
   }
 }
 
-//extension SellerTicketCell: CostItemViewYogaOutput {
-//  public func didTapAction(in view: CostItemViewYogaInput) {
-//    output?.didTapEditSellerPrice(in: self)
-//    output?.didTapEditSellerPrice()
-//    print("didTapEditSellerPrice in SellerTicketCell")
-//    print("DIDTAPACTION in SellerTicketCell: ")
-//  }
-//}
-
 extension SellerTicketCell: SellerTicketCellInput {}
+
+extension SellerTicketCell: DescEditingObjectItemViewOutput {
+  public func didTapEditDescription(in view: DescEditingObjectItemViewInput) {
+    print("didTapEditDescription in SellerTicketCell")
+    output?.didTapEditDescription(in: self)
+  }
+}

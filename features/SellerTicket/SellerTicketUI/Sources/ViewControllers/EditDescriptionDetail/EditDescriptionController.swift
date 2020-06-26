@@ -1,8 +1,8 @@
 //
-//  EditSellerPriceList.swift
+//  EditDescriptionController.swift
 //  SellerTicketUI#iphonesimulator-x86_64
 //
-//  Created by wtildestar on 17/06/2020.
+//  Created by wtildestar on 25/06/2020.
 //
 
 import Foundation
@@ -14,14 +14,26 @@ import ThemeManager
 import ListKit
 import Localized
 
-
-public final class EditSellerPriceList: ViewController<BaseListView> {
+final public class EditDescriptionController: ViewController<BaseListView> {
   public var disposeBag: DisposeBag = DisposeBag()
   
   public init() {
     super.init(viewCreator: BaseListView.init)
     
     configureUI()
+  }
+  
+  public override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    navigationItem.title = Localized.changeDesc
+  }
+  
+  public override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    navigationController?.navigationBar.setStyles(UINavigationBar.Styles.modal)
+    addLeftButtonIfNeeded(target: self, title: Localized.close, action: #selector(handleDismiss))
   }
   
   override public func viewDidLayoutSubviews() {
@@ -46,10 +58,16 @@ public final class EditSellerPriceList: ViewController<BaseListView> {
     specializedView.collectionView.backgroundColor = ThemeManager.current().colors.screen
     specializedView.collectionView.refreshControl = nil
   }
+  
+  @objc private func handleDismiss() {
+    self.view.window!.rootViewController?.dismiss(animated: true)
+  }
 }
 
-extension EditSellerPriceList {
+extension EditDescriptionController {
   enum Localized {
     public static let search = "search".localize()
+    public static let close = "Закрыть"
+    public static let changeDesc = "Изменить описание"
   }
 }

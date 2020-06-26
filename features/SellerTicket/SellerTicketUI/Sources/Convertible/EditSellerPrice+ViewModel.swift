@@ -12,9 +12,9 @@ import CDNImageLink
 
 extension RecomendedPrice {
   public func asViewModel() -> EditSellerPriceViewModel {
-//    let dataImg = photos.map { $0.fileName }
+    let objPrice = objectPrice.map { $0.price + "000"}
     //    let profileImage = URL(string: photoUrl?.profile ?? "")
-    return EditSellerPriceViewModel(id: id, price: price)
+    return EditSellerPriceViewModel(objectPrice: objPrice)
     //    photoUrl: profileImage,
   }
 }

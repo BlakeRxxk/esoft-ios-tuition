@@ -12,5 +12,6 @@ public protocol SellerTicketCellInput {
 }
 
 public protocol SellerTicketCellOutput: AnyObject {
-    func didTapEditSellerPrice(in cell: SellerTicketCellInput)
+  func didTapEditSellerPrice(in cell: SellerTicketCellInput)
+  func didTapEditDescription(in cell: SellerTicketCellInput)
 }

@@ -9,4 +9,6 @@ import Foundation
 
 public protocol EditSellerPriceCellInput {}
 
-public protocol EditSellerPriceCellOutput: class {}
+public protocol EditSellerPriceCellOutput: class {
+  func didTapInfoButton(in cell: EditSellerPriceCellInput)
+}

@@ -28,18 +28,7 @@ public final class SellerTicketCell: UICollectionViewCell {
   override public func prepareForReuse() {
     super.prepareForReuse()
     
-    // costItemViewYoga
-//    costItemViewYoga.costSubheader = ""
     costItemViewYoga.price = ""
-//    costItemViewYoga.notice = ""
-//    costItemViewYoga.costEdit = ""
-//    costItemViewYoga.costIcon = UIImage()
-    
-    // photoItemViewYoga
-    photoItemViewYoga.photoSubheader = ""
-    photoItemViewYoga.showAll = ""
-    photoItemViewYoga.showAllCount = ""
-    photoItemViewYoga.showAllCountImage = UIImage()
   }
   
   private func createUI() {

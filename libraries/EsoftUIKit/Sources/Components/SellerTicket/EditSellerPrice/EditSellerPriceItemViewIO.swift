@@ -8,5 +8,9 @@
 import Foundation
 
 public protocol EditSellerPriceItemViewInput {
-  var price: String { get set }
+  var recomendedPrice: String { get set }
+}
+
+public protocol EditSellerPriceItemViewOutput: AnyObject {
+  func didTapAction(in view: EditSellerPriceItemViewInput)
 }

@@ -9,4 +9,6 @@ import RxSwift
 
 public protocol SellerTicketRepository {
   func getSellerTicket() -> Single<SellerTicket>
+  func getRecomendedPrice() -> Single<RecomendedPrice>
+  func getDesc() -> Single<Desc>
 }

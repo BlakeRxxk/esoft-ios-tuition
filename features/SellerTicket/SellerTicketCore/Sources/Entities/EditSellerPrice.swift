@@ -6,19 +6,28 @@
 //
 
 public struct RecomendedPrice {
-  public let id: String
-  public let price: String
-  
-  public init(price: String,
-              id: String) {
-    self.id = id
-    self.price = price
-  }
+  public let objectPrice: [ObjectPrice]
 }
 
 extension RecomendedPrice: Codable, Hashable {
   enum CodingKeys: String, CodingKey {
-    case id
+    
+    case objectPrice = "object_price"
+  }
+}
+
+public struct ObjectPrice {
+  public let price: String
+  
+  public init(price: String) {
+    self.price = price
+  }
+}
+
+extension ObjectPrice: Codable, Hashable {
+  enum CodingKeys: String, CodingKey {
     case price
   }
 }
+
+

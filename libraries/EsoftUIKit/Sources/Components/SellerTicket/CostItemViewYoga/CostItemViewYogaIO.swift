@@ -5,8 +5,6 @@
 //  Created by wtildestar on 26/04/2020.
 //
 
-import UIKit
-
 public protocol CostItemViewYogaInput {
   var price: String { get set }
 }

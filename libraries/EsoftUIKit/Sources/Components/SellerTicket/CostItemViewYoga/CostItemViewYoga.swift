@@ -33,7 +33,7 @@ public final class CostItemViewYoga: View {
   private(set) lazy var editStackView: UIView = UIView()
   private(set) lazy var editIcon: UIImageView = UIImageView()
   public lazy var editLabel: UIButton = UIButton()
-
+  
   override public init() {
     super.init()
     
@@ -62,43 +62,31 @@ public final class CostItemViewYoga: View {
   }
   
   private func configureUI() {
-    costSubheaderTitle.setStyles(
-      UILabel.Styles.small,
-      UILabel.ColorStyle.secondary
-    )
-    
-    costSubheaderTitle.text = "Стоимость объекта"
+//    costSubheaderTitle.setStyles(
+    //      UILabel.Styles.small,
+//      UILabel.ColorStyle.secondary
+//    )
+    costSubheaderTitle.text = Localized.costSubheaderTitle
+    costSubheaderTitle.font = UIFont.systemFont(ofSize: 15.0)
+    costSubheaderTitle.setStyles(UILabel.ColorStyle.secondary)
     
     costContainer.backgroundColor = ThemeManager.current().colors.container
-
+    
     divider.backgroundColor = ThemeManager.current().colors.screen
     
     costLabel.setStyles(UILabel.Styles.regular, UILabel.ColorStyle.primary)
     
-    noticeLabel.text = "Выше рыночной на 90%"
+    noticeLabel.text = Localized.noticeLabel
     noticeLabel.setStyles(UILabel.Styles.microNormal, UILabel.ColorStyle.error)
     
     editIcon.image = UIImage.Screen5.edit
     editIcon.tintColor = ThemeManager.current().colors.primary500
     
-    editLabel.setTitle("Изменить", for: .normal)
+    editLabel.setTitle(Localized.editLabel, for: .normal)
     editLabel.setTitleColor(ThemeManager.current().colors.primary500, for: .normal)
     editLabel.titleLabel?.font = .boldSystemFont(ofSize: 17)
     editLabel.contentHorizontalAlignment = .left
-//    editLabel.setStyles(UIButton.Styles.outlineTextColors)
-//    
-//    let actionForEditStackView = UITapGestureRecognizer(target: self, action: #selector(handleTapAction))
-//    editStackView.addGestureRecognizer(actionForEditStackView)
-//    let actionForButton = UITapGestureRecognizer(target: self, action: #selector(handleTapAction))
-//    editLabel.addGestureRecognizer(actionForButton)
   }
-//
-//  @objc private func handleTapAction() {
-//    output?.didTapAction(in: self)
-//    print("didTapAction in CostItemViewYoga: ")
-//  }
-
-  
   private func layout() {
     mainContainer.configureLayout { layout in
       layout.isEnabled = true
@@ -106,16 +94,14 @@ public final class CostItemViewYoga: View {
     
     costSubheaderTitle.configureLayout { layout in
       layout.isEnabled = true
-      layout.marginLeft = 16
-      layout.marginRight = 16
       layout.marginTop = 20
+      layout.marginHorizontal = 16
     }
     
     costContainer.configureLayout { layout in
       layout.isEnabled = true
       layout.flexDirection = .column
-      layout.paddingLeft = 16
-      layout.paddingRight = 16
+      layout.paddingHorizontal = 16
       layout.marginTop = 8
     }
     
@@ -129,10 +115,18 @@ public final class CostItemViewYoga: View {
       layout.isEnabled = true
       layout.height = 1
       layout.width = 100%
-      layout.paddingLeft = 16
-      layout.paddingRight = 16
+      layout.paddingHorizontal = 16
     }
     
+    costLabel.configureLayout { layout in
+      layout.isEnabled = true
+      layout.marginVertical = 13
+    }
+    
+    noticeLabel.configureLayout { layout in
+      layout.isEnabled = true
+    }
+
     editStackView.configureLayout { layout in
       layout.isEnabled = true
       layout.position = .relative
@@ -140,20 +134,9 @@ public final class CostItemViewYoga: View {
       layout.justifyContent = .flexStart
     }
     
-    costLabel.configureLayout { layout in
-      layout.isEnabled = true
-      layout.marginTop = 13
-      layout.marginBottom = 13
-    }
-    
-    noticeLabel.configureLayout { layout in
-      layout.isEnabled = true
-    }
-    
     editIcon.configureLayout { layout in
       layout.isEnabled = true
-      layout.marginTop = 15.43
-      layout.marginBottom = 15.43
+      layout.marginVertical = 15.43
       layout.width = 17.14
       layout.height = 17.14
       layout.marginRight = 35.43
@@ -167,3 +150,11 @@ public final class CostItemViewYoga: View {
 }
 
 extension CostItemViewYoga: CostItemViewYogaInput {}
+
+extension CostItemViewYoga {
+  enum Localized {
+    public static let costSubheaderTitle = "Стоимость объекта"
+    public static let noticeLabel = "Выше рыночной на 90%"
+    public static let editLabel = "Изменить"
+  }
+}

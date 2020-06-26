@@ -16,10 +16,6 @@ extension Array {
         return .header(obj as! ListHeaderViewModel)
       case is EmptyListViewModel:
         return .empty(obj as! EmptyListViewModel)
-      case is ListSkeletonViewModel:
-        return .skeleton(obj as! ListSkeletonViewModel)
-      case is ListHeaderSkeletonViewModel:
-        return .listHeaderSkeleton(obj as! ListHeaderSkeletonViewModel)
       case is EditSellerPriceViewModel:
         return .editSellerPrice(obj as! EditSellerPriceViewModel)
       default:

@@ -32,7 +32,7 @@ public final class SellerTicketSectionController: ListSectionController {
     
     let width: CGFloat = context.containerSize.width
     
-    return CGSize(width: width, height: 80 + (48 * 2))
+    return CGSize(width: width, height: 700)
   }
   
   override public func cellForItem(at index: Int) -> UICollectionViewCell {
@@ -53,8 +53,13 @@ public final class SellerTicketSectionController: ListSectionController {
 }
 
 extension SellerTicketSectionController: SellerTicketCellOutput {
+  public func didTapEditDescription(in cell: SellerTicketCellInput) {
+    print("didTapEditDescription in SellerTicketSectionController")
+    output?.didTapEditDescription(in: cell)
+  }
+  
   public func didTapEditSellerPrice(in cell: SellerTicketCellInput) {
-    output?.didTapEditSellerPrice(in: cell)
     print("didTapEditSellerPrice in SellerTicketSectionController")
+    output?.didTapEditSellerPrice(in: cell)
   }
 }

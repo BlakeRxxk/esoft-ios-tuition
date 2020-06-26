@@ -9,13 +9,16 @@ public struct SellerTicket {
   public let id: String
   public let price: String
   public let photos: [Photos]
+  public let desc: String
   
   public init(id: String,
               price: String,
-              photos: [Photos]) {
+              photos: [Photos],
+              desc: String) {
     self.id = id
     self.price = price
     self.photos = photos
+    self.desc = desc
   }
 }
 
@@ -24,6 +27,7 @@ extension SellerTicket: Codable, Hashable {
     case id
     case price
     case photos
+    case desc = "object_description"
   }
 }
 

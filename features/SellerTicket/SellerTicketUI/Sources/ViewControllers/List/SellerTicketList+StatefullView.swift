@@ -15,7 +15,7 @@ import RxExtensions
 
 extension SellerTicketList: StatefullView {
   public func bind(store: SellerTicketListState) {
-    let state = store.state.distinctUntilChanged().share().debug()
+    let state = store.state.distinctUntilChanged().share()
     
     let source = RxListAdapterDataSource<SellerTicketSections>(sectionControllerProvider: { _, section in
       switch section {
@@ -23,10 +23,6 @@ extension SellerTicketList: StatefullView {
         return ListHeaderSectionController()
       case .empty:
         return EmptyListSectionController()
-      case .listHeaderSkeleton:
-        return ListHeaderSkeletonSectionController()
-      case .skeleton:
-        return SellerTicketListSkeletonSectionController()
       case .sellerTicket:
         return SellerTicketSectionController(output: self)
       }
@@ -37,14 +33,6 @@ extension SellerTicketList: StatefullView {
       .map { _ in SellerTicketListState.Action.fetchSellerTicket }
       .bind(to: store.action)
       .disposed(by: disposeBag)
-    
-    let skeleton = state
-      .filter { $0.initialLoading == true }
-      .map { _ in [
-        ListHeaderSkeletonViewModel(id: 0),
-        ListSkeletonViewModel(id: 1)
-        ]}
-      .map { $0.mapToSellerTicketSections() }
     
     let empty = state
       .filter { $0.initialLoading == false && $0.sellerTicket == nil }
@@ -62,7 +50,6 @@ extension SellerTicketList: StatefullView {
     guard let adapter = specializedView.adapter else { return }
     
     Observable.of(
-      skeleton,
       empty,
       sellerTicket
     )

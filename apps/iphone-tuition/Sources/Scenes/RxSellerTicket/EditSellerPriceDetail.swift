@@ -1,8 +1,8 @@
 //
-//  EditSellerPriceComponent.swift
+//  EditSellerPriceDetail.swift
 //  AppLibrary
 //
-//  Created by wtildestar on 22/06/2020.
+//  Created by wtildestar on 23/06/2020.
 //
 
 import NeedleFoundation
@@ -12,7 +12,7 @@ import SellerTicketCore
 import SellerTicketUI
 
 protocol EditSellerPriceDependency: Dependency {
-  var useCase: EditSellerPriceUseCase { get }
+  var useCase: SellerTicketUseCase { get }
 }
 
 protocol EditSellerPriceBuilder {
@@ -21,13 +21,15 @@ protocol EditSellerPriceBuilder {
 
 class EditSellerPriceComponent: Component<EditSellerPriceDependency>, EditSellerPriceBuilder {
   var state: EditSellerPriceListState {
-    EditSellerPriceListState(editSellerPriceUseCase: dependency.useCase)
+    EditSellerPriceListState(sellerTicketUseCase: dependency.useCase)
   }
   
   var viewController: UIViewController {
-    let viewController = EditSellerPriceList()
+    let viewController = EditSellerPriceController()
     viewController.store = state
 
+//    return UINavigationController(rootViewController: viewController)
+    
     return viewController
   }
 }

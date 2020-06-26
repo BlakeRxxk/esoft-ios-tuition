@@ -29,7 +29,7 @@ class SellerTicketListComponent: Component<SellerTicketListDependency>, SellerTi
     let viewController = SellerTicketList()
     viewController.store = state
     viewController.router = dependency.router
-
+    
     return viewController
   }
 }

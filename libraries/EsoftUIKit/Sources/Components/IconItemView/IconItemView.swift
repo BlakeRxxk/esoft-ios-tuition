@@ -118,6 +118,7 @@ public final class IconItemView: View {
   }
   
   @objc private func handleTapAction() {
+    print("handleTapAction in IconItemView")
     output?.didTapAction(in: self)
   }
 }

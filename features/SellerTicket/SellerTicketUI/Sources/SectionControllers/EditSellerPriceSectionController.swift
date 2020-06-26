@@ -8,7 +8,7 @@
 import IGListKit
 import EsoftUIKit
 
-public protocol EditSellerPriceSectionControllerOutput: class {}
+public protocol EditSellerPriceSectionControllerOutput: AnyObject {}
 
 public final class EditSellerPriceSectionController: ListSectionController {
   private var object: EditSellerPriceViewModel?
@@ -32,7 +32,7 @@ public final class EditSellerPriceSectionController: ListSectionController {
     
     let width: CGFloat = context.containerSize.width
     
-    return CGSize(width: width, height: 80 + (48 * 2))
+    return CGSize(width: width, height: 500)
   }
   
   override public func cellForItem(at index: Int) -> UICollectionViewCell {
@@ -52,4 +52,9 @@ public final class EditSellerPriceSectionController: ListSectionController {
   }
 }
 
-extension EditSellerPriceSectionController: EditSellerPriceCellOutput {}
+extension EditSellerPriceSectionController: EditSellerPriceCellOutput {
+  public func didTapInfoButton(in cell: EditSellerPriceCellInput) {
+    print("didTapInfoButton in EditSellerPriceSectionController")
+    
+  }
+}

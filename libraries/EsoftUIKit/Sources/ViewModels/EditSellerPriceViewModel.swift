@@ -10,31 +10,27 @@ import IGListKit
 import ListKit
 
 public final class EditSellerPriceViewModel {
-  public let id: String
-  public let price: String
+  public let objectPrice: [String]
   
-  public init(id: String,
-              price: String
-  ) {
-    self.id = id
-    self.price = price
+  public init(objectPrice: [String]) {
+    self.objectPrice = objectPrice
   }
 }
 
 extension EditSellerPriceViewModel: ListDiffable {
   public func diffIdentifier() -> NSObjectProtocol {
-    id as NSObjectProtocol
+    objectPrice as NSObjectProtocol
   }
-  
+
   public func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
     guard self !== object else { return true }
     guard let object = object as? EditSellerPriceViewModel else { return false }
-    return id == object.id
+    return objectPrice == object.objectPrice
   }
 }
 
 extension EditSellerPriceViewModel: Equatable {
   public static func == (lhs: EditSellerPriceViewModel, rhs: EditSellerPriceViewModel) -> Bool {
-    lhs.id == rhs.id
+    lhs.objectPrice == rhs.objectPrice
   }
 }
