@@ -34,7 +34,7 @@ public final class SpecialistCell: UICollectionViewCell {
       phoneRow.title
     }
   }
-
+  
   private(set) lazy var specialistView: SpecialistView = SpecialistView()
   private(set) lazy var phoneRow: IconItemView = {
     $0.output = self
@@ -66,7 +66,7 @@ public final class SpecialistCell: UICollectionViewCell {
     yoga.applyLayout(preservingOrigin: true)
     super.traitCollectionDidChange(previousTraitCollection)
   }
-  
+
   override public func prepareForReuse() {
     super.prepareForReuse()
     specialistID = 0

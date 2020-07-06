@@ -11,7 +11,9 @@ import YogaKit
 public enum Space {
   public static let tiny: CGFloat = 8
   public static let small: CGFloat = 16
+  public static let preBase: CGFloat = 20
   public static let base: CGFloat = 24
+  public static let preLarge: CGFloat = 44
   public static let large: CGFloat = 48
   public static let xLarge: CGFloat = 64
   public static let xxLarge: CGFloat = 128
@@ -20,7 +22,9 @@ public enum Space {
 extension YGValue {
   public static let tiny: YGValue = YGValue(Space.tiny)
   public static let small: YGValue = YGValue(Space.small)
+  public static let preBase: YGValue = YGValue(Space.preBase)
   public static let base: YGValue = YGValue(Space.base)
+  public static let preLarge: YGValue = YGValue(Space.preLarge)
   public static let large: YGValue = YGValue(Space.large)
   public static let xLarge: YGValue = YGValue(Space.xLarge)
   public static let xxLarge: YGValue = YGValue(Space.xxLarge)

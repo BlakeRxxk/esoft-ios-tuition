@@ -25,7 +25,7 @@ public final class RootViewController: ViewController<BaseListView> {
   ]
   
   private var objectsBuilder: ObjectsBuilder
-  private var sellerTicketBuilder: SellerTicketBuilder
+  private var rxSellerTicketBuilder: RxSellerTicketBuilder
   private var discountBuilder: DiscountBuilder
   private var mortgageBuilder: MortgageBuilder
   private var loggedOutBuilder: LoggedOutBuilder
@@ -33,14 +33,14 @@ public final class RootViewController: ViewController<BaseListView> {
   private var citiesBuilder: CitiesBuilder
   
   init(objectsBuilder: ObjectsBuilder,
-       sellerTicketBuilder: SellerTicketBuilder,
+       rxSellerTicketBuilder: RxSellerTicketBuilder,
        discountBuilder: DiscountBuilder,
        mortgageBuilder: MortgageBuilder,
        loggedOutBuilder: LoggedOutBuilder,
        citiesBuilder: CitiesBuilder,
        rxdemoBuilder: SpecialistsBuilder) {
     self.objectsBuilder = objectsBuilder
-    self.sellerTicketBuilder = sellerTicketBuilder
+    self.rxSellerTicketBuilder = rxSellerTicketBuilder
     self.discountBuilder = discountBuilder
     self.mortgageBuilder = mortgageBuilder
     self.loggedOutBuilder = loggedOutBuilder
@@ -98,7 +98,7 @@ extension RootViewController: RootViewItemSectionOutput {
     case "Task 4":
       show(mortgageBuilder.mortgageListViewController, sender: nil)
     case "Task 5":
-      show(sellerTicketBuilder.sellerTicketViewController, sender: nil)
+      show(rxSellerTicketBuilder.viewController, sender: nil)
     case "Task 6":
       present(loggedOutBuilder.loggedOutViewController, animated: true)
     case "Simple RxDemo":

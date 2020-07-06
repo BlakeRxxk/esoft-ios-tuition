@@ -12,16 +12,7 @@ import ThemeManager
 import YogaKit
 
 public final class CostItemViewYoga: View {
-  public var subheader: String {
-    get {
-      costSubheader.styledText ?? ""
-    }
-    set {
-      costSubheader.styledText = newValue
-    }
-  }
-  
-  public var firstTitle: String {
+  public var price: String {
     get {
       costLabel.styledText ?? ""
     }
@@ -30,35 +21,10 @@ public final class CostItemViewYoga: View {
     }
   }
   
-  public var secondTitle: String {
-    get {
-      noticeLabel.styledText ?? ""
-    }
-    set {
-      noticeLabel.styledText = newValue
-    }
-  }
-  
-  public var icon: UIImage? {
-    get {
-      editIcon.image
-    }
-    set {
-      editIcon.image = newValue ?? UIImage()
-    }
-  }
-  
-  public var thirdTitle: String {
-    get {
-      editLabel.styledText ?? ""
-    }
-    set {
-      editLabel.styledText = newValue
-    }
-  }
+  public weak var output: CostItemViewYogaOutput?
   
   private(set) lazy var mainContainer: UIView = UIView()
-  private(set) lazy var costSubheader: UILabel = UILabel()
+  private(set) lazy var costSubheaderTitle: UILabel = UILabel()
   private(set) lazy var costContainer: UIView = UIView()
   private(set) lazy var costStackView: UIView = UIView()
   private(set) lazy var costLabel: UILabel = UILabel()
@@ -66,17 +32,18 @@ public final class CostItemViewYoga: View {
   private(set) lazy var divider: UIView = UIView()
   private(set) lazy var editStackView: UIView = UIView()
   private(set) lazy var editIcon: UIImageView = UIImageView()
-  private(set) lazy var editLabel: UILabel = UILabel()
-
+  public lazy var editLabel: UIButton = UIButton()
+  
   override public init() {
     super.init()
     
     createUI()
     configureUI()
+    layout()
   }
   
   private func createUI() {
-    mainContainer.addSubview(costSubheader)
+    mainContainer.addSubview(costSubheaderTitle)
     mainContainer.addSubview(costContainer)
     
     costContainer.addSubview(costStackView)
@@ -95,41 +62,46 @@ public final class CostItemViewYoga: View {
   }
   
   private func configureUI() {
-    costSubheader.setStyles(
-      UILabel.Styles.small,
-      UILabel.ColorStyle.secondary
-    )
+//    costSubheaderTitle.setStyles(
+    //      UILabel.Styles.small,
+//      UILabel.ColorStyle.secondary
+//    )
+    costSubheaderTitle.text = Localized.costSubheaderTitle
+    costSubheaderTitle.font = UIFont.systemFont(ofSize: 15.0)
+    costSubheaderTitle.setStyles(UILabel.ColorStyle.secondary)
     
     costContainer.backgroundColor = ThemeManager.current().colors.container
-
+    
     divider.backgroundColor = ThemeManager.current().colors.screen
     
     costLabel.setStyles(UILabel.Styles.regular, UILabel.ColorStyle.primary)
     
+    noticeLabel.text = Localized.noticeLabel
     noticeLabel.setStyles(UILabel.Styles.microNormal, UILabel.ColorStyle.error)
     
     editIcon.image = UIImage.Screen5.edit
     editIcon.tintColor = ThemeManager.current().colors.primary500
     
-    editLabel.setStyles(UILabel.Styles.headline, UILabel.ColorStyle.primary500)
+    editLabel.setTitle(Localized.editLabel, for: .normal)
+    editLabel.setTitleColor(ThemeManager.current().colors.primary500, for: .normal)
+    editLabel.titleLabel?.font = .boldSystemFont(ofSize: 17)
+    editLabel.contentHorizontalAlignment = .left
   }
-  
-  override public func layoutSubviews() {
-    super.layoutSubviews()
+  private func layout() {
     mainContainer.configureLayout { layout in
       layout.isEnabled = true
     }
     
-    costSubheader.configureLayout { layout in
+    costSubheaderTitle.configureLayout { layout in
       layout.isEnabled = true
-      layout.marginLeft = 16
+      layout.marginTop = 20
+      layout.marginHorizontal = 16
     }
     
     costContainer.configureLayout { layout in
       layout.isEnabled = true
       layout.flexDirection = .column
-      layout.paddingLeft = 16
-      layout.paddingRight = 16
+      layout.paddingHorizontal = 16
       layout.marginTop = 8
     }
     
@@ -143,10 +115,18 @@ public final class CostItemViewYoga: View {
       layout.isEnabled = true
       layout.height = 1
       layout.width = 100%
-      layout.paddingLeft = 16
-      layout.paddingRight = 16
+      layout.paddingHorizontal = 16
     }
     
+    costLabel.configureLayout { layout in
+      layout.isEnabled = true
+      layout.marginVertical = 13
+    }
+    
+    noticeLabel.configureLayout { layout in
+      layout.isEnabled = true
+    }
+
     editStackView.configureLayout { layout in
       layout.isEnabled = true
       layout.position = .relative
@@ -154,20 +134,9 @@ public final class CostItemViewYoga: View {
       layout.justifyContent = .flexStart
     }
     
-    costLabel.configureLayout { layout in
-      layout.isEnabled = true
-      layout.marginTop = 13
-      layout.marginBottom = 13
-    }
-    
-    noticeLabel.configureLayout { layout in
-      layout.isEnabled = true
-    }
-    
     editIcon.configureLayout { layout in
       layout.isEnabled = true
-      layout.marginTop = 15.43
-      layout.marginBottom = 15.43
+      layout.marginVertical = 15.43
       layout.width = 17.14
       layout.height = 17.14
       layout.marginRight = 35.43
@@ -175,8 +144,17 @@ public final class CostItemViewYoga: View {
     
     editLabel.configureLayout { layout in
       layout.isEnabled = true
+      layout.width = 100%
     }
   }
 }
 
 extension CostItemViewYoga: CostItemViewYogaInput {}
+
+extension CostItemViewYoga {
+  enum Localized {
+    public static let costSubheaderTitle = "Стоимость объекта"
+    public static let noticeLabel = "Выше рыночной на 90%"
+    public static let editLabel = "Изменить"
+  }
+}

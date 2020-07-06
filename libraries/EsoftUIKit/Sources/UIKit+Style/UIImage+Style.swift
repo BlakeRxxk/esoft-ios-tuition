@@ -5,6 +5,7 @@
 //  Copyright © 2020 E-SOFT. All rights reserved.
 //
 
+
 import UIKit
 
 extension UIImage {
@@ -43,6 +44,18 @@ extension UIImage {
     
     public static var right: UIImage {
       named("call.right.base").withRenderingMode(.alwaysTemplate)
+    }
+  }
+  
+  public enum Info {
+    public static var base: UIImage {
+      named("info").withRenderingMode(.alwaysTemplate)
+    }
+  }
+  
+  public enum NoticeInfo {
+    public static var base: UIImage {
+      named("noticeInfo").withRenderingMode(.alwaysTemplate)
     }
   }
   

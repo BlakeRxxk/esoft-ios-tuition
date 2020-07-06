@@ -20,7 +20,7 @@ protocol SpecialistDetailsBuilder {
 }
 
 class SpecialistDetailsComponent: Component<SpecialistDetailsDependency>, SpecialistDetailsBuilder {
-
+  
   var state: SpecialistDetailState {
     SpecialistDetailState(specialistsUseCase: dependency.useCase)
   }
@@ -28,7 +28,7 @@ class SpecialistDetailsComponent: Component<SpecialistDetailsDependency>, Specia
   var viewController: UIViewController {
     let viewController = SpecialistDetails()
     viewController.store = state
-
+    
     return viewController
   }
 }

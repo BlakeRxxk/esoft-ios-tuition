@@ -33,9 +33,6 @@ PODS:
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
-  - RxFlow (2.9.0):
-    - RxCocoa (>= 5.1.1)
-    - RxSwift (>= 5.1.1)
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.1)
@@ -56,7 +53,6 @@ DEPENDENCIES:
   - PINRemoteImage
   - RxBlocking
   - RxCocoa
-  - RxFlow
   - RxRelay
   - RxSwift
   - RxTest
@@ -75,7 +71,6 @@ SPEC REPOS:
     - PINRemoteImage
     - RxBlocking
     - RxCocoa
-    - RxFlow
     - RxRelay
     - RxSwift
     - RxTest
@@ -94,7 +89,6 @@ SPEC CHECKSUMS:
   PINRemoteImage: 4ac4011c5caefd6befd99758e09becede05d3226
   RxBlocking: 5f700a78cad61ce253ebd37c9a39b5ccc76477b4
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
-  RxFlow: a7f993ba4791174d414509a0ec03bfeff530a826
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   RxTest: 711632d5644dffbeb62c936a521b5b008a1e1faa
@@ -102,6 +96,6 @@ SPEC CHECKSUMS:
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: c0c7269b46c0da558c1dffd3adf8f41c5189ad77
+PODFILE CHECKSUM: 7baf5de4ccbef268825653324bbdbed16db99ad8
 
 COCOAPODS: 1.9.1

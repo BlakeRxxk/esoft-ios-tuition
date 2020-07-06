@@ -21,13 +21,13 @@ extension UIButton {
       let highlightedColor: UIColor = ThemeManager.current().colors.primary400
       let disabledColor: UIColor = ThemeManager.current().colors.primary300
       
-      button.setBackgroundImage(roundedBackground(color: tintColor, cornerRadius: Space.base), for: .normal)
-      button.setBackgroundImage(roundedBackground(color: highlightedColor, cornerRadius: Space.base), for: .highlighted)
-      button.setBackgroundImage(roundedBackground(color: disabledColor, cornerRadius: Space.base), for: .disabled)
+      button.setBackgroundImage(roundedBackground(color: tintColor, cornerRadius: Space.preBase), for: .normal)
+      button.setBackgroundImage(roundedBackground(color: highlightedColor, cornerRadius: Space.preBase), for: .highlighted)
+      button.setBackgroundImage(roundedBackground(color: disabledColor, cornerRadius: Space.preBase), for: .disabled)
       
       button.configureLayout { layout in
-        layout.height = YGValue.large
-        layout.paddingHorizontal = YGValue.base
+        layout.height = YGValue.preLarge
+//        layout.paddingHorizontal = YGValue.base
       }
       
     }

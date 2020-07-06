@@ -48,7 +48,7 @@ public final class RootComponent: BootstrapComponent {
   
   var rootViewController: UIViewController {
     let rootViewController = RootViewController(objectsBuilder: objectsComponent,
-                                                sellerTicketBuilder: sellerTicketComponent,
+                                                rxSellerTicketBuilder: rxSellerTicketComponent,
                                                 discountBuilder: discountComponent,
                                                 mortgageBuilder: mortgageComponent,
                                                 loggedOutBuilder: loggedOutComponent,
@@ -64,8 +64,8 @@ public final class RootComponent: BootstrapComponent {
     ObjectsComponent(parent: self)
   }
   
-  var sellerTicketComponent: SellerTicketComponent {
-    SellerTicketComponent(parent: self)
+  var rxSellerTicketComponent: RxSellerTicketComponent {
+    RxSellerTicketComponent(parent: self)
   }
   
   var discountComponent: DiscountComponent {

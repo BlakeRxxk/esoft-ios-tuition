@@ -12,15 +12,6 @@ import ThemeManager
 import AutoLayoutKit
 
 public final class PhotoItemViewYoga: View {
-  public var subheader: String {
-    get {
-      photoSubheader.styledText ?? ""
-    }
-    set {
-      photoSubheader.styledText = newValue
-    }
-  }
-  
   public var dataSet: [String] {
     get {
       dataSet
@@ -31,38 +22,11 @@ public final class PhotoItemViewYoga: View {
     }
   }
   
-  public var firstTitle: String {
-    get {
-      showAllLabel.styledText ?? ""
-    }
-    set {
-      showAllLabel.styledText = newValue
-    }
-  }
-  
-  public var secondTitle: String {
-    get {
-      showAllQuantityLabel.styledText ?? ""
-    }
-    set {
-      showAllQuantityLabel.styledText = newValue
-    }
-  }
-  
-  public var icon: UIImage? {
-    get {
-      arrowImage.image
-    }
-    set {
-      arrowImage.image = newValue ?? UIImage()
-    }
-  }
-  
-  private(set) lazy var photoSubheader: UILabel = UILabel()
+  private(set) lazy var photoSubheaderTitle: UILabel = UILabel()
   private(set) lazy var photoContainer: UIView = UIView()
-  private(set) lazy var showAllStackView: UIStackView = UIStackView()
+  private(set) lazy var showAllStackView: UIView = UIView()
   private(set) lazy var showAllLabel: UILabel = UILabel()
-  private(set) lazy var showAllQuantityStackView: UIStackView = UIStackView()
+  private(set) lazy var showAllQuantityStackView: UIView = UIView()
   private(set) lazy var showAllQuantityLabel: UILabel = UILabel()
   private(set) lazy var arrowImage: UIImageView = UIImageView()
   private(set) lazy var imageArr: [UIImage] = [UIImage]()
@@ -76,7 +40,7 @@ public final class PhotoItemViewYoga: View {
     cv.register(PhotoCollectionViewCellYoga.self, forCellWithReuseIdentifier: PhotoCollectionViewCellYoga.reuseId)
     return cv
   }()
-  private var activeConstraints: [NSLayoutConstraint] = []
+  
   override public init() {
     super.init()
     
@@ -88,7 +52,7 @@ public final class PhotoItemViewYoga: View {
   private func createUI() {
     let subviews: [UIView] = [
       mainContainer,
-      photoSubheader,
+      photoSubheaderTitle,
       photoContainer,
       collectionView,
       showAllStackView,
@@ -102,15 +66,15 @@ public final class PhotoItemViewYoga: View {
       $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    mainContainer.addSubview(photoSubheader)
+    mainContainer.addSubview(photoSubheaderTitle)
     mainContainer.addSubview(photoContainer)
     
     photoContainer.addSubview(collectionView)
     photoContainer.addSubview(showAllStackView)
-    showAllStackView.addArrangedSubview(showAllLabel)
-    showAllStackView.addArrangedSubview(showAllQuantityStackView)
-    showAllQuantityStackView.addArrangedSubview(showAllQuantityLabel)
-    showAllQuantityStackView.addArrangedSubview(arrowImage)
+    showAllStackView.addSubview(showAllLabel)
+    showAllStackView.addSubview(showAllQuantityStackView)
+    showAllQuantityStackView.addSubview(showAllQuantityLabel)
+    showAllQuantityStackView.addSubview(arrowImage)
     
     addSubview <^> [
       mainContainer
@@ -121,7 +85,8 @@ public final class PhotoItemViewYoga: View {
     collectionView.delegate = self
     collectionView.dataSource = self
     
-    photoSubheader.setStyles(
+    photoSubheaderTitle.text = Localized.photoSubheaderTitle
+    photoSubheaderTitle.setStyles(
       UILabel.Styles.small,
       UILabel.ColorStyle.secondary
     )
@@ -130,59 +95,79 @@ public final class PhotoItemViewYoga: View {
     
     collectionView.backgroundColor = .clear
     
+    showAllLabel.text = Localized.showAllLabel
     showAllLabel.setStyles(UILabel.Styles.regular, UILabel.ColorStyle.primary)
     
+    showAllQuantityLabel.text = Localized.showAllQuantityLabel
     showAllQuantityLabel.setStyles(UILabel.Styles.regular, UILabel.ColorStyle.primary)
-    
-    showAllStackView.alignment = .center
-    
-    showAllQuantityStackView.alignment = .center
-    showAllQuantityStackView.spacing = 16
     
     arrowImage.image = UIImage.Screen5.go
   }
   
   private func layout() {
-    activeConstraints = [
-      mainContainer.top.constraint(equalTo: top),
-      mainContainer.leading.constraint(equalTo: leading),
-      mainContainer.trailing.constraint(equalTo: trailing),
-      mainContainer.bottom.constraint(equalTo: bottom),
-      
-      photoSubheader.top.constraint(equalTo: mainContainer.top, constant: 20),
-      photoSubheader.leading.constraint(equalTo: mainContainer.leading, constant: 16),
-      photoSubheader.trailing.constraint(equalTo: mainContainer.trailing, constant: 16),
-      
-      photoContainer.top.constraint(equalTo: photoSubheader.bottom, constant: 8),
-      photoContainer.leading.constraint(equalTo: mainContainer.leading),
-      photoContainer.trailing.constraint(equalTo: mainContainer.trailing),
-      photoContainer.bottom.constraint(equalTo: mainContainer.bottom),
-      
-      collectionView.top.constraint(equalTo: photoContainer.top),
-      collectionView.leading.constraint(equalTo: photoContainer.leading),
-      collectionView.trailing.constraint(equalTo: photoContainer.trailing),
-      collectionView.heightAnchor.constraint(equalToConstant: 184),
-      
-      showAllStackView.top.constraint(equalTo: collectionView.bottom),
-      showAllStackView.leading.constraint(equalTo: photoContainer.leading, constant: 16),
-      showAllStackView.trailing.constraint(equalTo: photoContainer.trailing, constant: -16),
-      showAllStackView.bottom.constraint(equalTo: photoContainer.bottom),
-      
-      showAllLabel.top.constraint(equalTo: showAllStackView.top, constant: 13),
-      showAllLabel.bottom.constraint(equalTo: showAllStackView.bottom, constant: -13),
-      showAllLabel.leading.constraint(equalTo: showAllStackView.leading),
-      
-      showAllQuantityLabel.centerYAnchor.constraint(equalTo: showAllLabel.centerYAnchor),
-      
-      arrowImage.heightAnchor.constraint(equalToConstant: 24),
-      arrowImage.widthAnchor.constraint(equalToConstant: 24)
-    ]
+    mainContainer.configureLayout { layout in
+      layout.isEnabled = true
+    }
     
-    NSLayoutConstraint.activate(activeConstraints)
+    photoSubheaderTitle.configureLayout { layout in
+      layout.isEnabled = true
+      layout.marginTop = 20
+      layout.marginHorizontal = 16
+    }
+    
+    photoContainer.configureLayout { layout in
+      layout.isEnabled = true
+      layout.marginTop = 8
+      layout.flexDirection = .column
+    }
+    
+    collectionView.configureLayout { layout in
+      layout.isEnabled = true
+      layout.marginTop = 8
+      layout.height = 184
+    }
+    
+    showAllStackView.configureLayout { layout in
+      layout.isEnabled = true
+      layout.marginHorizontal = 16
+      layout.flexDirection = .row
+      layout.justifyContent = .spaceBetween
+    }
+    
+    showAllLabel.configureLayout { layout in
+      layout.isEnabled = true
+      layout.marginVertical = 13
+    }
+    
+    showAllQuantityStackView.configureLayout { layout in
+      layout.isEnabled = true
+      layout.flexDirection = .row
+      layout.justifyContent = .spaceBetween
+    }
+    
+    showAllQuantityLabel.configureLayout { layout in
+      layout.isEnabled = true
+      layout.marginVertical = 13
+      layout.marginRight = 16
+    }
+    
+    arrowImage.configureLayout { layout in
+      layout.isEnabled = true
+      layout.width = 24
+      layout.marginVertical = 12
+    }
   }
 }
 
-extension PhotoItemViewYoga: PhotoItemViewInput {}
+extension PhotoItemViewYoga: PhotoItemViewYogaInput {}
+
+extension PhotoItemViewYoga {
+  enum Localized {
+    public static let photoSubheaderTitle = "Фотографии"
+    public static let showAllLabel = "Показать все"
+    public static let showAllQuantityLabel = "123"
+  }
+}
 
 extension PhotoItemViewYoga: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
   public func collectionView(_ collectionView: UICollectionView,
@@ -200,7 +185,7 @@ extension PhotoItemViewYoga: UICollectionViewDelegateFlowLayout, UICollectionVie
                              cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCellYoga.reuseId,
                                                   for: indexPath) as! PhotoCollectionViewCellYoga
-    cell.set(index: data[indexPath.row])
+    cell.set(photoName: data[indexPath.row])
     return cell
   }
   

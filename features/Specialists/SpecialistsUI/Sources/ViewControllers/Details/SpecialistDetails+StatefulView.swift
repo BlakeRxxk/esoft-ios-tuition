@@ -16,7 +16,7 @@ import RxExtensions
 
 extension SpecialistDetails: StatefullView {
   public func bind(store: SpecialistDetailState) {
-    let state = store.state.distinctUntilChanged().share()
+    let state = store.state.distinctUntilChanged().share().debug()
     
     let source = RxListAdapterDataSource<SpecialistDetailsSections>(sectionControllerProvider: {  _, section in
       switch section {

@@ -6,9 +6,10 @@
 //
 
 import Foundation
-import EsoftUIKit
 import SpecialistsCore
 import CDNImageLink
+import EsoftUIKit
+
 
 extension Specialist {
   public func asViewModel() -> SpecialistViewModel {
