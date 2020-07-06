@@ -9,6 +9,4 @@ import Foundation
 
 public protocol EditDescriptionCellInput {}
 
-public protocol EditDescriptionCellOutput: class {
-  
-}
+public protocol EditDescriptionCellOutput: class {}

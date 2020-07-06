@@ -7,6 +7,7 @@
 
 import StateKit
 import SellerTicketCore
+import EsoftUIKit
 
 public final class EditDescriptionControllerState: Store {
   public let initialState: EditDescriptionControllerState.State
@@ -21,50 +22,45 @@ public final class EditDescriptionControllerState: Store {
 
 extension EditDescriptionControllerState {
   public struct State: Equatable {
-    public var isAuth: Bool = false
-    public var initialLoading: Bool = false
-    public var isLoading: Bool = false
+//    public var sellerTicketID: Int = 0
+    public var sellerTicket: SellerTicketViewModel?
+    public var desc: String = ""
     public var error: Bool = false
-    public var desc: [Desc] = []
-    public var scope: SellerTicketScope = .all
+    public var errorMessage: String = ""
   }
   
   public enum Action {
-    case fetchDesc
-    case fetchSellerTicket(id: Int)
+    case fetchSellerTicket(desc: String)
   }
   
   public enum Mutation {
-    case setInitialLoading(_ condition: Bool = false)
-    case appendDesc([Desc] = [])
+    case setSellerTicket(sellerTicket: SellerTicketViewModel)
+    case setError(message: String)
+    case setDescription(String)
   }
   
   public func mutate(action: Action) -> Observable<Mutation> {
     switch action {
-    case .fetchDesc:
-      return Observable.merge([
-        .just(.setInitialLoading(true)),
-        sellerTicketUseCase
-          .invoke(request: EditDescriptionRequest())
-          .map { .appendDesc($0) }
-      ])
-    case let .fetchSellerTicket(id):
-      return .empty()
-      
+    case let .fetchSellerTicket(desc):
+//      return .empty()
+      return .just(.setDescription(desc))
     }
   }
   
   public func reduce(state: State, mutation: Mutation) -> State {
+    var newState = state
     switch mutation {
-    case let .appendDesc(desc):
-      var newState = state
-      newState.initialLoading = false
+    case let .setSellerTicket(sellerTicket):
+      newState.error = false
+      newState.errorMessage = ""
+      newState.desc = sellerTicket.desc ?? ""
+      newState.sellerTicket = sellerTicket
+    case let .setError(message):
+      newState.error = true
+      newState.errorMessage = message
+    case let .setDescription(desc):
       newState.desc = desc
-      return newState
-    case let .setInitialLoading(condition):
-      var newState = state
-      newState.initialLoading = condition
-      return newState
     }
+    return newState
   }
 }

@@ -15,7 +15,7 @@ import RxExtensions
 
 extension SellerTicketList: StatefullView {
   public func bind(store: SellerTicketListState) {
-    let state = store.state.distinctUntilChanged().share()
+    let state = store.state.distinctUntilChanged().share().debug()
     
     let source = RxListAdapterDataSource<SellerTicketSections>(sectionControllerProvider: { _, section in
       switch section {

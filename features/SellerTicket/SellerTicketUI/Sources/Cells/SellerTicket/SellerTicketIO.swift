@@ -9,6 +9,7 @@ import Foundation
 
 public protocol SellerTicketCellInput {
   var sellerTicketID: Int { get set }
+  var desc: String { get set }
 }
 
 public protocol SellerTicketCellOutput: AnyObject {

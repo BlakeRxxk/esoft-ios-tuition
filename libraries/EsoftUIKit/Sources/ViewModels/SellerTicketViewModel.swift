@@ -12,8 +12,8 @@ import ListKit
 public final class SellerTicketViewModel {
   public let id: String
   public let price: String
-  public let photos: [String]
-  public let desc: String
+  public let photos: [String]?
+  public let desc: String?
   
   public init(id: String,
               price: String,

@@ -28,33 +28,19 @@ extension EditDescriptionController: StatefullView {
       }
     })
     
-    rx
-      .viewWillAppear
-      .map { _ in EditDescriptionControllerState.Action.fetchDesc }
-      .bind(to: store.action)
-      .disposed(by: disposeBag)
-    
-    let empty = state
-      .filter { $0.initialLoading == false && $0.desc == nil }
-      .map { _ in [
-        EmptyListViewModel(title: "Empty", message: Localized.search, image: UIImage.Stub.specialists)
-        ]}
-      .map { $0.mapToEditDescriptionSections() }
-    
-    let editDescription = state
-      .filter { $0.initialLoading == false && $0.desc != nil }
-      .map { $0.desc }
-      .map { $0.map { $0.asViewModel() } }
-      .map { $0.mapToEditDescriptionSections() }
-    
     guard let adapter = specializedView.adapter else { return }
     
-    Observable.of(
-      empty,
-      editDescription
-    )
-      .merge()
+    state
+      .map { [unowned self] in self.mapState(state: $0) }
+      .map { $0.mapToEditDescriptionSections() }
       .bind(to: adapter.rx.objects(for: source))
       .disposed(by: disposeBag)
+    
   }
+  
+  private func mapState(state: EditDescriptionControllerState.State) -> [ListDiffable] {
+    guard let sellerTicket = state.sellerTicket else { return [EmptyListViewModel(title: "", message: "", image: UIImage())] }
+    return [sellerTicket]
+  }
+  
 }

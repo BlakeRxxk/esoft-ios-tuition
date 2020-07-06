@@ -10,7 +10,7 @@ import Foundation
 extension SellerTicketList: SellerTicketSectionControllerOutput {
   public func didTapEditDescription(in cell: SellerTicketCellInput) {
     print("didTapEditDescription in SellerTicketList")
-    router?.routeToEditDescription(sellerTicketID: cell.sellerTicketID)
+    router?.routeToEditDescription(desc: cell.desc)
   }
   
   public func didTapEditSellerPrice(in cell: SellerTicketCellInput) {

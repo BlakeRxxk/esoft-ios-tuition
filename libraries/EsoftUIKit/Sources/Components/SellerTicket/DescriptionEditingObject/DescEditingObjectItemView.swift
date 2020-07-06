@@ -63,7 +63,7 @@ public final class DescEditingObjectItemView: View {
       UILabel.Styles.regular
     )
     descriptionLabel.numberOfLines = 3
-    descriptionLabel.text = "Квартира на две стороны (вагончиком), что способствует правильной вентиляции, совмещенный санузел, кладовка"
+//    descriptionLabel.text = "Квартира на две стороны (вагончиком), что способствует правильной вентиляции, совмещенный санузел, кладовка"
     descriptionLabel.addCharacterSpacing(kernValue: -0.20)
     
     showMoreLabel.setStyles(

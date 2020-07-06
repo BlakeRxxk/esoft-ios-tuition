@@ -10,5 +10,5 @@ import UIKit
 
 public protocol SellerTicketRouter: AnyObject {
   func routeToEditSellerPrice(sellerTicketID: Int)
-  func routeToEditDescription(sellerTicketID: Int)
+  func routeToEditDescription(desc: String)
 }

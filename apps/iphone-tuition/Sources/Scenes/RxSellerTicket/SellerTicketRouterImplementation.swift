@@ -36,11 +36,11 @@ public final class SellerTicketRouterImplementation: SellerTicketRouter {
     source.present(UINavigationController(rootViewController: destination!), animated: true)
   }
   
-  public func routeToEditDescription(sellerTicketID: Int) {
+  public func routeToEditDescription(desc: String) {
     guard let source = viewController else { return }
     let destination = editDescriptionBuilder.viewController as? EditDescriptionController
     
-    destination?.store?.action.onNext(.fetchSellerTicket(id: sellerTicketID))
+    destination?.store?.action.onNext(.fetchSellerTicket(desc: desc))
     source.present(UINavigationController(rootViewController: destination!), animated: true)
   }
 }

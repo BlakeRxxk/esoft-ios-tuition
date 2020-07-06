@@ -52,6 +52,4 @@ public final class EditDescriptionSectionController: ListSectionController {
   }
 }
 
-extension EditDescriptionSectionController: EditDescriptionCellOutput {
-  
-}
+extension EditDescriptionSectionController: EditDescriptionCellOutput {}

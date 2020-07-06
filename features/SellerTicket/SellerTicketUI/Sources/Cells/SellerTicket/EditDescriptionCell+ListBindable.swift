@@ -11,8 +11,9 @@ import IGListKit.IGListBindable
 
 extension EditDescriptionCell: ListBindable {
   public func bindViewModel(_ viewModel: Any) {
-    guard let viewModel = viewModel as? EditDescriptionViewModel else { return }
+    guard let viewModel = viewModel as? SellerTicketViewModel else { return }
 //    price = viewModel.price
 //    dataSet = viewModel.photos
+//    descTextView.text = viewModel.desc
   }
 }

@@ -14,5 +14,6 @@ extension EditSellerPriceCell: ListBindable {
     guard let viewModel = viewModel as? EditSellerPriceViewModel else { return }
 //    price = viewModel.price
 //    dataSet = viewModel.photos
+    
   }
 }

@@ -16,9 +16,8 @@ public final class EditDescriptionCell: UICollectionViewCell {
   
   public weak var output: EditDescriptionCellOutput?
   
-  private(set) lazy var descTextView: UITextView = UITextView()
+  public private(set) lazy var descTextView: UITextView = UITextView()
   private(set) lazy var sendButton: UIButton = UIButton()
-  private(set) lazy var testView: UIView = UIView()
   
   override init(frame: CGRect = .zero) {
     super.init(frame: frame)
@@ -48,21 +47,12 @@ public final class EditDescriptionCell: UICollectionViewCell {
       layout.height = 100% //YGValue(UIScreen.main.bounds.size.height)
     }
     
-    testView.configureLayout { layout in
+    descTextView.configureLayout { layout in
       layout.isEnabled = true
-      layout.position = .absolute
-      layout.top = 0
       layout.width = 100%
-      layout.height = 200
+      layout.height = 100%
     }
     
-//    descTextView.configureLayout { layout in
-//      layout.isEnabled = true
-//      layout.marginTop = 8
-//      layout.height = 200
-//      layout.position = .relative
-//    }
-//
 //    sendButton.configureLayout { layout in
 //      layout.isEnabled = true
 //      layout.marginHorizontal = 16
@@ -76,9 +66,7 @@ public final class EditDescriptionCell: UICollectionViewCell {
   
   private func createUI() {
     contentView.addSubview <^> [
-      testView
-//      descTextView,
-//      sendButton
+      descTextView
     ]
     
   }
@@ -87,7 +75,6 @@ public final class EditDescriptionCell: UICollectionViewCell {
     sendButton.setStyledTitle(Localized.sendButtonTitle, for: .normal)
     sendButton.setStyles(UIButton.Styles.primary)
     contentView.backgroundColor = .red
-    testView.backgroundColor = .yellow
   }
 }
 

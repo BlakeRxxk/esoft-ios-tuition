@@ -11,8 +11,6 @@ import Atlas
 import BaseFRP
 import EsoftUIKit
 
-
-
 public final class SellerTicketCell: UICollectionViewCell {
   private static let reuseIdentifier: String = "SellerTicketCellID"
   public var sellerTicketID: Int = 0
@@ -24,6 +22,16 @@ public final class SellerTicketCell: UICollectionViewCell {
     }
     set {
       costItemView.price = newValue
+    }
+  }
+  
+  // MARK: - EditDescription
+  public var desc: String {
+    get {
+      descEditingObjectItemView.descLabel
+    }
+    set {
+      descEditingObjectItemView.descLabel = newValue
     }
   }
   

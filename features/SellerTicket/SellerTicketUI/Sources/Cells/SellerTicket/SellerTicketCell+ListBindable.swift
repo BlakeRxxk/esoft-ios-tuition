@@ -13,6 +13,7 @@ extension SellerTicketCell: ListBindable {
   public func bindViewModel(_ viewModel: Any) {
     guard let viewModel = viewModel as? SellerTicketViewModel else { return }
     price = viewModel.price
-    dataSet = viewModel.photos
+    desc = viewModel.desc ?? ""
+    dataSet = viewModel.photos ?? []
   }
 }
